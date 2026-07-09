@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PVN Kalkulators — aprēķini PVN 21%, 12%, 5% | Latvija un ES</title>
+<meta name="description" content="Bezmaksas PVN kalkulators. Ievadi summu ar vai bez PVN — otra aprēķinās automātiski. Visu ES valstu PVN likmes vai sava likme.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="PVN Kalkulators — aprēķini PVN 21%, 12%, 5%">
+<meta property="og:description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm, tumšo režīmu un iebūvētu kalkulatoru.">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+    --danger: #d0433f;
+    --danger-soft: rgba(208, 67, 63, .08);
+    /* Nesaistīts (0–1) koeficients, kas pāriet no 0 līdz 1 starp logu
+       augstumiem 640–900px. Izmanto, lai vertikālās atstarpes vienmērīgi
+       samazinātos zemos logos (piem. klēpjdatoros) un paliktu ērtas augstos. */
+    --vh-t: clamp(0, calc((100vh - 640px) / 260px), 1);
+  }
+  [data-theme="dark"] {
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+    --danger: #ff6b68;
+    --danger-soft: rgba(255, 107, 104, .12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Ritjosla vienmēr rezervēta — citādi lapas augstumam mainoties (piem., mainot likmi),
+     ritjosla parādās/pazūd un viss centrētais saturs palēkšas pa kreisi/labi. */
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  /* Galvene */
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: calc(4px + 10px * var(--vh-t)) 0;
+  }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 18px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav a:hover { color: var(--accent); }
+  #sepBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700;
+    color: var(--text); display: flex; align-items: center; justify-content: center;
+  }
+  #sepBtn:hover { border-color: var(--accent); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1rem; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lang-switch {
+    display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .lang-switch button {
+    background: none; border: none; padding: 6px 9px; cursor: pointer;
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
+  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
+  /* Kalkulators */
+  .calc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: calc(12px + 16px * var(--vh-t)) 24px;
+    margin: calc(8px + 20px * var(--vh-t)) 0;
+  }
+  h1 { font-size: calc(1.2rem + 0.3rem * var(--vh-t)); margin-bottom: 4px; }
+  .subtitle { color: var(--muted); font-size: .95rem; margin-bottom: calc(8px + 14px * var(--vh-t)); }
+
+  .field-label { font-weight: 600; font-size: .95rem; margin-bottom: 6px; display: block; }
+  .field-label small { font-weight: 400; color: var(--muted); }
+
+  /* Valsts izvēle (pielāgota izvēlne ar karodziņiem) */
+  .country-picker { position: relative; margin-bottom: calc(6px + 12px * var(--vh-t)); }
+  #countryBtn {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: calc(6px + 5px * var(--vh-t)) 14px; font-size: 1rem;
+    border: 2px solid var(--border); border-radius: 10px;
+    background: var(--bg); color: var(--text); cursor: pointer; text-align: left;
+  }
+  #countryBtn:hover, #countryBtn:focus { outline: none; border-color: var(--accent); }
+  #countryBtn .chev { margin-left: auto; color: var(--muted); font-size: .8rem; transition: transform .15s; }
+  .country-picker.open #countryBtn .chev { transform: rotate(180deg); }
+  .flag { width: 24px; height: 18px; border-radius: 3px; object-fit: cover; flex-shrink: 0; }
+  .country-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+  #countryList {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; padding: 6px;
+  }
+  .country-picker.open #countryList { display: block; }
+  #countryList button {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: 9px 10px; font-size: .97rem; border: none; border-radius: 8px;
+    background: none; color: var(--text); cursor: pointer; text-align: left;
+  }
+  #countryList button:hover { background: var(--accent-soft); }
+  #countryList button.selected { background: var(--accent); color: #fff; }
+
+  /* Likmju pogas */
+  .rates { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .rates button {
+    padding: calc(6px + 4px * var(--vh-t)) 16px; font-size: 1rem; font-weight: 600;
+    border: 2px solid var(--border); border-radius: 10px;
+    background: var(--card); color: var(--text); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .rates button:hover { border-color: var(--accent); }
+  .rates button.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+  /* "Cita %" lauks vienmēr paliek atpazīstams kā teksta ievade (gaišs fons),
+     nekad nepārtop par pilnībā aizpildītu pogu — tikai rāmītis/ķeksītis mainās. */
+  .custom-wrap { position: relative; display: inline-flex; align-items: center; }
+  .custom-percent {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-weight: 600; pointer-events: none;
+  }
+  .custom-wrap.active .custom-percent { color: var(--accent); }
+  #customRate {
+    width: 120px; padding: 10px 30px; text-align: center; font-size: 1rem; font-weight: 600;
+    border: 2px dashed var(--border); border-radius: 10px;
+    background: var(--card); color: var(--text);
+  }
+  #customRate:focus { outline: none; border-color: var(--accent); }
+  .custom-wrap.active #customRate {
+    border-style: solid; border-color: var(--accent);
+    background: var(--accent-soft); color: var(--accent);
+  }
+
+  /* Skaidri redzams, kura likme izvēlēta */
+  .rate-indicator {
+    margin: calc(3px + 5px * var(--vh-t)) 0 calc(6px + 14px * var(--vh-t)); font-size: .92rem; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rate-indicator::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .rate-indicator strong { color: var(--accent); }
+
+  /* Brīdinājums par negatīvu summu — redzams tikai, ja lietotājs ievadījis mīnusu */
+  .warn-msg {
+    display: none; align-items: center; gap: 8px;
+    margin: 8px 0 0; padding: 8px 12px; font-size: .88rem;
+    color: var(--danger); background: var(--danger-soft); border-radius: 8px;
+  }
+  .warn-msg.show { display: flex; }
+  .field-block input.input-negative {
+    border-color: var(--danger) !important; background: var(--danger-soft) !important;
+  }
+
+  /* Abpusējie lauki */
+  .fields { display: flex; flex-direction: column; }
+  .field-block .input-row { display: flex; gap: 8px; }
+  .field-block input {
+    flex: 1; font-size: 1.5rem; font-weight: 600; padding: calc(6px + 8px * var(--vh-t)) 16px;
+    border: 2px solid var(--border); border-radius: 12px;
+    background: var(--bg); color: var(--text); min-width: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .field-block input:focus { outline: none; border-color: var(--accent); background: var(--accent-soft); }
+  .field-block input::placeholder { color: var(--muted); font-weight: 400; }
+
+  .swap-row { display: flex; justify-content: center; padding: calc(2px + 6px * var(--vh-t)) 0; }
+  #swapBtn {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border); background: var(--card); color: var(--muted);
+    border-radius: 999px; padding: 8px 18px; cursor: pointer; font-size: .92rem;
+  }
+  #swapBtn:hover { color: var(--accent); border-color: var(--accent); }
+
+  .fields .field-block.net   { order: 1; }
+  .fields .swap-row          { order: 2; }
+  .fields .field-block.gross { order: 3; }
+  .fields.swapped .field-block.net   { order: 3; }
+  .fields.swapped .field-block.gross { order: 1; }
+
+  .copy-btn {
+    border: 1px solid var(--border); background: var(--card);
+    color: var(--muted); border-radius: 10px; padding: 4px 14px; cursor: pointer; font-size: .88rem;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  .vat-result {
+    margin-top: calc(6px + 16px * var(--vh-t));
+    background: var(--result-bg); border-radius: 12px; padding: calc(6px + 10px * var(--vh-t)) 18px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .vat-result .lbl { color: var(--muted); font-size: .95rem; }
+  .vat-result .val {
+    font-size: 1.6rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .actions { margin-top: calc(4px + 12px * var(--vh-t)); text-align: right; }
+  #clearBtn {
+    border: none; background: none; color: var(--muted);
+    cursor: pointer; font-size: .9rem; text-decoration: underline;
+  }
+  #clearBtn:hover { color: var(--accent); }
+
+  /* Sadaļas */
+  section { margin: 36px 0; }
+  h2 { font-size: 1.25rem; margin-bottom: 14px; }
+  .faq-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 10px; overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 14px 16px; font-weight: 600; cursor: pointer; list-style: none;
+  }
+  .faq-item summary::after { content: "+"; float: right; color: var(--muted); }
+  .faq-item[open] summary::after { content: "–"; }
+  .faq-item .faq-body { padding: 0 16px 14px; color: var(--muted); font-size: .95rem; }
+  .faq-body code {
+    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
+    font-size: .88em; color: var(--text);
+  }
+  .faq-body ul { padding-left: 20px; margin-top: 6px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 22px 0 34px;
+    color: var(--muted); font-size: .88rem; text-align: center;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  @media (max-width: 480px) {
+    .field-block input { font-size: 1.25rem; }
+    .vat-result .val { font-size: 1.3rem; }
+  }
+
+  /* ===== Sīkdatņu piekrišanas josla ===== */
+  #cookieBanner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: var(--card); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(20,30,50,.14);
+    padding: 16px; display: none;
+  }
+  #cookieBanner.show { display: block; }
+  .cookie-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .cookie-text { flex: 1; min-width: 240px; font-size: .9rem; color: var(--text); line-height: 1.5; }
+  .cookie-text a { color: var(--accent); }
+  .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .cookie-actions button {
+    padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer;
+    border-radius: 9px; border: 1px solid var(--border);
+  }
+  #cookieDecline { background: var(--card); color: var(--muted); }
+  #cookieDecline:hover { border-color: var(--accent); color: var(--accent); }
+  #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
+  #cookieAccept:hover { filter: brightness(1.05); }
+  @media (max-width: 560px) {
+    .cookie-actions { width: 100%; }
+    .cookie-actions button { flex: 1; }
+  }
+
+
+  /* ===== Peldošais kalkulators ===== */
+  #calcFab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 40;
+    width: 56px; height: 56px; border-radius: 50%; cursor: pointer;
+    border: none; background: var(--accent); color: #fff; font-size: 1.5rem;
+    box-shadow: 0 4px 16px rgba(20,30,50,.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #calcFab:hover { background: var(--accent-dark, #1558c0); transform: translateY(-1px); }
+  [data-theme="dark"] #calcFab:hover { filter: brightness(1.1); }
+
+  #miniCalc {
+    position: fixed; right: 22px; bottom: 88px; z-index: 45;
+    width: 268px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(20,30,50,.28);
+    display: none; overflow: hidden; user-select: none;
+  }
+  #miniCalc.open { display: block; }
+  .mc-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 12px; cursor: grab; background: var(--result-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .mc-head.dragging { cursor: grabbing; }
+  .mc-head .mc-title { font-weight: 600; font-size: .92rem; flex: 1; }
+  .mc-head button {
+    border: none; background: none; color: var(--muted); cursor: pointer;
+    font-size: 1.1rem; line-height: 1; padding: 2px 6px; border-radius: 6px;
+  }
+  .mc-head button:hover { background: var(--accent-soft); color: var(--accent); }
+
+  .mc-display {
+    padding: 12px 14px 6px; text-align: right;
+  }
+  .mc-expr { min-height: 16px; font-size: .8rem; color: var(--muted);
+             font-variant-numeric: tabular-nums; overflow: hidden; white-space: nowrap; }
+  .mc-value { font-size: 1.9rem; font-weight: 700; color: var(--text);
+              font-variant-numeric: tabular-nums; overflow: hidden; white-space: nowrap; }
+
+  .mc-insert-label { padding: 2px 12px 0; font-size: .74rem; color: var(--muted); }
+  .mc-insert { display: flex; gap: 6px; padding: 4px 10px 10px; }
+  .mc-insert button {
+    flex: 1; padding: 7px 4px; font-size: .82rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--accent); border-radius: 8px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .mc-insert button:hover { background: var(--accent); color: #fff; }
+
+  .mc-pad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 0 10px 12px; }
+  .mc-pad button {
+    padding: 12px 0; font-size: 1.05rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text);
+  }
+  .mc-pad button:hover { border-color: var(--accent); }
+  .mc-pad button.op { color: var(--accent); }
+  .mc-pad button.eq { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .mc-pad button.eq:hover { filter: brightness(1.05); }
+  .mc-pad button.fn { color: var(--muted); font-size: .95rem; }
+
+  @media (max-width: 480px) {
+    #miniCalc { right: 12px; left: 12px; width: auto; bottom: 84px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kādas PVN likmes piemēro Latvijā?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei. 5% — īpaši samazinātā likme atsevišķām preču grupām. 0% — atsevišķiem darījumiem, piemēram, eksportam. Precīzu un aktuālu informāciju meklē Valsts ieņēmumu dienesta (VID) mājaslapā."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai kalkulatorā ir pieejamas citu ES valstu PVN likmes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā, izvēlnē \"Valsts\" ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes parādās tās standarta likme un samazinātās likmes. Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi attiecīgās valsts nodokļu iestādes mājaslapā."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā pieskaitīt PVN summai?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ieraksti summu laukā \"Summa bez PVN\" — kalkulators to reizina ar koeficientu 1 + likme / 100. Piemērs ar 21% likmi: 100 € × 1,21 = 121 €. PVN daļa šajā gadījumā ir 21 €."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā atskaitīt PVN no summas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ieraksti summu laukā \"Summa ar PVN\" — kalkulators to dala ar koeficientu: 121 € ÷ 1,21 = 100 € (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai kalkulatoru var izmantot ar citu likmi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā \"Cita %\" ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā tiek noapaļoti rezultāti?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="#">PVN<span>kalkulators</span></a>
+    <nav>
+      <a href="#buj" id="navBuj">BUJ</a>
+      <a href="#likmes" id="navLikmes">Likmes</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="lv">LV</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu">🌞</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="calc">
+    <h1 id="mainH1">PVN kalkulators</h1>
+    <p class="subtitle" id="subtitleText">Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.</p>
+
+    <label class="field-label" id="countryLabel">Valsts</label>
+    <div class="country-picker" id="countryPicker">
+      <button type="button" id="countryBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="countryList" aria-labelledby="countryLabel"></button>
+      <div id="countryList" role="listbox" tabindex="-1" aria-labelledby="countryLabel"></div>
+    </div>
+
+    <label class="field-label" id="likmeLabel">PVN likme</label>
+    <div class="rates" id="rates">
+      <span id="rateBtns" style="display:contents"></span>
+      <span class="custom-wrap" id="customWrap">
+        <input type="text" id="customRate" inputmode="decimal" placeholder="Cita" title="Ievadi savu PVN likmi procentos">
+        <span class="custom-percent">%</span>
+      </span>
+    </div>
+    <div class="rate-indicator" id="rateIndicator"></div>
+
+    <div class="fields" id="fields">
+
+      <div class="field-block net">
+        <label class="field-label" for="netInput"><span id="netLabelText">Summa bez PVN</span> <small>(EUR)</small></label>
+        <div class="input-row">
+          <input type="text" id="netInput" inputmode="decimal" placeholder="0,00">
+          <button class="copy-btn" data-copy="netInput">Kopēt</button>
+        </div>
+      </div>
+
+      <div class="swap-row">
+        <button id="swapBtn" title="Apmainīt laukus vietām">⇅ <span id="swapText">Mainīt vietām</span></button>
+      </div>
+
+      <div class="field-block gross">
+        <label class="field-label" for="grossInput"><span id="grossLabelText">Summa ar PVN</span> <small>(EUR)</small></label>
+        <div class="input-row">
+          <input type="text" id="grossInput" inputmode="decimal" placeholder="0,00">
+          <button class="copy-btn" data-copy="grossInput">Kopēt</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="warn-msg" id="negWarning">
+      <span aria-hidden="true">⚠</span> <span id="negWarningText">Summa nevar būt negatīva — rezultāts var būt maldinošs.</span>
+    </div>
+
+    <div class="vat-result">
+      <span class="lbl"><span id="vatSummaLabelText">PVN summa</span> (<span id="rateLabel">21</span>%)</span>
+      <span style="display:flex;align-items:center;gap:12px;">
+        <span class="val" id="vatVal">0,00 €</span>
+        <button class="copy-btn" data-copy="vatVal">Kopēt</button>
+      </span>
+    </div>
+
+    <div class="actions">
+      <button id="clearBtn">Notīrīt</button>
+    </div>
+
+    <div class="sr-only" id="copyStatus" aria-live="polite"></div>
+  </div>
+
+  <section id="likmes">
+    <h2 id="likmesH2">PVN likmes</h2>
+    <details class="faq-item" open>
+      <summary id="likmesFaq1Summary">Kādas PVN likmes piemēro Latvijā?</summary>
+      <div class="faq-body" id="likmesFaq1Body">
+        Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:
+        <ul>
+          <li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>
+          <li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>
+          <li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>
+          <li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>
+        </ul>
+        Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="likmesFaq2Summary">Citu ES valstu PVN likmes</summary>
+      <div class="faq-body" id="likmesFaq2Body">
+        Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes
+        parādās tās standarta likme (pirmā poga) un samazinātās likmes.
+        Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi
+        attiecīgās valsts nodokļu iestādes mājaslapā.
+      </div>
+    </details>
+  </section>
+
+  <section id="buj">
+    <h2 id="bujH2">Biežāk uzdotie jautājumi</h2>
+
+    <details class="faq-item">
+      <summary id="bujFaq1Summary">Kā pieskaitīt PVN summai?</summary>
+      <div class="faq-body" id="bujFaq1Body">
+        Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu
+        <code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>.
+        PVN daļa šajā gadījumā ir 21 €.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="bujFaq2Summary">Kā atskaitīt PVN no summas?</summary>
+      <div class="faq-body" id="bujFaq2Body">
+        Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu:
+        <code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €.
+        Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="bujFaq3Summary">Vai kalkulatoru var izmantot ar citu likmi?</summary>
+      <div class="faq-body" id="bujFaq3Body">
+        Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %”
+        ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="bujFaq4Summary">Kā tiek noapaļoti rezultāti?</summary>
+      <div class="faq-body" id="bujFaq4Body">
+        Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa.
+        Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="privatuma-politika.html" id="footerPrivacy">Privātuma politika</a> ·
+      <a href="kontakti.html" id="footerContact">Kontakti</a>
+    </div>
+    <div id="footerText">
+      PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka; nodokļu jautājumos konsultējies ar grāmatvedi vai VID.
+      ES valstu likmes ir informatīvas un var mainīties.
+    </div>
+  </div>
+</footer>
+
+<!-- Sīkdatņu piekrišanas josla -->
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
+  <div class="cookie-inner">
+    <div class="cookie-text" id="cookieText">
+      Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense).
+      Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu.
+      Vairāk — <a href="privatuma-politika.html" id="cookieLink">privātuma politikā</a>.
+    </div>
+    <div class="cookie-actions">
+      <button id="cookieDecline" type="button">Noraidīt</button>
+      <button id="cookieAccept" type="button">Piekrītu</button>
+    </div>
+  </div>
+</div>
+
+<!-- Peldošais kalkulators -->
+<button id="calcFab" title="Atvērt kalkulatoru" aria-label="Atvērt kalkulatoru">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2"/>
+    <line x1="8" y1="6" x2="16" y2="6"/>
+    <line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
+    <line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
+    <line x1="8" y1="18" x2="8" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/>
+  </svg>
+</button>
+
+<div id="miniCalc" aria-label="Kalkulators">
+  <div class="mc-head" id="mcHead">
+    <span class="mc-title" id="mcTitleText">Kalkulators</span>
+    <button id="mcClose" title="Aizvērt">✕</button>
+  </div>
+  <div class="mc-display">
+    <div class="mc-expr" id="mcExpr"></div>
+    <div class="mc-value" id="mcValue">0</div>
+  </div>
+  <div class="mc-insert-label" id="mcInsertLabel">Pārnest rezultātu uz PVN aprēķinu:</div>
+  <div class="mc-insert">
+    <button id="mcInsertNet" data-insert="net" title="Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa bez PVN”">Bez PVN</button>
+    <button id="mcInsertGross" data-insert="gross" title="Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”">Ar PVN</button>
+  </div>
+  <div class="mc-pad">
+    <button class="fn" data-k="C">C</button>
+    <button class="fn" data-k="back">⌫</button>
+    <button class="fn" data-k="%">%</button>
+    <button class="op" data-k="/">÷</button>
+
+    <button data-k="7">7</button>
+    <button data-k="8">8</button>
+    <button data-k="9">9</button>
+    <button class="op" data-k="*">×</button>
+
+    <button data-k="4">4</button>
+    <button data-k="5">5</button>
+    <button data-k="6">6</button>
+    <button class="op" data-k="-">−</button>
+
+    <button data-k="1">1</button>
+    <button data-k="2">2</button>
+    <button data-k="3">3</button>
+    <button class="op" data-k="+">+</button>
+
+    <button data-k="neg">±</button>
+    <button data-k="0">0</button>
+    <button data-k=".">,</button>
+    <button class="eq" data-k="=">=</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ES valstu PVN likmes (pirmā — standarta, pārējās — samazinātās). Informatīvi, 2026. g. sākums.
+  var EU = [
+    { code: 'at', name: { lv: 'Austrija',    ru: 'Австрия',      en: 'Austria' },     rates: [20, 13, 10] },
+    { code: 'be', name: { lv: 'Beļģija',     ru: 'Бельгия',      en: 'Belgium' },     rates: [21, 12, 6] },
+    { code: 'bg', name: { lv: 'Bulgārija',   ru: 'Болгария',     en: 'Bulgaria' },    rates: [20, 9] },
+    { code: 'cz', name: { lv: 'Čehija',      ru: 'Чехия',        en: 'Czechia' },     rates: [21, 12] },
+    { code: 'dk', name: { lv: 'Dānija',      ru: 'Дания',        en: 'Denmark' },     rates: [25] },
+    { code: 'fr', name: { lv: 'Francija',    ru: 'Франция',      en: 'France' },      rates: [20, 10, 5.5, 2.1] },
+    { code: 'gr', name: { lv: 'Grieķija',    ru: 'Греция',       en: 'Greece' },      rates: [24, 13, 6] },
+    { code: 'hr', name: { lv: 'Horvātija',   ru: 'Хорватия',     en: 'Croatia' },     rates: [25, 13, 5] },
+    { code: 'ee', name: { lv: 'Igaunija',    ru: 'Эстония',      en: 'Estonia' },     rates: [24, 13, 9] },
+    { code: 'it', name: { lv: 'Itālija',     ru: 'Италия',       en: 'Italy' },       rates: [22, 10, 5, 4] },
+    { code: 'ie', name: { lv: 'Īrija',       ru: 'Ирландия',     en: 'Ireland' },     rates: [23, 13.5, 9, 4.8] },
+    { code: 'cy', name: { lv: 'Kipra',       ru: 'Кипр',         en: 'Cyprus' },      rates: [19, 9, 5, 3] },
+    { code: 'lv', name: { lv: 'Latvija',     ru: 'Латвия',       en: 'Latvia' },      rates: [21, 12, 5] },
+    { code: 'lt', name: { lv: 'Lietuva',     ru: 'Литва',        en: 'Lithuania' },   rates: [21, 9, 5] },
+    { code: 'lu', name: { lv: 'Luksemburga', ru: 'Люксембург',   en: 'Luxembourg' },  rates: [17, 14, 8, 3] },
+    { code: 'mt', name: { lv: 'Malta',       ru: 'Мальта',       en: 'Malta' },       rates: [18, 12, 7, 5] },
+    { code: 'nl', name: { lv: 'Nīderlande',  ru: 'Нидерланды',   en: 'Netherlands' }, rates: [21, 9] },
+    { code: 'pl', name: { lv: 'Polija',      ru: 'Польша',       en: 'Poland' },      rates: [23, 8, 5] },
+    { code: 'pt', name: { lv: 'Portugāle',   ru: 'Португалия',   en: 'Portugal' },    rates: [23, 13, 6] },
+    { code: 'ro', name: { lv: 'Rumānija',    ru: 'Румыния',      en: 'Romania' },     rates: [21, 11] },
+    { code: 'sk', name: { lv: 'Slovākija',   ru: 'Словакия',     en: 'Slovakia' },    rates: [23, 19, 5] },
+    { code: 'si', name: { lv: 'Slovēnija',   ru: 'Словения',     en: 'Slovenia' },    rates: [22, 9.5, 5] },
+    { code: 'fi', name: { lv: 'Somija',      ru: 'Финляндия',    en: 'Finland' },     rates: [25.5, 14, 10] },
+    { code: 'es', name: { lv: 'Spānija',     ru: 'Испания',      en: 'Spain' },       rates: [21, 10, 4] },
+    { code: 'hu', name: { lv: 'Ungārija',    ru: 'Венгрия',      en: 'Hungary' },     rates: [27, 18, 5] },
+    { code: 'de', name: { lv: 'Vācija',      ru: 'Германия',     en: 'Germany' },     rates: [19, 7] },
+    { code: 'se', name: { lv: 'Zviedrija',   ru: 'Швеция',       en: 'Sweden' },      rates: [25, 12, 6] }
+  ];
+
+  // Visi statiskie UI teksti trīs valodās
+  var I18N = {
+    lv: {
+      pageTitle: 'PVN Kalkulators — aprēķini PVN 21%, 12%, 5% | Latvija un ES',
+      pageDescription: 'Bezmaksas PVN kalkulators. Ievadi summu ar vai bez PVN — otra aprēķinās automātiski. Visu ES valstu PVN likmes vai sava likme.',
+      navBuj: 'BUJ', navLikmes: 'Likmes',
+      h1: 'PVN kalkulators',
+      subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.',
+      valstsLabel: 'Valsts', likmeLabel: 'PVN likme',
+      customPlaceholder: 'Cita', customTitle: 'Ievadi savu PVN likmi procentos',
+      netLabel: 'Summa bez PVN', grossLabel: 'Summa ar PVN',
+      copy: 'Kopēt', copied: 'Nokopēts!',
+      swapText: 'Mainīt vietām', swapTitle: 'Apmainīt laukus vietām',
+      vatSummaLabel: 'PVN summa', clear: 'Notīrīt',
+      negWarning: 'Summa nevar būt negatīva — rezultāts var būt maldinošs.',
+      rateStandard: 'standarta likme', rateReduced: 'samazinātā likme', rateCustom: 'tava ievadītā likme',
+      rateSelected: 'Izvēlēta likme:',
+      themeBtnTitle: 'Mainīt gaišo/tumšo režīmu',
+      sepBtnTitle: 'Mainīt decimāldaļu atdalītāju (komats/punkts)',
+      calcFabTitle: 'Atvērt kalkulatoru',
+      mcTitle: 'Kalkulators', mcCloseTitle: 'Aizvērt',
+      mcInsertLabel: 'Pārnest rezultātu uz PVN aprēķinu:',
+      mcInsertNet: 'Bez PVN', mcInsertGross: 'Ar PVN',
+      mcInsertNetTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa bez PVN”',
+      mcInsertGrossTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”',
+      likmesH2: 'PVN likmes',
+      likmesFaq1Summary: 'Kādas PVN likmes piemēro Latvijā?',
+      likmesFaq1Body: 'Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:' +
+        '<ul>' +
+        '<li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>' +
+        '<li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>' +
+        '<li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>' +
+        '<li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>' +
+        '</ul>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.',
+      likmesFaq2Summary: 'Citu ES valstu PVN likmes',
+      likmesFaq2Body: 'Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes ' +
+        'parādās tās standarta likme (pirmā poga) un samazinātās likmes. ' +
+        'Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi ' +
+        'attiecīgās valsts nodokļu iestādes mājaslapā.',
+      bujH2: 'Biežāk uzdotie jautājumi',
+      bujFaq1Summary: 'Kā pieskaitīt PVN summai?',
+      bujFaq1Body: 'Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu ' +
+        '<code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>. ' +
+        'PVN daļa šajā gadījumā ir 21 €.',
+      bujFaq2Summary: 'Kā atskaitīt PVN no summas?',
+      bujFaq2Body: 'Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu: ' +
+        '<code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. ' +
+        'Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.',
+      bujFaq3Summary: 'Vai kalkulatoru var izmantot ar citu likmi?',
+      bujFaq3Body: 'Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %” ' +
+        'ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.',
+      bujFaq4Summary: 'Kā tiek noapaļoti rezultāti?',
+      bujFaq4Body: 'Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. ' +
+        'Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.',
+      footer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka; nodokļu jautājumos konsultējies ar grāmatvedi vai VID. ES valstu likmes ir informatīvas un var mainīties.',
+      footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
+      cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
+        'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
+        'Vairāk — <a href="privatuma-politika.html">privātuma politikā</a>.',
+      cookieAccept: 'Piekrītu', cookieDecline: 'Noraidīt'
+    },
+    ru: {
+      pageTitle: 'Калькулятор НДС — расчёт НДС 21%, 12%, 5% | Латвия и ЕС',
+      pageDescription: 'Бесплатный калькулятор НДС. Введите сумму с НДС или без — вторая рассчитается автоматически. Ставки НДС всех стран ЕС или своя ставка.',
+      navBuj: 'Вопросы', navLikmes: 'Ставки',
+      h1: 'Калькулятор НДС',
+      subtitleHtml: 'Введите сумму в <strong>любое</strong> поле — остальное рассчитается автоматически.',
+      valstsLabel: 'Страна', likmeLabel: 'Ставка НДС',
+      customPlaceholder: 'Другая', customTitle: 'Введите свою ставку НДС в процентах',
+      netLabel: 'Сумма без НДС', grossLabel: 'Сумма с НДС',
+      copy: 'Копировать', copied: 'Скопировано!',
+      swapText: 'Поменять местами', swapTitle: 'Поменять поля местами',
+      vatSummaLabel: 'Сумма НДС', clear: 'Очистить',
+      negWarning: 'Сумма не может быть отрицательной — результат может быть некорректным.',
+      rateStandard: 'стандартная ставка', rateReduced: 'сниженная ставка', rateCustom: 'введённая вами ставка',
+      rateSelected: 'Выбранная ставка:',
+      themeBtnTitle: 'Переключить светлый/тёмный режим',
+      sepBtnTitle: 'Переключить разделитель десятичных (запятая/точка)',
+      calcFabTitle: 'Открыть калькулятор',
+      mcTitle: 'Калькулятор', mcCloseTitle: 'Закрыть',
+      mcInsertLabel: 'Перенести результат в расчёт НДС:',
+      mcInsertNet: 'Без НДС', mcInsertGross: 'С НДС',
+      mcInsertNetTitle: 'Вставить число с экрана в поле «Сумма без НДС»',
+      mcInsertGrossTitle: 'Вставить число с экрана в поле «Сумма с НДС»',
+      likmesH2: 'Ставки НДС',
+      likmesFaq1Summary: 'Какие ставки НДС применяются в Латвии?',
+      likmesFaq1Body: 'В Латвии действуют несколько ставок налога на добавленную стоимость:' +
+        '<ul>' +
+        '<li><strong>21%</strong> — стандартная ставка, применяется к большинству товаров и услуг.</li>' +
+        '<li><strong>12%</strong> — сниженная ставка, например, для медикаментов, теплоэнергии для населения, книг и прессы.</li>' +
+        '<li><strong>5%</strong> — особая сниженная ставка для отдельных групп товаров.</li>' +
+        '<li><strong>0%</strong> — для отдельных операций, например, экспорта.</li>' +
+        '</ul>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).',
+      likmesFaq2Summary: 'Ставки НДС других стран ЕС',
+      likmesFaq2Body: 'В меню «Страна» доступны все 27 стран-членов ЕС. При выборе страны под меню появляется ' +
+        'её стандартная ставка (первая кнопка) и сниженные ставки. ' +
+        'Ставки время от времени меняются, поэтому перед важными расчётами проверяйте актуальную ставку ' +
+        'на сайте налоговой службы соответствующей страны.',
+      bujH2: 'Часто задаваемые вопросы',
+      bujFaq1Summary: 'Как прибавить НДС к сумме?',
+      bujFaq1Body: 'Введите сумму в поле <strong>«Сумма без НДС»</strong> — калькулятор умножит её на коэффициент ' +
+        '<code>1 + ставка / 100</code>. Пример при ставке 21%: <code>100 € × 1,21 = 121 €</code>. ' +
+        'Сумма НДС в этом случае — 21 €.',
+      bujFaq2Summary: 'Как вычесть НДС из суммы?',
+      bujFaq2Body: 'Введите сумму в поле <strong>«Сумма с НДС»</strong> — калькулятор разделит её на коэффициент: ' +
+        '<code>121 € ÷ 1,21 = 100 €</code> (при ставке 21%). Это сумма без НДС, а сумма НДС — 21 €. ' +
+        'Частая ошибка — просто вычесть 21% из итоговой суммы, такой результат неверен.',
+      bujFaq3Summary: 'Можно ли использовать калькулятор с другой ставкой?',
+      bujFaq3Body: 'Да — выберите страну в меню и нажмите одну из её ставок, либо введите любую ставку в поле ' +
+        '«Другая %», и расчёт будет произведён по тому же принципу.',
+      bujFaq4Summary: 'Как округляются результаты?',
+      bujFaq4Body: 'Результаты округляются до 2 знаков после запятой (центов) по правилам математического округления. ' +
+        'Для бухгалтерских нужд всегда уточняйте порядок округления, принятый в вашей компании.',
+      footer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы; по налоговым вопросам консультируйтесь с бухгалтером или VID. Ставки стран ЕС носят информативный характер и могут изменяться.',
+      footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
+      cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
+        'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
+        'Подробнее — в <a href="privatuma-politika.html">политике конфиденциальности</a>.',
+      cookieAccept: 'Принимаю', cookieDecline: 'Отклонить'
+    },
+    en: {
+      pageTitle: 'VAT Calculator — calculate VAT 21%, 12%, 5% | Latvia and EU',
+      pageDescription: 'Free VAT calculator. Enter an amount with or without VAT — the other updates automatically. VAT rates for all EU countries or your own rate.',
+      navBuj: 'FAQ', navLikmes: 'Rates',
+      h1: 'VAT Calculator',
+      subtitleHtml: 'Type an amount into <strong>either</strong> field — the other calculates automatically.',
+      valstsLabel: 'Country', likmeLabel: 'VAT rate',
+      customPlaceholder: 'Other', customTitle: 'Enter your own VAT rate in percent',
+      netLabel: 'Amount without VAT', grossLabel: 'Amount with VAT',
+      copy: 'Copy', copied: 'Copied!',
+      swapText: 'Swap fields', swapTitle: 'Swap the two fields',
+      vatSummaLabel: 'VAT amount', clear: 'Clear',
+      negWarning: 'The amount cannot be negative — the result may be misleading.',
+      rateStandard: 'standard rate', rateReduced: 'reduced rate', rateCustom: 'your custom rate',
+      rateSelected: 'Selected rate:',
+      themeBtnTitle: 'Toggle light/dark mode',
+      sepBtnTitle: 'Toggle decimal separator (comma/period)',
+      calcFabTitle: 'Open calculator',
+      mcTitle: 'Calculator', mcCloseTitle: 'Close',
+      mcInsertLabel: 'Send result to VAT calculation:',
+      mcInsertNet: 'No VAT', mcInsertGross: 'With VAT',
+      mcInsertNetTitle: 'Insert the number shown on the display into the “Amount without VAT” field',
+      mcInsertGrossTitle: 'Insert the number shown on the display into the “Amount with VAT” field',
+      likmesH2: 'VAT rates',
+      likmesFaq1Summary: 'What VAT rates apply in Latvia?',
+      likmesFaq1Body: 'Latvia has several value-added tax rates in effect:' +
+        '<ul>' +
+        '<li><strong>21%</strong> — the standard rate, applied to most goods and services.</li>' +
+        '<li><strong>12%</strong> — a reduced rate, e.g. for medicines, district heating for households, books and press.</li>' +
+        '<li><strong>5%</strong> — a special reduced rate for certain product groups.</li>' +
+        '<li><strong>0%</strong> — for certain transactions, e.g. exports.</li>' +
+        '</ul>For precise and current information on rate application, check the State Revenue Service (VID) website.',
+      likmesFaq2Summary: 'VAT rates of other EU countries',
+      likmesFaq2Body: 'The “Country” menu includes all 27 EU member states. Selecting a country shows its standard ' +
+        'rate (first button) and reduced rates below the menu. ' +
+        'Rates change from time to time, so before important calculations check the current rate on the relevant ' +
+        'country\'s tax authority website.',
+      bujH2: 'Frequently asked questions',
+      bujFaq1Summary: 'How do I add VAT to an amount?',
+      bujFaq1Body: 'Enter the amount in the <strong>“Amount without VAT”</strong> field — the calculator multiplies ' +
+        'it by the factor <code>1 + rate / 100</code>. Example at a 21% rate: <code>€100 × 1.21 = €121</code>. ' +
+        'The VAT amount in this case is €21.',
+      bujFaq2Summary: 'How do I deduct VAT from an amount?',
+      bujFaq2Body: 'Enter the amount in the <strong>“Amount with VAT”</strong> field — the calculator divides it by ' +
+        'the factor: <code>€121 ÷ 1.21 = €100</code> (at a 21% rate). That\'s the amount without VAT, and the VAT ' +
+        'amount is €21. A common mistake is simply subtracting 21% from the total — that result is incorrect.',
+      bujFaq3Summary: 'Can I use the calculator with a different rate?',
+      bujFaq3Body: 'Yes — choose a country from the menu and click one of its rates, or enter any rate in the ' +
+        '“Other %” field, and the calculation works the same way.',
+      bujFaq4Summary: 'How are results rounded?',
+      bujFaq4Body: 'Results are rounded to 2 decimal places (cents) using standard mathematical rounding. ' +
+        'For accounting purposes, always confirm the rounding convention used by your company.',
+      footer: 'VAT calculator — an informational tool. Calculations have no legal effect; consult an accountant or VID on tax matters. EU country rates are for information only and may change.',
+      footerPrivacy: 'Privacy policy', footerContact: 'Contact',
+      cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
+        'Analytics and advertising cookies are loaded only with your consent. ' +
+        'Learn more in our <a href="privatuma-politika.html">privacy policy</a>.',
+      cookieAccept: 'I agree', cookieDecline: 'Decline'
+    }
+  };
+
+  var netInput = document.getElementById('netInput');
+  var grossInput = document.getElementById('grossInput');
+  var customEl = document.getElementById('customRate');
+  var customWrap = document.getElementById('customWrap');
+  var picker = document.getElementById('countryPicker');
+  var countryBtn = document.getElementById('countryBtn');
+  var countryList = document.getElementById('countryList');
+  var rateBtnsBox = document.getElementById('rateBtns');
+  var indicator = document.getElementById('rateIndicator');
+  var vatVal = document.getElementById('vatVal');
+  var rateLabel = document.getElementById('rateLabel');
+  var themeBtn = document.getElementById('themeBtn');
+  var sepBtn = document.getElementById('sepBtn');
+  var swapBtn = document.getElementById('swapBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var fields = document.getElementById('fields');
+  var negWarning = document.getElementById('negWarning');
+  var copyStatus = document.getElementById('copyStatus');
+  var langSwitch = document.getElementById('langSwitch');
+
+  var state = { countryIdx: 12, rate: 21, custom: false, lastEdited: 'net', lang: 'lv', decimalSep: 'comma' }; // 12 = Latvija
+
+  /* --- Decimāldaļas atdalītājs (,/.) — neatkarīgs no UI valodas,
+     jo tas atkarīgs no sistēmas, kurā rezultātu ielīmēs (Excel, rēķini u.c.),
+     nevis no tā, kādā valodā lietotājs lasa saskarni. --- */
+  function applyDecimalSep(sep) {
+    state.decimalSep = sep;
+    sepBtn.textContent = sep === 'comma' ? ',' : '.';
+    try { localStorage.setItem('pvn-decimal-sep', sep); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('pvn-sep-change', { detail: sep }));
+    renderRates();
+    calc();
+  }
+  sepBtn.addEventListener('click', function () {
+    applyDecimalSep(state.decimalSep === 'comma' ? 'period' : 'comma');
+  });
+
+  /* --- Valodas (LV/RU/EN) --- */
+  function guessInitialLang() {
+    try {
+      var saved = localStorage.getItem('pvn-lang');
+      if (saved && I18N[saved]) return saved;
+    } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    if (nav.indexOf('ru') === 0) return 'ru';
+    if (nav.indexOf('en') === 0) return 'en';
+    return 'lv';
+  }
+
+  function applyLanguage(lang) {
+    var t = I18N[lang];
+    if (!t) return;
+    state.lang = lang;
+    document.documentElement.lang = lang;
+    document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('mainH1').textContent = t.h1;
+    document.getElementById('subtitleText').innerHTML = t.subtitleHtml;
+    document.getElementById('countryLabel').textContent = t.valstsLabel;
+    document.getElementById('likmeLabel').textContent = t.likmeLabel;
+    customEl.placeholder = t.customPlaceholder;
+    customEl.title = t.customTitle;
+    document.getElementById('netLabelText').textContent = t.netLabel;
+    document.getElementById('grossLabelText').textContent = t.grossLabel;
+    document.querySelectorAll('.copy-btn').forEach(function (b) { b.textContent = t.copy; });
+    document.getElementById('swapText').textContent = t.swapText;
+    swapBtn.title = t.swapTitle;
+    document.getElementById('vatSummaLabelText').textContent = t.vatSummaLabel;
+    clearBtn.textContent = t.clear;
+    document.getElementById('negWarningText').textContent = t.negWarning;
+    themeBtn.title = t.themeBtnTitle;
+    themeBtn.setAttribute('aria-label', t.themeBtnTitle);
+    sepBtn.title = t.sepBtnTitle;
+    document.getElementById('calcFab').title = t.calcFabTitle;
+    document.getElementById('calcFab').setAttribute('aria-label', t.calcFabTitle);
+    document.getElementById('mcTitleText').textContent = t.mcTitle;
+    document.getElementById('mcClose').title = t.mcCloseTitle;
+    document.getElementById('mcInsertLabel').textContent = t.mcInsertLabel;
+    document.getElementById('mcInsertNet').textContent = t.mcInsertNet;
+    document.getElementById('mcInsertNet').title = t.mcInsertNetTitle;
+    document.getElementById('mcInsertGross').textContent = t.mcInsertGross;
+    document.getElementById('mcInsertGross').title = t.mcInsertGrossTitle;
+
+    document.getElementById('likmesH2').textContent = t.likmesH2;
+    document.getElementById('likmesFaq1Summary').textContent = t.likmesFaq1Summary;
+    document.getElementById('likmesFaq1Body').innerHTML = t.likmesFaq1Body;
+    document.getElementById('likmesFaq2Summary').textContent = t.likmesFaq2Summary;
+    document.getElementById('likmesFaq2Body').innerHTML = t.likmesFaq2Body;
+    document.getElementById('bujH2').textContent = t.bujH2;
+    document.getElementById('bujFaq1Summary').textContent = t.bujFaq1Summary;
+    document.getElementById('bujFaq1Body').innerHTML = t.bujFaq1Body;
+    document.getElementById('bujFaq2Summary').textContent = t.bujFaq2Summary;
+    document.getElementById('bujFaq2Body').innerHTML = t.bujFaq2Body;
+    document.getElementById('bujFaq3Summary').textContent = t.bujFaq3Summary;
+    document.getElementById('bujFaq3Body').innerHTML = t.bujFaq3Body;
+    document.getElementById('bujFaq4Summary').textContent = t.bujFaq4Summary;
+    document.getElementById('bujFaq4Body').innerHTML = t.bujFaq4Body;
+    document.getElementById('footerText').textContent = t.footer;
+    document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
+    document.getElementById('footerContact').textContent = t.footerContact;
+
+    // Sīkdatņu piekrišanas josla
+    var cookieText = document.getElementById('cookieText');
+    if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var cookieAccept = document.getElementById('cookieAccept');
+    if (cookieAccept) cookieAccept.textContent = t.cookieAccept;
+    var cookieDecline = document.getElementById('cookieDecline');
+    if (cookieDecline) cookieDecline.textContent = t.cookieDecline;
+
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+
+    try { localStorage.setItem('pvn-lang', lang); } catch (e) {}
+
+    // Pārzīmē elementus, kas atkarīgi no valodas (valstu nosaukumi, likmes apraksts)
+    renderCountryBtn();
+    renderCountryList();
+    renderRates();
+    calc();
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { applyLanguage(b.dataset.lang); });
+  });
+
+  function parseNum(str) {
+    if (!str) return NaN;
+    return parseFloat(String(str).replace(/\s/g, '').replace(',', '.'));
+  }
+  function fmt(n) {
+    var s = n.toLocaleString('lv-LV', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return state.decimalSep === 'period' ? s.replace(',', '.') : s;
+  }
+  function fmtRate(r) {
+    var s = String(r).replace('.', ',');
+    return state.decimalSep === 'period' ? s.replace(',', '.') : s;
+  }
+  function flagImg(code) {
+    // onerror: ja karodziņš neielādējas (piem., bezsaistē), paslēpjam bojāto ikonu,
+    // bet saglabājam tās vietu, lai teksts nelēkā.
+    return '<img class="flag" src="https://flagcdn.com/24x18/' + code + '.png" ' +
+           'srcset="https://flagcdn.com/48x36/' + code + '.png 2x" alt="" loading="lazy" ' +
+           'onerror="this.style.visibility=\'hidden\'">';
+  }
+
+  /* --- Valsts izvēlne --- */
+  function renderCountryBtn() {
+    var c = EU[state.countryIdx];
+    countryBtn.innerHTML = flagImg(c.code) + '<span class="country-name">' + c.name[state.lang] + '</span><span class="chev">▼</span>';
+  }
+
+  function renderCountryList() {
+    countryList.innerHTML = '';
+    EU.forEach(function (c, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.id = 'country-opt-' + i;
+      b.setAttribute('role', 'option');
+      b.innerHTML = flagImg(c.code) + '<span class="country-name">' + c.name[state.lang] + '</span>';
+      var isSelected = i === state.countryIdx;
+      if (isSelected) b.classList.add('selected');
+      b.setAttribute('aria-selected', String(isSelected));
+      b.addEventListener('click', function () {
+        state.countryIdx = i;
+        state.custom = false;
+        customEl.value = '';
+        customWrap.classList.remove('active');
+        state.rate = c.rates[0];
+        closeCountryPicker();
+        renderCountryBtn();
+        renderCountryList();
+        renderRates();
+        calc();
+      });
+      countryList.appendChild(b);
+    });
+  }
+
+  function openCountryPicker() {
+    picker.classList.add('open');
+    countryBtn.setAttribute('aria-expanded', 'true');
+    var sel = countryList.querySelector('.selected') || countryList.querySelector('button');
+    if (sel) { sel.scrollIntoView({ block: 'nearest' }); sel.focus(); }
+  }
+  function closeCountryPicker(returnFocus) {
+    picker.classList.remove('open');
+    countryBtn.setAttribute('aria-expanded', 'false');
+    if (returnFocus) countryBtn.focus();
+  }
+
+  countryBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    picker.classList.contains('open') ? closeCountryPicker(false) : openCountryPicker();
+  });
+  countryBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openCountryPicker();
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (!picker.contains(e.target)) closeCountryPicker(false);
+  });
+  countryList.addEventListener('keydown', function (e) {
+    var opts = Array.prototype.slice.call(countryList.querySelectorAll('button'));
+    var idx = opts.indexOf(document.activeElement);
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeCountryPicker(true);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      opts[Math.min(idx + 1, opts.length - 1)].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      opts[Math.max(idx - 1, 0)].focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      opts[0].focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      opts[opts.length - 1].focus();
+    }
+  });
+
+  /* --- Likmju pogas --- */
+  function renderRates() {
+    var c = EU[state.countryIdx];
+    rateBtnsBox.innerHTML = '';
+    c.rates.forEach(function (r) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      var active = !state.custom && state.rate === r;
+      b.innerHTML = fmtRate(r) + '%';
+      if (active) b.classList.add('active');
+      b.addEventListener('click', function () {
+        state.rate = r;
+        state.custom = false;
+        customEl.value = '';
+        customWrap.classList.remove('active');
+        renderRates();
+        calc();
+      });
+      rateBtnsBox.appendChild(b);
+    });
+    updateIndicator();
+  }
+
+  function updateIndicator() {
+    var c = EU[state.countryIdx];
+    var t = I18N[state.lang];
+    var text;
+    if (state.custom) {
+      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> — ' + t.rateCustom;
+    } else {
+      var kind = state.rate === c.rates[0] ? t.rateStandard : t.rateReduced;
+      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> — ' + c.name[state.lang] + ', ' + kind;
+    }
+    indicator.innerHTML = text;
+  }
+
+  /* --- Aprēķins: pārrēķina otru lauku pēc tā, kurā pēdējo reizi rakstīja --- */
+  function calc() {
+    var k = 1 + state.rate / 100;
+    rateLabel.textContent = fmtRate(state.rate);
+
+    var src = state.lastEdited === 'net' ? netInput : grossInput;
+    var dst = state.lastEdited === 'net' ? grossInput : netInput;
+    var amount = parseNum(src.value);
+
+    var negative = !isNaN(amount) && amount < 0;
+    src.classList.toggle('input-negative', negative);
+    dst.classList.remove('input-negative');
+    negWarning.classList.toggle('show', negative);
+
+    if (isNaN(amount)) {
+      dst.value = '';
+      vatVal.textContent = fmt(0) + ' €';
+      return;
+    }
+
+    var net, gross;
+    if (state.lastEdited === 'net') { net = amount; gross = amount * k; }
+    else { gross = amount; net = amount / k; }
+
+    dst.value = fmt(state.lastEdited === 'net' ? gross : net);
+    vatVal.textContent = fmt(gross - net) + ' €';
+  }
+
+  netInput.addEventListener('input', function () { state.lastEdited = 'net'; calc(); });
+  grossInput.addEventListener('input', function () { state.lastEdited = 'gross'; calc(); });
+
+  customEl.addEventListener('input', function () {
+    var r = parseNum(customEl.value);
+    if (!isNaN(r) && r >= 0) {
+      state.custom = true;
+      state.rate = r;
+      customWrap.classList.add('active');
+    } else {
+      // Tukšs vai nederīgs — atgriežamies pie valsts standarta likmes
+      state.custom = false;
+      state.rate = EU[state.countryIdx].rates[0];
+      customWrap.classList.remove('active');
+    }
+    renderRates();
+    calc();
+  });
+
+  // Tiklīdz lauks iegūst fokusu, nekavējoties noņem ķeksīti no citām likmēm —
+  // tas nedrīkst palikt uz iepriekš izvēlētās pogas, kamēr lietotājs raksta savu likmi.
+  customEl.addEventListener('focus', function () {
+    rateBtnsBox.querySelectorAll('button.active').forEach(function (b) {
+      b.classList.remove('active');
+    });
+    customEl.placeholder = '';
+  });
+  customEl.addEventListener('blur', function () {
+    customEl.placeholder = I18N[state.lang].customPlaceholder;
+    if (!customEl.value.trim()) renderRates();
+  });
+
+  swapBtn.addEventListener('click', function () {
+    fields.classList.toggle('swapped');
+    (fields.classList.contains('swapped') ? grossInput : netInput).focus();
+  });
+
+  clearBtn.addEventListener('click', function () {
+    netInput.value = '';
+    grossInput.value = '';
+    vatVal.textContent = fmt(0) + ' €';
+    netInput.classList.remove('input-negative');
+    grossInput.classList.remove('input-negative');
+    negWarning.classList.remove('show');
+    (fields.classList.contains('swapped') ? grossInput : netInput).focus();
+  });
+
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var text = (el.value !== undefined ? el.value : el.textContent)
+        .replace(' €', '').replace(/\s/g, '');
+      if (!text) return;
+      // Vērtība aiziet arī uz peldošo kalkulatoru, lai ar to varētu turpināt rēķināt
+      document.dispatchEvent(new CustomEvent('pvn-calc-load', { detail: text }));
+      navigator.clipboard.writeText(text).then(function () {
+        var old = btn.textContent;
+        var copiedText = I18N[state.lang].copied;
+        btn.textContent = copiedText;
+        // Notīra un no jauna iestata, lai ekrāna lasītājs paziņojumu izziņo arī tad,
+        // ja iepriekšējais paziņojums bija tieši tāds pats teksts.
+        copyStatus.textContent = '';
+        setTimeout(function () { copyStatus.textContent = copiedText; }, 10);
+        setTimeout(function () { btn.textContent = old; }, 1200);
+      });
+    });
+  });
+
+  // Gaišais/tumšais režīms
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.innerHTML = t === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', t); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var savedSep = null;
+  try { savedSep = localStorage.getItem('pvn-decimal-sep'); } catch (e) {}
+  applyDecimalSep(savedSep === 'period' ? 'period' : 'comma');
+
+  applyLanguage(guessInitialLang());
+
+  // Fokusu uz pirmo lauku liekam tikai ierīcēs ar peli/pointeri —
+  // mobilajās ierīcēs tas uzreiz atvērtu tastatūru un aizsegtu saturu.
+  if (window.matchMedia('(pointer: fine)').matches) netInput.focus();
+})();
+
+/* ===== Peldošais kalkulators ===== */
+(function () {
+  var fab = document.getElementById('calcFab');
+  var panel = document.getElementById('miniCalc');
+  var head = document.getElementById('mcHead');
+  var closeBtn = document.getElementById('mcClose');
+  var exprEl = document.getElementById('mcExpr');
+  var valueEl = document.getElementById('mcValue');
+  var netInput = document.getElementById('netInput');
+  var grossInput = document.getElementById('grossInput');
+
+  // Aprēķina stāvoklis
+  var cur = '0';       // pašreiz ievadītais skaitlis (teksts)
+  var acc = null;      // uzkrātā vērtība
+  var op = null;       // gaidošā operācija
+  var fresh = true;    // vai nākamais cipars sāk jaunu skaitli
+  var lastExpr = '';   // rādāmā izteiksme
+
+  var OPSYM = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+
+  // Decimāldaļas atdalītājs — sinhronizēts ar galveno kalkulatoru caur notikumu,
+  // jo šis ir atsevišķs IIFE ar savu stāvokli.
+  var decimalSep = 'comma';
+  try { decimalSep = localStorage.getItem('pvn-decimal-sep') === 'period' ? 'period' : 'comma'; } catch (e) {}
+  document.addEventListener('pvn-sep-change', function (e) {
+    decimalSep = e.detail;
+    render();
+  });
+
+  function fmtDisp(numStr) {
+    // Rāda ar izvēlēto atdalītāju, saglabā ievades pēdas (piem. "12,")
+    var s = String(numStr).replace('.', ',');
+    return decimalSep === 'period' ? s.replace(',', '.') : s;
+  }
+  function render() {
+    valueEl.textContent = fmtDisp(cur);
+    exprEl.textContent = lastExpr;
+  }
+  function toNum(s) { return parseFloat(s); }
+  function trimNum(n) {
+    // Noapaļo peldošā komata kļūdas, bez liekām nullēm
+    var r = Math.round((n + Number.EPSILON) * 1e10) / 1e10;
+    return String(r);
+  }
+
+  function inputDigit(d) {
+    if (fresh) { cur = (d === '.') ? '0.' : d; fresh = false; }
+    else {
+      if (d === '.' && cur.indexOf('.') !== -1) return;
+      cur = (cur === '0' && d !== '.') ? d : cur + d;
+    }
+    render();
+  }
+  function setOp(nextOp) {
+    if (op && !fresh) { compute(); }
+    else { acc = toNum(cur); }
+    op = nextOp;
+    fresh = true;
+    lastExpr = trimNum(acc).replace('.', ',') + ' ' + OPSYM[nextOp];
+    render();
+  }
+  function compute() {
+    if (op === null || acc === null) { return; }
+    var b = toNum(cur), res;
+    switch (op) {
+      case '+': res = acc + b; break;
+      case '-': res = acc - b; break;
+      case '*': res = acc * b; break;
+      case '/': res = (b === 0) ? NaN : acc / b; break;
+    }
+    if (!isFinite(res)) { cur = '0'; acc = null; op = null; fresh = true; lastExpr = 'Kļūda'; render(); return; }
+    acc = res;
+    cur = trimNum(res);
+    render();
+  }
+  function equals() {
+    if (op === null) return;
+    lastExpr = trimNum(acc).replace('.', ',') + ' ' + OPSYM[op] + ' ' + fmtDisp(cur) + ' =';
+    compute();
+    op = null;
+    fresh = true;
+    exprEl.textContent = lastExpr; // saglabā izteiksmi pēc compute() (kas to notīrītu)
+  }
+  function clearAll() { cur = '0'; acc = null; op = null; fresh = true; lastExpr = ''; render(); }
+  function backspace() {
+    if (fresh) return;
+    cur = cur.length > 1 ? cur.slice(0, -1) : '0';
+    if (cur === '0') fresh = true;
+    render();
+  }
+  function percent() {
+    // Procenti: ja ir gaidoša operācija, ņem % no uzkrātās vērtības, citādi /100
+    var v = toNum(cur);
+    cur = trimNum((op && acc !== null) ? acc * v / 100 : v / 100);
+    render();
+  }
+  function negate() {
+    if (cur === '0') return;
+    cur = cur.charAt(0) === '-' ? cur.slice(1) : '-' + cur;
+    render();
+  }
+
+  function handleKey(k) {
+    if (/^[0-9]$/.test(k) || k === '.') inputDigit(k);
+    else if (k === '+' || k === '-' || k === '*' || k === '/') setOp(k);
+    else if (k === '=') equals();
+    else if (k === 'C') clearAll();
+    else if (k === 'back') backspace();
+    else if (k === '%') percent();
+    else if (k === 'neg') negate();
+  }
+
+  panel.querySelectorAll('.mc-pad button').forEach(function (b) {
+    b.addEventListener('click', function () { handleKey(b.dataset.k); });
+  });
+
+  // Ievietot rezultātu PVN kalkulatorā
+  function insertInto(which) {
+    // Ja ir iesākta darbība ar ievadītu otro skaitli (piem. "73 + 60"),
+    // vispirms pabeidz aprēķinu, lai ievietotu rezultātu, nevis pēdējo ciparu.
+    if (op !== null && !fresh) equals();
+    var target = which === 'net' ? netInput : grossInput;
+    var val = trimNum(toNum(cur));
+    val = decimalSep === 'period' ? val : val.replace('.', ',');
+    target.value = val;
+    target.dispatchEvent(new Event('input', { bubbles: true }));
+    target.focus();
+  }
+  panel.querySelectorAll('.mc-insert button').forEach(function (b) {
+    b.addEventListener('click', function () { insertInto(b.dataset.insert); });
+  });
+
+  // Atvēršana / aizvēršana
+  function openCalc() { panel.classList.add('open'); try { localStorage.setItem('pvn-calc-open', '1'); } catch (e) {} }
+  function closeCalc() { panel.classList.remove('open'); try { localStorage.setItem('pvn-calc-open', '0'); } catch (e) {} }
+  fab.addEventListener('click', function () { panel.classList.contains('open') ? closeCalc() : openCalc(); });
+  closeBtn.addEventListener('click', closeCalc);
+
+  // Ielādē kopēto vērtību kalkulatorā (no PVN kalkulatora "Kopēt" pogām) un atver to.
+  // Ja ir iesākta darbība (piem. "320 +"), kopētā vērtība kļūst par nākamo skaitli,
+  // lai aprēķinu varētu turpināt; ja darbības nav — sākas tīrs skaitlis.
+  document.addEventListener('pvn-calc-load', function (e) {
+    var n = parseFloat(String(e.detail).replace(/\s/g, '').replace(',', '.'));
+    if (isNaN(n)) return;
+    cur = trimNum(n);
+    fresh = false;
+    if (!op) { acc = null; lastExpr = ''; }
+    render();
+    openCalc();
+  });
+
+  // Tastatūra (tikai kad panelis atvērts)
+  document.addEventListener('keydown', function (e) {
+    if (!panel.classList.contains('open')) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA')) return;
+    var k = e.key;
+    if (/^[0-9]$/.test(k)) { handleKey(k); e.preventDefault(); }
+    else if (k === '.' || k === ',') { handleKey('.'); e.preventDefault(); }
+    else if (k === '+' || k === '-' || k === '*' || k === '/') { handleKey(k); e.preventDefault(); }
+    else if (k === 'Enter' || k === '=') { handleKey('='); e.preventDefault(); }
+    else if (k === 'Backspace') { handleKey('back'); e.preventDefault(); }
+    else if (k === 'Escape') { closeCalc(); }
+    else if (k.toLowerCase() === 'c') { handleKey('C'); }
+    else if (k === '%') { handleKey('%'); }
+  });
+
+  // Pārvietošana ar galvenes vilkšanu
+  var drag = null;
+  head.addEventListener('mousedown', function (e) {
+    if (e.target === closeBtn) return;
+    var r = panel.getBoundingClientRect();
+    drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+    panel.style.right = 'auto'; panel.style.bottom = 'auto';
+    panel.style.left = r.left + 'px'; panel.style.top = r.top + 'px';
+    head.classList.add('dragging');
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (!drag) return;
+    var x = e.clientX - drag.dx, y = e.clientY - drag.dy;
+    var maxX = window.innerWidth - panel.offsetWidth, maxY = window.innerHeight - panel.offsetHeight;
+    panel.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+    panel.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+  });
+  document.addEventListener('mouseup', function () { drag = null; head.classList.remove('dragging'); });
+
+  // Atceramies, vai bija atvērts
+  try { if (localStorage.getItem('pvn-calc-open') === '1') openCalc(); } catch (e) {}
+
+  render();
+})();
+
+/* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
+(function () {
+  // ↓↓↓ IEVADI SAVUS ID (kamēr te ir "XXXX", skripti netiek ielādēti) ↓↓↓
+  var GA_ID = 'G-XXXXXXXXXX';               // Google Analytics 4 mērījuma ID
+  var ADSENSE_ID = 'ca-pub-XXXXXXXXXXXXXXXX'; // Google AdSense izdevēja ID
+  // ↑↑↑ ------------------------------------------------------------- ↑↑↑
+
+  var banner = document.getElementById('cookieBanner');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  var loaded = false;
+
+  function loadScript(src, attrs) {
+    var s = document.createElement('script');
+    s.async = true; s.src = src;
+    if (attrs) Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
+    document.head.appendChild(s);
+    return s;
+  }
+
+  function loadGoogle() {
+    if (loaded) return;
+    loaded = true;
+    // Google Analytics (GA4)
+    if (GA_ID.indexOf('XXX') === -1) {
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
+    // Google AdSense
+    if (ADSENSE_ID.indexOf('XXX') === -1) {
+      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
+        { crossorigin: 'anonymous' });
+    }
+  }
+
+  function setConsent(v) { try { localStorage.setItem('pvn-consent', v); } catch (e) {} }
+  function getConsent() { try { return localStorage.getItem('pvn-consent'); } catch (e) { return null; } }
+
+  function hideBanner() { banner.classList.remove('show'); }
+  function showBanner() { banner.classList.add('show'); }
+
+  var consent = getConsent();
+  if (consent === 'granted') { loadGoogle(); }
+  else if (consent !== 'denied') { showBanner(); } // rāda tikai pirmajā reizē
+
+  acceptBtn.addEventListener('click', function () { setConsent('granted'); hideBanner(); loadGoogle(); });
+  declineBtn.addEventListener('click', function () { setConsent('denied'); hideBanner(); });
+
+  // Ļauj vēlāk atkārtoti atvērt joslu (piem. no privātuma politikas): #cookies
+  window.pvnOpenCookieBanner = showBanner;
+  if (location.hash === '#cookies') showBanner();
+})();
+</script>
+
+</body>
+</html>

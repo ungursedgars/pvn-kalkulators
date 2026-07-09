@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakti | PVN Kalkulators</title>
+<meta name="description" content="Sazinies ar PVN kalkulatora komandu — jautājumi, kļūdas, ieteikumi vai sadarbība. Uzraksti mums tieši lapā.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+    --ok: #2e9e5b; --ok-soft: rgba(46,158,91,.1);
+    --err: #d0433f; --err-soft: rgba(208,67,63,.1);
+  }
+  [data-theme="dark"] {
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+    --ok: #4ec27e; --ok-soft: rgba(78,194,126,.14);
+    --err: #ff6b68; --err-soft: rgba(255,107,104,.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .lang-switch button {
+    background: none; border: none; padding: 6px 9px; cursor: pointer;
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
+  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  main { padding: 40px 0 60px; }
+  .contact-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 34px 28px;
+  }
+  .contact-card h1 { font-size: 1.6rem; margin-bottom: 8px; text-align: center; }
+  .contact-card .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 26px; text-align: center; }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+  .field-label { font-weight: 600; font-size: .9rem; margin-bottom: 5px; display: block; }
+  .field-label .req { color: var(--accent); }
+  input, textarea {
+    width: 100%; font-family: inherit; font-size: 1rem; padding: 11px 13px;
+    border: 2px solid var(--border); border-radius: 10px;
+    background: var(--bg); color: var(--text); resize: vertical;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--accent-soft); }
+  textarea { min-height: 130px; }
+  .honey { position: absolute; left: -9999px; top: -9999px; }
+
+  .submit-btn {
+    margin-top: 4px; padding: 13px 20px; font-size: 1.05rem; font-weight: 600; cursor: pointer;
+    border: none; border-radius: 11px; background: var(--accent); color: #fff;
+    box-shadow: 0 4px 14px rgba(31,111,235,.25);
+  }
+  .submit-btn:hover { filter: brightness(1.05); }
+  .submit-btn:disabled { opacity: .6; cursor: default; filter: none; }
+
+  .form-msg { display: none; padding: 12px 14px; border-radius: 10px; font-size: .95rem; }
+  .form-msg.show { display: block; }
+  .form-msg.ok { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok); }
+  .form-msg.err { background: var(--err-soft); color: var(--err); border: 1px solid var(--err); }
+
+  .alt-mail { margin-top: 18px; text-align: center; font-size: .9rem; color: var(--muted); }
+  .alt-mail a { color: var(--accent); }
+  .back-link { display: block; margin-top: 20px; text-align: center; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html">PVN<span>kalkulators</span></a>
+    <nav>
+      <a href="index.html" id="navCalc">Kalkulators</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="lv">LV</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="contact-card">
+    <h1 id="contactTitle">Kontakti</h1>
+    <p class="lead" id="contactText">Jautājumi, kļūdas, ieteikumi vai sadarbība? Rakstiet mums…</p>
+
+    <form id="contactForm" method="POST">
+      <div>
+        <label class="field-label" for="cfName" id="lblName">Vārds</label>
+        <input type="text" id="cfName" name="name" autocomplete="name" placeholder="Jūsu vārds">
+      </div>
+      <div>
+        <label class="field-label" for="cfEmail" id="lblEmail">E-pasts <span class="req">*</span></label>
+        <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="jusu@epasts.lv">
+      </div>
+      <div>
+        <label class="field-label" for="cfMsg" id="lblMsg">Ziņojums <span class="req">*</span></label>
+        <textarea id="cfMsg" name="message" required placeholder="Jūsu ziņojums…"></textarea>
+      </div>
+
+      <!-- Pretmēstuļu slazds (netiek rādīts cilvēkiem) -->
+      <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off">
+      <!-- FormSubmit iestatījumi (action, _subject un _next iestata JS) -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_subject" id="cfSubject" value="">
+      <input type="hidden" name="_next" id="cfNext" value="">
+
+      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Nosūtīt</button>
+    </form>
+
+    <a class="back-link" href="index.html" id="backLink">← Atpakaļ uz kalkulatoru</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html" id="footHome">Sākums</a> ·
+      <a href="privatuma-politika.html" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti.html" id="footContact">Kontakti</a>
+    </div>
+    <div id="footDisclaimer">PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Uz šo e-pastu nonāks formas ziņojumi (caur bezmaksas FormSubmit.co servisu).
+  // E-pasts salikts no daļām, lai tas nebūtu tiešā tekstā pirmkodā (mazina mēstuļu robotu skrāpēšanu).
+  // IETEIKUMS: pēc FormSubmit aktivizācijas nomaini šo pret savu slēpto kodu no FormSubmit
+  // (piem. 'a1b2c3...') — tad e-pasts vispār neparādās lapā.
+  var CONTACT_EMAIL = ['ungurs', 'gmail.com'].join('@');
+
+  var I18N = {
+    lv: {
+      htmlLang: 'lv', pageTitle: 'Kontakti | PVN Kalkulators', navCalc: 'Kalkulators',
+      title: 'Kontakti',
+      text: 'Jautājumi, kļūdas, ieteikumi vai sadarbība? Rakstiet mums…',
+      lblName: 'Vārds', phName: 'Jūsu vārds',
+      lblEmail: 'E-pasts', phEmail: 'jusu@epasts.lv',
+      lblMsg: 'Ziņojums', phMsg: 'Jūsu ziņojums…',
+      send: 'Nosūtīt', sending: 'Sūta…',
+      ok: 'Paldies! Ziņojums nosūtīts. Atbildēsim pēc iespējas ātrāk.',
+      errFields: 'Lūdzu, ievadiet e-pastu un ziņojumu.',
+      errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
+      errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
+      altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora'
+    },
+    ru: {
+      htmlLang: 'ru', pageTitle: 'Контакты | Калькулятор НДС', navCalc: 'Калькулятор',
+      title: 'Контакты',
+      text: 'Вопросы, ошибки, предложения или сотрудничество? Напишите нам…',
+      lblName: 'Имя', phName: 'Ваше имя',
+      lblEmail: 'E-mail', phEmail: 'vash@email.com',
+      lblMsg: 'Сообщение', phMsg: 'Ваше сообщение…',
+      send: 'Отправить', sending: 'Отправка…',
+      ok: 'Спасибо! Сообщение отправлено. Ответим как можно скорее.',
+      errFields: 'Пожалуйста, введите e-mail и сообщение.',
+      errEmail: 'Пожалуйста, введите корректный e-mail.',
+      errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
+      altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
+      footHome: 'Главная', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
+      themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС'
+    },
+    en: {
+      htmlLang: 'en', pageTitle: 'Contact | VAT Calculator', navCalc: 'Calculator',
+      title: 'Contact',
+      text: 'Questions, bugs, suggestions or collaboration? Write to us…',
+      lblName: 'Name', phName: 'Your name',
+      lblEmail: 'Email', phEmail: 'you@email.com',
+      lblMsg: 'Message', phMsg: 'Your message…',
+      send: 'Send', sending: 'Sending…',
+      ok: 'Thank you! Your message has been sent. We’ll reply as soon as possible.',
+      errFields: 'Please enter your email and a message.',
+      errEmail: 'Please enter a valid email address.',
+      errSend: 'Could not send. Try again later or email us directly.',
+      altMail: 'Or write to us directly:', back: '← Back to the calculator',
+      footHome: 'Home', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
+      themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator'
+    }
+  };
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+  var form = document.getElementById('contactForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var formMsg = document.getElementById('formMsg');
+  var nameEl = document.getElementById('cfName');
+  var emailEl = document.getElementById('cfEmail');
+  var msgEl = document.getElementById('cfMsg');
+  var honeyEl = form.querySelector('[name="_honey"]');
+  var lang = 'lv';
+
+  function T() { return I18N[lang]; }
+
+  function apply(l) {
+    var t = I18N[l]; if (!t) return;
+    lang = l;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.getElementById('navCalc').textContent = t.navCalc;
+    document.getElementById('contactTitle').textContent = t.title;
+    document.getElementById('contactText').textContent = t.text;
+    document.getElementById('lblName').innerHTML = t.lblName;
+    document.getElementById('lblEmail').innerHTML = t.lblEmail + ' <span class="req">*</span>';
+    document.getElementById('lblMsg').innerHTML = t.lblMsg + ' <span class="req">*</span>';
+    nameEl.placeholder = t.phName;
+    emailEl.placeholder = t.phEmail;
+    msgEl.placeholder = t.phMsg;
+    submitBtn.textContent = t.send;
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === l);
+    });
+    try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    if (nav.indexOf('ru') === 0) return 'ru';
+    if (nav.indexOf('lv') === 0) return 'lv';
+    return 'en';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(initialLang());
+
+  // --- Formas nosūtīšana caur FormSubmit.co (parastais POST — bez fetch/CORS, strādā arī no faila) ---
+  var subjEl = document.getElementById('cfSubject');
+  var nextEl = document.getElementById('cfNext');
+  form.action = 'https://formsubmit.co/' + CONTACT_EMAIL;
+  // Uz http/https izcelsmes atgriežam lietotāju atpakaļ šeit ar veiksmes paziņojumu.
+  // No file:// _next neiestatām — tad FormSubmit parāda savu apstiprinājuma lapu.
+  if (location.protocol === 'http:' || location.protocol === 'https:') {
+    nextEl.value = location.origin + location.pathname + '?sent=1';
+  }
+
+  function showMsg(kind, text) {
+    formMsg.className = 'form-msg show ' + kind;
+    formMsg.textContent = text;
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  form.addEventListener('submit', function (e) {
+    var t = T();
+    if (honeyEl.value) { e.preventDefault(); return; } // mēstule
+    if (!emailEl.value.trim() || !msgEl.value.trim()) { e.preventDefault(); showMsg('err', t.errFields); return; }
+    if (!validEmail(emailEl.value.trim())) { e.preventDefault(); showMsg('err', t.errEmail); return; }
+    // Derīga forma — iestatām tēmu un ļaujam parastajam POST nosūtīties uz FormSubmit
+    subjEl.value = t.subject;
+    submitBtn.disabled = true;
+    submitBtn.textContent = t.sending;
+  });
+
+  // Pēc atgriešanās no FormSubmit (?sent=1) parādām veiksmes ziņu un notīrām URL
+  if (new URLSearchParams(location.search).get('sent') === '1') {
+    showMsg('ok', T().ok);
+    if (history.replaceState) history.replaceState(null, '', location.pathname);
+  }
+
+  // Tēma — tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>

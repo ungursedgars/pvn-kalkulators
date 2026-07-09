@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privātuma politika | PVN Kalkulators</title>
+<meta name="description" content="PVN kalkulatora privātuma politika — sīkdatnes, Google Analytics, Google reklāmas (AdSense) un tavas tiesības.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+  }
+  [data-theme="dark"] {
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px 0;
+  }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .lang-switch button {
+    background: none; border: none; padding: 6px 9px; cursor: pointer;
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
+  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1rem; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  main { padding: 30px 0 50px; }
+  .legal {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 30px 28px;
+  }
+  .legal h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .updated { color: var(--muted); font-size: .88rem; margin-bottom: 24px; }
+  .legal h2 {
+    font-size: 1.15rem; margin: 26px 0 10px; padding-top: 14px; border-top: 1px solid var(--border);
+  }
+  .legal h2:first-of-type { border-top: none; padding-top: 0; }
+  .legal p { margin-bottom: 12px; }
+  .legal ul { margin: 6px 0 14px 22px; }
+  .legal li { margin-bottom: 6px; }
+  .legal a { color: var(--accent); }
+  .back-link { display: inline-block; margin-top: 18px; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html">PVN<span>kalkulators</span></a>
+    <nav>
+      <a href="index.html" id="navCalc">Kalkulators</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="lv">LV</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="legal">
+    <h1 id="legalTitle">Privātuma politika</h1>
+    <p class="updated" id="legalUpdated"></p>
+    <div id="legalBody"></div>
+    <a class="back-link" href="index.html" id="backLink">← Atpakaļ uz kalkulatoru</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html" id="footHome">Sākums</a> ·
+      <a href="privatuma-politika.html" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti.html" id="footContact">Kontakti</a> ·
+      <a href="index.html#cookies" id="footCookies">Pārvaldīt sīkdatnes</a>
+    </div>
+    <div id="footDisclaimer">PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var CONTACT_EMAIL = 'info@piemers.lv'; // <-- nomaini uz savu īsto e-pastu
+
+  var I18N = {
+    lv: {
+      htmlLang: 'lv',
+      pageTitle: 'Privātuma politika | PVN Kalkulators',
+      navCalc: 'Kalkulators',
+      title: 'Privātuma politika',
+      updated: 'Pēdējoreiz atjaunināta: 2026. gada 7. jūlijā',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footPrivacy: 'Privātuma politika', footContact: 'Kontakti', footCookies: 'Pārvaldīt sīkdatnes',
+      footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu',
+      body:
+        '<p>Šī privātuma politika skaidro, kā tīmekļa vietnē tiek apstrādāta informācija par apmeklētājiem, ' +
+        'kad tiek izmantots PVN kalkulators. Vietne ir informatīvs rīks, un mūsu mērķis ir pēc iespējas caurspīdīgi ' +
+        'izskaidrot, kādus datus apstrādā mūsu izmantotie trešo pušu pakalpojumi — galvenokārt Google Analytics un ' +
+        'Google reklāmas (Google AdSense).</p>' +
+
+        '<h2>1. Datu pārzinis</h2>' +
+        '<p>Par vietni un tajā izmantoto sīkdatņu un analītikas rīku iestatīšanu ir atbildīgs vietnes īpašnieks. ' +
+        'Jautājumu vai pieprasījumu gadījumā sazinies ar mums sadaļā “Kontakti” norādītajā e-pastā.</p>' +
+
+        '<h2>2. Kādus datus mēs apstrādājam</h2>' +
+        '<p>Vietne pati par sevi <strong>nelūdz un tieši neievāc</strong> personu identificējošu informāciju — ' +
+        'tev nav jāreģistrējas vai jāievada personiska informācija, lai lietotu kalkulatoru. Visi aprēķini notiek tavā ' +
+        'pārlūkprogrammā, un ievadītās summas netiek nosūtītas mums vai saglabātas mūsu serveros.</p>' +
+        '<p>Vienlaikus trešo pušu pakalpojumi (piemēram, Google) var automātiski apstrādāt noteiktus tehniskus datus:</p>' +
+        '<ul><li>IP adresi (bieži saīsinātā/anonimizētā veidā);</li>' +
+        '<li>pārlūkprogrammas un ierīces veidu, operētājsistēmu;</li>' +
+        '<li>apmeklētās lapas, apmeklējuma laiku un ilgumu;</li>' +
+        '<li>aptuveno atrašanās vietu (valsts/reģiona līmenī);</li>' +
+        '<li>datus par mijiedarbību ar reklāmām.</li></ul>' +
+
+        '<h2>3. Sīkdatnes (cookies)</h2>' +
+        '<p>Sīkdatnes ir nelieli teksta faili, ko pārlūkprogramma saglabā ierīcē. Šajā vietnē tās izmanto:</p>' +
+        '<ul><li><strong>Funkcionālās sīkdatnes (vietnes pašas):</strong> tavu iestatījumu iegaumēšanai — valoda, ' +
+        'gaišais/tumšais režīms, decimāldaļas atdalītājs. Šie dati glabājas tikai tavā pārlūkprogrammā.</li>' +
+        '<li><strong>Analītikas un reklāmas sīkdatnes (trešo pušu):</strong> tās iestata Google; tās tiek ielādētas ' +
+        'tikai pēc tavas piekrišanas sīkdatņu joslā.</li></ul>' +
+        '<p>Piekrišanu vari mainīt jebkurā laikā, atverot sīkdatņu joslu ar saiti “Pārvaldīt sīkdatnes”, kā arī ' +
+        'dzēšot sīkdatnes un pielāgojot pārlūka iestatījumus.</p>' +
+
+        '<h2>4. Google Analytics</h2>' +
+        '<p>Vietnē tiek izmantots <strong>Google Analytics</strong> — tīmekļa analītikas pakalpojums, kas palīdz saprast, ' +
+        'kā apmeklētāji lieto vietni, lai to uzlabotu. Dati tiek apstrādāti apkopotā un pārsvarā anonimizētā veidā. ' +
+        'Mēs neizmantojam šos datus, lai identificētu konkrētu personu.</p>' +
+        '<p>Google veiktā apstrāde notiek saskaņā ar <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privātuma politiku</a>. ' +
+        'No Google Analytics var atteikties ar <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google pārlūka papildinājumu</a>.</p>' +
+
+        '<h2>5. Google reklāmas (Google AdSense)</h2>' +
+        '<p>Vietnē tiek rādītas reklāmas, ko nodrošina <strong>Google AdSense</strong>. Google un tā partneri var izmantot ' +
+        'sīkdatnes, lai rādītu reklāmas, kas balstītas uz tavām iepriekšējām apmeklējumu reizēm šajā un citās vietnēs.</p>' +
+        '<p>Personalizētās reklāmas vari pārvaldīt <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google reklāmu iestatījumos</a>. ' +
+        'Vairāk: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">kā Google izmanto datus reklāmās</a>.</p>' +
+
+        '<h2>6. Trešo pušu pakalpojumi</h2>' +
+        '<p>Google Analytics un Google AdSense ir neatkarīgi pakalpojumu sniedzēji, kas datus apstrādā saskaņā ar saviem ' +
+        'noteikumiem. Mums nav kontroles pār to iestatītajām sīkdatnēm. Iesakām iepazīties ar attiecīgo pakalpojumu politikām.</p>' +
+        '<p>Kontaktformas ziņojumu piegādei izmantojam pakalpojumu <strong>FormSubmit</strong> (formsubmit.co). Aizpildot un ' +
+        'nosūtot formu, tavs vārds, e-pasta adrese un ziņojuma teksts tiek apstrādāti šī pakalpojuma serveros, lai piegādātu ' +
+        'ziņu mums. Vairāk skati <a href="https://formsubmit.co/" target="_blank" rel="noopener">formsubmit.co</a>.</p>' +
+
+        '<h2>7. Tavas tiesības</h2>' +
+        '<p>Saskaņā ar Vispārīgo datu aizsardzības regulu (VDAR/GDPR) tev ir tiesības:</p>' +
+        '<ul><li>piekļūt saviem datiem un saņemt informāciju par to apstrādi;</li>' +
+        '<li>pieprasīt datu labošanu vai dzēšanu;</li>' +
+        '<li>ierobežot vai iebilst pret datu apstrādi;</li>' +
+        '<li>atsaukt iepriekš doto piekrišanu.</li></ul>' +
+        '<p>Tā kā vietne saglabā minimālu informāciju, lielākā daļa šo tiesību īstenojama tieši pie trešo pušu pakalpojumu ' +
+        'sniedzējiem (piemēram, Google). Tev ir arī tiesības iesniegt sūdzību ' +
+        '<a href="https://www.dvi.gov.lv" target="_blank" rel="noopener">Datu valsts inspekcijai</a>.</p>' +
+
+        '<h2>8. Piekrišana un sīkdatņu pārvaldība</h2>' +
+        '<p>Analītikas un reklāmas sīkdatnes tiek ielādētas tikai pēc tavas piekrišanas. Piekrišanu vari jebkurā laikā ' +
+        'mainīt vai atsaukt, atkārtoti atverot sīkdatņu joslu (saite “Pārvaldīt sīkdatnes”) vai dzēšot sīkdatnes pārlūkā.</p>' +
+
+        '<h2>9. Izmaiņas šajā politikā</h2>' +
+        '<p>Šī politika laiku pa laikam var tikt atjaunināta. Aktuālā versija vienmēr būs pieejama šajā lapā, ' +
+        'norādot pēdējās atjaunināšanas datumu.</p>' +
+
+        '<h2>10. Kontakti</h2>' +
+        '<p>Jautājumu gadījumā raksti mums: <a href="mailto:__EMAIL__">__EMAIL__</a>.</p>'
+    },
+
+    ru: {
+      htmlLang: 'ru',
+      pageTitle: 'Политика конфиденциальности | Калькулятор НДС',
+      navCalc: 'Калькулятор',
+      title: 'Политика конфиденциальности',
+      updated: 'Последнее обновление: 7 июля 2026 года',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты', footCookies: 'Управление cookie',
+      footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
+      themeTitle: 'Переключить светлый/тёмный режим',
+      body:
+        '<p>Эта политика конфиденциальности объясняет, как на сайте обрабатывается информация о посетителях ' +
+        'при использовании калькулятора НДС. Сайт является информационным инструментом, и наша цель — максимально ' +
+        'прозрачно объяснить, какие данные обрабатывают используемые сторонние сервисы — прежде всего Google Analytics ' +
+        'и реклама Google (Google AdSense).</p>' +
+
+        '<h2>1. Ответственный за данные</h2>' +
+        '<p>За сайт и настройку используемых на нём cookie и аналитических инструментов отвечает владелец сайта. ' +
+        'По вопросам обращайтесь к нам по адресу, указанному в разделе «Контакты».</p>' +
+
+        '<h2>2. Какие данные мы обрабатываем</h2>' +
+        '<p>Сам сайт <strong>не запрашивает и напрямую не собирает</strong> персональные данные — для использования ' +
+        'калькулятора не нужно регистрироваться или вводить личную информацию. Все расчёты происходят в вашем браузере, ' +
+        'а введённые суммы не отправляются нам и не хранятся на наших серверах.</p>' +
+        '<p>При этом сторонние сервисы (например, Google) могут автоматически обрабатывать некоторые технические данные:</p>' +
+        '<ul><li>IP-адрес (часто в сокращённом/анонимизированном виде);</li>' +
+        '<li>тип браузера и устройства, операционную систему;</li>' +
+        '<li>посещённые страницы, время и продолжительность визита;</li>' +
+        '<li>примерное местоположение (на уровне страны/региона);</li>' +
+        '<li>данные о взаимодействии с рекламой.</li></ul>' +
+
+        '<h2>3. Файлы cookie</h2>' +
+        '<p>Cookie — это небольшие текстовые файлы, которые браузер сохраняет на устройстве. На этом сайте они используются:</p>' +
+        '<ul><li><strong>Функциональные cookie (самого сайта):</strong> для запоминания настроек — язык, светлый/тёмный ' +
+        'режим, разделитель дробной части. Эти данные хранятся только в вашем браузере.</li>' +
+        '<li><strong>Аналитические и рекламные cookie (сторонние):</strong> устанавливаются Google и загружаются только ' +
+        'после вашего согласия в баннере cookie.</li></ul>' +
+        '<p>Согласие можно изменить в любое время, открыв баннер по ссылке «Управление cookie», а также удалив cookie ' +
+        'и изменив настройки браузера.</p>' +
+
+        '<h2>4. Google Analytics</h2>' +
+        '<p>На сайте используется <strong>Google Analytics</strong> — сервис веб-аналитики, помогающий понять, как ' +
+        'посетители пользуются сайтом, чтобы улучшать его. Данные обрабатываются в агрегированном и преимущественно ' +
+        'анонимизированном виде. Мы не используем эти данные для идентификации конкретного человека.</p>' +
+        '<p>Обработка Google осуществляется согласно <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политике конфиденциальности Google</a>. ' +
+        'Отказаться от Google Analytics можно с помощью <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">дополнения для браузера от Google</a>.</p>' +
+
+        '<h2>5. Реклама Google (Google AdSense)</h2>' +
+        '<p>На сайте показывается реклама через <strong>Google AdSense</strong>. Google и его партнёры могут использовать ' +
+        'cookie для показа рекламы на основе ваших предыдущих посещений этого и других сайтов.</p>' +
+        '<p>Персонализированной рекламой можно управлять в <a href="https://adssettings.google.com" target="_blank" rel="noopener">настройках рекламы Google</a>. ' +
+        'Подробнее: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">как Google использует данные в рекламе</a>.</p>' +
+
+        '<h2>6. Сторонние сервисы</h2>' +
+        '<p>Google Analytics и Google AdSense — независимые поставщики услуг, обрабатывающие данные согласно своим ' +
+        'правилам. Мы не контролируем устанавливаемые ими cookie. Рекомендуем ознакомиться с политиками этих сервисов.</p>' +
+        '<p>Для доставки сообщений контактной формы мы используем сервис <strong>FormSubmit</strong> (formsubmit.co). ' +
+        'При заполнении и отправке формы ваше имя, адрес e-mail и текст сообщения обрабатываются на серверах этого сервиса, ' +
+        'чтобы доставить сообщение нам. Подробнее: <a href="https://formsubmit.co/" target="_blank" rel="noopener">formsubmit.co</a>.</p>' +
+
+        '<h2>7. Ваши права</h2>' +
+        '<p>Согласно Общему регламенту по защите данных (GDPR) вы имеете право:</p>' +
+        '<ul><li>получить доступ к своим данным и информацию об их обработке;</li>' +
+        '<li>требовать исправления или удаления данных;</li>' +
+        '<li>ограничить обработку или возразить против неё;</li>' +
+        '<li>отозвать ранее данное согласие.</li></ul>' +
+        '<p>Поскольку сайт хранит минимум информации, большинство этих прав реализуется напрямую у сторонних поставщиков ' +
+        '(например, Google). Вы также вправе подать жалобу в ' +
+        '<a href="https://www.dvi.gov.lv" target="_blank" rel="noopener">Государственную инспекцию данных Латвии</a>.</p>' +
+
+        '<h2>8. Согласие и управление cookie</h2>' +
+        '<p>Аналитические и рекламные cookie загружаются только после вашего согласия. Согласие можно в любой момент ' +
+        'изменить или отозвать, снова открыв баннер cookie (ссылка «Управление cookie») или удалив cookie в браузере.</p>' +
+
+        '<h2>9. Изменения в этой политике</h2>' +
+        '<p>Политика время от времени может обновляться. Актуальная версия всегда доступна на этой странице ' +
+        'с указанием даты последнего обновления.</p>' +
+
+        '<h2>10. Контакты</h2>' +
+        '<p>По вопросам пишите нам: <a href="mailto:__EMAIL__">__EMAIL__</a>.</p>'
+    },
+
+    en: {
+      htmlLang: 'en',
+      pageTitle: 'Privacy Policy | VAT Calculator',
+      navCalc: 'Calculator',
+      title: 'Privacy Policy',
+      updated: 'Last updated: 7 July 2026',
+      back: '← Back to the calculator',
+      footHome: 'Home', footPrivacy: 'Privacy policy', footContact: 'Contact', footCookies: 'Manage cookies',
+      footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
+      themeTitle: 'Toggle light/dark mode',
+      body:
+        '<p>This privacy policy explains how information about visitors is processed on the website when using the ' +
+        'VAT calculator. The site is an informational tool, and our goal is to explain as transparently as possible ' +
+        'what data is processed by the third-party services we use — primarily Google Analytics and Google ads (Google AdSense).</p>' +
+
+        '<h2>1. Data controller</h2>' +
+        '<p>The website owner is responsible for the site and for configuring the cookies and analytics tools used on it. ' +
+        'For questions or requests, contact us at the email address given in the “Contact” section.</p>' +
+
+        '<h2>2. What data we process</h2>' +
+        '<p>The site itself <strong>does not request or directly collect</strong> personally identifying information — ' +
+        'you do not need to register or enter any personal information to use the calculator. All calculations happen in ' +
+        'your browser, and the amounts you enter are not sent to us or stored on our servers.</p>' +
+        '<p>At the same time, third-party services (such as Google) may automatically process certain technical data:</p>' +
+        '<ul><li>IP address (often in a shortened/anonymized form);</li>' +
+        '<li>browser and device type, operating system;</li>' +
+        '<li>pages visited, time and duration of the visit;</li>' +
+        '<li>approximate location (country/region level);</li>' +
+        '<li>data about interactions with ads.</li></ul>' +
+
+        '<h2>3. Cookies</h2>' +
+        '<p>Cookies are small text files that your browser stores on your device. On this site they are used for:</p>' +
+        '<ul><li><strong>Functional cookies (the site’s own):</strong> to remember your settings — language, light/dark ' +
+        'mode, decimal separator. This data stays only in your browser.</li>' +
+        '<li><strong>Analytics and advertising cookies (third-party):</strong> set by Google and loaded only after your ' +
+        'consent in the cookie banner.</li></ul>' +
+        '<p>You can change your consent at any time by reopening the cookie banner via the “Manage cookies” link, as well ' +
+        'as by deleting cookies and adjusting your browser settings.</p>' +
+
+        '<h2>4. Google Analytics</h2>' +
+        '<p>The site uses <strong>Google Analytics</strong>, a web analytics service that helps understand how visitors ' +
+        'use the site so we can improve it. Data is processed in an aggregated and largely anonymized form. We do not use ' +
+        'this data to identify any specific individual.</p>' +
+        '<p>Google’s processing is carried out under the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>. ' +
+        'You can opt out of Google Analytics with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google browser add-on</a>.</p>' +
+
+        '<h2>5. Google ads (Google AdSense)</h2>' +
+        '<p>The site displays ads provided by <strong>Google AdSense</strong>. Google and its partners may use cookies to ' +
+        'show ads based on your prior visits to this and other websites.</p>' +
+        '<p>You can manage personalized ads in <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ad Settings</a>. ' +
+        'Learn more: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">how Google uses data in ads</a>.</p>' +
+
+        '<h2>6. Third-party services</h2>' +
+        '<p>Google Analytics and Google AdSense are independent service providers that process data under their own terms. ' +
+        'We have no control over the cookies they set. We recommend reviewing the policies of these services.</p>' +
+        '<p>To deliver contact form messages we use the service <strong>FormSubmit</strong> (formsubmit.co). When you fill in ' +
+        'and submit the form, your name, email address and message text are processed on that service’s servers in order to ' +
+        'deliver your message to us. Learn more at <a href="https://formsubmit.co/" target="_blank" rel="noopener">formsubmit.co</a>.</p>' +
+
+        '<h2>7. Your rights</h2>' +
+        '<p>Under the General Data Protection Regulation (GDPR) you have the right to:</p>' +
+        '<ul><li>access your data and receive information about its processing;</li>' +
+        '<li>request correction or deletion of your data;</li>' +
+        '<li>restrict or object to processing;</li>' +
+        '<li>withdraw consent previously given.</li></ul>' +
+        '<p>Because the site stores minimal information, most of these rights are exercised directly with the third-party ' +
+        'providers (such as Google). You also have the right to lodge a complaint with the ' +
+        '<a href="https://www.dvi.gov.lv" target="_blank" rel="noopener">Data State Inspectorate of Latvia</a>.</p>' +
+
+        '<h2>8. Consent and cookie management</h2>' +
+        '<p>Analytics and advertising cookies are loaded only after your consent. You can change or withdraw consent at any ' +
+        'time by reopening the cookie banner (the “Manage cookies” link) or by deleting cookies in your browser.</p>' +
+
+        '<h2>9. Changes to this policy</h2>' +
+        '<p>This policy may be updated from time to time. The current version is always available on this page, with the ' +
+        'date of the last update.</p>' +
+
+        '<h2>10. Contact</h2>' +
+        '<p>For any questions, write to us: <a href="mailto:__EMAIL__">__EMAIL__</a>.</p>'
+    }
+  };
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+
+  function apply(lang) {
+    var t = I18N[lang]; if (!t) return;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.getElementById('navCalc').textContent = t.navCalc;
+    document.getElementById('legalTitle').textContent = t.title;
+    document.getElementById('legalUpdated').textContent = t.updated;
+    document.getElementById('legalBody').innerHTML = t.body.replace(/__EMAIL__/g, CONTACT_EMAIL);
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footCookies').textContent = t.footCookies;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('pvn-lang', lang); } catch (e) {}
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    if (nav.indexOf('ru') === 0) return 'ru';
+    if (nav.indexOf('lv') === 0) return 'lv';
+    return 'en';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(initialLang());
+
+  // Tēma (sinhronizēta ar galveno lapu caur 'pvn-theme') — tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>
