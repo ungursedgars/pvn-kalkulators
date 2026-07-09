@@ -737,9 +737,6 @@
       var saved = localStorage.getItem('pvn-lang');
       if (saved && I18N[saved]) return saved;
     } catch (e) {}
-    var nav = (navigator.language || '').toLowerCase();
-    if (nav.indexOf('ru') === 0) return 'ru';
-    if (nav.indexOf('en') === 0) return 'en';
     return 'lv';
   }
 

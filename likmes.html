@@ -122,17 +122,45 @@
   .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; }
 
   section { margin: 0; }
-  .faq-item {
+
+  .field-label { font-weight: 600; font-size: .95rem; margin-bottom: 6px; display: block; }
+  .country-picker { position: relative; margin-bottom: 14px; }
+  #countryBtn {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: 11px 14px; font-size: 1rem;
+    border: 2px solid var(--border); border-radius: 10px;
+    background: var(--card); color: var(--text); cursor: pointer; text-align: left;
+  }
+  #countryBtn:hover, #countryBtn:focus { outline: none; border-color: var(--accent); }
+  #countryBtn .chev { margin-left: auto; color: var(--muted); font-size: .8rem; transition: transform .15s; }
+  .country-picker.open #countryBtn .chev { transform: rotate(180deg); }
+  .flag { width: 24px; height: 18px; border-radius: 3px; object-fit: cover; flex-shrink: 0; }
+  .country-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+  #countryList {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; padding: 6px;
+  }
+  .country-picker.open #countryList { display: block; }
+  #countryList button {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    padding: 9px 10px; font-size: .97rem; border: none; border-radius: 8px;
+    background: none; color: var(--text); cursor: pointer; text-align: left;
+  }
+  #countryList button:hover { background: var(--accent-soft); }
+  #countryList button.selected { background: var(--accent); color: #fff; }
+
+  .rate-card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; margin-bottom: 10px; overflow: hidden;
+    border-radius: 10px; padding: 16px;
   }
-  .faq-item summary {
-    padding: 14px 16px; font-weight: 600; cursor: pointer; list-style: none;
+  .rate-card h2 {
+    font-size: 1.15rem; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .faq-item summary::after { content: "+"; float: right; color: var(--muted); }
-  .faq-item[open] summary::after { content: "–"; }
-  .faq-item .faq-body { padding: 0 16px 14px; color: var(--muted); font-size: .95rem; }
-  .faq-body ul { padding-left: 20px; margin-top: 6px; }
+  .rate-card ul { padding-left: 20px; margin: 6px 0; color: var(--muted); font-size: .95rem; }
+  .rate-card li { margin-bottom: 4px; }
+  .rate-card p { color: var(--muted); font-size: .95rem; margin-top: 10px; }
 
   .back-link { display: inline-block; margin-top: 18px; color: var(--accent); text-decoration: none; font-size: .95rem; }
   .back-link:hover { text-decoration: underline; }
@@ -181,28 +209,12 @@
   <p class="lead" id="pageLead">Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.</p>
 
   <section>
-    <details class="faq-item" open>
-      <summary id="faq1Summary">Kādas PVN likmes piemēro Latvijā?</summary>
-      <div class="faq-body" id="faq1Body">
-        Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:
-        <ul>
-          <li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>
-          <li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>
-          <li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>
-          <li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>
-        </ul>
-        Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.
-      </div>
-    </details>
-    <details class="faq-item">
-      <summary id="faq2Summary">Citu ES valstu PVN likmes</summary>
-      <div class="faq-body" id="faq2Body">
-        Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes
-        parādās tās standarta likme (pirmā poga) un samazinātās likmes.
-        Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi
-        attiecīgās valsts nodokļu iestādes mājaslapā.
-      </div>
-    </details>
+    <label class="field-label" id="countryLabel">Valsts</label>
+    <div class="country-picker" id="countryPicker">
+      <button type="button" id="countryBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="countryList" aria-labelledby="countryLabel"></button>
+      <div id="countryList" role="listbox" tabindex="-1" aria-labelledby="countryLabel"></div>
+    </div>
+    <div class="rate-card" id="rateCard" aria-live="polite"></div>
   </section>
 
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
@@ -230,19 +242,19 @@
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN likmes',
       lead: 'Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.',
-      faq1Summary: 'Kādas PVN likmes piemēro Latvijā?',
-      faq1Body: 'Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:' +
-        '<ul>' +
+      countryLabel: 'Valsts',
+      cardTitle: 'PVN likmes',
+      std: 'standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu',
+      redOne: 'samazinātā likme atsevišķām preču un pakalpojumu grupām',
+      redMany: 'samazinātās likmes atsevišķām preču un pakalpojumu grupām',
+      noRed: 'Šajā valstī samazinātu PVN likmju nav — visam piemēro standarta likmi.',
+      lvBody: '<ul>' +
         '<li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>' +
         '<li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>' +
         '<li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>' +
         '<li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>' +
-        '</ul>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.',
-      faq2Summary: 'Citu ES valstu PVN likmes',
-      faq2Body: 'Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes ' +
-        'parādās tās standarta likme (pirmā poga) un samazinātās likmes. ' +
-        'Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi ' +
-        'attiecīgās valsts nodokļu iestādes mājaslapā.',
+        '</ul><p>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.</p>',
+      note: 'Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo informāciju attiecīgās valsts nodokļu iestādes mājaslapā.',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
@@ -253,19 +265,19 @@
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Ставки НДС',
       lead: 'Ставки налога на добавленную стоимость в Латвии и других странах ЕС.',
-      faq1Summary: 'Какие ставки НДС применяются в Латвии?',
-      faq1Body: 'В Латвии действуют несколько ставок налога на добавленную стоимость:' +
-        '<ul>' +
+      countryLabel: 'Страна',
+      cardTitle: 'Ставки НДС',
+      std: 'стандартная ставка, применяется к большинству товаров и услуг',
+      redOne: 'сниженная ставка для отдельных групп товаров и услуг',
+      redMany: 'сниженные ставки для отдельных групп товаров и услуг',
+      noRed: 'В этой стране нет сниженных ставок НДС — ко всему применяется стандартная ставка.',
+      lvBody: '<ul>' +
         '<li><strong>21%</strong> — стандартная ставка, применяется к большинству товаров и услуг.</li>' +
         '<li><strong>12%</strong> — сниженная ставка, например, для медикаментов, теплоэнергии для населения, книг и прессы.</li>' +
         '<li><strong>5%</strong> — особая сниженная ставка для отдельных групп товаров.</li>' +
         '<li><strong>0%</strong> — для отдельных операций, например, экспорта.</li>' +
-        '</ul>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).',
-      faq2Summary: 'Ставки НДС других стран ЕС',
-      faq2Body: 'В меню «Страна» доступны все 27 стран-членов ЕС. При выборе страны под меню появляется ' +
-        'её стандартная ставка (первая кнопка) и сниженные ставки. ' +
-        'Ставки время от времени меняются, поэтому перед важными расчётами проверяйте актуальную ставку ' +
-        'на сайте налоговой службы соответствующей страны.',
+        '</ul><p>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).</p>',
+      note: 'Ставки время от времени меняются, поэтому перед важными расчётами проверяйте актуальную информацию на сайте налоговой службы соответствующей страны.',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
@@ -276,19 +288,19 @@
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT rates',
       lead: 'Value-added tax rates in Latvia and other EU countries.',
-      faq1Summary: 'What VAT rates apply in Latvia?',
-      faq1Body: 'Latvia has several value-added tax rates in effect:' +
-        '<ul>' +
+      countryLabel: 'Country',
+      cardTitle: 'VAT rates',
+      std: 'the standard rate, applied to most goods and services',
+      redOne: 'a reduced rate for certain groups of goods and services',
+      redMany: 'reduced rates for certain groups of goods and services',
+      noRed: 'This country has no reduced VAT rates — the standard rate applies to everything.',
+      lvBody: '<ul>' +
         '<li><strong>21%</strong> — the standard rate, applied to most goods and services.</li>' +
         '<li><strong>12%</strong> — a reduced rate, e.g. for medicines, district heating for households, books and press.</li>' +
         '<li><strong>5%</strong> — a special reduced rate for certain product groups.</li>' +
         '<li><strong>0%</strong> — for certain transactions, e.g. exports.</li>' +
-        '</ul>For precise and current information on rate application, check the State Revenue Service (VID) website.',
-      faq2Summary: 'VAT rates of other EU countries',
-      faq2Body: 'The “Country” menu includes all 27 EU member states. Selecting a country shows its standard ' +
-        'rate (first button) and reduced rates below the menu. ' +
-        'Rates change from time to time, so before important calculations check the current rate on the relevant ' +
-        'country\'s tax authority website.',
+        '</ul><p>For precise and current information on rate application, check the State Revenue Service (VID) website.</p>',
+      note: 'Rates change from time to time, so before important calculations check the current information on the relevant country\u2019s tax authority website.',
       back: '← Back to the calculator',
       footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
@@ -299,6 +311,112 @@
   var langSwitch = document.getElementById('langSwitch');
   var themeBtn = document.getElementById('themeBtn');
   var lang = 'lv';
+
+  // ES valstu PVN likmes (pirmā — standarta, pārējās — samazinātās). Informatīvi, 2026. g. sākums.
+  var EU = [
+    { code: 'at', name: { lv: 'Austrija',    ru: 'Австрия',      en: 'Austria' },     rates: [20, 13, 10] },
+    { code: 'be', name: { lv: 'Beļģija',     ru: 'Бельгия',      en: 'Belgium' },     rates: [21, 12, 6] },
+    { code: 'bg', name: { lv: 'Bulgārija',   ru: 'Болгария',     en: 'Bulgaria' },    rates: [20, 9] },
+    { code: 'cz', name: { lv: 'Čehija',      ru: 'Чехия',        en: 'Czechia' },     rates: [21, 12] },
+    { code: 'dk', name: { lv: 'Dānija',      ru: 'Дания',        en: 'Denmark' },     rates: [25] },
+    { code: 'fr', name: { lv: 'Francija',    ru: 'Франция',      en: 'France' },      rates: [20, 10, 5.5, 2.1] },
+    { code: 'gr', name: { lv: 'Grieķija',    ru: 'Греция',       en: 'Greece' },      rates: [24, 13, 6] },
+    { code: 'hr', name: { lv: 'Horvātija',   ru: 'Хорватия',     en: 'Croatia' },     rates: [25, 13, 5] },
+    { code: 'ee', name: { lv: 'Igaunija',    ru: 'Эстония',      en: 'Estonia' },     rates: [24, 13, 9] },
+    { code: 'it', name: { lv: 'Itālija',     ru: 'Италия',       en: 'Italy' },       rates: [22, 10, 5, 4] },
+    { code: 'ie', name: { lv: 'Īrija',       ru: 'Ирландия',     en: 'Ireland' },     rates: [23, 13.5, 9, 4.8] },
+    { code: 'cy', name: { lv: 'Kipra',       ru: 'Кипр',         en: 'Cyprus' },      rates: [19, 9, 5, 3] },
+    { code: 'lv', name: { lv: 'Latvija',     ru: 'Латвия',       en: 'Latvia' },      rates: [21, 12, 5] },
+    { code: 'lt', name: { lv: 'Lietuva',     ru: 'Литва',        en: 'Lithuania' },   rates: [21, 9, 5] },
+    { code: 'lu', name: { lv: 'Luksemburga', ru: 'Люксембург',   en: 'Luxembourg' },  rates: [17, 14, 8, 3] },
+    { code: 'mt', name: { lv: 'Malta',       ru: 'Мальта',       en: 'Malta' },       rates: [18, 12, 7, 5] },
+    { code: 'nl', name: { lv: 'Nīderlande',  ru: 'Нидерланды',   en: 'Netherlands' }, rates: [21, 9] },
+    { code: 'pl', name: { lv: 'Polija',      ru: 'Польша',       en: 'Poland' },      rates: [23, 8, 5] },
+    { code: 'pt', name: { lv: 'Portugāle',   ru: 'Португалия',   en: 'Portugal' },    rates: [23, 13, 6] },
+    { code: 'ro', name: { lv: 'Rumānija',    ru: 'Румыния',      en: 'Romania' },     rates: [21, 11] },
+    { code: 'sk', name: { lv: 'Slovākija',   ru: 'Словакия',     en: 'Slovakia' },    rates: [23, 19, 5] },
+    { code: 'si', name: { lv: 'Slovēnija',   ru: 'Словения',     en: 'Slovenia' },    rates: [22, 9.5, 5] },
+    { code: 'fi', name: { lv: 'Somija',      ru: 'Финляндия',    en: 'Finland' },     rates: [25.5, 14, 10] },
+    { code: 'es', name: { lv: 'Spānija',     ru: 'Испания',      en: 'Spain' },       rates: [21, 10, 4] },
+    { code: 'hu', name: { lv: 'Ungārija',    ru: 'Венгрия',      en: 'Hungary' },     rates: [27, 18, 5] },
+    { code: 'de', name: { lv: 'Vācija',      ru: 'Германия',     en: 'Germany' },     rates: [19, 7] },
+    { code: 'se', name: { lv: 'Zviedrija',   ru: 'Швеция',       en: 'Sweden' },      rates: [25, 12, 6] }
+  ];
+
+  var countryPicker = document.getElementById('countryPicker');
+  var countryBtn = document.getElementById('countryBtn');
+  var countryList = document.getElementById('countryList');
+  var rateCard = document.getElementById('rateCard');
+  var countryIdx = 0;
+  EU.forEach(function (c, i) { if (c.code === 'lv') countryIdx = i; }); // Latvija pēc noklusējuma
+
+  function flagImg(code) {
+    return '<img class="flag" src="https://flagcdn.com/24x18/' + code + '.png" ' +
+           'srcset="https://flagcdn.com/48x36/' + code + '.png 2x" alt="" loading="lazy" ' +
+           'onerror="this.style.visibility=\'hidden\'">';
+  }
+  function fmtRate(r) {
+    var str = String(r);
+    return lang === 'en' ? str : str.replace('.', ',');
+  }
+  function renderCountryBtn() {
+    var c = EU[countryIdx];
+    countryBtn.innerHTML = flagImg(c.code) + '<span class="country-name">' + c.name[lang] + '</span><span class="chev">▼</span>';
+  }
+  function renderCountryList() {
+    countryList.innerHTML = '';
+    EU.forEach(function (c, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'option');
+      b.innerHTML = flagImg(c.code) + '<span class="country-name">' + c.name[lang] + '</span>';
+      var sel = i === countryIdx;
+      if (sel) b.classList.add('selected');
+      b.setAttribute('aria-selected', String(sel));
+      b.addEventListener('click', function () {
+        countryIdx = i;
+        closeCountry();
+        renderCountryBtn();
+        renderCountryList();
+        renderCard();
+      });
+      countryList.appendChild(b);
+    });
+  }
+  function renderCard() {
+    var t = I18N[lang];
+    var c = EU[countryIdx];
+    var html = '<h2>' + flagImg(c.code) + c.name[lang] + ' — ' + t.cardTitle + '</h2>';
+    if (c.code === 'lv') {
+      html += t.lvBody;
+    } else {
+      var reduced = c.rates.slice(1);
+      html += '<ul><li><strong>' + fmtRate(c.rates[0]) + '%</strong> — ' + t.std + '.</li>';
+      if (reduced.length) {
+        html += '<li><strong>' + reduced.map(function (r) { return fmtRate(r) + '%'; }).join(', ') + '</strong> — ' +
+                (reduced.length > 1 ? t.redMany : t.redOne) + '.</li>';
+      }
+      html += '</ul>';
+      if (!reduced.length) html += '<p>' + t.noRed + '</p>';
+      html += '<p>' + t.note + '</p>';
+    }
+    rateCard.innerHTML = html;
+  }
+  function closeCountry() {
+    countryPicker.classList.remove('open');
+    countryBtn.setAttribute('aria-expanded', 'false');
+  }
+  countryBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = countryPicker.classList.toggle('open');
+    countryBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!countryPicker.contains(e.target)) closeCountry();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeCountry();
+  });
 
   function apply(l) {
     var t = I18N[l]; if (!t) return;
@@ -311,10 +429,10 @@
     document.getElementById('navKontakti').textContent = t.navKontakti;
     document.getElementById('pageTitle').textContent = t.h1;
     document.getElementById('pageLead').textContent = t.lead;
-    document.getElementById('faq1Summary').textContent = t.faq1Summary;
-    document.getElementById('faq1Body').innerHTML = t.faq1Body;
-    document.getElementById('faq2Summary').textContent = t.faq2Summary;
-    document.getElementById('faq2Body').innerHTML = t.faq2Body;
+    document.getElementById('countryLabel').textContent = t.countryLabel;
+    renderCountryBtn();
+    renderCountryList();
+    renderCard();
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
@@ -332,10 +450,7 @@
 
   function initialLang() {
     try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
-    var nav = (navigator.language || '').toLowerCase();
-    if (nav.indexOf('ru') === 0) return 'ru';
-    if (nav.indexOf('lv') === 0) return 'lv';
-    return 'en';
+    return 'lv';
   }
 
   langSwitch.querySelectorAll('button').forEach(function (b) {

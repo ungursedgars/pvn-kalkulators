@@ -328,10 +328,7 @@
 
   function initialLang() {
     try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
-    var nav = (navigator.language || '').toLowerCase();
-    if (nav.indexOf('ru') === 0) return 'ru';
-    if (nav.indexOf('lv') === 0) return 'lv';
-    return 'en';
+    return 'lv';
   }
 
   langSwitch.querySelectorAll('button').forEach(function (b) {
