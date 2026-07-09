@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biežāk uzdotie jautājumi | PVN Kalkulators</title>
+<meta name="description" content="Atbildes uz biežāk uzdotajiem jautājumiem par PVN aprēķinu — kā pieskaitīt un atskaitīt PVN, lietot citu likmi un kā tiek noapaļoti rezultāti.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kā pieskaitīt PVN summai?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ieraksti summu laukā \"Summa bez PVN\" — kalkulators to reizina ar koeficientu 1 + likme / 100. Piemērs ar 21% likmi: 100 € × 1,21 = 121 €. PVN daļa šajā gadījumā ir 21 €."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā atskaitīt PVN no summas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ieraksti summu laukā \"Summa ar PVN\" — kalkulators to dala ar koeficientu: 121 € ÷ 1,21 = 100 € (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai kalkulatoru var izmantot ar citu likmi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā \"Cita %\" ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā tiek noapaļoti rezultāti?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+  }
+  [data-theme="dark"] {
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .lang-switch button {
+    background: none; border: none; padding: 6px 9px; cursor: pointer;
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
+  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; }
+
+  section { margin: 0; }
+  .faq-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 10px; overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 14px 16px; font-weight: 600; cursor: pointer; list-style: none;
+  }
+  .faq-item summary::after { content: "+"; float: right; color: var(--muted); }
+  .faq-item[open] summary::after { content: "–"; }
+  .faq-item .faq-body { padding: 0 16px 14px; color: var(--muted); font-size: .95rem; }
+  .faq-body code {
+    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
+    font-size: .88em; color: var(--text);
+  }
+
+  .back-link { display: inline-block; margin-top: 18px; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html">PVN<span>kalkulators</span></a>
+    <nav>
+      <a href="index.html" id="navCalc">Kalkulators</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="lv">LV</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="instrukcijas.html" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj.html" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes.html" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="kontakti.html" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 id="pageTitle">Biežāk uzdotie jautājumi</h1>
+  <p class="lead" id="pageLead">Atbildes uz visbiežāk uzdotajiem jautājumiem par PVN aprēķinu.</p>
+
+  <section>
+    <details class="faq-item" open>
+      <summary id="faq1Summary">Kā pieskaitīt PVN summai?</summary>
+      <div class="faq-body" id="faq1Body">
+        Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu
+        <code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>.
+        PVN daļa šajā gadījumā ir 21 €.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="faq2Summary">Kā atskaitīt PVN no summas?</summary>
+      <div class="faq-body" id="faq2Body">
+        Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu:
+        <code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €.
+        Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="faq3Summary">Vai kalkulatoru var izmantot ar citu likmi?</summary>
+      <div class="faq-body" id="faq3Body">
+        Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %”
+        ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary id="faq4Summary">Kā tiek noapaļoti rezultāti?</summary>
+      <div class="faq-body" id="faq4Body">
+        Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa.
+        Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.
+      </div>
+    </details>
+  </section>
+
+  <a class="back-link" href="index.html" id="backLink">← Atpakaļ uz kalkulatoru</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html" id="footHome">Sākums</a> ·
+      <a href="instrukcijas.html" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj.html" id="footBuj">BUJ</a> ·
+      <a href="likmes.html" id="footLikmes">Likmes</a> ·
+      <a href="privatuma-politika.html" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti.html" id="footContact">Kontakti</a>
+    </div>
+    <div id="footDisclaimer">PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var I18N = {
+    lv: {
+      htmlLang: 'lv', pageTitle: 'Biežāk uzdotie jautājumi | PVN Kalkulators', navCalc: 'Kalkulators',
+      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      h1: 'Biežāk uzdotie jautājumi',
+      lead: 'Atbildes uz visbiežāk uzdotajiem jautājumiem par PVN aprēķinu.',
+      faq1Summary: 'Kā pieskaitīt PVN summai?',
+      faq1Body: 'Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu ' +
+        '<code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>. ' +
+        'PVN daļa šajā gadījumā ir 21 €.',
+      faq2Summary: 'Kā atskaitīt PVN no summas?',
+      faq2Body: 'Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu: ' +
+        '<code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. ' +
+        'Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.',
+      faq3Summary: 'Vai kalkulatoru var izmantot ar citu likmi?',
+      faq3Body: 'Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %” ' +
+        'ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.',
+      faq4Summary: 'Kā tiek noapaļoti rezultāti?',
+      faq4Body: 'Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. ' +
+        'Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu'
+    },
+    ru: {
+      htmlLang: 'ru', pageTitle: 'Часто задаваемые вопросы | Калькулятор НДС', navCalc: 'Калькулятор',
+      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      h1: 'Часто задаваемые вопросы',
+      lead: 'Ответы на самые частые вопросы о расчёте НДС.',
+      faq1Summary: 'Как прибавить НДС к сумме?',
+      faq1Body: 'Введите сумму в поле <strong>«Сумма без НДС»</strong> — калькулятор умножит её на коэффициент ' +
+        '<code>1 + ставка / 100</code>. Пример при ставке 21%: <code>100 € × 1,21 = 121 €</code>. ' +
+        'Сумма НДС в этом случае — 21 €.',
+      faq2Summary: 'Как вычесть НДС из суммы?',
+      faq2Body: 'Введите сумму в поле <strong>«Сумма с НДС»</strong> — калькулятор разделит её на коэффициент: ' +
+        '<code>121 € ÷ 1,21 = 100 €</code> (при ставке 21%). Это сумма без НДС, а сумма НДС — 21 €. ' +
+        'Частая ошибка — просто вычесть 21% из итоговой суммы, такой результат неверен.',
+      faq3Summary: 'Можно ли использовать калькулятор с другой ставкой?',
+      faq3Body: 'Да — выберите страну в меню и нажмите одну из её ставок, либо введите любую ставку в поле ' +
+        '«Другая %», и расчёт будет произведён по тому же принципу.',
+      faq4Summary: 'Как округляются результаты?',
+      faq4Body: 'Результаты округляются до 2 знаков после запятой (центов) по правилам математического округления. ' +
+        'Для бухгалтерских нужд всегда уточняйте порядок округления, принятый в вашей компании.',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
+      themeTitle: 'Переключить светлый/тёмный режим'
+    },
+    en: {
+      htmlLang: 'en', pageTitle: 'Frequently Asked Questions | VAT Calculator', navCalc: 'Calculator',
+      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      h1: 'Frequently asked questions',
+      lead: 'Answers to the most common questions about VAT calculation.',
+      faq1Summary: 'How do I add VAT to an amount?',
+      faq1Body: 'Enter the amount in the <strong>“Amount without VAT”</strong> field — the calculator multiplies ' +
+        'it by the factor <code>1 + rate / 100</code>. Example at a 21% rate: <code>€100 × 1.21 = €121</code>. ' +
+        'The VAT amount in this case is €21.',
+      faq2Summary: 'How do I deduct VAT from an amount?',
+      faq2Body: 'Enter the amount in the <strong>“Amount with VAT”</strong> field — the calculator divides it by ' +
+        'the factor: <code>€121 ÷ 1.21 = €100</code> (at a 21% rate). That\'s the amount without VAT, and the VAT ' +
+        'amount is €21. A common mistake is simply subtracting 21% from the total — that result is incorrect.',
+      faq3Summary: 'Can I use the calculator with a different rate?',
+      faq3Body: 'Yes — choose a country from the menu and click one of its rates, or enter any rate in the ' +
+        '“Other %” field, and the calculation works the same way.',
+      faq4Summary: 'How are results rounded?',
+      faq4Body: 'Results are rounded to 2 decimal places (cents) using standard mathematical rounding. ' +
+        'For accounting purposes, always confirm the rounding convention used by your company.',
+      back: '← Back to the calculator',
+      footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
+      themeTitle: 'Toggle light/dark mode'
+    }
+  };
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+  var lang = 'lv';
+
+  function apply(l) {
+    var t = I18N[l]; if (!t) return;
+    lang = l;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.getElementById('navCalc').textContent = t.navCalc;
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('faq1Summary').textContent = t.faq1Summary;
+    document.getElementById('faq1Body').innerHTML = t.faq1Body;
+    document.getElementById('faq2Summary').textContent = t.faq2Summary;
+    document.getElementById('faq2Body').innerHTML = t.faq2Body;
+    document.getElementById('faq3Summary').textContent = t.faq3Summary;
+    document.getElementById('faq3Body').innerHTML = t.faq3Body;
+    document.getElementById('faq4Summary').textContent = t.faq4Summary;
+    document.getElementById('faq4Body').innerHTML = t.faq4Body;
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === l);
+    });
+    try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    if (nav.indexOf('ru') === 0) return 'ru';
+    if (nav.indexOf('lv') === 0) return 'lv';
+    return 'en';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(initialLang());
+
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Tēma — tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>

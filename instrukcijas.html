@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kā lietot kalkulatoru | PVN Kalkulators</title>
+<meta name="description" content="Īss ceļvedis, kā lietot PVN kalkulatoru un iebūvēto peldošo kalkulatoru — soli pa solim.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+  }
+  [data-theme="dark"] {
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .lang-switch button {
+    background: none; border: none; padding: 6px 9px; cursor: pointer;
+    font-size: .8rem; font-weight: 700; color: var(--muted);
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; }
+  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; }
+
+  .step-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow); padding: 24px 24px 20px; margin-bottom: 18px;
+  }
+  .step-card h2 { font-size: 1.15rem; margin-bottom: 14px; }
+  .step-card ol { padding-left: 22px; }
+  .step-card li { margin-bottom: 10px; color: var(--text); }
+  .step-card li:last-child { margin-bottom: 0; }
+  .tip {
+    background: var(--result-bg); border-radius: 10px; padding: 12px 14px;
+    color: var(--muted); font-size: .92rem; margin-top: 14px;
+  }
+  .tip strong { color: var(--text); }
+
+  .back-link { display: inline-block; margin-top: 4px; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html">PVN<span>kalkulators</span></a>
+    <nav>
+      <a href="index.html" id="navCalc">Kalkulators</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="lv">LV</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="instrukcijas.html" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj.html" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes.html" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="kontakti.html" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 id="pageTitle">Kā lietot kalkulatoru</h1>
+  <p class="lead" id="pageLead">Īss ceļvedis PVN kalkulatoram un iebūvētajam papildu kalkulatoram.</p>
+
+  <div class="step-card">
+    <h2 id="card1Title">PVN kalkulators</h2>
+    <ol id="card1List">
+      <li>Ieraksti summu laukā “Summa bez PVN” vai “Summa ar PVN” — otrs lauks aizpildīsies automātiski.</li>
+      <li>Izvēlnē “Valsts” izvēlies valsti, lai redzētu tās PVN likmes, vai izmanto lauku “Cita %”, lai ievadītu savu likmi.</li>
+      <li>Spied uz kādas no likmju pogām (piemēram, 21%, 12%, 5%), lai pārslēgtos starp tām.</li>
+      <li>Zem laukiem redzi automātiski aprēķināto “PVN summa”.</li>
+      <li>Spied “Kopēt” blakus jebkuram laukam, lai vērtību iekopētu starpliktuvē.</li>
+    </ol>
+  </div>
+
+  <div class="step-card">
+    <h2 id="card2Title">Peldošais kalkulators</h2>
+    <ol id="card2List">
+      <li>Ekrāna labajā apakšējā stūrī spied uz apaļo zilo pogu ar kalkulatora ikonu, lai atvērtu papildu kalkulatoru.</li>
+      <li>Lieto to kā parastu kalkulatoru — piemēram, lai saskaitītu vairākas summas, pirms tām aprēķini PVN.</li>
+      <li>Kad displejā redzi vajadzīgo rezultātu, spied pogu “Bez PVN” vai “Ar PVN” — skaitlis uzreiz ievietosies attiecīgajā PVN kalkulatora laukā, un aprēķins turpināsies automātiski.</li>
+      <li>Kalkulatoru vari aizvērt ar “✕” pogu vai spiežot vēlreiz uz apaļo pogu.</li>
+    </ol>
+    <div class="tip" id="tipText"><strong>Padoms:</strong> spiežot “Kopēt” jebkuram PVN kalkulatora laukam, vērtība automātiski nonāk arī peldošajā kalkulatorā — vari uzreiz turpināt ar to rēķināt.</div>
+  </div>
+
+  <a class="back-link" href="index.html" id="backLink">← Atpakaļ uz kalkulatoru</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html" id="footHome">Sākums</a> ·
+      <a href="instrukcijas.html" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj.html" id="footBuj">BUJ</a> ·
+      <a href="likmes.html" id="footLikmes">Likmes</a> ·
+      <a href="privatuma-politika.html" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti.html" id="footContact">Kontakti</a>
+    </div>
+    <div id="footDisclaimer">PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var I18N = {
+    lv: {
+      htmlLang: 'lv', pageTitle: 'Kā lietot kalkulatoru | PVN Kalkulators', navCalc: 'Kalkulators',
+      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      h1: 'Kā lietot kalkulatoru',
+      lead: 'Īss ceļvedis PVN kalkulatoram un iebūvētajam papildu kalkulatoram.',
+      card1Title: 'PVN kalkulators',
+      card1: [
+        'Ieraksti summu laukā “Summa bez PVN” vai “Summa ar PVN” — otrs lauks aizpildīsies automātiski.',
+        'Izvēlnē “Valsts” izvēlies valsti, lai redzētu tās PVN likmes, vai izmanto lauku “Cita %”, lai ievadītu savu likmi.',
+        'Spied uz kādas no likmju pogām (piemēram, 21%, 12%, 5%), lai pārslēgtos starp tām.',
+        'Zem laukiem redzi automātiski aprēķināto “PVN summa”.',
+        'Spied “Kopēt” blakus jebkuram laukam, lai vērtību iekopētu starpliktuvē.'
+      ],
+      card2Title: 'Peldošais kalkulators',
+      card2: [
+        'Ekrāna labajā apakšējā stūrī spied uz apaļo zilo pogu ar kalkulatora ikonu, lai atvērtu papildu kalkulatoru.',
+        'Lieto to kā parastu kalkulatoru — piemēram, lai saskaitītu vairākas summas, pirms tām aprēķini PVN.',
+        'Kad displejā redzi vajadzīgo rezultātu, spied pogu “Bez PVN” vai “Ar PVN” — skaitlis uzreiz ievietosies attiecīgajā PVN kalkulatora laukā, un aprēķins turpināsies automātiski.',
+        'Kalkulatoru vari aizvērt ar “✕” pogu vai spiežot vēlreiz uz apaļo pogu.'
+      ],
+      tipHtml: '<strong>Padoms:</strong> spiežot “Kopēt” jebkuram PVN kalkulatora laukam, vērtība automātiski nonāk arī peldošajā kalkulatorā — vari uzreiz turpināt ar to rēķināt.',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes',
+      footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu'
+    },
+    ru: {
+      htmlLang: 'ru', pageTitle: 'Как пользоваться калькулятором | Калькулятор НДС', navCalc: 'Калькулятор',
+      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      h1: 'Как пользоваться калькулятором',
+      lead: 'Краткое руководство по калькулятору НДС и встроенному дополнительному калькулятору.',
+      card1Title: 'Калькулятор НДС',
+      card1: [
+        'Введите сумму в поле «Сумма без НДС» или «Сумма с НДС» — второе поле заполнится автоматически.',
+        'В меню «Страна» выберите страну, чтобы увидеть её ставки НДС, или используйте поле «Другая %», чтобы ввести свою ставку.',
+        'Нажмите на одну из кнопок ставки (например, 21%, 12%, 5%), чтобы переключиться между ними.',
+        'Под полями отображается автоматически рассчитанная «Сумма НДС».',
+        'Нажмите «Копировать» рядом с любым полем, чтобы скопировать значение в буфер обмена.'
+      ],
+      card2Title: 'Плавающий калькулятор',
+      card2: [
+        'В правом нижнем углу экрана нажмите на круглую синюю кнопку с иконкой калькулятора, чтобы открыть дополнительный калькулятор.',
+        'Используйте его как обычный калькулятор — например, чтобы сложить несколько сумм перед расчётом НДС.',
+        'Когда на экране появится нужный результат, нажмите кнопку «Без НДС» или «С НДС» — число сразу вставится в соответствующее поле калькулятора НДС, и расчёт продолжится автоматически.',
+        'Калькулятор можно закрыть кнопкой «✕» или повторным нажатием на круглую кнопку.'
+      ],
+      tipHtml: '<strong>Совет:</strong> нажимая «Копировать» у любого поля калькулятора НДС, значение автоматически попадает и в плавающий калькулятор — можно сразу продолжить с ним считать.',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки',
+      footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
+      themeTitle: 'Переключить светлый/тёмный режим'
+    },
+    en: {
+      htmlLang: 'en', pageTitle: 'How to use the calculator | VAT Calculator', navCalc: 'Calculator',
+      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      h1: 'How to use the calculator',
+      lead: 'A quick guide to the VAT calculator and the built-in extra calculator.',
+      card1Title: 'VAT calculator',
+      card1: [
+        'Type an amount into the “Amount without VAT” or “Amount with VAT” field — the other field fills in automatically.',
+        'In the “Country” menu, pick a country to see its VAT rates, or use the “Other %” field to enter your own rate.',
+        'Click one of the rate buttons (e.g. 21%, 12%, 5%) to switch between them.',
+        'The automatically calculated “VAT amount” appears below the fields.',
+        'Click “Copy” next to any field to copy its value to the clipboard.'
+      ],
+      card2Title: 'Floating calculator',
+      card2: [
+        'Click the round blue button with the calculator icon in the bottom-right corner to open the extra calculator.',
+        'Use it like a regular calculator — for example, to add up several amounts before calculating VAT on the total.',
+        'Once the display shows the result you need, click “No VAT” or “With VAT” — the number is instantly inserted into the matching VAT calculator field, and the calculation continues automatically.',
+        'Close the calculator with the “✕” button or by clicking the round button again.'
+      ],
+      tipHtml: '<strong>Tip:</strong> clicking “Copy” on any VAT calculator field also sends the value into the floating calculator, so you can keep calculating with it right away.',
+      back: '← Back to the calculator',
+      footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates',
+      footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
+      themeTitle: 'Toggle light/dark mode'
+    }
+  };
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+  var lang = 'lv';
+
+  function renderList(el, items) {
+    el.innerHTML = '';
+    items.forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      el.appendChild(li);
+    });
+  }
+
+  function apply(l) {
+    var t = I18N[l]; if (!t) return;
+    lang = l;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.getElementById('navCalc').textContent = t.navCalc;
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('card1Title').textContent = t.card1Title;
+    renderList(document.getElementById('card1List'), t.card1);
+    document.getElementById('card2Title').textContent = t.card2Title;
+    renderList(document.getElementById('card2List'), t.card2);
+    document.getElementById('tipText').innerHTML = t.tipHtml;
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === l);
+    });
+    try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    var nav = (navigator.language || '').toLowerCase();
+    if (nav.indexOf('ru') === 0) return 'ru';
+    if (nav.indexOf('lv') === 0) return 'lv';
+    return 'en';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(initialLang());
+
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Tēma — tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>
