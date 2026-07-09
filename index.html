@@ -274,7 +274,8 @@
   footer a { color: var(--muted); }
   footer a:hover { color: var(--accent); }
   .footer-links { margin-bottom: 8px; }
-  .foot-logo { display: block; margin: 0 auto 8px; border-radius: 50%; }
+  .foot-brand { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .foot-logo { border-radius: 50%; }
   @media (max-width: 480px) {
     .field-block input { font-size: 1.25rem; }
     .vat-result .val { font-size: 1.3rem; }
@@ -486,8 +487,10 @@
       <a href="privatuma-politika" id="footerPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footerContact">Kontakti</a>
     </div>
-    <img src="/logo-64.png" class="foot-logo" alt="PVN kalkulators" width="32" height="32">
-    <div id="footerText">© 2026 pvnkalkulators.eu</div>
+    <div class="foot-brand">
+      <img src="/logo-64.png" class="foot-logo" alt="PVN kalkulators" width="22" height="22">
+      <span id="footerText">© 2026 pvnkalkulators.eu</span>
+    </div>
   </div>
 </footer>
 
