@@ -230,7 +230,7 @@
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
     </div>
-    <div id="footDisclaimer">PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.</div>
+    <div id="footDisclaimer">© 2026 pvnkalkulators.eu</div>
   </div>
 </footer>
 
@@ -254,10 +254,9 @@
         '<li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>' +
         '<li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>' +
         '</ul><p>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.</p>',
-      note: 'Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo informāciju attiecīgās valsts nodokļu iestādes mājaslapā.',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
-      footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu'
     },
     ru: {
@@ -277,10 +276,9 @@
         '<li><strong>5%</strong> — особая сниженная ставка для отдельных групп товаров.</li>' +
         '<li><strong>0%</strong> — для отдельных операций, например, экспорта.</li>' +
         '</ul><p>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).</p>',
-      note: 'Ставки время от времени меняются, поэтому перед важными расчётами проверяйте актуальную информацию на сайте налоговой службы соответствующей страны.',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
-      footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим'
     },
     en: {
@@ -300,10 +298,9 @@
         '<li><strong>5%</strong> — a special reduced rate for certain product groups.</li>' +
         '<li><strong>0%</strong> — for certain transactions, e.g. exports.</li>' +
         '</ul><p>For precise and current information on rate application, check the State Revenue Service (VID) website.</p>',
-      note: 'Rates change from time to time, so before important calculations check the current information on the relevant country\u2019s tax authority website.',
       back: '← Back to the calculator',
       footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
-      footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode'
     }
   };
@@ -398,7 +395,6 @@
       }
       html += '</ul>';
       if (!reduced.length) html += '<p>' + t.noRed + '</p>';
-      html += '<p>' + t.note + '</p>';
     }
     rateCard.innerHTML = html;
   }
