@@ -91,6 +91,25 @@
   .lang-switch button.active { background: var(--accent); color: #fff; }
   .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
 
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
@@ -241,25 +260,6 @@
   }
   #clearBtn:hover { color: var(--accent); }
 
-  /* Sadaļas */
-  section { margin: 36px 0; }
-  h2 { font-size: 1.25rem; margin-bottom: 14px; }
-  .faq-item {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; margin-bottom: 10px; overflow: hidden;
-  }
-  .faq-item summary {
-    padding: 14px 16px; font-weight: 600; cursor: pointer; list-style: none;
-  }
-  .faq-item summary::after { content: "+"; float: right; color: var(--muted); }
-  .faq-item[open] summary::after { content: "–"; }
-  .faq-item .faq-body { padding: 0 16px 14px; color: var(--muted); font-size: .95rem; }
-  .faq-body code {
-    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
-    font-size: .88em; color: var(--text);
-  }
-  .faq-body ul { padding-left: 20px; margin-top: 6px; }
-
   footer {
     border-top: 1px solid var(--border); padding: 22px 0 34px;
     color: var(--muted); font-size: .88rem; text-align: center;
@@ -366,62 +366,6 @@
     #miniCalc { right: 12px; left: 12px; width: auto; bottom: 84px; }
   }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Kādas PVN likmes piemēro Latvijā?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei. 5% — īpaši samazinātā likme atsevišķām preču grupām. 0% — atsevišķiem darījumiem, piemēram, eksportam. Precīzu un aktuālu informāciju meklē Valsts ieņēmumu dienesta (VID) mājaslapā."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Vai kalkulatorā ir pieejamas citu ES valstu PVN likmes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Jā, izvēlnē \"Valsts\" ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes parādās tās standarta likme un samazinātās likmes. Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi attiecīgās valsts nodokļu iestādes mājaslapā."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kā pieskaitīt PVN summai?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ieraksti summu laukā \"Summa bez PVN\" — kalkulators to reizina ar koeficientu 1 + likme / 100. Piemērs ar 21% likmi: 100 € × 1,21 = 121 €. PVN daļa šajā gadījumā ir 21 €."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kā atskaitīt PVN no summas?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ieraksti summu laukā \"Summa ar PVN\" — kalkulators to dala ar koeficientu: 121 € ÷ 1,21 = 100 € (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Vai kalkulatoru var izmantot ar citu likmi?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā \"Cita %\" ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kā tiek noapaļoti rezultāti?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību."
-      }
-    }
-  ]
-}
-</script>
 </head>
 <body>
 
@@ -429,14 +373,27 @@
   <div class="wrap header-inner">
     <a class="logo" href="#">PVN<span>kalkulators</span></a>
     <nav>
-      <a href="#buj" id="navBuj">BUJ</a>
-      <a href="#likmes" id="navLikmes">Likmes</a>
       <div class="lang-switch" id="langSwitch">
         <button type="button" data-lang="lv">LV</button>
         <button type="button" data-lang="ru">RU</button>
         <button type="button" data-lang="en">EN</button>
       </div>
       <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="instrukcijas.html" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj.html" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes.html" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="kontakti.html" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
       <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu">🌞</button>
     </nav>
   </div>
@@ -507,75 +464,12 @@
     <div class="sr-only" id="copyStatus" aria-live="polite"></div>
   </div>
 
-  <section id="likmes">
-    <h2 id="likmesH2">PVN likmes</h2>
-    <details class="faq-item" open>
-      <summary id="likmesFaq1Summary">Kādas PVN likmes piemēro Latvijā?</summary>
-      <div class="faq-body" id="likmesFaq1Body">
-        Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:
-        <ul>
-          <li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>
-          <li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>
-          <li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>
-          <li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>
-        </ul>
-        Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.
-      </div>
-    </details>
-    <details class="faq-item">
-      <summary id="likmesFaq2Summary">Citu ES valstu PVN likmes</summary>
-      <div class="faq-body" id="likmesFaq2Body">
-        Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes
-        parādās tās standarta likme (pirmā poga) un samazinātās likmes.
-        Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi
-        attiecīgās valsts nodokļu iestādes mājaslapā.
-      </div>
-    </details>
-  </section>
-
-  <section id="buj">
-    <h2 id="bujH2">Biežāk uzdotie jautājumi</h2>
-
-    <details class="faq-item">
-      <summary id="bujFaq1Summary">Kā pieskaitīt PVN summai?</summary>
-      <div class="faq-body" id="bujFaq1Body">
-        Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu
-        <code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>.
-        PVN daļa šajā gadījumā ir 21 €.
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary id="bujFaq2Summary">Kā atskaitīt PVN no summas?</summary>
-      <div class="faq-body" id="bujFaq2Body">
-        Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu:
-        <code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €.
-        Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary id="bujFaq3Summary">Vai kalkulatoru var izmantot ar citu likmi?</summary>
-      <div class="faq-body" id="bujFaq3Body">
-        Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %”
-        ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary id="bujFaq4Summary">Kā tiek noapaļoti rezultāti?</summary>
-      <div class="faq-body" id="bujFaq4Body">
-        Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa.
-        Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.
-      </div>
-    </details>
-  </section>
-
 </main>
 
 <footer>
   <div class="wrap">
     <div class="footer-links">
+      <a href="instrukcijas.html" id="footerInstrukcijas">Instrukcijas</a> ·
       <a href="privatuma-politika.html" id="footerPrivacy">Privātuma politika</a> ·
       <a href="kontakti.html" id="footerContact">Kontakti</a>
     </div>
@@ -692,7 +586,7 @@
     lv: {
       pageTitle: 'PVN Kalkulators — aprēķini PVN 21%, 12%, 5% | Latvija un ES',
       pageDescription: 'Bezmaksas PVN kalkulators. Ievadi summu ar vai bez PVN — otra aprēķinās automātiski. Visu ES valstu PVN likmes vai sava likme.',
-      navBuj: 'BUJ', navLikmes: 'Likmes',
+      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN kalkulators',
       subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.',
       valstsLabel: 'Valsts', likmeLabel: 'PVN likme',
@@ -712,37 +606,8 @@
       mcInsertNet: 'Bez PVN', mcInsertGross: 'Ar PVN',
       mcInsertNetTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa bez PVN”',
       mcInsertGrossTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”',
-      likmesH2: 'PVN likmes',
-      likmesFaq1Summary: 'Kādas PVN likmes piemēro Latvijā?',
-      likmesFaq1Body: 'Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes:' +
-        '<ul>' +
-        '<li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>' +
-        '<li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>' +
-        '<li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>' +
-        '<li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>' +
-        '</ul>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.',
-      likmesFaq2Summary: 'Citu ES valstu PVN likmes',
-      likmesFaq2Body: 'Izvēlnē “Valsts” ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes ' +
-        'parādās tās standarta likme (pirmā poga) un samazinātās likmes. ' +
-        'Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi ' +
-        'attiecīgās valsts nodokļu iestādes mājaslapā.',
-      bujH2: 'Biežāk uzdotie jautājumi',
-      bujFaq1Summary: 'Kā pieskaitīt PVN summai?',
-      bujFaq1Body: 'Ieraksti summu laukā <strong>“Summa bez PVN”</strong> — kalkulators to reizina ar koeficientu ' +
-        '<code>1 + likme / 100</code>. Piemērs ar 21% likmi: <code>100 € × 1,21 = 121 €</code>. ' +
-        'PVN daļa šajā gadījumā ir 21 €.',
-      bujFaq2Summary: 'Kā atskaitīt PVN no summas?',
-      bujFaq2Body: 'Ieraksti summu laukā <strong>“Summa ar PVN”</strong> — kalkulators to dala ar koeficientu: ' +
-        '<code>121 € ÷ 1,21 = 100 €</code> (pie 21% likmes). Tā ir summa bez PVN, un PVN daļa ir 21 €. ' +
-        'Bieža kļūda ir vienkārši atņemt 21% no gala summas — tāds rezultāts ir nepareizs.',
-      bujFaq3Summary: 'Vai kalkulatoru var izmantot ar citu likmi?',
-      bujFaq3Body: 'Jā — izvēlies valsti izvēlnē un spied uz kādu no tās likmēm, vai arī laukā “Cita %” ' +
-        'ievadi jebkuru likmi, un aprēķins notiks pēc tā paša principa.',
-      bujFaq4Summary: 'Kā tiek noapaļoti rezultāti?',
-      bujFaq4Body: 'Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. ' +
-        'Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.',
       footer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka; nodokļu jautājumos konsultējies ar grāmatvedi vai VID. ES valstu likmes ir informatīvas un var mainīties.',
-      footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
+      footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
       cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
         'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
         'Vairāk — <a href="privatuma-politika.html">privātuma politikā</a>.',
@@ -751,7 +616,7 @@
     ru: {
       pageTitle: 'Калькулятор НДС — расчёт НДС 21%, 12%, 5% | Латвия и ЕС',
       pageDescription: 'Бесплатный калькулятор НДС. Введите сумму с НДС или без — вторая рассчитается автоматически. Ставки НДС всех стран ЕС или своя ставка.',
-      navBuj: 'Вопросы', navLikmes: 'Ставки',
+      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Калькулятор НДС',
       subtitleHtml: 'Введите сумму в <strong>любое</strong> поле — остальное рассчитается автоматически.',
       valstsLabel: 'Страна', likmeLabel: 'Ставка НДС',
@@ -771,37 +636,8 @@
       mcInsertNet: 'Без НДС', mcInsertGross: 'С НДС',
       mcInsertNetTitle: 'Вставить число с экрана в поле «Сумма без НДС»',
       mcInsertGrossTitle: 'Вставить число с экрана в поле «Сумма с НДС»',
-      likmesH2: 'Ставки НДС',
-      likmesFaq1Summary: 'Какие ставки НДС применяются в Латвии?',
-      likmesFaq1Body: 'В Латвии действуют несколько ставок налога на добавленную стоимость:' +
-        '<ul>' +
-        '<li><strong>21%</strong> — стандартная ставка, применяется к большинству товаров и услуг.</li>' +
-        '<li><strong>12%</strong> — сниженная ставка, например, для медикаментов, теплоэнергии для населения, книг и прессы.</li>' +
-        '<li><strong>5%</strong> — особая сниженная ставка для отдельных групп товаров.</li>' +
-        '<li><strong>0%</strong> — для отдельных операций, например, экспорта.</li>' +
-        '</ul>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).',
-      likmesFaq2Summary: 'Ставки НДС других стран ЕС',
-      likmesFaq2Body: 'В меню «Страна» доступны все 27 стран-членов ЕС. При выборе страны под меню появляется ' +
-        'её стандартная ставка (первая кнопка) и сниженные ставки. ' +
-        'Ставки время от времени меняются, поэтому перед важными расчётами проверяйте актуальную ставку ' +
-        'на сайте налоговой службы соответствующей страны.',
-      bujH2: 'Часто задаваемые вопросы',
-      bujFaq1Summary: 'Как прибавить НДС к сумме?',
-      bujFaq1Body: 'Введите сумму в поле <strong>«Сумма без НДС»</strong> — калькулятор умножит её на коэффициент ' +
-        '<code>1 + ставка / 100</code>. Пример при ставке 21%: <code>100 € × 1,21 = 121 €</code>. ' +
-        'Сумма НДС в этом случае — 21 €.',
-      bujFaq2Summary: 'Как вычесть НДС из суммы?',
-      bujFaq2Body: 'Введите сумму в поле <strong>«Сумма с НДС»</strong> — калькулятор разделит её на коэффициент: ' +
-        '<code>121 € ÷ 1,21 = 100 €</code> (при ставке 21%). Это сумма без НДС, а сумма НДС — 21 €. ' +
-        'Частая ошибка — просто вычесть 21% из итоговой суммы, такой результат неверен.',
-      bujFaq3Summary: 'Можно ли использовать калькулятор с другой ставкой?',
-      bujFaq3Body: 'Да — выберите страну в меню и нажмите одну из её ставок, либо введите любую ставку в поле ' +
-        '«Другая %», и расчёт будет произведён по тому же принципу.',
-      bujFaq4Summary: 'Как округляются результаты?',
-      bujFaq4Body: 'Результаты округляются до 2 знаков после запятой (центов) по правилам математического округления. ' +
-        'Для бухгалтерских нужд всегда уточняйте порядок округления, принятый в вашей компании.',
       footer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы; по налоговым вопросам консультируйтесь с бухгалтером или VID. Ставки стран ЕС носят информативный характер и могут изменяться.',
-      footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
+      footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
       cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
         'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
         'Подробнее — в <a href="privatuma-politika.html">политике конфиденциальности</a>.',
@@ -810,7 +646,7 @@
     en: {
       pageTitle: 'VAT Calculator — calculate VAT 21%, 12%, 5% | Latvia and EU',
       pageDescription: 'Free VAT calculator. Enter an amount with or without VAT — the other updates automatically. VAT rates for all EU countries or your own rate.',
-      navBuj: 'FAQ', navLikmes: 'Rates',
+      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT Calculator',
       subtitleHtml: 'Type an amount into <strong>either</strong> field — the other calculates automatically.',
       valstsLabel: 'Country', likmeLabel: 'VAT rate',
@@ -830,37 +666,8 @@
       mcInsertNet: 'No VAT', mcInsertGross: 'With VAT',
       mcInsertNetTitle: 'Insert the number shown on the display into the “Amount without VAT” field',
       mcInsertGrossTitle: 'Insert the number shown on the display into the “Amount with VAT” field',
-      likmesH2: 'VAT rates',
-      likmesFaq1Summary: 'What VAT rates apply in Latvia?',
-      likmesFaq1Body: 'Latvia has several value-added tax rates in effect:' +
-        '<ul>' +
-        '<li><strong>21%</strong> — the standard rate, applied to most goods and services.</li>' +
-        '<li><strong>12%</strong> — a reduced rate, e.g. for medicines, district heating for households, books and press.</li>' +
-        '<li><strong>5%</strong> — a special reduced rate for certain product groups.</li>' +
-        '<li><strong>0%</strong> — for certain transactions, e.g. exports.</li>' +
-        '</ul>For precise and current information on rate application, check the State Revenue Service (VID) website.',
-      likmesFaq2Summary: 'VAT rates of other EU countries',
-      likmesFaq2Body: 'The “Country” menu includes all 27 EU member states. Selecting a country shows its standard ' +
-        'rate (first button) and reduced rates below the menu. ' +
-        'Rates change from time to time, so before important calculations check the current rate on the relevant ' +
-        'country\'s tax authority website.',
-      bujH2: 'Frequently asked questions',
-      bujFaq1Summary: 'How do I add VAT to an amount?',
-      bujFaq1Body: 'Enter the amount in the <strong>“Amount without VAT”</strong> field — the calculator multiplies ' +
-        'it by the factor <code>1 + rate / 100</code>. Example at a 21% rate: <code>€100 × 1.21 = €121</code>. ' +
-        'The VAT amount in this case is €21.',
-      bujFaq2Summary: 'How do I deduct VAT from an amount?',
-      bujFaq2Body: 'Enter the amount in the <strong>“Amount with VAT”</strong> field — the calculator divides it by ' +
-        'the factor: <code>€121 ÷ 1.21 = €100</code> (at a 21% rate). That\'s the amount without VAT, and the VAT ' +
-        'amount is €21. A common mistake is simply subtracting 21% from the total — that result is incorrect.',
-      bujFaq3Summary: 'Can I use the calculator with a different rate?',
-      bujFaq3Body: 'Yes — choose a country from the menu and click one of its rates, or enter any rate in the ' +
-        '“Other %” field, and the calculation works the same way.',
-      bujFaq4Summary: 'How are results rounded?',
-      bujFaq4Body: 'Results are rounded to 2 decimal places (cents) using standard mathematical rounding. ' +
-        'For accounting purposes, always confirm the rounding convention used by your company.',
       footer: 'VAT calculator — an informational tool. Calculations have no legal effect; consult an accountant or VID on tax matters. EU country rates are for information only and may change.',
-      footerPrivacy: 'Privacy policy', footerContact: 'Contact',
+      footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
       cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
         'Analytics and advertising cookies are loaded only with your consent. ' +
         'Learn more in our <a href="privatuma-politika.html">privacy policy</a>.',
@@ -896,10 +703,19 @@
   function applyDecimalSep(sep) {
     state.decimalSep = sep;
     sepBtn.textContent = sep === 'comma' ? ',' : '.';
+    var ph = sep === 'comma' ? '0,00' : '0.00';
+    netInput.placeholder = ph;
+    grossInput.placeholder = ph;
     try { localStorage.setItem('pvn-decimal-sep', sep); } catch (e) {}
     document.dispatchEvent(new CustomEvent('pvn-sep-change', { detail: sep }));
     renderRates();
     calc();
+    // calc() pārraksta tikai otru (aprēķināto) lauku — pārrakstām arī to, kurā lietotājs
+    // pats rakstīja, lai abi lauki vienmēr rāda vienu un to pašu atdalītāju.
+    [netInput, grossInput].forEach(function (el) {
+      var n = parseNum(el.value);
+      if (!isNaN(n)) el.value = fmt(n);
+    });
   }
   sepBtn.addEventListener('click', function () {
     applyDecimalSep(state.decimalSep === 'comma' ? 'period' : 'comma');
@@ -926,8 +742,10 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
 
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
     document.getElementById('mainH1').textContent = t.h1;
     document.getElementById('subtitleText').innerHTML = t.subtitleHtml;
     document.getElementById('countryLabel').textContent = t.valstsLabel;
@@ -955,21 +773,8 @@
     document.getElementById('mcInsertGross').textContent = t.mcInsertGross;
     document.getElementById('mcInsertGross').title = t.mcInsertGrossTitle;
 
-    document.getElementById('likmesH2').textContent = t.likmesH2;
-    document.getElementById('likmesFaq1Summary').textContent = t.likmesFaq1Summary;
-    document.getElementById('likmesFaq1Body').innerHTML = t.likmesFaq1Body;
-    document.getElementById('likmesFaq2Summary').textContent = t.likmesFaq2Summary;
-    document.getElementById('likmesFaq2Body').innerHTML = t.likmesFaq2Body;
-    document.getElementById('bujH2').textContent = t.bujH2;
-    document.getElementById('bujFaq1Summary').textContent = t.bujFaq1Summary;
-    document.getElementById('bujFaq1Body').innerHTML = t.bujFaq1Body;
-    document.getElementById('bujFaq2Summary').textContent = t.bujFaq2Summary;
-    document.getElementById('bujFaq2Body').innerHTML = t.bujFaq2Body;
-    document.getElementById('bujFaq3Summary').textContent = t.bujFaq3Summary;
-    document.getElementById('bujFaq3Body').innerHTML = t.bujFaq3Body;
-    document.getElementById('bujFaq4Summary').textContent = t.bujFaq4Summary;
-    document.getElementById('bujFaq4Body').innerHTML = t.bujFaq4Body;
     document.getElementById('footerText').textContent = t.footer;
+    document.getElementById('footerInstrukcijas').textContent = t.footerInstrukcijas;
     document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
     document.getElementById('footerContact').textContent = t.footerContact;
 
@@ -996,6 +801,28 @@
 
   langSwitch.querySelectorAll('button').forEach(function (b) {
     b.addEventListener('click', function () { applyLanguage(b.dataset.lang); });
+  });
+
+  /* --- Izvēlnes pogas (BUJ / Likmes / Kontakti) nolaižamā saraksta pārslēgšana --- */
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
   });
 
   function parseNum(str) {
@@ -1163,6 +990,15 @@
 
   netInput.addEventListener('input', function () { state.lastEdited = 'net'; calc(); });
   grossInput.addEventListener('input', function () { state.lastEdited = 'gross'; calc(); });
+
+  // Kad lietotājs pabeidz rakstīt (blur), pārrakstām lauka paša vērtību ar izvēlēto
+  // atdalītāju — ja ieraksta "100.20" komata režīmā, pēc laukā izlaišanas kļūst "100,20".
+  function reformatOnBlur() {
+    var n = parseNum(this.value);
+    if (!isNaN(n)) this.value = fmt(n);
+  }
+  netInput.addEventListener('blur', reformatOnBlur);
+  grossInput.addEventListener('blur', reformatOnBlur);
 
   customEl.addEventListener('input', function () {
     var r = parseNum(customEl.value);
