@@ -149,12 +149,7 @@
       </div>
 
       <!-- Pretmēstuļu slazds (netiek rādīts cilvēkiem) -->
-      <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off">
-      <!-- FormSubmit iestatījumi (action, _subject un _next iestata JS) -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" id="cfSubject" value="">
-      <input type="hidden" name="_next" id="cfNext" value="">
+      <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
 
       <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
 
@@ -178,11 +173,10 @@
 
 <script>
 (function () {
-  // Uz šo e-pastu nonāks formas ziņojumi (caur bezmaksas FormSubmit.co servisu).
-  // E-pasts salikts no daļām, lai tas nebūtu tiešā tekstā pirmkodā (mazina mēstuļu robotu skrāpēšanu).
-  // IETEIKUMS: pēc FormSubmit aktivizācijas nomaini šo pret savu slēpto kodu no FormSubmit
-  // (piem. 'a1b2c3...') — tad e-pasts vispār neparādās lapā.
-  var CONTACT_EMAIL = ['ungurs', 'gmail.com'].join('@');
+  // Formas ziņojumi iet caur Web3Forms (bezmaksas serviss) — piekļuves atslēga ir
+  // publiska pēc dizaina (Web3Forms to tā arī apraksta), e-pasts pats nekad
+  // nav redzams lapas kodā, jo ir piesaistīts atslēgai viņu panelī.
+  var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
 
   var I18N = {
     lv: {
@@ -246,7 +240,7 @@
   var nameEl = document.getElementById('cfName');
   var emailEl = document.getElementById('cfEmail');
   var msgEl = document.getElementById('cfMsg');
-  var honeyEl = form.querySelector('[name="_honey"]');
+  var honeyEl = form.querySelector('[name="botcheck"]');
   var lang = 'lv';
 
   function T() { return I18N[lang]; }
@@ -291,16 +285,7 @@
   });
   apply(initialLang());
 
-  // --- Formas nosūtīšana caur FormSubmit.co (parastais POST — bez fetch/CORS, strādā arī no faila) ---
-  var subjEl = document.getElementById('cfSubject');
-  var nextEl = document.getElementById('cfNext');
-  form.action = 'https://formsubmit.co/' + CONTACT_EMAIL;
-  // Uz http/https izcelsmes atgriežam lietotāju atpakaļ šeit ar veiksmes paziņojumu.
-  // No file:// _next neiestatām — tad FormSubmit parāda savu apstiprinājuma lapu.
-  if (location.protocol === 'http:' || location.protocol === 'https:') {
-    nextEl.value = location.origin + location.pathname + '?sent=1';
-  }
-
+  // --- Formas nosūtīšana caur Web3Forms (fetch/JSON, bez lapas pārlādes) ---
   function showMsg(kind, text) {
     formMsg.className = 'form-msg show ' + kind;
     formMsg.textContent = text;
@@ -308,21 +293,40 @@
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
   form.addEventListener('submit', function (e) {
+    e.preventDefault();
     var t = T();
-    if (honeyEl.value) { e.preventDefault(); return; } // mēstule
-    if (!emailEl.value.trim() || !msgEl.value.trim()) { e.preventDefault(); showMsg('err', t.errFields); return; }
-    if (!validEmail(emailEl.value.trim())) { e.preventDefault(); showMsg('err', t.errEmail); return; }
-    // Derīga forma — iestatām tēmu un ļaujam parastajam POST nosūtīties uz FormSubmit
-    subjEl.value = t.subject;
+    if (honeyEl.checked) return; // mēstule
+    if (!emailEl.value.trim() || !msgEl.value.trim()) { showMsg('err', t.errFields); return; }
+    if (!validEmail(emailEl.value.trim())) { showMsg('err', t.errEmail); return; }
+
     submitBtn.disabled = true;
     submitBtn.textContent = t.sending;
-  });
 
-  // Pēc atgriešanās no FormSubmit (?sent=1) parādām veiksmes ziņu un notīrām URL
-  if (new URLSearchParams(location.search).get('sent') === '1') {
-    showMsg('ok', T().ok);
-    if (history.replaceState) history.replaceState(null, '', location.pathname);
-  }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        name: nameEl.value.trim(),
+        email: emailEl.value.trim(),
+        message: msgEl.value.trim(),
+        subject: t.subject
+      })
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = t.send;
+      if (data.success) {
+        showMsg('ok', t.ok);
+        form.reset();
+      } else {
+        showMsg('err', t.errSend);
+      }
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = t.send;
+      showMsg('err', t.errSend);
+    });
+  });
 
   // Tēma — tās pašas SVG ikonas kā index
   var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
