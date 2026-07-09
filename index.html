@@ -370,6 +370,11 @@
   @media (max-width: 480px) {
     #miniCalc { right: 12px; left: 12px; width: auto; bottom: 84px; }
   }
+
+  /* Peldošais kalkulators ir domāts tikai lieliem ekrāniem — telefonos to slēpjam */
+  @media (max-width: 768px) {
+    #calcFab, #miniCalc { display: none !important; }
+  }
 </style>
 </head>
 <body>
