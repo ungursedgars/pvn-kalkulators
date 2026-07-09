@@ -96,6 +96,12 @@
   }
   .lang-switch button.active { background: var(--accent); color: #fff; }
   .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  #sepBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700;
+    color: var(--text); display: flex; align-items: center; justify-content: center;
+  }
+  #sepBtn:hover { border-color: var(--accent); color: var(--accent); }
   #themeBtn {
     background: none; border: 1px solid var(--border); border-radius: 8px;
     width: 30px; height: 30px; cursor: pointer; color: var(--text);
@@ -123,7 +129,6 @@
   .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
 
   @media (max-width: 560px) {
-    #navCalc { display: none; }
     nav { gap: 10px; }
     .logo { font-size: 1.1rem; }
   }
@@ -164,12 +169,12 @@
   <div class="wrap header-inner">
     <a class="logo" href="/">PVN<span>kalkulators</span></a>
     <nav>
-      <a href="/" id="navCalc">Kalkulators</a>
       <div class="lang-switch" id="langSwitch">
         <button type="button" data-lang="lv">LV</button>
         <button type="button" data-lang="ru">RU</button>
         <button type="button" data-lang="en">EN</button>
       </div>
+      <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
       <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
       <div class="menu-dropdown" id="menuDropdown">
         <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
@@ -251,7 +256,7 @@
 (function () {
   var I18N = {
     lv: {
-      htmlLang: 'lv', pageTitle: 'Biežāk uzdotie jautājumi | PVN Kalkulators', navCalc: 'Kalkulators',
+      htmlLang: 'lv', pageTitle: 'Biežāk uzdotie jautājumi | PVN Kalkulators',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'Biežāk uzdotie jautājumi',
       lead: 'Atbildes uz visbiežāk uzdotajiem jautājumiem par PVN aprēķinu.',
@@ -275,7 +280,7 @@
       themeTitle: 'Mainīt gaišo/tumšo režīmu'
     },
     ru: {
-      htmlLang: 'ru', pageTitle: 'Часто задаваемые вопросы | Калькулятор НДС', navCalc: 'Калькулятор',
+      htmlLang: 'ru', pageTitle: 'Часто задаваемые вопросы | Калькулятор НДС',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Часто задаваемые вопросы',
       lead: 'Ответы на самые частые вопросы о расчёте НДС.',
@@ -299,7 +304,7 @@
       themeTitle: 'Переключить светлый/тёмный режим'
     },
     en: {
-      htmlLang: 'en', pageTitle: 'Frequently Asked Questions | VAT Calculator', navCalc: 'Calculator',
+      htmlLang: 'en', pageTitle: 'Frequently Asked Questions | VAT Calculator',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'Frequently asked questions',
       lead: 'Answers to the most common questions about VAT calculation.',
@@ -333,7 +338,6 @@
     lang = l;
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
-    document.getElementById('navCalc').textContent = t.navCalc;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -418,6 +422,18 @@
   applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   themeBtn.addEventListener('click', function () {
     applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var sepBtn = document.getElementById('sepBtn');
+  function applySep(sep) {
+    sepBtn.textContent = sep === 'comma' ? ',' : '.';
+    try { localStorage.setItem('pvn-decimal-sep', sep); } catch (e) {}
+  }
+  var savedSep = null;
+  try { savedSep = localStorage.getItem('pvn-decimal-sep'); } catch (e) {}
+  applySep(savedSep === 'period' ? 'period' : 'comma');
+  sepBtn.addEventListener('click', function () {
+    applySep(sepBtn.textContent === ',' ? 'period' : 'comma');
   });
 })();
 </script>
