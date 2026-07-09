@@ -67,6 +67,25 @@
   }
   #themeBtn:hover { border-color: var(--accent); }
 
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
   main { padding: 40px 0 60px; }
   .contact-card {
     background: var(--card); border: 1px solid var(--border);
@@ -124,6 +143,21 @@
         <button type="button" data-lang="ru">RU</button>
         <button type="button" data-lang="en">EN</button>
       </div>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="instrukcijas.html" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj.html" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes.html" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="kontakti.html" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
       <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
     </nav>
   </div>
@@ -164,6 +198,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="index.html" id="footHome">Sākums</a> ·
+      <a href="instrukcijas.html" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="privatuma-politika.html" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti.html" id="footContact">Kontakti</a>
     </div>
@@ -181,6 +216,7 @@
   var I18N = {
     lv: {
       htmlLang: 'lv', pageTitle: 'Kontakti | PVN Kalkulators', navCalc: 'Kalkulators',
+      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       title: 'Kontakti',
       text: 'Jautājumi, kļūdas, ieteikumi vai sadarbība? Rakstiet mums…',
       lblName: 'Vārds', phName: 'Jūsu vārds',
@@ -192,12 +228,13 @@
       errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
       errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
       altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: 'PVN kalkulators — informatīvs rīks. Aprēķiniem nav juridiska spēka.',
       themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora'
     },
     ru: {
       htmlLang: 'ru', pageTitle: 'Контакты | Калькулятор НДС', navCalc: 'Калькулятор',
+      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       title: 'Контакты',
       text: 'Вопросы, ошибки, предложения или сотрудничество? Напишите нам…',
       lblName: 'Имя', phName: 'Ваше имя',
@@ -209,12 +246,13 @@
       errEmail: 'Пожалуйста, введите корректный e-mail.',
       errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
       altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
-      footHome: 'Главная', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: 'Калькулятор НДС — информационный инструмент. Расчёты не имеют юридической силы.',
       themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС'
     },
     en: {
       htmlLang: 'en', pageTitle: 'Contact | VAT Calculator', navCalc: 'Calculator',
+      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       title: 'Contact',
       text: 'Questions, bugs, suggestions or collaboration? Write to us…',
       lblName: 'Name', phName: 'Your name',
@@ -226,7 +264,7 @@
       errEmail: 'Please enter a valid email address.',
       errSend: 'Could not send. Try again later or email us directly.',
       altMail: 'Or write to us directly:', back: '← Back to the calculator',
-      footHome: 'Home', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: 'VAT calculator — an informational tool. Calculations have no legal effect.',
       themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator'
     }
@@ -242,6 +280,7 @@
   var msgEl = document.getElementById('cfMsg');
   var honeyEl = form.querySelector('[name="botcheck"]');
   var lang = 'lv';
+  var lastMsgKey = null; // atceramies rādīto ziņu (ok/errFields/errEmail/errSend), lai varam pārtulkot pēc valodas maiņas
 
   function T() { return I18N[lang]; }
 
@@ -251,6 +290,10 @@
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
     document.getElementById('navCalc').textContent = t.navCalc;
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
     document.getElementById('contactTitle').textContent = t.title;
     document.getElementById('contactText').textContent = t.text;
     document.getElementById('lblName').innerHTML = t.lblName;
@@ -262,6 +305,7 @@
     submitBtn.textContent = t.send;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;
     document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
@@ -270,6 +314,7 @@
       b.classList.toggle('active', b.dataset.lang === l);
     });
     try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+    if (lastMsgKey) formMsg.textContent = t[lastMsgKey];
   }
 
   function initialLang() {
@@ -285,10 +330,32 @@
   });
   apply(initialLang());
 
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
   // --- Formas nosūtīšana caur Web3Forms (fetch/JSON, bez lapas pārlādes) ---
-  function showMsg(kind, text) {
+  function showMsg(kind, key) {
+    lastMsgKey = key;
     formMsg.className = 'form-msg show ' + kind;
-    formMsg.textContent = text;
+    formMsg.textContent = T()[key];
   }
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
@@ -296,8 +363,8 @@
     e.preventDefault();
     var t = T();
     if (honeyEl.checked) return; // mēstule
-    if (!emailEl.value.trim() || !msgEl.value.trim()) { showMsg('err', t.errFields); return; }
-    if (!validEmail(emailEl.value.trim())) { showMsg('err', t.errEmail); return; }
+    if (!emailEl.value.trim() || !msgEl.value.trim()) { showMsg('err', 'errFields'); return; }
+    if (!validEmail(emailEl.value.trim())) { showMsg('err', 'errEmail'); return; }
 
     submitBtn.disabled = true;
     submitBtn.textContent = t.sending;
@@ -316,15 +383,15 @@
       submitBtn.disabled = false;
       submitBtn.textContent = t.send;
       if (data.success) {
-        showMsg('ok', t.ok);
+        showMsg('ok', 'ok');
         form.reset();
       } else {
-        showMsg('err', t.errSend);
+        showMsg('err', 'errSend');
       }
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = t.send;
-      showMsg('err', t.errSend);
+      showMsg('err', 'errSend');
     });
   });
 
