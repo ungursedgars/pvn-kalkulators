@@ -16,10 +16,12 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - `instrukcijas.html` — step-by-step usage guide, covering the calculator and the floating mini-calculator's "insert into field" buttons.
 - `kontakti.html`, `privatuma-politika.html` — contact form and privacy policy.
 - All 6 pages share the same header: logo, LV/RU/EN lang-switch, and a `☰` dropdown menu (`#menuDropdown`/`#menuBtn`/`#menuList`) linking to Instrukcijas/BUJ/Likmes/Kontakti. No page should be a navigation dead end.
+- Internal links are extensionless (`href="buj"`, `href="/"` for the homepage, etc.) — GitHub Pages serves `foo.html` for a request to `/foo`, so this keeps `.html` out of the address bar. Follow this convention for any new internal links or pages.
 
 ## Workflow
 
 - **Edit freely, but only `git push` when the user explicitly asks** (e.g. "pusho", "publish this"). This is an early-stage project — changes come in quick succession and shouldn't go live on every single edit.
+- **Exception: in cloud/remote sessions** (Claude Code on the web, not a local checkout), commit, push, and merge straight to `main` without asking first — the user has asked for this so the live site stays current automatically.
 - Don't verify UI changes yourself in a browser preview after every edit — just make the change and describe it. The user tests it themselves. Only open a preview if asked to, or when reproducing a bug the user reported.
 - When adding a new page, replicate the existing per-page i18n pattern (an `I18N` object with `lv`/`ru`/`en` keys, an `apply(lang)` function that updates the DOM, `initialLang()` that checks `localStorage` then `navigator.language`) and the shared dropdown-menu markup/CSS/JS — don't introduce a different pattern.
 - The decimal-separator setting and the UI language setting are deliberately independent — don't couple them.
