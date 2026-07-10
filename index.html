@@ -136,6 +136,7 @@
 
   /* Kalkulators */
   .calc {
+    position: relative; /* enkurs peldošā kalkulatora sānu mēlītei (#calcFab) */
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -321,24 +322,31 @@
 
 
   /* ===== Peldošais kalkulators ===== */
+  /* Atvēršanas poga — vertikāla mēlīte, pielīmēta pie aprēķinu kartes labās malas */
   #calcFab {
-    position: fixed; right: 22px; bottom: 22px; z-index: 40;
-    width: 56px; height: 56px; border-radius: 50%; cursor: pointer;
-    border: none; background: var(--accent); color: #fff; font-size: 1.5rem;
-    box-shadow: 0 4px 16px rgba(20,30,50,.25);
-    display: flex; align-items: center; justify-content: center;
+    position: absolute; left: 100%; top: 24px; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    padding: 12px 6px; border: none; cursor: pointer;
+    background: var(--accent); color: #fff;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 3px 3px 10px rgba(20,30,50,.18);
   }
-  #calcFab:hover { background: var(--accent-dark, #1558c0); transform: translateY(-1px); }
+  #calcFab span { writing-mode: vertical-rl; font-size: .78rem; font-weight: 600; letter-spacing: .06em; }
+  #calcFab:hover, #calcFab.active { background: var(--accent-dark, #1558c0); }
   [data-theme="dark"] #calcFab:hover { filter: brightness(1.1); }
 
   #miniCalc {
-    position: fixed; right: 22px; bottom: 88px; z-index: 45;
+    position: fixed; left: calc(50% + 372px); top: 104px; z-index: 45;
     width: 268px; background: var(--card);
     border: 1px solid var(--border); border-radius: 14px;
     box-shadow: 0 8px 30px rgba(20,30,50,.28);
     display: none; overflow: hidden; user-select: none;
   }
   #miniCalc.open { display: block; }
+  /* Ja blakus kartei panelim nepietiek vietas, tas atveras apakšējā labajā stūrī */
+  @media (max-width: 1339px) {
+    #miniCalc { left: auto; top: auto; right: 22px; bottom: 88px; }
+  }
   .mc-head {
     display: flex; align-items: center; gap: 8px;
     padding: 10px 12px; cursor: grab; background: var(--result-bg);
@@ -496,6 +504,18 @@
     </div>
 
     <div class="sr-only" id="copyStatus" aria-live="polite"></div>
+
+    <!-- Peldošā kalkulatora atvēršanas mēlīte pie kartes labās malas -->
+    <button type="button" id="calcFab" title="Atvērt kalkulatoru" aria-label="Atvērt kalkulatoru">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2"/>
+        <line x1="8" y1="6" x2="16" y2="6"/>
+        <line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
+        <line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
+        <line x1="8" y1="18" x2="8" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/>
+      </svg>
+      <span id="calcFabLabel">Kalkulators</span>
+    </button>
   </div>
 
 </main>
@@ -526,17 +546,7 @@
   </div>
 </div>
 
-<!-- Peldošais kalkulators -->
-<button id="calcFab" title="Atvērt kalkulatoru" aria-label="Atvērt kalkulatoru">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="4" y="2" width="16" height="20" rx="2"/>
-    <line x1="8" y1="6" x2="16" y2="6"/>
-    <line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
-    <line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
-    <line x1="8" y1="18" x2="8" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/>
-  </svg>
-</button>
-
+<!-- Peldošais kalkulators (atvēršanas mēlīte ir iekš .calc kartes) -->
 <div id="miniCalc" aria-label="Kalkulators">
   <div class="mc-head" id="mcHead">
     <span class="mc-title" id="mcTitleText">Kalkulators</span>
@@ -793,6 +803,7 @@
     sepBtn.title = t.sepBtnTitle;
     document.getElementById('calcFab').title = t.calcFabTitle;
     document.getElementById('calcFab').setAttribute('aria-label', t.calcFabTitle);
+    document.getElementById('calcFabLabel').textContent = t.mcTitle;
     document.getElementById('mcTitleText').textContent = t.mcTitle;
     document.getElementById('mcClose').title = t.mcCloseTitle;
     document.getElementById('mcInsertLabel').textContent = t.mcInsertLabel;
@@ -1284,8 +1295,8 @@
   });
 
   // Atvēršana / aizvēršana
-  function openCalc() { panel.classList.add('open'); try { localStorage.setItem('pvn-calc-open', '1'); } catch (e) {} }
-  function closeCalc() { panel.classList.remove('open'); try { localStorage.setItem('pvn-calc-open', '0'); } catch (e) {} }
+  function openCalc() { panel.classList.add('open'); fab.classList.add('active'); try { localStorage.setItem('pvn-calc-open', '1'); } catch (e) {} }
+  function closeCalc() { panel.classList.remove('open'); fab.classList.remove('active'); try { localStorage.setItem('pvn-calc-open', '0'); } catch (e) {} }
   fab.addEventListener('click', function () { panel.classList.contains('open') ? closeCalc() : openCalc(); });
   closeBtn.addEventListener('click', closeCalc);
 
