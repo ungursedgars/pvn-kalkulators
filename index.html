@@ -211,14 +211,15 @@
     background: var(--accent-soft); color: var(--accent);
   }
 
-  /* Skaidri redzams, kura likme izvēlēta */
+  /* Skaidri redzams, kura likme izvēlēta.
+     Nedrīkst būt flex: saturs ir brīvs teksts ar <strong>, un flex katru teksta
+     gabalu padara par atsevišķu elementu, kas šauros ekrānos lūst pa savam. */
   .rate-indicator {
     margin: calc(3px + 5px * var(--vh-t)) 0 calc(6px + 14px * var(--vh-t)); font-size: .92rem; color: var(--muted);
-    display: flex; align-items: center; gap: 8px;
   }
   .rate-indicator::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent); flex-shrink: 0;
+    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); margin-right: 8px;
   }
   .rate-indicator strong { color: var(--accent); }
 
@@ -274,8 +275,9 @@
   .vat-result .lbl { color: var(--muted); font-size: .95rem; }
   .vat-result .val {
     font-size: 1.6rem; font-weight: 700; color: var(--accent);
-    font-variant-numeric: tabular-nums;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
   }
+  .vat-result .val-row { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
   .actions { margin-top: calc(4px + 12px * var(--vh-t)); text-align: right; }
   #clearBtn {
@@ -292,8 +294,17 @@
   footer a:hover { color: var(--accent); }
   .footer-links { margin-bottom: 8px; }
   @media (max-width: 480px) {
+    .subtitle { font-size: .9rem; }
+    .rates button { padding: calc(6px + 4px * var(--vh-t)) 13px; font-size: .95rem; }
+    #customRate { width: 104px; font-size: .95rem; }
+    .rate-indicator { font-size: .85rem; }
     .field-block input { font-size: 1.25rem; }
+    .copy-btn { padding: 4px 10px; font-size: .82rem; }
+    #swapBtn { font-size: .85rem; padding: 7px 14px; }
+    .vat-result { padding-left: 14px; padding-right: 14px; }
+    .vat-result .lbl { font-size: .88rem; }
     .vat-result .val { font-size: 1.3rem; }
+    .vat-result .val-row { gap: 8px; }
   }
 
   /* ===== Sīkdatņu piekrišanas josla ===== */
@@ -497,7 +508,7 @@
 
     <div class="vat-result">
       <span class="lbl"><span id="vatSummaLabelText">PVN summa</span> (<span id="rateLabel">21</span>%)</span>
-      <span style="display:flex;align-items:center;gap:12px;">
+      <span class="val-row">
         <span class="val" id="vatVal">0,00 €</span>
         <button class="copy-btn" data-copy="vatVal">Kopēt</button>
       </span>
