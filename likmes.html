@@ -19,7 +19,7 @@
       "name": "Kādas PVN likmes piemēro Latvijā?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, zīdaiņu pārtikai, sabiedriskajam transportam, viesu izmitināšanai, siltumenerģijai iedzīvotājiem, svaigiem augļiem, ogām un dārzeņiem, kā arī maizei, pienam, svaigai mājputnu gaļai un olām. 5% — īpaši samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskā formātā). 0% — atsevišķiem darījumiem, piemēram, eksportam. Precīzu un aktuālu informāciju meklē Valsts ieņēmumu dienesta (VID) mājaslapā."
+        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, zīdaiņu pārtikai, sabiedriskajam transportam, viesu izmitināšanai, siltumenerģijai iedzīvotājiem, svaigiem augļiem, ogām un dārzeņiem, kā arī maizei, pienam, svaigai mājputnu gaļai un olām. 5% — īpaši samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskā formātā). 0% — atsevišķiem darījumiem, piemēram, eksportam."
       }
     },
     {
@@ -27,7 +27,7 @@
       "name": "Vai kalkulatorā ir pieejamas citu ES valstu PVN likmes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Jā, izvēlnē \"Valsts\" ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes parādās tās standarta likme un samazinātās likmes. Likmes laiku pa laikam mainās, tāpēc pirms svarīgiem aprēķiniem pārbaudi aktuālo likmi attiecīgās valsts nodokļu iestādes mājaslapā."
+        "text": "Jā, izvēlnē \"Valsts\" ir pieejamas visas 27 ES dalībvalstis. Izvēloties valsti, zem izvēlnes parādās tās standarta likme un samazinātās likmes ar piemēriem, kam katra likme piemērojama."
       }
     }
   ]
@@ -274,8 +274,6 @@
       redOne: 'samazinātā likme atsevišķām preču un pakalpojumu grupām',
       zero: 'atsevišķiem darījumiem, piemēram, eksportam',
       noRed: 'Šajā valstī samazinātu PVN likmju nav — gandrīz visam piemēro standarta likmi.',
-      checkNote: 'Likmes laiku pa laikam mainās — precīzu un aktuālu informāciju pārbaudi attiecīgās valsts nodokļu iestādes mājaslapā.',
-      lvNote: 'Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -292,8 +290,6 @@
       redOne: 'сниженная ставка для отдельных групп товаров и услуг',
       zero: 'отдельные операции, например экспорт',
       noRed: 'В этой стране нет сниженных ставок НДС — почти ко всему применяется стандартная ставка.',
-      checkNote: 'Ставки время от времени меняются — точную и актуальную информацию проверяйте на сайте налоговой службы соответствующей страны.',
-      lvNote: 'Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -310,8 +306,6 @@
       redOne: 'a reduced rate for certain groups of goods and services',
       zero: 'certain transactions, e.g. exports',
       noRed: 'This country has no reduced VAT rates — the standard rate applies to almost everything.',
-      checkNote: 'Rates change from time to time — check the current details on the website of the national tax authority.',
-      lvNote: 'For precise and current information on rate application, check the State Revenue Service (VID) website.',
       back: '← Back to the calculator',
       footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -644,7 +638,6 @@
     });
     html += '<li><strong>0%</strong> — ' + (zero ? zero[lang] : t.zero) + '.</li></ul>';
     if (c.rates.length === 1) html += '<p>' + t.noRed + '</p>';
-    html += '<p>' + (c.code === 'lv' ? t.lvNote : t.checkNote) + '</p>';
     rateCard.innerHTML = html;
   }
   function closeCountry() {
