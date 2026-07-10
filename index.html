@@ -1043,6 +1043,7 @@
 
   /* --- Aprēķins: pārrēķina otru lauku pēc tā, kurā pēdējo reizi rakstīja --- */
   function calc() {
+    resetCopyBtns(); // vērtības mainās — "Nokopēts!" vairs nav aktuāls
     var k = 1 + state.rate / 100;
     rateLabel.textContent = fmtRate(state.rate);
 
@@ -1118,6 +1119,7 @@
   clearBtn.addEventListener('click', function () {
     netInput.value = '';
     grossInput.value = '';
+    resetCopyBtns();
     vatVal.textContent = fmt(0) + ' €';
     netInput.classList.remove('input-negative');
     grossInput.classList.remove('input-negative');
@@ -1125,12 +1127,12 @@
     (fields.classList.contains('swapped') ? grossInput : netInput).focus();
   });
 
-  // Pamata uzraksts vienmēr ņemams no I18N, nevis no pogas pašreizējā teksta —
-  // citādi atkārtots klikšķis 1,2 s logā "atceras" un uz visiem laikiem
-  // atstāj "Nokopēts!". Taimeris glabājas pie pogas, lai to varētu atcelt.
-  function resetCopyBtn(btn) {
-    if (btn._copyTimer) { clearTimeout(btn._copyTimer); btn._copyTimer = null; }
-    btn.textContent = I18N[state.lang].copy;
+  // "Nokopēts!" paliek redzams, līdz vērtības mainās — calc() to atiestata.
+  // Bez taimera, kas uzrakstu priekšlaicīgi pārslēgtu atpakaļ uz "Kopēt".
+  function resetCopyBtns() {
+    document.querySelectorAll('.copy-btn').forEach(function (b) {
+      b.textContent = I18N[state.lang].copy;
+    });
   }
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -1142,20 +1144,13 @@
       document.dispatchEvent(new CustomEvent('pvn-calc-load', { detail: text }));
       navigator.clipboard.writeText(text).then(function () {
         var copiedText = I18N[state.lang].copied;
-        if (btn._copyTimer) clearTimeout(btn._copyTimer);
+        resetCopyBtns(); // ja "Nokopēts!" vēl rādās pie citas pogas
         btn.textContent = copiedText;
         // Notīra un no jauna iestata, lai ekrāna lasītājs paziņojumu izziņo arī tad,
         // ja iepriekšējais paziņojums bija tieši tāds pats teksts.
         copyStatus.textContent = '';
         setTimeout(function () { copyStatus.textContent = copiedText; }, 10);
-        btn._copyTimer = setTimeout(function () { resetCopyBtn(btn); }, 1200);
       });
-    });
-  });
-  // Ievadot vai ieliekot jaunu summu, kopēšanas pogas uzreiz atgriežas uz "Kopēt"
-  [netInput, grossInput].forEach(function (inp) {
-    inp.addEventListener('input', function () {
-      document.querySelectorAll('.copy-btn').forEach(resetCopyBtn);
     });
   });
 
