@@ -811,7 +811,7 @@
     customEl.title = t.customTitle;
     document.getElementById('netLabelText').textContent = t.netLabel;
     document.getElementById('grossLabelText').textContent = t.grossLabel;
-    document.querySelectorAll('.copy-btn').forEach(function (b) { b.textContent = t.copy; });
+    refreshCopyBtns(); // saglabā "Nokopēts!" stāvokli, tikai pārtulko uzrakstus
     document.getElementById('swapText').textContent = t.swapText;
     swapBtn.title = t.swapTitle;
     document.getElementById('vatSummaLabelText').textContent = t.vatSummaLabel;
@@ -1042,8 +1042,15 @@
   }
 
   /* --- Aprēķins: pārrēķina otru lauku pēc tā, kurā pēdējo reizi rakstīja --- */
+  // "Nokopēts!" atiestatās tikai tad, ja redzamās vērtības tiešām izmainījās —
+  // valodas maiņa arī izsauc calc(), bet skaitļus nemaina, un kopētais paliek spēkā.
   function calc() {
-    resetCopyBtns(); // vērtības mainās — "Nokopēts!" vairs nav aktuāls
+    var before = netInput.value + '|' + grossInput.value + '|' + vatVal.textContent;
+    calcInner();
+    var after = netInput.value + '|' + grossInput.value + '|' + vatVal.textContent;
+    if (after !== before) resetCopyBtns();
+  }
+  function calcInner() {
     var k = 1 + state.rate / 100;
     rateLabel.textContent = fmtRate(state.rate);
 
@@ -1127,12 +1134,18 @@
     (fields.classList.contains('swapped') ? grossInput : netInput).focus();
   });
 
-  // "Nokopēts!" paliek redzams, līdz vērtības mainās — calc() to atiestata.
-  // Bez taimera, kas uzrakstu priekšlaicīgi pārslēgtu atpakaļ uz "Kopēt".
-  function resetCopyBtns() {
+  // "Nokopēts!" paliek redzams, līdz vērtības mainās. Stāvoklis glabājas
+  // copiedBtn mainīgajā (nevis pogas tekstā), lai valodas maiņa uzrakstu
+  // pārtulko, nevis nodzēš.
+  var copiedBtn = null;
+  function refreshCopyBtns() {
     document.querySelectorAll('.copy-btn').forEach(function (b) {
-      b.textContent = I18N[state.lang].copy;
+      b.textContent = b === copiedBtn ? I18N[state.lang].copied : I18N[state.lang].copy;
     });
+  }
+  function resetCopyBtns() {
+    copiedBtn = null;
+    refreshCopyBtns();
   }
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -1143,11 +1156,11 @@
       // Vērtība aiziet arī uz peldošo kalkulatoru, lai ar to varētu turpināt rēķināt
       document.dispatchEvent(new CustomEvent('pvn-calc-load', { detail: text }));
       navigator.clipboard.writeText(text).then(function () {
-        var copiedText = I18N[state.lang].copied;
-        resetCopyBtns(); // ja "Nokopēts!" vēl rādās pie citas pogas
-        btn.textContent = copiedText;
+        copiedBtn = btn; // "Nokopēts!" rādās tikai pēdējai kopētajai pogai
+        refreshCopyBtns();
         // Notīra un no jauna iestata, lai ekrāna lasītājs paziņojumu izziņo arī tad,
         // ja iepriekšējais paziņojums bija tieši tāds pats teksts.
+        var copiedText = I18N[state.lang].copied;
         copyStatus.textContent = '';
         setTimeout(function () { copyStatus.textContent = copiedText; }, 10);
       });
