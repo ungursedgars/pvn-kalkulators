@@ -83,15 +83,27 @@
     width: 30px; height: 30px; cursor: pointer; font-size: 1rem; color: var(--text);
     display: flex; align-items: center; justify-content: center;
   }
-  .lang-switch {
-    display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  .lang-dropdown { position: relative; }
+  #langBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    height: 30px; padding: 0 10px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+    font-size: .8rem; font-weight: 700;
   }
-  .lang-switch button {
-    background: none; border: none; padding: 6px 9px; cursor: pointer;
-    font-size: .8rem; font-weight: 700; color: var(--muted);
+  #langBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 130px;
   }
-  .lang-switch button.active { background: var(--accent); color: #fff; }
-  .lang-switch button:not(.active):hover { background: var(--accent-soft); color: var(--accent); }
+  .lang-dropdown.open .lang-list { display: block; }
+  .lang-list button {
+    display: block; width: 100%; padding: 9px 12px; border: none; border-radius: 8px;
+    background: none; color: var(--text); cursor: pointer; text-align: left;
+    font-size: .95rem; white-space: nowrap;
+  }
+  .lang-list button:hover { background: var(--accent-soft); color: var(--accent); }
+  .lang-list button.active { background: var(--accent); color: #fff; }
 
   .menu-dropdown { position: relative; }
   #menuBtn {
@@ -385,10 +397,20 @@
   <div class="wrap header-inner">
     <a class="logo" href="/">PVN<span>kalkulators</span></a>
     <nav>
-      <div class="lang-switch" id="langSwitch">
-        <button type="button" data-lang="lv">LV</button>
-        <button type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="en">EN</button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button type="button" id="langBtn" title="Mainīt valodu" aria-haspopup="true" aria-expanded="false" aria-controls="langSwitch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langCurrent">LV</span>
+        </button>
+        <div class="lang-list" id="langSwitch" role="menu">
+          <button type="button" data-lang="lv" role="menuitemradio" aria-checked="true">Latviešu</button>
+          <button type="button" data-lang="ru" role="menuitemradio" aria-checked="false">Русский</button>
+          <button type="button" data-lang="en" role="menuitemradio" aria-checked="false">English</button>
+        </div>
       </div>
       <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
       <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu">🌞</button>
@@ -793,8 +815,12 @@
     if (cookieDecline) cookieDecline.textContent = t.cookieDecline;
 
     langSwitch.querySelectorAll('button').forEach(function (b) {
-      b.classList.toggle('active', b.dataset.lang === lang);
+      var active = b.dataset.lang === lang;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-checked', String(active));
     });
+    document.getElementById('langCurrent').textContent = lang.toUpperCase();
+    document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[lang];
 
     try { localStorage.setItem('pvn-lang', lang); } catch (e) {}
 
@@ -806,7 +832,26 @@
   }
 
   langSwitch.querySelectorAll('button').forEach(function (b) {
-    b.addEventListener('click', function () { applyLanguage(b.dataset.lang); });
+    b.addEventListener('click', function () { applyLanguage(b.dataset.lang); closeLang(); });
+  });
+
+  /* --- Valodu nolaižamā saraksta pārslēgšana --- */
+  var langDropdown = document.getElementById('langDropdown');
+  var langBtn = document.getElementById('langBtn');
+  function closeLang() {
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  }
+  langBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = langDropdown.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function (e) {
+    if (!langDropdown.contains(e.target)) closeLang();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLang();
   });
 
   /* --- Izvēlnes pogas (BUJ / Likmes / Kontakti) nolaižamā saraksta pārslēgšana --- */
