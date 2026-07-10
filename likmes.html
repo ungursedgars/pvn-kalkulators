@@ -6,7 +6,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/logo-192.png">
 <title>PVN likmes Latvijā un ES | PVN Kalkulators</title>
-<meta name="description" content="PVN likmju pārskats: Latvijas 21%, 12%, 5% un 0% likmes, kā arī visu 27 ES dalībvalstu PVN likmes.">
+<meta name="description" content="PVN likmju pārskats ar piemēriem: Latvijas 21%, 12%, 5% un 0% likmes un visu 27 ES dalībvalstu PVN likmes — kam katra likme piemērojama.">
 <meta name="robots" content="index, follow">
 <meta name="color-scheme" content="light dark">
 <script type="application/ld+json">
@@ -19,7 +19,7 @@
       "name": "Kādas PVN likmes piemēro Latvijā?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei. 5% — īpaši samazinātā likme atsevišķām preču grupām. 0% — atsevišķiem darījumiem, piemēram, eksportam. Precīzu un aktuālu informāciju meklē Valsts ieņēmumu dienesta (VID) mājaslapā."
+        "text": "Latvijā spēkā ir vairākas pievienotās vērtības nodokļa likmes: 21% — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu. 12% — samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, zīdaiņu pārtikai, sabiedriskajam transportam, viesu izmitināšanai, siltumenerģijai iedzīvotājiem, svaigiem augļiem, ogām un dārzeņiem, kā arī maizei, pienam, svaigai mājputnu gaļai un olām. 5% — īpaši samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskā formātā). 0% — atsevišķiem darījumiem, piemēram, eksportam. Precīzu un aktuālu informāciju meklē Valsts ieņēmumu dienesta (VID) mājaslapā."
       }
     },
     {
@@ -272,14 +272,10 @@
       cardTitle: 'PVN likmes',
       std: 'standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu',
       redOne: 'samazinātā likme atsevišķām preču un pakalpojumu grupām',
-      redMany: 'samazinātās likmes atsevišķām preču un pakalpojumu grupām',
-      noRed: 'Šajā valstī samazinātu PVN likmju nav — visam piemēro standarta likmi.',
-      lvBody: '<ul>' +
-        '<li><strong>21%</strong> — standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li>' +
-        '<li><strong>12%</strong> — samazinātā likme, piemēram, medikamentiem, siltumenerģijai iedzīvotājiem, grāmatām un presei.</li>' +
-        '<li><strong>5%</strong> — īpaši samazinātā likme atsevišķām preču grupām.</li>' +
-        '<li><strong>0%</strong> — atsevišķiem darījumiem, piemēram, eksportam.</li>' +
-        '</ul><p>Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.</p>',
+      zero: 'atsevišķiem darījumiem, piemēram, eksportam',
+      noRed: 'Šajā valstī samazinātu PVN likmju nav — gandrīz visam piemēro standarta likmi.',
+      checkNote: 'Likmes laiku pa laikam mainās — precīzu un aktuālu informāciju pārbaudi attiecīgās valsts nodokļu iestādes mājaslapā.',
+      lvNote: 'Precīzu un aktuālu informāciju par likmju piemērošanu meklē Valsts ieņēmumu dienesta (VID) mājaslapā.',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -294,14 +290,10 @@
       cardTitle: 'Ставки НДС',
       std: 'стандартная ставка, применяется к большинству товаров и услуг',
       redOne: 'сниженная ставка для отдельных групп товаров и услуг',
-      redMany: 'сниженные ставки для отдельных групп товаров и услуг',
-      noRed: 'В этой стране нет сниженных ставок НДС — ко всему применяется стандартная ставка.',
-      lvBody: '<ul>' +
-        '<li><strong>21%</strong> — стандартная ставка, применяется к большинству товаров и услуг.</li>' +
-        '<li><strong>12%</strong> — сниженная ставка, например, для медикаментов, теплоэнергии для населения, книг и прессы.</li>' +
-        '<li><strong>5%</strong> — особая сниженная ставка для отдельных групп товаров.</li>' +
-        '<li><strong>0%</strong> — для отдельных операций, например, экспорта.</li>' +
-        '</ul><p>Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).</p>',
+      zero: 'отдельные операции, например экспорт',
+      noRed: 'В этой стране нет сниженных ставок НДС — почти ко всему применяется стандартная ставка.',
+      checkNote: 'Ставки время от времени меняются — точную и актуальную информацию проверяйте на сайте налоговой службы соответствующей страны.',
+      lvNote: 'Точную и актуальную информацию о применении ставок ищите на сайте Службы государственных доходов (VID).',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -316,14 +308,10 @@
       cardTitle: 'VAT rates',
       std: 'the standard rate, applied to most goods and services',
       redOne: 'a reduced rate for certain groups of goods and services',
-      redMany: 'reduced rates for certain groups of goods and services',
-      noRed: 'This country has no reduced VAT rates — the standard rate applies to everything.',
-      lvBody: '<ul>' +
-        '<li><strong>21%</strong> — the standard rate, applied to most goods and services.</li>' +
-        '<li><strong>12%</strong> — a reduced rate, e.g. for medicines, district heating for households, books and press.</li>' +
-        '<li><strong>5%</strong> — a special reduced rate for certain product groups.</li>' +
-        '<li><strong>0%</strong> — for certain transactions, e.g. exports.</li>' +
-        '</ul><p>For precise and current information on rate application, check the State Revenue Service (VID) website.</p>',
+      zero: 'certain transactions, e.g. exports',
+      noRed: 'This country has no reduced VAT rates — the standard rate applies to almost everything.',
+      checkNote: 'Rates change from time to time — check the current details on the website of the national tax authority.',
+      lvNote: 'For precise and current information on rate application, check the State Revenue Service (VID) website.',
       back: '← Back to the calculator',
       footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -365,6 +353,244 @@
     { code: 'de', name: { lv: 'Vācija',      ru: 'Германия',     en: 'Germany' },     rates: [19, 7] },
     { code: 'se', name: { lv: 'Zviedrija',   ru: 'Швеция',       en: 'Sweden' },      rates: [25, 12, 6] }
   ];
+
+  // Samazināto likmju skaidrojumi ar piemēriem — masīva secība atbilst EU
+  // ieraksta rates samazinātajām likmēm (bez standarta). Informatīvi, 2026. g. vidus.
+  var RATE_DESC = {
+    at: [
+      { lv: 'samazinātā likme, piemēram, kultūras un sporta pasākumu biļetēm, kino, iekšzemes lidojumiem, malkai un augiem',
+        ru: 'сниженная ставка, например, для билетов на культурные и спортивные мероприятия, кино, внутренних авиарейсов, дров и растений',
+        en: 'reduced rate, e.g. for tickets to cultural and sporting events, cinema, domestic flights, firewood and plants' },
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, pasažieru transportam, viesnīcām, dzīvokļa īrei',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, книг и прессы, пассажирского транспорта, гостиниц, аренды жилья',
+        en: 'reduced rate, e.g. for food, medicines, books and press, passenger transport, hotels, residential rent' }
+    ],
+    be: [
+      { lv: 'samazinātā likme, piemēram, restorānu un ēdināšanas pakalpojumiem (bez dzērieniem), margarīnam, akmeņoglēm',
+        ru: 'сниженная ставка, например, для ресторанов и общепита (без напитков), маргарина, угля',
+        en: 'reduced rate, e.g. for restaurant and catering services (drinks excluded), margarine, coal' },
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām, ūdensapgādei, viesnīcām, pasažieru transportam',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, книг, водоснабжения, гостиниц, пассажирского транспорта',
+        en: 'reduced rate, e.g. for food, medicines, books, water supply, hotels, passenger transport' }
+    ],
+    bg: [
+      { lv: 'samazinātā likme, piemēram, viesnīcu izmitināšanai, grāmatām, zīdaiņu pārtikai un autiņbiksītēm',
+        ru: 'сниженная ставка, например, для гостиничного размещения, книг, детского питания и подгузников',
+        en: 'reduced rate, e.g. for hotel accommodation, books, baby food and nappies' }
+    ],
+    cz: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei un siltumam, sabiedriskajam transportam, viesnīcām, ēdināšanai',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, водоснабжения и отопления, общественного транспорта, гостиниц, общепита',
+        en: 'reduced rate, e.g. for food, medicines, water and heating, public transport, hotels, catering services' }
+    ],
+    fr: [
+      { lv: 'samazinātā likme, piemēram, restorāniem un ēdināšanai, pasažieru transportam, viesnīcām, mājokļu remontdarbiem',
+        ru: 'сниженная ставка, например, для ресторанов и общепита, пассажирского транспорта, гостиниц, ремонта жилья',
+        en: 'reduced rate, e.g. for restaurants and catering, passenger transport, hotels, home renovation works' },
+      { lv: 'samazinātā likme, piemēram, lielākajai daļai pārtikas, grāmatām, elektroenerģijai un gāzei, kino un koncertu biļetēm, invalīdu aprīkojumam',
+        ru: 'сниженная ставка, например, для большинства продуктов питания, книг, электроэнергии и газа, билетов в кино и на концерты, оборудования для людей с инвалидностью',
+        en: 'reduced rate, e.g. for most food, books, electricity and gas, cinema and concert tickets, equipment for the disabled' },
+      { lv: 'īpaši samazinātā likme kompensējamiem medikamentiem un presei',
+        ru: 'особо сниженная ставка для компенсируемых лекарств и прессы',
+        en: 'super-reduced rate for reimbursable medicines and the press' }
+    ],
+    gr: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, ēdināšanai, viesnīcām, ūdensapgādei',
+        ru: 'сниженная ставка, например, для продуктов питания, общепита, гостиниц, водоснабжения',
+        en: 'reduced rate, e.g. for food, catering, hotels, water supply' },
+      { lv: 'samazinātā likme, piemēram, medikamentiem, grāmatām, elektroenerģijai un gāzei, teātra un koncertu biļetēm',
+        ru: 'сниженная ставка, например, для лекарств, книг, электроэнергии и газа, билетов в театр и на концерты',
+        en: 'reduced rate, e.g. for medicines, books, electricity and gas, theatre and concert tickets' }
+    ],
+    hr: [
+      { lv: 'samazinātā likme, piemēram, viesnīcām un tūristu izmitināšanai, elektroenerģijai, ūdensapgādei, zīdaiņu pārtikai, žurnāliem',
+        ru: 'сниженная ставка, например, для гостиниц и туристического размещения, электроэнергии, водоснабжения, детского питания, журналов',
+        en: 'reduced rate, e.g. for hotels and tourist accommodation, electricity, water supply, baby food, magazines' },
+      { lv: 'samazinātā likme, piemēram, maizei, pienam, medikamentiem, grāmatām, dienas laikrakstiem, kino biļetēm',
+        ru: 'сниженная ставка, например, для хлеба, молока, лекарств, книг, ежедневных газет, билетов в кино',
+        en: 'reduced rate, e.g. for bread, milk, medicines, books, daily newspapers, cinema tickets' }
+    ],
+    ee: [
+      { lv: 'samazinātā likme viesnīcu izmitināšanai',
+        ru: 'сниженная ставка для гостиничного размещения',
+        en: 'reduced rate for hotel accommodation' },
+      { lv: 'samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, grāmatām, avīzēm un žurnāliem',
+        ru: 'сниженная ставка, например, для лекарств и медицинских изделий, книг, газет и журналов',
+        en: 'reduced rate, e.g. for medicines and medical devices, books, newspapers and magazines' }
+    ],
+    it: [
+      { lv: 'samazinātā likme, piemēram, viesnīcām, restorāniem, elektroenerģijai un gāzei mājsaimniecībām, daļai pārtikas, pasažieru transportam',
+        ru: 'сниженная ставка, например, для гостиниц, ресторанов, электроэнергии и газа для домохозяйств, части продуктов питания, пассажирского транспорта',
+        en: 'reduced rate, e.g. for hotels, restaurants, household electricity and gas, some foodstuffs, passenger transport' },
+      { lv: 'samazinātā likme atsevišķiem pārtikas produktiem un sociālās aprūpes pakalpojumiem',
+        ru: 'сниженная ставка для отдельных продуктов питания и услуг социального ухода',
+        en: 'reduced rate for certain foodstuffs and social care services' },
+      { lv: 'īpaši samazinātā likme, piemēram, pamatpārtikai (maizei, pienam, makaroniem), grāmatām un presei, invalīdu aprīkojumam',
+        ru: 'особо сниженная ставка, например, для базовых продуктов (хлеб, молоко, макароны), книг и прессы, оборудования для людей с инвалидностью',
+        en: 'super-reduced rate, e.g. for staple foods (bread, milk, pasta), books and press, equipment for the disabled' }
+    ],
+    ie: [
+      { lv: 'samazinātā likme, piemēram, būvniecībai un remontdarbiem, kurināmajam, viesnīcu izmitināšanai',
+        ru: 'сниженная ставка, например, для строительства и ремонтных работ, топлива, гостиничного размещения',
+        en: 'reduced rate, e.g. for construction and repair services, heating fuel, hotel accommodation' },
+      { lv: 'samazinātā likme, piemēram, restorāniem un ēdināšanai, frizieru pakalpojumiem, elektroenerģijai un gāzei, sporta un izklaides pasākumiem',
+        ru: 'сниженная ставка, например, для ресторанов и общепита, парикмахерских услуг, электроэнергии и газа, спортивных и развлекательных мероприятий',
+        en: 'reduced rate, e.g. for restaurants and catering, hairdressing, electricity and gas, sports and entertainment events' },
+      { lv: 'īpaši samazinātā likme mājlopu tirdzniecībai',
+        ru: 'особо сниженная ставка для торговли скотом',
+        en: 'super-reduced rate for sales of livestock' }
+    ],
+    cy: [
+      { lv: 'samazinātā likme, piemēram, viesnīcām, restorāniem un ēdināšanai, iekšzemes pasažieru pārvadājumiem',
+        ru: 'сниженная ставка, например, для гостиниц, ресторанов и общепита, внутренних пассажирских перевозок',
+        en: 'reduced rate, e.g. for hotels, restaurants and catering, domestic passenger transport' },
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei, ieejas biļetēm pasākumos',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, водоснабжения, входных билетов на мероприятия',
+        en: 'reduced rate, e.g. for food, medicines, water supply, admission tickets' },
+      { lv: 'īpaši samazinātā likme, piemēram, grāmatām un presei, invalīdu aprīkojumam',
+        ru: 'особо сниженная ставка, например, для книг и прессы, оборудования для людей с инвалидностью',
+        en: 'super-reduced rate, e.g. for books and press, equipment for the disabled' }
+    ],
+    lv: [
+      { lv: 'samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, zīdaiņu pārtikai, sabiedriskajam transportam, viesu izmitināšanai, siltumenerģijai un malkai iedzīvotājiem, svaigiem augļiem, ogām un dārzeņiem, kā arī (no 2026. gada jūlija) maizei, pienam, svaigai mājputnu gaļai un olām',
+        ru: 'сниженная ставка, например, для лекарств и медицинских изделий, детского питания, общественного транспорта, гостиничных услуг, теплоэнергии и дров для населения, свежих фруктов, ягод и овощей, а также (с июля 2026 года) хлеба, молока, свежего мяса птицы и яиц',
+        en: 'reduced rate, e.g. for medicines and medical devices, infant food, public transport, hotel accommodation, heating and firewood for households, fresh fruit, berries and vegetables, and (from July 2026) bread, milk, fresh poultry meat and eggs' },
+      { lv: 'īpaši samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskā formātā)',
+        ru: 'особо сниженная ставка для книг, газет и журналов (в том числе электронных)',
+        en: 'super-reduced rate for books, newspapers and magazines (including electronic)' }
+    ],
+    lt: [
+      { lv: 'samazinātā likme, piemēram, grāmatām, viesnīcām, siltumenerģijai un malkai mājsaimniecībām, sabiedriskajam transportam',
+        ru: 'сниженная ставка, например, для книг, гостиниц, теплоэнергии и дров для домохозяйств, общественного транспорта',
+        en: 'reduced rate, e.g. for books, hotels, district heating and firewood for households, public transport' },
+      { lv: 'samazinātā likme, piemēram, kompensējamiem medikamentiem, medicīnas palīglīdzekļiem, avīzēm un žurnāliem',
+        ru: 'сниженная ставка, например, для компенсируемых лекарств, медицинских вспомогательных средств, газет и журналов',
+        en: 'reduced rate, e.g. for reimbursable medicines, medical aids, newspapers and magazines' }
+    ],
+    lu: [
+      { lv: 'starplikme, piemēram, atsevišķiem vīniem, cietajam kurināmajam, reklāmas iespieddarbiem',
+        ru: 'промежуточная ставка, например, для некоторых вин, твёрдого топлива, печатной рекламы',
+        en: 'intermediate rate, e.g. for certain wines, solid fuels, printed advertising' },
+      { lv: 'samazinātā likme, piemēram, elektroenerģijai un gāzei, frizieru pakalpojumiem, velosipēdu un apavu remontam, augiem',
+        ru: 'сниженная ставка, например, для электроэнергии и газа, парикмахерских услуг, ремонта велосипедов и обуви, растений',
+        en: 'reduced rate, e.g. for electricity and gas, hairdressing, bicycle and shoe repairs, plants' },
+      { lv: 'īpaši samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, restorāniem, bērnu apģērbam un apaviem',
+        ru: 'особо сниженная ставка, например, для продуктов питания, лекарств, книг и прессы, ресторанов, детской одежды и обуви',
+        en: 'super-reduced rate, e.g. for food, medicines, books and press, restaurants, children\'s clothing and footwear' }
+    ],
+    mt: [
+      { lv: 'samazinātā likme, piemēram, atsevišķiem veselības aprūpes pakalpojumiem, izpriecu kuģu īrei',
+        ru: 'сниженная ставка, например, для отдельных медицинских услуг, аренды прогулочных судов',
+        en: 'reduced rate, e.g. for certain healthcare services, hiring of pleasure boats' },
+      { lv: 'samazinātā likme viesnīcu izmitināšanai un sporta objektu izmantošanai',
+        ru: 'сниженная ставка для гостиничного размещения и использования спортивных объектов',
+        en: 'reduced rate for hotel accommodation and use of sports facilities' },
+      { lv: 'samazinātā likme, piemēram, elektroenerģijai, grāmatām un presei, konditorejas izstrādājumiem, muzeju biļetēm',
+        ru: 'сниженная ставка, например, для электроэнергии, книг и прессы, кондитерских изделий, билетов в музеи',
+        en: 'reduced rate, e.g. for electricity, books and press, confectionery, museum admission' }
+    ],
+    nl: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, pasažieru transportam, kultūras un sporta pasākumiem, frizieru pakalpojumiem',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, книг и прессы, пассажирского транспорта, культурных и спортивных мероприятий, парикмахерских услуг',
+        en: 'reduced rate, e.g. for food, medicines, books and press, passenger transport, cultural and sporting events, hairdressing' }
+    ],
+    pl: [
+      { lv: 'samazinātā likme, piemēram, medikamentiem, pasažieru transportam, viesnīcām, restorāniem, daļai pārtikas produktu',
+        ru: 'сниженная ставка, например, для лекарств, пассажирского транспорта, гостиниц, ресторанов, части продуктов питания',
+        en: 'reduced rate, e.g. for medicines, passenger transport, hotels, restaurants, some foodstuffs' },
+      { lv: 'samazinātā likme, piemēram, pamatpārtikai (maizei, piena produktiem, gaļai), grāmatām un e-grāmatām',
+        ru: 'сниженная ставка, например, для базовых продуктов (хлеб, молочные продукты, мясо), книг и электронных книг',
+        en: 'reduced rate, e.g. for staple foods (bread, dairy, meat), books and e-books' }
+    ],
+    pt: [
+      { lv: 'samazinātā likme, piemēram, restorānu ēdieniem, vīnam, atsevišķiem pārtikas produktiem',
+        ru: 'сниженная ставка, например, для ресторанных блюд, вина, отдельных продуктов питания',
+        en: 'reduced rate, e.g. for restaurant meals, wine, certain foodstuffs' },
+      { lv: 'samazinātā likme, piemēram, pamatpārtikai, medikamentiem, grāmatām un presei, viesnīcām, pasažieru transportam, elektroenerģijai',
+        ru: 'сниженная ставка, например, для базовых продуктов питания, лекарств, книг и прессы, гостиниц, пассажирского транспорта, электроэнергии',
+        en: 'reduced rate, e.g. for basic food, medicines, books and press, hotels, passenger transport, electricity' }
+    ],
+    ro: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, viesnīcām, restorāniem, ūdensapgādei',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, книг и прессы, гостиниц, ресторанов, водоснабжения',
+        en: 'reduced rate, e.g. for food, medicines, books and press, hotels, restaurants, water supply' }
+    ],
+    sk: [
+      { lv: 'samazinātā likme, piemēram, pārtikai (izņemot pamatpārtiku), elektroenerģijai, bezalkoholiskajiem dzērieniem ēdināšanā',
+        ru: 'сниженная ставка, например, для продуктов питания (кроме базовых), электроэнергии, безалкогольных напитков в общепите',
+        en: 'reduced rate, e.g. for food (other than basic foodstuffs), electricity, non-alcoholic drinks served in catering' },
+      { lv: 'samazinātā likme, piemēram, pamatpārtikai, medikamentiem, grāmatām un presei, viesnīcām, restorānu ēdieniem, sporta objektiem',
+        ru: 'сниженная ставка, например, для базовых продуктов питания, лекарств, книг и прессы, гостиниц, ресторанных блюд, спортивных объектов',
+        en: 'reduced rate, e.g. for basic foodstuffs, medicines, books and press, accommodation, restaurant meals, sports facilities' }
+    ],
+    si: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei, viesnīcām, pasažieru transportam, kultūras pasākumiem',
+        ru: 'сниженная ставка, например, для продуктов питания, лекарств, водоснабжения, гостиниц, пассажирского транспорта, культурных мероприятий',
+        en: 'reduced rate, e.g. for food, medicines, water supply, hotels, passenger transport, cultural events' },
+      { lv: 'samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskiem)',
+        ru: 'сниженная ставка для книг, газет и журналов (в том числе электронных)',
+        en: 'reduced rate for books, newspapers and periodicals (including electronic)' }
+    ],
+    fi: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, restorāniem un ēdināšanai, medikamentiem, grāmatām, viesnīcām, pasažieru transportam, kultūras un sporta pasākumiem',
+        ru: 'сниженная ставка, например, для продуктов питания, ресторанов и общепита, лекарств, книг, гостиниц, пассажирского транспорта, культурных и спортивных мероприятий',
+        en: 'reduced rate, e.g. for food, restaurants and catering, medicines, books, hotels, passenger transport, cultural and sporting events' },
+      { lv: 'samazinātā likme avīzēm un žurnāliem, sabiedriskajai apraidei',
+        ru: 'сниженная ставка для газет и журналов, общественного вещания',
+        en: 'reduced rate for newspapers and magazines, public broadcasting' }
+    ],
+    es: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, viesnīcām, restorāniem, pasažieru transportam, jauniem mājokļiem',
+        ru: 'сниженная ставка, например, для продуктов питания, гостиниц, ресторанов, пассажирского транспорта, нового жилья',
+        en: 'reduced rate, e.g. for food, hotels, restaurants, passenger transport, newly built housing' },
+      { lv: 'īpaši samazinātā likme, piemēram, pamatpārtikai (maizei, pienam, augļiem, dārzeņiem), medikamentiem, grāmatām un presei',
+        ru: 'особо сниженная ставка, например, для базовых продуктов (хлеб, молоко, фрукты, овощи), лекарств, книг и прессы',
+        en: 'super-reduced rate, e.g. for staple foods (bread, milk, fruit, vegetables), medicines, books and press' }
+    ],
+    hu: [
+      { lv: 'samazinātā likme, piemēram, atsevišķiem piena un maizes izstrādājumiem, brīvdabas pasākumu biļetēm',
+        ru: 'сниженная ставка, например, для отдельных молочных и хлебобулочных изделий, билетов на мероприятия под открытым небом',
+        en: 'reduced rate, e.g. for certain dairy and bakery products, open-air event tickets' },
+      { lv: 'samazinātā likme, piemēram, medikamentiem, grāmatām un presei, jauniem mājokļiem, viesnīcām, restorānu ēdieniem, interneta piekļuvei, centralizētajai siltumapgādei',
+        ru: 'сниженная ставка, например, для лекарств, книг и прессы, нового жилья, гостиниц, ресторанных блюд, доступа в интернет, центрального отопления',
+        en: 'reduced rate, e.g. for medicines, books and press, new housing, hotels, restaurant meals, internet access, district heating' }
+    ],
+    de: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, grāmatām un presei, vietējam sabiedriskajam transportam, viesnīcu izmitināšanai, kultūras pasākumu biļetēm, kā arī (no 2026. gada) restorānu ēdieniem',
+        ru: 'сниженная ставка, например, для продуктов питания, книг и прессы, местного общественного транспорта, гостиничного размещения, билетов на культурные мероприятия, а также (с 2026 года) блюд в ресторанах',
+        en: 'reduced rate, e.g. for food, books and press, local public transport, hotel accommodation, cultural event tickets, and (from 2026) restaurant meals' }
+    ],
+    se: [
+      { lv: 'samazinātā likme, piemēram, pārtikai, restorāniem, viesnīcām, velosipēdu, apavu un apģērbu remontam',
+        ru: 'сниженная ставка, например, для продуктов питания, ресторанов, гостиниц, ремонта велосипедов, обуви и одежды',
+        en: 'reduced rate, e.g. for food, restaurants, hotels, repairs of bicycles, shoes and clothing' },
+      { lv: 'samazinātā likme, piemēram, grāmatām un presei, pasažieru transportam, koncertu un sporta pasākumu biļetēm',
+        ru: 'сниженная ставка, например, для книг и прессы, пассажирского транспорта, билетов на концерты и спортивные мероприятия',
+        en: 'reduced rate, e.g. for books and press, passenger transport, concert and sporting event tickets' }
+    ]
+  };
+
+  // Valstis, kur 0% likme aptver ko vairāk par eksportu un līdzīgiem darījumiem
+  var ZERO_DESC = {
+    be: { lv: 'dienas un nedēļas presei, kā arī atsevišķiem darījumiem, piemēram, eksportam',
+          ru: 'ежедневная и еженедельная пресса, а также отдельные операции, например экспорт',
+          en: 'daily and weekly press, and certain transactions such as exports' },
+    cz: { lv: 'grāmatām, kā arī atsevišķiem darījumiem, piemēram, eksportam',
+          ru: 'книги, а также отдельные операции, например экспорт',
+          en: 'books, and certain transactions such as exports' },
+    dk: { lv: 'avīzēm, kā arī atsevišķiem darījumiem, piemēram, eksportam',
+          ru: 'газеты, а также отдельные операции, например экспорт',
+          en: 'newspapers, and certain transactions such as exports' },
+    ie: { lv: 'pārtikai, grāmatām, bērnu apģērbam un apaviem, lielākajai daļai medikamentu, kā arī eksportam',
+          ru: 'продукты питания, книги, детская одежда и обувь, большинство лекарств, а также экспорт',
+          en: 'food, books, children\'s clothing and footwear, most medicines, and exports' },
+    mt: { lv: 'pārtikai, medikamentiem, kā arī eksportam',
+          ru: 'продукты питания, лекарства, а также экспорт',
+          en: 'food, medicines, and exports' },
+    se: { lv: 'recepšu medikamentiem, kā arī eksportam',
+          ru: 'рецептурные лекарства, а также экспорт',
+          en: 'prescription medicines, and exports' }
+  };
 
   var countryPicker = document.getElementById('countryPicker');
   var countryBtn = document.getElementById('countryBtn');
@@ -409,19 +635,16 @@
   function renderCard() {
     var t = I18N[lang];
     var c = EU[countryIdx];
+    var descs = RATE_DESC[c.code] || [];
+    var zero = ZERO_DESC[c.code];
     var html = '<h2>' + flagImg(c.code) + c.name[lang] + ' — ' + t.cardTitle + '</h2>';
-    if (c.code === 'lv') {
-      html += t.lvBody;
-    } else {
-      var reduced = c.rates.slice(1);
-      html += '<ul><li><strong>' + fmtRate(c.rates[0]) + '%</strong> — ' + t.std + '.</li>';
-      if (reduced.length) {
-        html += '<li><strong>' + reduced.map(function (r) { return fmtRate(r) + '%'; }).join(', ') + '</strong> — ' +
-                (reduced.length > 1 ? t.redMany : t.redOne) + '.</li>';
-      }
-      html += '</ul>';
-      if (!reduced.length) html += '<p>' + t.noRed + '</p>';
-    }
+    html += '<ul><li><strong>' + fmtRate(c.rates[0]) + '%</strong> — ' + t.std + '.</li>';
+    c.rates.slice(1).forEach(function (r, i) {
+      html += '<li><strong>' + fmtRate(r) + '%</strong> — ' + (descs[i] ? descs[i][lang] : t.redOne) + '.</li>';
+    });
+    html += '<li><strong>0%</strong> — ' + (zero ? zero[lang] : t.zero) + '.</li></ul>';
+    if (c.rates.length === 1) html += '<p>' + t.noRed + '</p>';
+    html += '<p>' + (c.code === 'lv' ? t.lvNote : t.checkNote) + '</p>';
     rateCard.innerHTML = html;
   }
   function closeCountry() {
