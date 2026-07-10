@@ -295,9 +295,12 @@
   .footer-links { margin-bottom: 8px; }
   @media (max-width: 480px) {
     .subtitle { font-size: .9rem; }
-    .rates button { padding: calc(6px + 4px * var(--vh-t)) 13px; font-size: .95rem; }
-    /* Pietiekami plats arī garākajam placeholder tekstam "Другая" */
-    #customRate { width: 116px; font-size: .95rem; padding: 10px 26px 10px 10px; }
+    /* Pogas pietiekami šauras, lai 21/12/5 + "Cita %" ietilptu vienā rindā;
+       "Cita" lauks tomēr pietiekami plats garākajam tekstam "Другая" */
+    .rates { gap: 6px; }
+    .rates button { padding: calc(6px + 4px * var(--vh-t)) 11px; font-size: .95rem; }
+    #customRate { width: 100px; font-size: .9rem; padding: 10px 22px 10px 8px; }
+    .custom-percent { right: 10px; }
     .rate-indicator { font-size: .85rem; }
     .field-block input { font-size: 1.25rem; }
     .copy-btn { padding: 4px 8px; font-size: .82rem; }
