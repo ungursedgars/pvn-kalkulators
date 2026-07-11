@@ -8,6 +8,7 @@
 <title>Privātuma politika | PVN Kalkulators</title>
 <meta name="description" content="PVN kalkulatora privātuma politika — sīkdatnes, Google Analytics, Google reklāmas (AdSense) un tavas tiesības.">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://pvnkalkulators.eu/privatuma-politika">
 <meta name="color-scheme" content="light dark">
 <style>
   :root {
@@ -138,6 +139,34 @@
   footer a:hover { color: var(--accent); }
   .footer-links { margin-bottom: 8px; }
   .footer-links a { margin: 0 4px; }
+
+  /* ===== Sīkdatņu piekrišanas josla ===== */
+  #cookieBanner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: var(--card); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(20,30,50,.14);
+    padding: 16px; display: none;
+  }
+  #cookieBanner.show { display: block; }
+  .cookie-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .cookie-text { flex: 1; min-width: 240px; font-size: .9rem; color: var(--text); line-height: 1.5; }
+  .cookie-text a { color: var(--accent); }
+  .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .cookie-actions button {
+    padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer;
+    border-radius: 9px; border: 1px solid var(--border);
+  }
+  #cookieDecline { background: var(--card); color: var(--muted); }
+  #cookieDecline:hover { border-color: var(--accent); color: var(--accent); }
+  #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
+  #cookieAccept:hover { filter: brightness(1.05); }
+  @media (max-width: 560px) {
+    .cookie-actions { width: 100%; }
+    .cookie-actions button { flex: 1; }
+  }
 </style>
 </head>
 <body>
@@ -204,6 +233,21 @@
   </div>
 </footer>
 
+<!-- Sīkdatņu piekrišanas josla -->
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
+  <div class="cookie-inner">
+    <div class="cookie-text" id="cookieText">
+      Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense).
+      Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu.
+      Vairāk — <a href="privatuma-politika" id="cookieLink">privātuma politikā</a>.
+    </div>
+    <div class="cookie-actions">
+      <button id="cookieDecline" type="button">Noraidīt</button>
+      <button id="cookieAccept" type="button">Piekrītu</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
   var I18N = {
@@ -218,6 +262,10 @@
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti', footCookies: 'Pārvaldīt sīkdatnes',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
+      cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
+        'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
+        'Vairāk — <a href="privatuma-politika">privātuma politikā</a>.',
+      cookieAccept: 'Piekrītu', cookieDecline: 'Noraidīt',
       body:
         '<p>Šī privātuma politika skaidro, kā tīmekļa vietnē tiek apstrādāta informācija par apmeklētājiem, ' +
         'kad tiek izmantots PVN kalkulators. Vietne ir informatīvs rīks, un mūsu mērķis ir pēc iespējas caurspīdīgi ' +
@@ -301,6 +349,10 @@
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты', footCookies: 'Управление cookie',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
+      cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
+        'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
+        'Подробнее — в <a href="privatuma-politika">политике конфиденциальности</a>.',
+      cookieAccept: 'Принимаю', cookieDecline: 'Отклонить',
       body:
         '<p>Эта политика конфиденциальности объясняет, как на сайте обрабатывается информация о посетителях ' +
         'при использовании калькулятора НДС. Сайт является информационным инструментом, и наша цель — максимально ' +
@@ -384,6 +436,10 @@
       footHome: 'Home', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact', footCookies: 'Manage cookies',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
+      cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
+        'Analytics and advertising cookies are loaded only with your consent. ' +
+        'Learn more in our <a href="privatuma-politika">privacy policy</a>.',
+      cookieAccept: 'I agree', cookieDecline: 'Decline',
       body:
         '<p>This privacy policy explains how information about visitors is processed on the website when using the ' +
         'VAT calculator. The site is an informational tool, and our goal is to explain as transparently as possible ' +
@@ -488,6 +544,12 @@
     document.getElementById('langCurrent').textContent = lang.toUpperCase();
     document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[lang];
     try { localStorage.setItem('pvn-lang', lang); } catch (e) {}
+    var cookieText = document.getElementById('cookieText');
+    if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var cookieAccept = document.getElementById('cookieAccept');
+    if (cookieAccept) cookieAccept.textContent = t.cookieAccept;
+    var cookieDecline = document.getElementById('cookieDecline');
+    if (cookieDecline) cookieDecline.textContent = t.cookieDecline;
   }
 
   function initialLang() {
@@ -575,6 +637,62 @@
   sepBtn.addEventListener('click', function () {
     applySep(sepBtn.textContent === ',' ? 'period' : 'comma');
   });
+})();
+
+/* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
+(function () {
+  // ↓↓↓ IEVADI SAVUS ID (kamēr te ir "XXXX", skripti netiek ielādēti) ↓↓↓
+  var GA_ID = 'G-XXXXXXXXXX';               // Google Analytics 4 mērījuma ID
+  var ADSENSE_ID = 'ca-pub-XXXXXXXXXXXXXXXX'; // Google AdSense izdevēja ID
+  // ↑↑↑ ------------------------------------------------------------- ↑↑↑
+
+  var banner = document.getElementById('cookieBanner');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  var loaded = false;
+
+  function loadScript(src, attrs) {
+    var s = document.createElement('script');
+    s.async = true; s.src = src;
+    if (attrs) Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
+    document.head.appendChild(s);
+    return s;
+  }
+
+  function loadGoogle() {
+    if (loaded) return;
+    loaded = true;
+    // Google Analytics (GA4)
+    if (GA_ID.indexOf('XXX') === -1) {
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
+    // Google AdSense
+    if (ADSENSE_ID.indexOf('XXX') === -1) {
+      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
+        { crossorigin: 'anonymous' });
+    }
+  }
+
+  function setConsent(v) { try { localStorage.setItem('pvn-consent', v); } catch (e) {} }
+  function getConsent() { try { return localStorage.getItem('pvn-consent'); } catch (e) { return null; } }
+
+  function hideBanner() { banner.classList.remove('show'); }
+  function showBanner() { banner.classList.add('show'); }
+
+  var consent = getConsent();
+  if (consent === 'granted') { loadGoogle(); }
+  else if (consent !== 'denied') { showBanner(); } // rāda tikai pirmajā reizē
+
+  acceptBtn.addEventListener('click', function () { setConsent('granted'); hideBanner(); loadGoogle(); });
+  declineBtn.addEventListener('click', function () { setConsent('denied'); hideBanner(); });
+
+  // Ļauj vēlāk atkārtoti atvērt joslu (piem. no privātuma politikas): #cookies
+  window.pvnOpenCookieBanner = showBanner;
+  if (location.hash === '#cookies') showBanner();
 })();
 </script>
 
