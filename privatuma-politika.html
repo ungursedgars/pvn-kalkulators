@@ -210,6 +210,7 @@
     lv: {
       htmlLang: 'lv',
       pageTitle: 'Privātuma politika | PVN Kalkulators',
+      pageDescription: 'PVN kalkulatora privātuma politika — sīkdatnes, Google Analytics, Google reklāmas (AdSense) un tavas tiesības.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       title: 'Privātuma politika',
       updated: 'Pēdējoreiz atjaunināta: 2026. gada 7. jūlijā',
@@ -292,6 +293,7 @@
     ru: {
       htmlLang: 'ru',
       pageTitle: 'Политика конфиденциальности | Калькулятор НДС',
+      pageDescription: 'Политика конфиденциальности калькулятора НДС — cookie, Google Analytics, Google Ads (AdSense) и ваши права.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       title: 'Политика конфиденциальности',
       updated: 'Последнее обновление: 7 июля 2026 года',
@@ -374,6 +376,7 @@
     en: {
       htmlLang: 'en',
       pageTitle: 'Privacy Policy | VAT Calculator',
+      pageDescription: 'VAT calculator privacy policy — cookies, Google Analytics, Google Ads (AdSense), and your rights.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       title: 'Privacy Policy',
       updated: 'Last updated: 7 July 2026',
@@ -460,6 +463,8 @@
     var t = I18N[lang]; if (!t) return;
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;

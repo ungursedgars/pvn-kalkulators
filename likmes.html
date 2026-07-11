@@ -269,6 +269,7 @@
   var I18N = {
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN likmes Latvijā un ES | PVN Kalkulators',
+      pageDescription: 'PVN likmju pārskats ar piemēriem: Latvijas 21%, 12%, 5% un 0% likmes un visu 27 ES dalībvalstu PVN likmes — kam katra likme piemērojama.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN likmes',
       lead: 'Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.',
@@ -285,6 +286,7 @@
     },
     ru: {
       htmlLang: 'ru', pageTitle: 'Ставки НДС в Латвии и ЕС | Калькулятор НДС',
+      pageDescription: 'Обзор ставок НДС с примерами: латвийские ставки 21%, 12%, 5% и 0%, а также ставки НДС всех 27 стран ЕС — какая ставка применяется к какой категории.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Ставки НДС',
       lead: 'Ставки налога на добавленную стоимость в Латвии и других странах ЕС.',
@@ -301,6 +303,7 @@
     },
     en: {
       htmlLang: 'en', pageTitle: 'VAT rates in Latvia and the EU | VAT Calculator',
+      pageDescription: 'Overview of VAT rates with examples: Latvia\'s 21%, 12%, 5% and 0% rates and VAT rates for all 27 EU countries — which rate applies to which category.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT rates',
       lead: 'Value-added tax rates in Latvia and other EU countries.',
@@ -665,6 +668,8 @@
     lang = l;
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;

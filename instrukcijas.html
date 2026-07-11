@@ -231,6 +231,7 @@
   var I18N = {
     lv: {
       htmlLang: 'lv', pageTitle: 'Kā lietot kalkulatoru | PVN Kalkulators',
+      pageDescription: 'Īss ceļvedis, kā lietot PVN kalkulatoru un iebūvēto peldošo kalkulatoru — soli pa solim.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'Kā lietot kalkulatoru',
       lead: 'Īss ceļvedis PVN kalkulatoram un iebūvētajam papildu kalkulatoram.',
@@ -258,6 +259,7 @@
     },
     ru: {
       htmlLang: 'ru', pageTitle: 'Как пользоваться калькулятором | Калькулятор НДС',
+      pageDescription: 'Краткое руководство по использованию калькулятора НДС и встроенного плавающего калькулятора — пошагово.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Как пользоваться калькулятором',
       lead: 'Краткое руководство по калькулятору НДС и встроенному дополнительному калькулятору.',
@@ -285,6 +287,7 @@
     },
     en: {
       htmlLang: 'en', pageTitle: 'How to use the calculator | VAT Calculator',
+      pageDescription: 'A quick step-by-step guide on how to use the VAT calculator and the built-in floating calculator.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'How to use the calculator',
       lead: 'A quick guide to the VAT calculator and the built-in extra calculator.',
@@ -330,6 +333,8 @@
     lang = l;
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;

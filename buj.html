@@ -287,6 +287,7 @@
   var I18N = {
     lv: {
       htmlLang: 'lv', pageTitle: 'Biežāk uzdotie jautājumi | PVN Kalkulators',
+      pageDescription: 'Atbildes uz biežāk uzdotajiem jautājumiem par PVN aprēķinu — kā pieskaitīt un atskaitīt PVN, lietot citu likmi un kā tiek noapaļoti rezultāti.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'Biežāk uzdotie jautājumi',
       lead: 'Atbildes uz visbiežāk uzdotajiem jautājumiem par PVN aprēķinu.',
@@ -311,6 +312,7 @@
     },
     ru: {
       htmlLang: 'ru', pageTitle: 'Часто задаваемые вопросы | Калькулятор НДС',
+      pageDescription: 'Ответы на самые частые вопросы о расчёте НДС — как прибавить и вычесть НДС, использовать другую ставку и как округляются результаты.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Часто задаваемые вопросы',
       lead: 'Ответы на самые частые вопросы о расчёте НДС.',
@@ -335,6 +337,7 @@
     },
     en: {
       htmlLang: 'en', pageTitle: 'Frequently Asked Questions | VAT Calculator',
+      pageDescription: 'Answers to the most common questions about VAT calculation — how to add and deduct VAT, use a different rate, and how results are rounded.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'Frequently asked questions',
       lead: 'Answers to the most common questions about VAT calculation.',
@@ -368,6 +371,8 @@
     lang = l;
     document.documentElement.lang = t.htmlLang;
     document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
