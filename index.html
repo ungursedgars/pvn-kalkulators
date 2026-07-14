@@ -34,6 +34,7 @@
 </script>
 <style>
   :root {
+    color-scheme: light;
     --bg: #f6f7f9;
     --card: #ffffff;
     --text: #1c2430;
@@ -51,6 +52,7 @@
     --vh-t: clamp(0, calc((100vh - 640px) / 260px), 1);
   }
   [data-theme="dark"] {
+    color-scheme: dark;
     --bg: #12161c;
     --card: #1b212a;
     --text: #e8ecf1;
@@ -273,11 +275,8 @@
   }
   #swapBtn:hover { color: var(--accent); border-color: var(--accent); }
 
-  .fields .field-block.net   { order: 1; }
-  .fields .swap-row          { order: 2; }
-  .fields .field-block.gross { order: 3; }
-  .fields.swapped .field-block.net   { order: 3; }
-  .fields.swapped .field-block.gross { order: 1; }
+  /* Lauku apmaiņu veic JS, fiziski pārkārtojot DOM elementus (ne CSS order),
+     lai Tab secība vienmēr sakristu ar redzamo secību. */
 
   .copy-btn {
     border: 1px solid var(--border); background: var(--card);
@@ -927,7 +926,19 @@
 
   function parseNum(str) {
     if (!str) return NaN;
-    return parseFloat(String(str).replace(/\s/g, '').replace(',', '.'));
+    var s = String(str).replace(/\s/g, '');
+    var lastDot = s.lastIndexOf('.');
+    var lastComma = s.lastIndexOf(',');
+    if (lastDot !== -1 && lastComma !== -1) {
+      // Abi atdalītāji reizē (piem. "1.250,50" vai "1,250.50") — pēdējais
+      // ir decimāldaļa, otrs ir tūkstošu atdalītājs un ir jāizmet.
+      s = lastComma > lastDot
+        ? s.replace(/\./g, '').replace(',', '.')
+        : s.replace(/,/g, '');
+    } else {
+      s = s.replace(',', '.');
+    }
+    return parseFloat(s);
   }
   function fmt(n) {
     var s = n.toLocaleString('lv-LV', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -1003,6 +1014,27 @@
   document.addEventListener('click', function (e) {
     if (!picker.contains(e.target)) closeCountryPicker(false);
   });
+  // Type-ahead: rakstot burtus, fokuss pārlec uz pirmo atbilstošo valsti
+  // (kā natīvajā <select>). Buferis ļauj rakstīt vairākus burtus pēc kārtas.
+  var typeahead = { buf: '', timer: null };
+  function typeaheadJump(opts, idx, ch) {
+    clearTimeout(typeahead.timer);
+    typeahead.buf += ch.toLowerCase();
+    typeahead.timer = setTimeout(function () { typeahead.buf = ''; }, 600);
+    // Sākam meklēt no nākamās opcijas (viena burta atkārtošana iet pa apli),
+    // vai no pašreizējās, ja rakstīts vairāku burtu prefikss.
+    var start = typeahead.buf.length > 1 ? idx : idx + 1;
+    for (var s = 0; s < opts.length; s++) {
+      var o = opts[(start + s + opts.length) % opts.length];
+      var name = o.querySelector('.country-name');
+      if (name && name.textContent.toLowerCase().indexOf(typeahead.buf) === 0) {
+        o.scrollIntoView({ block: 'nearest' });
+        o.focus();
+        return;
+      }
+    }
+  }
+
   countryList.addEventListener('keydown', function (e) {
     var opts = Array.prototype.slice.call(countryList.querySelectorAll('button'));
     var idx = opts.indexOf(document.activeElement);
@@ -1021,6 +1053,9 @@
     } else if (e.key === 'End') {
       e.preventDefault();
       opts[opts.length - 1].focus();
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey && e.key !== ' ') {
+      e.preventDefault();
+      typeaheadJump(opts, idx, e.key);
     }
   });
 
@@ -1138,8 +1173,19 @@
   });
 
   swapBtn.addEventListener('click', function () {
-    fields.classList.toggle('swapped');
-    (fields.classList.contains('swapped') ? grossInput : netInput).focus();
+    var swappedNow = fields.classList.toggle('swapped');
+    // Fiziski pārkārtojam DOM, lai Tab secība sakristu ar redzamo secību
+    var netBlock = fields.querySelector('.field-block.net');
+    var grossBlock = fields.querySelector('.field-block.gross');
+    var swapRow = fields.querySelector('.swap-row');
+    if (swappedNow) {
+      fields.insertBefore(grossBlock, swapRow);
+      fields.appendChild(netBlock);
+    } else {
+      fields.insertBefore(netBlock, swapRow);
+      fields.appendChild(grossBlock);
+    }
+    (swappedNow ? grossInput : netInput).focus();
   });
 
   clearBtn.addEventListener('click', function () {
