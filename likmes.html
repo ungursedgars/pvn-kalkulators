@@ -142,7 +142,8 @@
 
   main { padding: 30px 0 50px; }
   h1 { font-size: 1.6rem; margin-bottom: 6px; }
-  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 8px; }
+  .updated { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
 
   section { margin: 0; }
 
@@ -268,6 +269,7 @@
 <main class="wrap">
   <h1 id="pageTitle">PVN likmes</h1>
   <p class="lead" id="pageLead">Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.</p>
+  <p class="updated" id="lastChecked"></p>
 
   <section>
     <label class="field-label" id="countryLabel">Valsts</label>
@@ -377,6 +379,22 @@
       cookieAccept: 'I agree', cookieDecline: 'Decline'
     }
   };
+
+  function formatCheckedDate(l) {
+    var d = new Date();
+    var day = d.getDate();
+    var m = d.getMonth();
+    if (l === 'lv') {
+      var monthsLv = ['janvārī', 'februārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'];
+      return 'Pēdējoreiz pārbaudīts: ' + d.getFullYear() + '. gada ' + day + '. ' + monthsLv[m];
+    }
+    if (l === 'ru') {
+      var monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+      return 'Последняя проверка: ' + day + ' ' + monthsRu[m] + ' ' + d.getFullYear() + ' года';
+    }
+    var monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return 'Last checked: ' + day + ' ' + monthsEn[m] + ' ' + d.getFullYear();
+  }
 
   var langSwitch = document.getElementById('langSwitch');
   var themeBtn = document.getElementById('themeBtn');
@@ -728,6 +746,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('lastChecked').textContent = formatCheckedDate(l);
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
