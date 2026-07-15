@@ -703,7 +703,7 @@
       b.setAttribute('aria-selected', String(sel));
       b.addEventListener('click', function () {
         countryIdx = i;
-        closeCountry();
+        closeCountry(true);
         renderCountryBtn();
         renderCountryList();
         renderCard();
@@ -725,20 +725,79 @@
     if (c.rates.length === 1) html += '<p>' + t.noRed + '</p>';
     rateCard.innerHTML = html;
   }
-  function closeCountry() {
+  function openCountry() {
+    countryPicker.classList.add('open');
+    countryBtn.setAttribute('aria-expanded', 'true');
+    var sel = countryList.querySelector('.selected') || countryList.querySelector('button');
+    if (sel) { sel.scrollIntoView({ block: 'nearest' }); sel.focus(); }
+  }
+  function closeCountry(returnFocus) {
     countryPicker.classList.remove('open');
     countryBtn.setAttribute('aria-expanded', 'false');
+    if (returnFocus) countryBtn.focus();
   }
   countryBtn.addEventListener('click', function (e) {
     e.stopPropagation();
-    var open = countryPicker.classList.toggle('open');
-    countryBtn.setAttribute('aria-expanded', String(open));
+    countryPicker.classList.contains('open') ? closeCountry(false) : openCountry();
   });
+  countryBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openCountry();
+    }
+  });
+
+  // Type-ahead: rakstot burtus, fokuss pārlec uz pirmo atbilstošo valsti
+  // (kā natīvajā <select>). Tāda pati loģika kā kalkulatora lapā.
+  var typeahead = { buf: '', timer: null };
+  function typeaheadJump(opts, idx, ch) {
+    clearTimeout(typeahead.timer);
+    typeahead.buf += ch.toLowerCase();
+    typeahead.timer = setTimeout(function () { typeahead.buf = ''; }, 600);
+    var start = typeahead.buf.length > 1 ? idx : idx + 1;
+    for (var s = 0; s < opts.length; s++) {
+      var o = opts[(start + s + opts.length) % opts.length];
+      var name = o.querySelector('.country-name');
+      if (name && name.textContent.toLowerCase().indexOf(typeahead.buf) === 0) {
+        o.scrollIntoView({ block: 'nearest' });
+        o.focus();
+        return;
+      }
+    }
+  }
+
+  countryList.addEventListener('keydown', function (e) {
+    var opts = Array.prototype.slice.call(countryList.querySelectorAll('button'));
+    var idx = opts.indexOf(document.activeElement);
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeCountry(true);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      opts[Math.min(idx + 1, opts.length - 1)].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      opts[Math.max(idx - 1, 0)].focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      opts[0].focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      opts[opts.length - 1].focus();
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (idx >= 0) opts[idx].click();
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+      e.preventDefault();
+      typeaheadJump(opts, idx, e.key);
+    }
+  });
+
   document.addEventListener('click', function (e) {
-    if (!countryPicker.contains(e.target)) closeCountry();
+    if (!countryPicker.contains(e.target)) closeCountry(false);
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeCountry();
+    if (e.key === 'Escape') closeCountry(false);
   });
 
   function apply(l) {

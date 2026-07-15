@@ -979,7 +979,7 @@
         customEl.value = '';
         customWrap.classList.remove('active');
         state.rate = c.rates[0];
-        closeCountryPicker();
+        closeCountryPicker(true);
         renderCountryBtn();
         renderCountryList();
         renderRates();
@@ -1053,7 +1053,10 @@
     } else if (e.key === 'End') {
       e.preventDefault();
       opts[opts.length - 1].focus();
-    } else if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey && e.key !== ' ') {
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (idx >= 0) opts[idx].click();
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
       e.preventDefault();
       typeaheadJump(opts, idx, e.key);
     }
