@@ -6,22 +6,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
 <link rel="apple-touch-icon" href="/logo-192.png">
-<title>PVN Kalkulators — PVN aprēķins Latvijai un visai ES</title>
-<meta name="description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
+<title>PVN Kalkulators - PVN aprēķins Latvijai un visai ES</title>
+<meta name="description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm - noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
 <link rel="canonical" href="https://pvnkalkulators.eu/">
 <meta name="color-scheme" content="light dark">
 <meta name="google-adsense-account" content="ca-pub-1040653408011392">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="lv_LV">
-<meta property="og:title" content="PVN Kalkulators — PVN aprēķins Latvijai un visai ES">
-<meta property="og:description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
+<meta property="og:title" content="PVN Kalkulators - PVN aprēķins Latvijai un visai ES">
+<meta property="og:description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm - noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "PVN Kalkulators",
-  "description": "Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.",
+  "description": "Bezmaksas PVN kalkulators ar visu ES valstu likmēm - noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.",
   "url": "https://pvnkalkulators.eu/",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
@@ -66,7 +66,7 @@
     --danger-soft: rgba(255, 107, 104, .12);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  /* Ritjosla vienmēr rezervēta — citādi lapas augstumam mainoties (piem., mainot likmi),
+  /* Ritjosla vienmēr rezervēta - citādi lapas augstumam mainoties (piem., mainot likmi),
      ritjosla parādās/pazūd un viss centrētais saturs palēkšas pa kreisi/labi. */
   html { overflow-y: scroll; scrollbar-gutter: stable; }
   body {
@@ -214,7 +214,7 @@
   .rates button.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
   /* "Cita %" lauks vienmēr paliek atpazīstams kā teksta ievade (gaišs fons),
-     nekad nepārtop par pilnībā aizpildītu pogu — tikai rāmītis/ķeksītis mainās. */
+     nekad nepārtop par pilnībā aizpildītu pogu - tikai rāmītis/ķeksītis mainās. */
   .custom-wrap { position: relative; display: inline-flex; align-items: center; }
   .custom-percent {
     position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
@@ -244,7 +244,7 @@
   }
   .rate-indicator strong { color: var(--accent); }
 
-  /* Brīdinājums par negatīvu summu — redzams tikai, ja lietotājs ievadījis mīnusu */
+  /* Brīdinājums par negatīvu summu - redzams tikai, ja lietotājs ievadījis mīnusu */
   .warn-msg {
     display: none; align-items: center; gap: 8px;
     margin: 8px 0 0; padding: 8px 12px; font-size: .88rem;
@@ -363,7 +363,7 @@
 
 
   /* ===== Peldošais kalkulators ===== */
-  /* Atvēršanas poga — vertikāla mēlīte, pielīmēta pie aprēķinu kartes labās malas */
+  /* Atvēršanas poga - vertikāla mēlīte, pielīmēta pie aprēķinu kartes labās malas */
   #calcFab {
     position: absolute; left: 100%; top: 24px; z-index: 5;
     display: flex; flex-direction: column; align-items: center; gap: 7px;
@@ -434,7 +434,7 @@
     #miniCalc { right: 12px; left: 12px; width: auto; bottom: 84px; }
   }
 
-  /* Peldošais kalkulators ir domāts tikai lieliem ekrāniem — telefonos to slēpjam */
+  /* Peldošais kalkulators ir domāts tikai lieliem ekrāniem - telefonos to slēpjam */
   @media (max-width: 768px) {
     #calcFab, #miniCalc { display: none !important; }
   }
@@ -486,7 +486,7 @@
 
   <div class="calc">
     <h1 id="mainH1">PVN kalkulators</h1>
-    <p class="subtitle" id="subtitleText">Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.</p>
+    <p class="subtitle" id="subtitleText">Raksti summu <strong>jebkurā</strong> no laukiem - pārējais aprēķinās automātiski.</p>
 
     <label class="field-label" id="countryLabel">Valsts</label>
     <div class="country-picker" id="countryPicker">
@@ -529,7 +529,7 @@
     </div>
 
     <div class="warn-msg" id="negWarning">
-      <span aria-hidden="true">⚠</span> <span id="negWarningText">Summa nevar būt negatīva — rezultāts var būt maldinošs.</span>
+      <span aria-hidden="true">⚠</span> <span id="negWarningText">Summa nevar būt negatīva - rezultāts var būt maldinošs.</span>
     </div>
 
     <div class="vat-result">
@@ -559,7 +559,7 @@
     </button>
   </div>
 
-  <p class="oss-note" id="ossNote">Kalkulators noder arī e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā — izvēlies valsti izvēlnē un aprēķini precīzu summu.</p>
+  <p class="oss-note" id="ossNote">Kalkulators noder arī e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā - izvēlies valsti izvēlnē un aprēķini precīzu summu.</p>
 
 </main>
 
@@ -580,7 +580,7 @@
     <div class="cookie-text" id="cookieText">
       Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense).
       Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu.
-      Vairāk — <a href="privatuma-politika" id="cookieLink">privātuma politikā</a>.
+      Vairāk - <a href="privatuma-politika" id="cookieLink">privātuma politikā</a>.
     </div>
     <div class="cookie-actions">
       <button id="cookieDecline" type="button">Noraidīt</button>
@@ -634,7 +634,7 @@
 
 <script>
 (function () {
-  // ES valstu PVN likmes (pirmā — standarta, pārējās — samazinātās). Informatīvi, 2026. g. sākums.
+  // ES valstu PVN likmes (pirmā - standarta, pārējās - samazinātās). Informatīvi, 2026. g. sākums.
   var EU = [
     { code: 'at', name: { lv: 'Austrija',    ru: 'Австрия',      en: 'Austria' },     rates: [20, 13, 10] },
     { code: 'be', name: { lv: 'Beļģija',     ru: 'Бельгия',      en: 'Belgium' },     rates: [21, 12, 6] },
@@ -668,18 +668,18 @@
   // Visi statiskie UI teksti trīs valodās
   var I18N = {
     lv: {
-      pageTitle: 'PVN Kalkulators — PVN aprēķins Latvijai un visai ES',
-      pageDescription: 'Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.',
+      pageTitle: 'PVN Kalkulators - PVN aprēķins Latvijai un visai ES',
+      pageDescription: 'Bezmaksas PVN kalkulators ar visu ES valstu likmēm - noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN kalkulators',
-      subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.',
+      subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem - pārējais aprēķinās automātiski.',
       valstsLabel: 'Valsts', likmeLabel: 'PVN likme',
       customPlaceholder: 'Cita', customTitle: 'Ievadi savu PVN likmi procentos',
       netLabel: 'Summa bez PVN', grossLabel: 'Summa ar PVN',
       copy: 'Kopēt', copied: 'Nokopēts!',
       swapText: 'Mainīt vietām', swapTitle: 'Apmainīt laukus vietām',
       vatSummaLabel: 'PVN summa', clear: 'Notīrīt',
-      negWarning: 'Summa nevar būt negatīva — rezultāts var būt maldinošs.',
+      negWarning: 'Summa nevar būt negatīva - rezultāts var būt maldinošs.',
       rateStandard: 'standarta likme', rateReduced: 'samazinātā likme', rateCustom: 'tava ievadītā likme',
       rateSelected: 'Izvēlēta likme:',
       themeBtnTitle: 'Mainīt gaišo/tumšo režīmu',
@@ -693,26 +693,26 @@
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
       ossNote: 'Kalkulators noder arī e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, ' +
-        'PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā — ' +
+        'PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā - ' +
         'izvēlies valsti izvēlnē un aprēķini precīzu summu.',
       cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
         'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
-        'Vairāk — <a href="privatuma-politika">privātuma politikā</a>.',
+        'Vairāk - <a href="privatuma-politika">privātuma politikā</a>.',
       cookieAccept: 'Piekrītu', cookieDecline: 'Noraidīt'
     },
     ru: {
-      pageTitle: 'Калькулятор НДС — расчёт НДС для Латвии и всего ЕС',
-      pageDescription: 'Бесплатный калькулятор НДС со ставками всех стран ЕС — удобен для e-commerce и деклараций OSS (One Stop Shop). Со встроенным дополнительным калькулятором.',
+      pageTitle: 'Калькулятор НДС - расчёт НДС для Латвии и всего ЕС',
+      pageDescription: 'Бесплатный калькулятор НДС со ставками всех стран ЕС - удобен для e-commerce и деклараций OSS (One Stop Shop). Со встроенным дополнительным калькулятором.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Калькулятор НДС',
-      subtitleHtml: 'Введите сумму в <strong>любое</strong> поле — остальное рассчитается автоматически.',
+      subtitleHtml: 'Введите сумму в <strong>любое</strong> поле - остальное рассчитается автоматически.',
       valstsLabel: 'Страна', likmeLabel: 'Ставка НДС',
       customPlaceholder: 'Другая', customTitle: 'Введите свою ставку НДС в процентах',
       netLabel: 'Сумма без НДС', grossLabel: 'Сумма с НДС',
       copy: 'Копировать', copied: 'Скопировано!',
       swapText: 'Поменять местами', swapTitle: 'Поменять поля местами',
       vatSummaLabel: 'Сумма НДС', clear: 'Очистить',
-      negWarning: 'Сумма не может быть отрицательной — результат может быть некорректным.',
+      negWarning: 'Сумма не может быть отрицательной - результат может быть некорректным.',
       rateStandard: 'стандартная ставка', rateReduced: 'сниженная ставка', rateCustom: 'введённая вами ставка',
       rateSelected: 'Выбранная ставка:',
       themeBtnTitle: 'Переключить светлый/тёмный режим',
@@ -726,26 +726,26 @@
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
       ossNote: 'Калькулятор пригодится и для e-commerce: при продаже товаров или услуг покупателям из других стран ЕС ' +
-        'НДС часто применяется по ставке страны покупателя и декларируется через OSS (One Stop Shop) — ' +
+        'НДС часто применяется по ставке страны покупателя и декларируется через OSS (One Stop Shop) - ' +
         'выберите страну в меню и рассчитайте точную сумму.',
       cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
         'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
-        'Подробнее — в <a href="privatuma-politika">политике конфиденциальности</a>.',
+        'Подробнее - в <a href="privatuma-politika">политике конфиденциальности</a>.',
       cookieAccept: 'Принимаю', cookieDecline: 'Отклонить'
     },
     en: {
-      pageTitle: 'VAT Calculator — VAT calculation for Latvia and the whole EU',
-      pageDescription: 'Free VAT calculator with rates for every EU country — handy for e-commerce and OSS (One Stop Shop) returns. Includes a built-in extra calculator.',
+      pageTitle: 'VAT Calculator - VAT calculation for Latvia and the whole EU',
+      pageDescription: 'Free VAT calculator with rates for every EU country - handy for e-commerce and OSS (One Stop Shop) returns. Includes a built-in extra calculator.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT Calculator',
-      subtitleHtml: 'Type an amount into <strong>either</strong> field — the other calculates automatically.',
+      subtitleHtml: 'Type an amount into <strong>either</strong> field - the other calculates automatically.',
       valstsLabel: 'Country', likmeLabel: 'VAT rate',
       customPlaceholder: 'Other', customTitle: 'Enter your own VAT rate in percent',
       netLabel: 'Amount without VAT', grossLabel: 'Amount with VAT',
       copy: 'Copy', copied: 'Copied!',
       swapText: 'Swap fields', swapTitle: 'Swap the two fields',
       vatSummaLabel: 'VAT amount', clear: 'Clear',
-      negWarning: 'The amount cannot be negative — the result may be misleading.',
+      negWarning: 'The amount cannot be negative - the result may be misleading.',
       rateStandard: 'standard rate', rateReduced: 'reduced rate', rateCustom: 'your custom rate',
       rateSelected: 'Selected rate:',
       themeBtnTitle: 'Toggle light/dark mode',
@@ -759,7 +759,7 @@
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
       ossNote: 'The calculator is also handy for e-commerce: when selling goods or services to buyers in other EU countries, ' +
-        'VAT is often charged at the buyer\'s country rate and reported via the OSS (One Stop Shop) scheme — ' +
+        'VAT is often charged at the buyer\'s country rate and reported via the OSS (One Stop Shop) scheme - ' +
         'pick the country from the menu and calculate the exact amount.',
       cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
         'Analytics and advertising cookies are loaded only with your consent. ' +
@@ -790,7 +790,7 @@
 
   var state = { countryIdx: 12, rate: 21, custom: false, lastEdited: 'net', lang: 'lv', decimalSep: 'comma' }; // 12 = Latvija
 
-  /* --- Decimāldaļas atdalītājs (,/.) — neatkarīgs no UI valodas,
+  /* --- Decimāldaļas atdalītājs (,/.) - neatkarīgs no UI valodas,
      jo tas atkarīgs no sistēmas, kurā rezultātu ielīmēs (Excel, rēķini u.c.),
      nevis no tā, kādā valodā lietotājs lasa saskarni. --- */
   function applyDecimalSep(sep) {
@@ -803,7 +803,7 @@
     document.dispatchEvent(new CustomEvent('pvn-sep-change', { detail: sep }));
     renderRates();
     calc();
-    // calc() pārraksta tikai otru (aprēķināto) lauku — pārrakstām arī to, kurā lietotājs
+    // calc() pārraksta tikai otru (aprēķināto) lauku - pārrakstām arī to, kurā lietotājs
     // pats rakstīja, lai abi lauki vienmēr rāda vienu un to pašu atdalītāju.
     [netInput, grossInput].forEach(function (el) {
       var n = parseNum(el.value);
@@ -947,7 +947,7 @@
     var lastDot = s.lastIndexOf('.');
     var lastComma = s.lastIndexOf(',');
     if (lastDot !== -1 && lastComma !== -1) {
-      // Abi atdalītāji reizē (piem. "1.250,50" vai "1,250.50") — pēdējais
+      // Abi atdalītāji reizē (piem. "1.250,50" vai "1,250.50") - pēdējais
       // ir decimāldaļa, otrs ir tūkstošu atdalītājs un ir jāizmet.
       s = lastComma > lastDot
         ? s.replace(/\./g, '').replace(',', '.')
@@ -1107,16 +1107,16 @@
     var t = I18N[state.lang];
     var text;
     if (state.custom) {
-      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> — ' + t.rateCustom;
+      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> - ' + t.rateCustom;
     } else {
       var kind = state.rate === c.rates[0] ? t.rateStandard : t.rateReduced;
-      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> — ' + c.name[state.lang] + ', ' + kind;
+      text = t.rateSelected + ' <strong>' + fmtRate(state.rate) + '%</strong> - ' + c.name[state.lang] + ', ' + kind;
     }
     indicator.innerHTML = text;
   }
 
   /* --- Aprēķins: pārrēķina otru lauku pēc tā, kurā pēdējo reizi rakstīja --- */
-  // "Nokopēts!" atiestatās tikai tad, ja redzamās vērtības tiešām izmainījās —
+  // "Nokopēts!" atiestatās tikai tad, ja redzamās vērtības tiešām izmainījās -
   // valodas maiņa arī izsauc calc(), bet skaitļus nemaina, un kopētais paliek spēkā.
   function calc() {
     var before = netInput.value + '|' + grossInput.value + '|' + vatVal.textContent;
@@ -1155,7 +1155,7 @@
   grossInput.addEventListener('input', function () { state.lastEdited = 'gross'; calc(); });
 
   // Kad lietotājs pabeidz rakstīt (blur), pārrakstām lauka paša vērtību ar izvēlēto
-  // atdalītāju — ja ieraksta "100.20" komata režīmā, pēc laukā izlaišanas kļūst "100,20".
+  // atdalītāju - ja ieraksta "100.20" komata režīmā, pēc laukā izlaišanas kļūst "100,20".
   function reformatOnBlur() {
     var n = parseNum(this.value);
     if (!isNaN(n)) this.value = fmt(n);
@@ -1170,7 +1170,7 @@
       state.rate = r;
       customWrap.classList.add('active');
     } else {
-      // Tukšs vai nederīgs — atgriežamies pie valsts standarta likmes
+      // Tukšs vai nederīgs - atgriežamies pie valsts standarta likmes
       state.custom = false;
       state.rate = EU[state.countryIdx].rates[0];
       customWrap.classList.remove('active');
@@ -1179,7 +1179,7 @@
     calc();
   });
 
-  // Tiklīdz lauks iegūst fokusu, nekavējoties noņem ķeksīti no citām likmēm —
+  // Tiklīdz lauks iegūst fokusu, nekavējoties noņem ķeksīti no citām likmēm -
   // tas nedrīkst palikt uz iepriekš izvēlētās pogas, kamēr lietotājs raksta savu likmi.
   customEl.addEventListener('focus', function () {
     rateBtnsBox.querySelectorAll('button.active').forEach(function (b) {
@@ -1282,7 +1282,7 @@
 
   applyLanguage(guessInitialLang());
 
-  // Fokusu uz pirmo lauku liekam tikai ierīcēs ar peli/pointeri —
+  // Fokusu uz pirmo lauku liekam tikai ierīcēs ar peli/pointeri -
   // mobilajās ierīcēs tas uzreiz atvērtu tastatūru un aizsegtu saturu.
   if (window.matchMedia('(pointer: fine)').matches) netInput.focus();
 })();
@@ -1307,7 +1307,7 @@
 
   var OPSYM = { '+': '+', '-': '−', '*': '×', '/': '÷' };
 
-  // Decimāldaļas atdalītājs — sinhronizēts ar galveno kalkulatoru caur notikumu,
+  // Decimāldaļas atdalītājs - sinhronizēts ar galveno kalkulatoru caur notikumu,
   // jo šis ir atsevišķs IIFE ar savu stāvokli.
   var decimalSep = 'comma';
   try { decimalSep = localStorage.getItem('pvn-decimal-sep') === 'period' ? 'period' : 'comma'; } catch (e) {}
@@ -1427,7 +1427,7 @@
 
   // Ielādē kopēto vērtību kalkulatorā (no PVN kalkulatora "Kopēt" pogām) un atver to.
   // Ja ir iesākta darbība (piem. "320 +"), kopētā vērtība kļūst par nākamo skaitli,
-  // lai aprēķinu varētu turpināt; ja darbības nav — sākas tīrs skaitlis.
+  // lai aprēķinu varētu turpināt; ja darbības nav - sākas tīrs skaitlis.
   document.addEventListener('pvn-calc-load', function (e) {
     var n = parseFloat(String(e.detail).replace(/\s/g, '').replace(',', '.'));
     if (isNaN(n)) return;

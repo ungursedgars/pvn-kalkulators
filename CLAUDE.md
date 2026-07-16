@@ -18,6 +18,10 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - All 6 pages share the same header: logo, LV/RU/EN lang-switch, and a `☰` dropdown menu (`#menuDropdown`/`#menuBtn`/`#menuList`) linking to Instrukcijas/BUJ/Likmes/Kontakti. No page should be a navigation dead end.
 - Internal links are extensionless (`href="buj"`, `href="/"` for the homepage, etc.) — GitHub Pages serves `foo.html` for a request to `/foo`, so this keeps `.html` out of the address bar. Follow this convention for any new internal links or pages.
 
+## Content style
+
+- **Never use em-dashes (—) in any site content** — page copy, titles, meta descriptions, JSON-LD, all languages. Use a plain hyphen (-) instead. The owner's explicit preference: em-dashes make the page look AI-generated. (This rule is about site content; CLAUDE.md itself is exempt.)
+
 ## Workflow
 
 - **Edit freely, but only `git push` when the user explicitly asks** (e.g. "pusho", "publish this"). This is an early-stage project — changes come in quick succession and shouldn't go live on every single edit.
