@@ -48,6 +48,14 @@
         "@type": "Answer",
         "text": "Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Kam noder citu ES valstu PVN likmes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Galvenokārt e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā. Kalkulatorā izvēlies attiecīgo valsti un aprēķini precīzu summu."
+      }
     }
   ]
 }
@@ -298,6 +306,14 @@
         Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.
       </div>
     </details>
+    <details class="faq-item">
+      <summary id="faq5Summary">Kam noder citu ES valstu PVN likmes?</summary>
+      <div class="faq-body" id="faq5Body">
+        Galvenokārt e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži
+        jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā. Kalkulatorā izvēlies
+        attiecīgo valsti un aprēķini precīzu summu.
+      </div>
+    </details>
   </section>
 
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
@@ -355,6 +371,10 @@
       faq4Summary: 'Kā tiek noapaļoti rezultāti?',
       faq4Body: 'Rezultāti tiek noapaļoti līdz 2 zīmēm aiz komata (centiem) pēc matemātiskās noapaļošanas principa. ' +
         'Grāmatvedības vajadzībām vienmēr pārliecinies par sava uzņēmuma noapaļošanas kārtību.',
+      faq5Summary: 'Kam noder citu ES valstu PVN likmes?',
+      faq5Body: 'Galvenokārt e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži ' +
+        'jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā. Kalkulatorā izvēlies ' +
+        'attiecīgo valsti un aprēķini precīzu summu.',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -384,6 +404,10 @@
       faq4Summary: 'Как округляются результаты?',
       faq4Body: 'Результаты округляются до 2 знаков после запятой (центов) по правилам математического округления. ' +
         'Для бухгалтерских нужд всегда уточняйте порядок округления, принятый в вашей компании.',
+      faq5Summary: 'Кому нужны ставки НДС других стран ЕС?',
+      faq5Body: 'Прежде всего для e-commerce: при продаже товаров или услуг покупателям из других стран ЕС НДС часто ' +
+        'применяется по ставке страны покупателя и декларируется через OSS (One Stop Shop). Выберите нужную страну ' +
+        'в калькуляторе и рассчитайте точную сумму.',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -413,6 +437,10 @@
       faq4Summary: 'How are results rounded?',
       faq4Body: 'Results are rounded to 2 decimal places (cents) using standard mathematical rounding. ' +
         'For accounting purposes, always confirm the rounding convention used by your company.',
+      faq5Summary: 'Why does the calculator include VAT rates for other EU countries?',
+      faq5Body: 'Mainly for e-commerce: when selling goods or services to buyers in other EU countries, VAT is often ' +
+        'charged at the buyer\'s country rate and reported via the OSS (One Stop Shop) scheme. Pick the country ' +
+        'in the calculator and work out the exact amount.',
       back: '← Back to the calculator',
       footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -466,6 +494,8 @@
     document.getElementById('faq3Body').innerHTML = t.faq3Body;
     document.getElementById('faq4Summary').textContent = t.faq4Summary;
     document.getElementById('faq4Body').innerHTML = t.faq4Body;
+    document.getElementById('faq5Summary').textContent = t.faq5Summary;
+    document.getElementById('faq5Body').innerHTML = t.faq5Body;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
