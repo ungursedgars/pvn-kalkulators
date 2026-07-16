@@ -6,22 +6,22 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
 <link rel="apple-touch-icon" href="/logo-192.png">
-<title>PVN Kalkulators — automātisks PVN aprēķins Latvijai un visai ES</title>
-<meta name="description" content="Bezmaksas PVN kalkulators ar automātisku aprēķinu — izvēlies jebkuru ES valsti un izmanto iebūvēto papildu kalkulatoru.">
+<title>PVN Kalkulators — PVN aprēķins Latvijai un visai ES</title>
+<meta name="description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
 <link rel="canonical" href="https://pvnkalkulators.eu/">
 <meta name="color-scheme" content="light dark">
 <meta name="google-adsense-account" content="ca-pub-1040653408011392">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="lv_LV">
-<meta property="og:title" content="PVN Kalkulators — automātisks PVN aprēķins Latvijai un visai ES">
-<meta property="og:description" content="Bezmaksas PVN kalkulators ar automātisku aprēķinu — izvēlies jebkuru ES valsti un izmanto iebūvēto papildu kalkulatoru.">
+<meta property="og:title" content="PVN Kalkulators — PVN aprēķins Latvijai un visai ES">
+<meta property="og:description" content="Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "PVN Kalkulators",
-  "description": "Bezmaksas PVN kalkulators ar automātisku aprēķinu — izvēlies jebkuru ES valsti un izmanto iebūvēto papildu kalkulatoru.",
+  "description": "Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.",
   "url": "https://pvnkalkulators.eu/",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
@@ -290,6 +290,10 @@
     background: var(--result-bg); border-radius: 12px; padding: calc(6px + 10px * var(--vh-t)) 18px;
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
   }
+  .oss-note {
+    color: var(--muted); font-size: .88rem; line-height: 1.55;
+    text-align: center; margin: 18px auto 0; max-width: 560px;
+  }
   .vat-result .lbl { color: var(--muted); font-size: .95rem; }
   .vat-result .val {
     font-size: 1.6rem; font-weight: 700; color: var(--accent);
@@ -555,6 +559,8 @@
     </button>
   </div>
 
+  <p class="oss-note" id="ossNote">Kalkulators noder arī e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā — izvēlies valsti izvēlnē un aprēķini precīzu summu.</p>
+
 </main>
 
 <footer>
@@ -662,8 +668,8 @@
   // Visi statiskie UI teksti trīs valodās
   var I18N = {
     lv: {
-      pageTitle: 'PVN Kalkulators — automātisks PVN aprēķins Latvijai un visai ES',
-      pageDescription: 'Bezmaksas PVN kalkulators ar automātisku aprēķinu — izvēlies jebkuru ES valsti un izmanto iebūvēto papildu kalkulatoru.',
+      pageTitle: 'PVN Kalkulators — PVN aprēķins Latvijai un visai ES',
+      pageDescription: 'Bezmaksas PVN kalkulators ar visu ES valstu likmēm — noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.',
       navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN kalkulators',
       subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem — pārējais aprēķinās automātiski.',
@@ -686,14 +692,17 @@
       mcInsertGrossTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
+      ossNote: 'Kalkulators noder arī e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, ' +
+        'PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā — ' +
+        'izvēlies valsti izvēlnē un aprēķini precīzu summu.',
       cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
         'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
         'Vairāk — <a href="privatuma-politika">privātuma politikā</a>.',
       cookieAccept: 'Piekrītu', cookieDecline: 'Noraidīt'
     },
     ru: {
-      pageTitle: 'Калькулятор НДС — автоматический расчёт для Латвии и ЕС',
-      pageDescription: 'Бесплатный калькулятор НДС с автоматическим расчётом. Выберите любую страну ЕС и используйте встроенный дополнительный калькулятор.',
+      pageTitle: 'Калькулятор НДС — расчёт НДС для Латвии и всего ЕС',
+      pageDescription: 'Бесплатный калькулятор НДС со ставками всех стран ЕС — удобен для e-commerce и деклараций OSS (One Stop Shop). Со встроенным дополнительным калькулятором.',
       navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Калькулятор НДС',
       subtitleHtml: 'Введите сумму в <strong>любое</strong> поле — остальное рассчитается автоматически.',
@@ -716,14 +725,17 @@
       mcInsertGrossTitle: 'Вставить число с экрана в поле «Сумма с НДС»',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
+      ossNote: 'Калькулятор пригодится и для e-commerce: при продаже товаров или услуг покупателям из других стран ЕС ' +
+        'НДС часто применяется по ставке страны покупателя и декларируется через OSS (One Stop Shop) — ' +
+        'выберите страну в меню и рассчитайте точную сумму.',
       cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
         'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
         'Подробнее — в <a href="privatuma-politika">политике конфиденциальности</a>.',
       cookieAccept: 'Принимаю', cookieDecline: 'Отклонить'
     },
     en: {
-      pageTitle: 'VAT Calculator — automatic calculation for Latvia and the EU',
-      pageDescription: 'Free VAT calculator with automatic calculation. Choose any EU country and use the built-in extra calculator.',
+      pageTitle: 'VAT Calculator — VAT calculation for Latvia and the whole EU',
+      pageDescription: 'Free VAT calculator with rates for every EU country — handy for e-commerce and OSS (One Stop Shop) returns. Includes a built-in extra calculator.',
       navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT Calculator',
       subtitleHtml: 'Type an amount into <strong>either</strong> field — the other calculates automatically.',
@@ -746,6 +758,9 @@
       mcInsertGrossTitle: 'Insert the number shown on the display into the “Amount with VAT” field',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
+      ossNote: 'The calculator is also handy for e-commerce: when selling goods or services to buyers in other EU countries, ' +
+        'VAT is often charged at the buyer\'s country rate and reported via the OSS (One Stop Shop) scheme — ' +
+        'pick the country from the menu and calculate the exact amount.',
       cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
         'Analytics and advertising cookies are loaded only with your consent. ' +
         'Learn more in our <a href="privatuma-politika">privacy policy</a>.',
@@ -848,6 +863,8 @@
     document.getElementById('mcInsertNet').title = t.mcInsertNetTitle;
     document.getElementById('mcInsertGross').textContent = t.mcInsertGross;
     document.getElementById('mcInsertGross').title = t.mcInsertGrossTitle;
+
+    document.getElementById('ossNote').textContent = t.ossNote;
 
     document.getElementById('footerText').textContent = t.footer;
     document.getElementById('footerInstrukcijas').textContent = t.footerInstrukcijas;
