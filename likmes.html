@@ -758,6 +758,17 @@
       openCountry();
     }
   });
+  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
+  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
+  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
+  var countryPickerPointer = false;
+  function countryPickerPointerArm() { countryPickerPointer = true; setTimeout(function () { countryPickerPointer = false; }, 0); }
+  countryPicker.addEventListener('mousedown', countryPickerPointerArm);
+  countryPicker.addEventListener('touchstart', countryPickerPointerArm, { passive: true });
+  countryPicker.addEventListener('focusout', function (e) {
+    if (countryPickerPointer) return;
+    if (!countryPicker.contains(e.relatedTarget)) closeCountry(false);
+  });
 
   // Type-ahead: rakstot burtus, fokuss pārlec uz pirmo atbilstošo valsti
   // (kā natīvajā <select>). Tāda pati loģika kā kalkulatora lapā.
@@ -878,6 +889,17 @@
     var open = langDropdown.classList.toggle('open');
     langBtn.setAttribute('aria-expanded', String(open));
   });
+  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
+  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
+  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
+  var langDropdownPointer = false;
+  function langDropdownPointerArm() { langDropdownPointer = true; setTimeout(function () { langDropdownPointer = false; }, 0); }
+  langDropdown.addEventListener('mousedown', langDropdownPointerArm);
+  langDropdown.addEventListener('touchstart', langDropdownPointerArm, { passive: true });
+  langDropdown.addEventListener('focusout', function (e) {
+    if (langDropdownPointer) return;
+    if (!langDropdown.contains(e.relatedTarget)) closeLang();
+  });
   document.addEventListener('click', function (e) {
     if (!langDropdown.contains(e.target)) closeLang();
   });
@@ -896,6 +918,17 @@
     e.stopPropagation();
     var open = menuDropdown.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
+  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
+  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
+  var menuDropdownPointer = false;
+  function menuDropdownPointerArm() { menuDropdownPointer = true; setTimeout(function () { menuDropdownPointer = false; }, 0); }
+  menuDropdown.addEventListener('mousedown', menuDropdownPointerArm);
+  menuDropdown.addEventListener('touchstart', menuDropdownPointerArm, { passive: true });
+  menuDropdown.addEventListener('focusout', function (e) {
+    if (menuDropdownPointer) return;
+    if (!menuDropdown.contains(e.relatedTarget)) closeMenu();
   });
   document.addEventListener('click', function (e) {
     if (!menuDropdown.contains(e.target)) closeMenu();
