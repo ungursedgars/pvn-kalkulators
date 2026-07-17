@@ -92,13 +92,13 @@
   .logo span { color: var(--accent); }
   nav { display: flex; align-items: center; gap: 14px; }
   nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
-  nav a:hover { color: var(--accent); }
+  @media (hover: hover) { nav a:hover { color: var(--accent); } }
   #sepBtn {
     background: none; border: 1px solid var(--border); border-radius: 8px;
     width: 30px; height: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700;
     color: var(--text); display: flex; align-items: center; justify-content: center;
   }
-  #sepBtn:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #sepBtn:hover { border-color: var(--accent); color: var(--accent); } }
   #themeBtn {
     background: none; border: 1px solid var(--border); border-radius: 8px;
     width: 30px; height: 30px; cursor: pointer; font-size: 1rem; color: var(--text);
@@ -111,7 +111,7 @@
     display: flex; align-items: center; gap: 6px;
     font-size: .8rem; font-weight: 700;
   }
-  #langBtn:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #langBtn:hover { border-color: var(--accent); color: var(--accent); } }
   .lang-list {
     display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
@@ -123,7 +123,7 @@
     background: none; color: var(--text); cursor: pointer; text-align: left;
     font-size: .95rem; white-space: nowrap;
   }
-  .lang-list button:hover { background: var(--accent-soft); color: var(--accent); }
+  @media (hover: hover) { .lang-list button:hover { background: var(--accent-soft); color: var(--accent); } }
   .lang-list button.active { background: var(--accent); color: #fff; }
 
   .menu-dropdown { position: relative; }
@@ -132,7 +132,7 @@
     width: 30px; height: 30px; cursor: pointer; color: var(--text);
     display: flex; align-items: center; justify-content: center;
   }
-  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #menuBtn:hover { border-color: var(--accent); color: var(--accent); } }
   .menu-list {
     display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
@@ -143,7 +143,7 @@
     display: block; padding: 9px 12px; border-radius: 8px;
     color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
   }
-  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+  @media (hover: hover) { .menu-list a:hover { background: var(--accent-soft); color: var(--accent); } }
 
   @media (max-width: 560px) {
     .header-inner { padding: 9px 16px; }
@@ -183,7 +183,8 @@
     border: 2px solid var(--border); border-radius: 10px;
     background: var(--bg); color: var(--text); cursor: pointer; text-align: left;
   }
-  #countryBtn:hover, #countryBtn:focus { outline: none; border-color: var(--accent); }
+  #countryBtn:focus { outline: none; border-color: var(--accent); }
+  @media (hover: hover) { #countryBtn:hover { border-color: var(--accent); } }
   #countryBtn .chev { margin-left: auto; color: var(--muted); font-size: .8rem; transition: transform .15s; }
   .country-picker.open #countryBtn .chev { transform: rotate(180deg); }
   .flag { width: 24px; height: 18px; border-radius: 3px; object-fit: cover; flex-shrink: 0; }
@@ -199,7 +200,7 @@
     padding: 9px 10px; font-size: .97rem; border: none; border-radius: 8px;
     background: none; color: var(--text); cursor: pointer; text-align: left;
   }
-  #countryList button:hover { background: var(--accent-soft); }
+  @media (hover: hover) { #countryList button:hover { background: var(--accent-soft); } }
   #countryList button.selected { background: var(--accent); color: #fff; }
 
   /* Likmju pogas */
@@ -210,7 +211,7 @@
     background: var(--card); color: var(--text); cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center;
   }
-  .rates button:hover { border-color: var(--accent); }
+  @media (hover: hover) { .rates button:hover { border-color: var(--accent); } }
   .rates button.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
   /* "Cita %" lauks vienmēr paliek atpazīstams kā teksta ievade (gaišs fons),
@@ -273,7 +274,7 @@
     border: 1px solid var(--border); background: var(--card); color: var(--muted);
     border-radius: 999px; padding: 8px 18px; cursor: pointer; font-size: .92rem;
   }
-  #swapBtn:hover { color: var(--accent); border-color: var(--accent); }
+  @media (hover: hover) { #swapBtn:hover { color: var(--accent); border-color: var(--accent); } }
 
   /* Lauku apmaiņu veic JS, fiziski pārkārtojot DOM elementus (ne CSS order),
      lai Tab secība vienmēr sakristu ar redzamo secību. */
@@ -283,7 +284,7 @@
     color: var(--muted); border-radius: 10px; padding: 4px 14px; cursor: pointer; font-size: .88rem;
     white-space: nowrap;
   }
-  .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+  @media (hover: hover) { .copy-btn:hover { color: var(--accent); border-color: var(--accent); } }
 
   .vat-result {
     margin-top: calc(6px + 16px * var(--vh-t));
@@ -302,14 +303,14 @@
     border: none; background: none; color: var(--muted);
     cursor: pointer; font-size: .9rem; text-decoration: underline;
   }
-  #clearBtn:hover { color: var(--accent); }
+  @media (hover: hover) { #clearBtn:hover { color: var(--accent); } }
 
   footer {
     border-top: 1px solid var(--border); padding: 22px 0 34px;
     color: var(--muted); font-size: .88rem; text-align: center;
   }
   footer a { color: var(--muted); }
-  footer a:hover { color: var(--accent); }
+  @media (hover: hover) { footer a:hover { color: var(--accent); } }
   .footer-links { margin-bottom: 8px; }
   @media (max-width: 480px) {
     .subtitle { font-size: .9rem; }
@@ -349,9 +350,9 @@
     border-radius: 9px; border: 1px solid var(--border);
   }
   #cookieDecline { background: var(--card); color: var(--muted); }
-  #cookieDecline:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #cookieDecline:hover { border-color: var(--accent); color: var(--accent); } }
   #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
-  #cookieAccept:hover { filter: brightness(1.05); }
+  @media (hover: hover) { #cookieAccept:hover { filter: brightness(1.05); } }
   @media (max-width: 560px) {
     .cookie-actions { width: 100%; }
     .cookie-actions button { flex: 1; }
@@ -369,8 +370,11 @@
     box-shadow: 3px 3px 10px rgba(20,30,50,.18);
   }
   #calcFab span { writing-mode: vertical-rl; font-size: .78rem; font-weight: 600; letter-spacing: .06em; }
-  #calcFab:hover, #calcFab.active { background: var(--accent-dark, #1558c0); }
-  [data-theme="dark"] #calcFab:hover { filter: brightness(1.1); }
+  #calcFab.active { background: var(--accent-dark, #1558c0); }
+  @media (hover: hover) {
+    @media (hover: hover) { #calcFab:hover { background: var(--accent-dark, #1558c0); } }
+    @media (hover: hover) { [data-theme="dark"] #calcFab:hover { filter: brightness(1.1); } }
+  }
 
   #miniCalc {
     position: fixed; left: calc(50% + 372px); top: 104px; z-index: 45;
@@ -395,7 +399,7 @@
     border: none; background: none; color: var(--muted); cursor: pointer;
     font-size: 1.1rem; line-height: 1; padding: 2px 6px; border-radius: 6px;
   }
-  .mc-head button:hover { background: var(--accent-soft); color: var(--accent); }
+  @media (hover: hover) { .mc-head button:hover { background: var(--accent-soft); color: var(--accent); } }
 
   .mc-display {
     padding: 12px 14px 6px; text-align: right;
@@ -412,7 +416,7 @@
     border: 1px solid var(--accent); border-radius: 8px;
     background: var(--accent-soft); color: var(--accent);
   }
-  .mc-insert button:hover { background: var(--accent); color: #fff; }
+  @media (hover: hover) { .mc-insert button:hover { background: var(--accent); color: #fff; } }
 
   .mc-pad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 0 10px 12px; }
   .mc-pad button {
@@ -420,10 +424,10 @@
     border: 1px solid var(--border); border-radius: 8px;
     background: var(--bg); color: var(--text);
   }
-  .mc-pad button:hover { border-color: var(--accent); }
+  @media (hover: hover) { .mc-pad button:hover { border-color: var(--accent); } }
   .mc-pad button.op { color: var(--accent); }
   .mc-pad button.eq { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .mc-pad button.eq:hover { filter: brightness(1.05); }
+  @media (hover: hover) { .mc-pad button.eq:hover { filter: brightness(1.05); } }
   .mc-pad button.fn { color: var(--muted); font-size: .95rem; }
 
   @media (max-width: 480px) {
@@ -435,6 +439,15 @@
     #calcFab, #miniCalc { display: none !important; }
   }
 </style>
+<script>
+  // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('pvn-theme'); } catch (e) {}
+    document.documentElement.setAttribute('data-theme',
+      t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  })();
+</script>
 </head>
 <body>
 
@@ -1361,9 +1374,10 @@
     render();
   }
   function percent() {
-    // Procenti: ja ir gaidoša operācija, ņem % no uzkrātās vērtības, citādi /100
+    // Procenti: saskaitot/atņemot ņem % no uzkrātās vērtības (100 + 21% = 121),
+    // bet reizinot/dalot vai bez darbības pārvērš decimāldaļā (21 × 5% = 1,05).
     var v = toNum(cur);
-    cur = trimNum((op && acc !== null) ? acc * v / 100 : v / 100);
+    cur = trimNum(((op === '+' || op === '-') && acc !== null) ? acc * v / 100 : v / 100);
     render();
   }
   function negate() {
@@ -1392,7 +1406,10 @@
     // vispirms pabeidz aprēķinu, lai ievietotu rezultātu, nevis pēdējo ciparu.
     if (op !== null && !fresh) equals();
     var target = which === 'net' ? netInput : grossInput;
-    var val = trimNum(toNum(cur));
+    // Noapaļojam līdz 2 zīmēm aiz komata, lai laukā nenonāk garš periodisks
+    // daļskaitlis (piem. 10 ÷ 3). Veselus skaitļus atstājam bez ,00 astes.
+    var numVal = toNum(cur);
+    var val = isNaN(numVal) ? '' : String(Math.round(numVal * 100) / 100);
     val = decimalSep === 'period' ? val : val.replace('.', ',');
     target.value = val;
     target.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1437,25 +1454,35 @@
     else if (k === '%') { handleKey('%'); }
   });
 
-  // Pārvietošana ar galvenes vilkšanu
+  // Pārvietošana ar galvenes vilkšanu - gan ar peli, gan ar pirkstu (planšetes)
   var drag = null;
-  head.addEventListener('mousedown', function (e) {
+  function dragPoint(e) { return e.touches ? e.touches[0] : e; }
+  function dragStart(e) {
     if (e.target === closeBtn) return;
+    var p = dragPoint(e);
     var r = panel.getBoundingClientRect();
-    drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+    drag = { dx: p.clientX - r.left, dy: p.clientY - r.top };
     panel.style.right = 'auto'; panel.style.bottom = 'auto';
     panel.style.left = r.left + 'px'; panel.style.top = r.top + 'px';
     head.classList.add('dragging');
     e.preventDefault();
-  });
-  document.addEventListener('mousemove', function (e) {
+  }
+  function dragMove(e) {
     if (!drag) return;
-    var x = e.clientX - drag.dx, y = e.clientY - drag.dy;
+    var p = dragPoint(e);
+    var x = p.clientX - drag.dx, y = p.clientY - drag.dy;
     var maxX = window.innerWidth - panel.offsetWidth, maxY = window.innerHeight - panel.offsetHeight;
     panel.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
     panel.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-  });
-  document.addEventListener('mouseup', function () { drag = null; head.classList.remove('dragging'); });
+    if (e.cancelable) e.preventDefault(); // velkot neritinām lapu
+  }
+  function dragEnd() { drag = null; head.classList.remove('dragging'); }
+  head.addEventListener('mousedown', dragStart);
+  head.addEventListener('touchstart', dragStart, { passive: false });
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('touchmove', dragMove, { passive: false });
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchend', dragEnd);
 
   // Atceramies, vai bija atvērts
   try { if (localStorage.getItem('pvn-calc-open') === '1') openCalc(); } catch (e) {}

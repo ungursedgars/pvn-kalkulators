@@ -172,6 +172,15 @@
     .cookie-actions button { flex: 1; }
   }
 </style>
+<script>
+  // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('pvn-theme'); } catch (e) {}
+    document.documentElement.setAttribute('data-theme',
+      t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  })();
+</script>
 </head>
 <body>
 
