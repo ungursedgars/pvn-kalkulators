@@ -11,6 +11,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pvnkalkulators.eu/kontakti">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
 <meta name="google-adsense-account" content="ca-pub-1040653408011392">
 <style>
   :root {
@@ -199,8 +200,10 @@
   (function () {
     var t = null;
     try { t = localStorage.getItem('pvn-theme'); } catch (e) {}
-    document.documentElement.setAttribute('data-theme',
-      t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    t = t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#1b212a' : '#ffffff');
   })();
 </script>
 </head>
@@ -548,6 +551,8 @@
     '</svg>';
   function applyTheme(th) {
     document.documentElement.setAttribute('data-theme', th);
+    var tcMeta = document.querySelector('meta[name="theme-color"]');
+    if (tcMeta) tcMeta.setAttribute('content', th === 'dark' ? '#1b212a' : '#ffffff');
     themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
     try { localStorage.setItem('pvn-theme', th); } catch (e) {}
   }
