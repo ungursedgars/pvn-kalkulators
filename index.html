@@ -1420,8 +1420,12 @@
     var target = which === 'net' ? netInput : grossInput;
     // Noapaļojam līdz 2 zīmēm aiz komata, lai laukā nenonāk garš periodisks
     // daļskaitlis (piem. 10 ÷ 3). Veselus skaitļus atstājam bez ,00 astes.
+    // Noapaļošana caur eksponentes pierakstu ("1.005e2" -> precīzi 100.5),
+    // jo numVal * 100 peldošajā komatā dotu 100.4999... un 1.005 kļūtu 1.
     var numVal = toNum(cur);
-    var val = isNaN(numVal) ? '' : String(Math.round(numVal * 100) / 100);
+    var rounded = Number(Math.round(Number(numVal + 'e2')) + 'e-2');
+    if (isNaN(rounded)) rounded = Math.round(numVal * 100) / 100;
+    var val = isNaN(numVal) ? '' : String(rounded);
     val = decimalSep === 'period' ? val : val.replace('.', ',');
     target.value = val;
     target.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1431,10 +1435,20 @@
     b.addEventListener('click', function () { insertInto(b.dataset.insert); });
   });
 
-  // Atvēršana / aizvēršana
-  function openCalc() { panel.classList.add('open'); fab.classList.add('active'); try { localStorage.setItem('pvn-calc-open', '1'); } catch (e) {} }
-  function closeCalc() { panel.classList.remove('open'); fab.classList.remove('active'); try { localStorage.setItem('pvn-calc-open', '0'); } catch (e) {} }
-  fab.addEventListener('click', function () { panel.classList.contains('open') ? closeCalc() : openCalc(); });
+  // Atvēršana / aizvēršana. focusInto pārnes fokusu kalkulatorā - tikai tad,
+  // kad atver ar pogu (ne atjaunojot stāvokli lapas ielādē, kur tas nozagtu fokusu).
+  function openCalc(focusInto) {
+    panel.classList.add('open'); fab.classList.add('active');
+    try { localStorage.setItem('pvn-calc-open', '1'); } catch (e) {}
+    if (focusInto) closeBtn.focus();
+  }
+  function closeCalc() {
+    var wasInside = panel.contains(document.activeElement);
+    panel.classList.remove('open'); fab.classList.remove('active');
+    try { localStorage.setItem('pvn-calc-open', '0'); } catch (e) {}
+    if (wasInside) fab.focus(); // neatstājam fokusu paslēptā panelī
+  }
+  fab.addEventListener('click', function () { panel.classList.contains('open') ? closeCalc() : openCalc(true); });
   closeBtn.addEventListener('click', closeCalc);
 
   // Ielādē kopēto vērtību kalkulatorā (no PVN kalkulatora "Kopēt" pogām) un atver to.
@@ -1455,6 +1469,9 @@
     if (!panel.classList.contains('open')) return;
     var t = e.target;
     if (t && (t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA')) return;
+    // Ja fokuss ir uz kādas paneļa pogas (aizvērt, ievietot, cipari), Enter/Space
+    // aktivizē pašu pogu - nepārtveram to kā kalkulatora "=" taustiņu.
+    if (t && t.tagName === 'BUTTON' && panel.contains(t) && (e.key === 'Enter' || e.key === ' ')) return;
     var k = e.key;
     if (/^[0-9]$/.test(k)) { handleKey(k); e.preventDefault(); }
     else if (k === '.' || k === ',') { handleKey('.'); e.preventDefault(); }
