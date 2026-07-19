@@ -350,8 +350,8 @@
     padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer;
     border-radius: 9px; border: 1px solid var(--border);
   }
-  #cookieDecline { background: var(--card); color: var(--muted); }
-  @media (hover: hover) { #cookieDecline:hover { border-color: var(--accent); color: var(--accent); } }
+  #cookieSettingsBtn { background: var(--card); color: var(--muted); }
+  @media (hover: hover) { #cookieSettingsBtn:hover { border-color: var(--accent); color: var(--accent); } }
   #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
   @media (hover: hover) { #cookieAccept:hover { filter: brightness(1.05); } }
   @media (max-width: 560px) {
@@ -439,6 +439,56 @@
   @media (max-width: 768px) {
     #calcFab, #miniCalc { display: none !important; }
   }
+
+  /* ===== Sīkdatņu preferenču logs ===== */
+  .cookie-title { display: block; margin-bottom: 2px; }
+  #cookiePrefs {
+    display: none; position: fixed; inset: 0; z-index: 70;
+    background: rgba(10, 16, 26, .5); padding: 16px;
+  }
+  #cookiePrefs.show { display: flex; align-items: center; justify-content: center; }
+  .prefs-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); width: 100%; max-width: 480px;
+    max-height: calc(100vh - 32px); overflow-y: auto; padding: 20px;
+  }
+  .prefs-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .prefs-head h2 { font-size: 1.15rem; }
+  #prefsClose {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 1.05rem; padding: 4px 9px; border-radius: 8px; line-height: 1;
+  }
+  @media (hover: hover) { #prefsClose:hover { background: var(--accent-soft); color: var(--accent); } }
+  .prefs-top-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+  .prefs-top-actions button {
+    flex: 1; padding: 10px 12px; border-radius: 9px; font-size: .92rem; font-weight: 600; cursor: pointer;
+  }
+  #prefsRejectAll { background: var(--card); border: 1px solid var(--border); color: var(--muted); }
+  @media (hover: hover) { #prefsRejectAll:hover { border-color: var(--accent); color: var(--accent); } }
+  #prefsAcceptAll { background: var(--accent); border: 1px solid var(--accent); color: #fff; }
+  @media (hover: hover) { #prefsAcceptAll:hover { filter: brightness(1.05); } }
+  .prefs-intro { color: var(--muted); font-size: .9rem; margin-bottom: 4px; }
+  .prefs-cat { border-top: 1px solid var(--border); padding: 12px 0; }
+  .prefs-cat-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .prefs-cat-name { font-weight: 600; }
+  .prefs-always { color: var(--accent); font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .switch {
+    width: 44px; height: 24px; border-radius: 12px; border: none; padding: 0;
+    background: var(--border); position: relative; cursor: pointer; flex-shrink: 0;
+    transition: background .15s;
+  }
+  .switch .knob {
+    position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); transition: left .15s;
+  }
+  .switch[aria-checked="true"] { background: var(--accent); }
+  .switch[aria-checked="true"] .knob { left: 22px; }
+  .prefs-cat-desc { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  #prefsSave {
+    width: 100%; margin-top: 14px; padding: 12px; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
+  }
+  @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
 </style>
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
@@ -584,18 +634,54 @@
   </div>
 </footer>
 
-<!-- Sīkdatņu piekrišanas josla -->
+<!-- Sīkdatņu piekrišana: pirmais slānis -->
 <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
   <div class="cookie-inner">
-    <div class="cookie-text" id="cookieText">
-      Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense).
-      Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu.
-      Vairāk - <a href="privatuma-politika" id="cookieLink">privātuma politikā</a>.
+    <div class="cookie-text">
+      <strong class="cookie-title" id="cookieTitle">Mēs cienām tavu privātumu</strong>
+      <span id="cookieText">Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. <a href="privatuma-politika">Uzzini vairāk</a></span>
     </div>
     <div class="cookie-actions">
-      <button id="cookieDecline" type="button">Noraidīt</button>
+      <button id="cookieSettingsBtn" type="button">Iestatījumi</button>
       <button id="cookieAccept" type="button">Piekrītu</button>
     </div>
+  </div>
+</div>
+
+<!-- Sīkdatņu piekrišana: preferenču logs -->
+<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
+  <div class="prefs-card">
+    <div class="prefs-head">
+      <h2 id="prefsTitle">Pārvaldīt sīkdatņu preferences</h2>
+      <button id="prefsClose" type="button" aria-label="Aizvērt">✕</button>
+    </div>
+    <div class="prefs-top-actions">
+      <button id="prefsRejectAll" type="button">Noraidīt visu</button>
+      <button id="prefsAcceptAll" type="button">Pieņemt visas</button>
+    </div>
+    <p class="prefs-intro" id="prefsIntro">Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. Pārējās tiek ielādētas tikai ar tavu piekrišanu.</p>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catNecessaryName">Nepieciešamās sīkdatnes</span>
+        <span class="prefs-always" id="catNecessaryAlways">Vienmēr atļauts</span>
+      </div>
+      <p class="prefs-cat-desc" id="catNecessaryDesc">Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.</p>
+    </div>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catAnalyticsName">Analītikas sīkdatnes</span>
+        <button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button>
+      </div>
+      <p class="prefs-cat-desc" id="catAnalyticsDesc">Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.</p>
+    </div>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catAdsName">Reklāmas sīkdatnes</span>
+        <button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button>
+      </div>
+      <p class="prefs-cat-desc" id="catAdsDesc">Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.</p>
+    </div>
+    <button id="prefsSave" type="button">Saglabāt preferences</button>
   </div>
 </div>
 
@@ -702,10 +788,22 @@
       mcInsertGrossTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
-      cookieTextHtml: 'Mēs izmantojam sīkdatnes vietnes darbībai, kā arī Google Analytics un Google reklāmām (AdSense). ' +
-        'Analītikas un reklāmas sīkdatnes tiek ielādētas tikai ar tavu piekrišanu. ' +
-        'Vairāk - <a href="privatuma-politika">privātuma politikā</a>.',
-      cookieAccept: 'Piekrītu', cookieDecline: 'Noraidīt'
+      cookieTitle: 'Mēs cienām tavu privātumu',
+      cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
+        '<a href="privatuma-politika">Uzzini vairāk</a>',
+      cookieAccept: 'Piekrītu', cookieSettings: 'Iestatījumi',
+      prefsTitle: 'Pārvaldīt sīkdatņu preferences', prefsCloseLabel: 'Aizvērt',
+      prefsRejectAll: 'Noraidīt visu', prefsAcceptAll: 'Pieņemt visas',
+      prefsIntro: 'Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. ' +
+        'Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. ' +
+        'Pārējās tiek ielādētas tikai ar tavu piekrišanu.',
+      catNecessaryName: 'Nepieciešamās sīkdatnes', alwaysOn: 'Vienmēr atļauts',
+      catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
+      catAnalyticsName: 'Analītikas sīkdatnes',
+      catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
+      catAdsName: 'Reklāmas sīkdatnes',
+      catAdsDesc: 'Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.',
+      prefsSave: 'Saglabāt preferences'
     },
     ru: {
       pageTitle: 'Калькулятор НДС - расчёт НДС для Латвии и всего ЕС',
@@ -732,10 +830,22 @@
       mcInsertGrossTitle: 'Вставить число с экрана в поле «Сумма с НДС»',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
-      cookieTextHtml: 'Мы используем файлы cookie для работы сайта, а также Google Analytics и рекламу Google (AdSense). ' +
-        'Аналитические и рекламные cookie загружаются только с вашего согласия. ' +
-        'Подробнее - в <a href="privatuma-politika">политике конфиденциальности</a>.',
-      cookieAccept: 'Принимаю', cookieDecline: 'Отклонить'
+      cookieTitle: 'Мы уважаем вашу конфиденциальность',
+      cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
+        '<a href="privatuma-politika">Узнать больше</a>',
+      cookieAccept: 'Принимаю', cookieSettings: 'Настройки',
+      prefsTitle: 'Управление настройками cookie', prefsCloseLabel: 'Закрыть',
+      prefsRejectAll: 'Отклонить все', prefsAcceptAll: 'Принять все',
+      prefsIntro: 'Мы используем cookie, чтобы сайт работал правильно и чтобы понимать, как им пользуются. ' +
+        'Необходимые cookie нельзя отключить - они хранят только ваши настройки. ' +
+        'Остальные загружаются только с вашего согласия.',
+      catNecessaryName: 'Необходимые cookie', alwaysOn: 'Всегда включены',
+      catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
+      catAnalyticsName: 'Аналитические cookie',
+      catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
+      catAdsName: 'Рекламные cookie',
+      catAdsDesc: 'Google AdSense - позволяет показывать рекламу, которая поддерживает бесплатную работу сайта.',
+      prefsSave: 'Сохранить настройки'
     },
     en: {
       pageTitle: 'VAT Calculator - VAT calculation for Latvia and the whole EU',
@@ -762,10 +872,22 @@
       mcInsertGrossTitle: 'Insert the number shown on the display into the “Amount with VAT” field',
       footer: '© 2026 pvnkalkulators.eu',
       footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
-      cookieTextHtml: 'We use cookies for the site to work, as well as Google Analytics and Google ads (AdSense). ' +
-        'Analytics and advertising cookies are loaded only with your consent. ' +
-        'Learn more in our <a href="privatuma-politika">privacy policy</a>.',
-      cookieAccept: 'I agree', cookieDecline: 'Decline'
+      cookieTitle: 'We respect your privacy',
+      cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
+        '<a href="privatuma-politika">Learn more</a>',
+      cookieAccept: 'I agree', cookieSettings: 'Settings',
+      prefsTitle: 'Manage cookie preferences', prefsCloseLabel: 'Close',
+      prefsRejectAll: 'Reject all', prefsAcceptAll: 'Accept all',
+      prefsIntro: 'We use cookies so the site works properly and to understand how it is used. ' +
+        'Necessary cookies cannot be turned off - they only store your settings. ' +
+        'All others load only with your consent.',
+      catNecessaryName: 'Necessary cookies', alwaysOn: 'Always on',
+      catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
+      catAnalyticsName: 'Analytics cookies',
+      catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
+      catAdsName: 'Advertising cookies',
+      catAdsDesc: 'Google AdSense - lets us show ads that keep the site free.',
+      prefsSave: 'Save preferences'
     }
   };
 
@@ -871,12 +993,22 @@
     document.getElementById('footerContact').textContent = t.footerContact;
 
     // Sīkdatņu piekrišanas josla
+    var cookieIds = {
+      cookieTitle: t.cookieTitle, cookieAccept: t.cookieAccept, cookieSettingsBtn: t.cookieSettings,
+      prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
+      prefsIntro: t.prefsIntro, catNecessaryName: t.catNecessaryName, catNecessaryAlways: t.alwaysOn,
+      catNecessaryDesc: t.catNecessaryDesc, catAnalyticsName: t.catAnalyticsName,
+      catAnalyticsDesc: t.catAnalyticsDesc, catAdsName: t.catAdsName, catAdsDesc: t.catAdsDesc,
+      prefsSave: t.prefsSave
+    };
+    Object.keys(cookieIds).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = cookieIds[id];
+    });
     var cookieText = document.getElementById('cookieText');
     if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
-    var cookieAccept = document.getElementById('cookieAccept');
-    if (cookieAccept) cookieAccept.textContent = t.cookieAccept;
-    var cookieDecline = document.getElementById('cookieDecline');
-    if (cookieDecline) cookieDecline.textContent = t.cookieDecline;
+    var prefsCloseEl = document.getElementById('prefsClose');
+    if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
 
     langSwitch.querySelectorAll('button').forEach(function (b) {
       var active = b.dataset.lang === lang;
@@ -1554,58 +1686,107 @@
 
 /* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
 (function () {
-  // ↓↓↓ IEVADI SAVUS ID (kamēr te ir "XXXX", skripti netiek ielādēti) ↓↓↓
   var GA_ID = 'G-VSLEWS7DRR';               // Google Analytics 4 mērījuma ID
   var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
-  // ↑↑↑ ------------------------------------------------------------- ↑↑↑
 
   var banner = document.getElementById('cookieBanner');
+  var prefs = document.getElementById('cookiePrefs');
   var acceptBtn = document.getElementById('cookieAccept');
-  var declineBtn = document.getElementById('cookieDecline');
-  var loaded = false;
+  var settingsBtn = document.getElementById('cookieSettingsBtn');
+  var prefsCloseBtn = document.getElementById('prefsClose');
+  var rejectAllBtn = document.getElementById('prefsRejectAll');
+  var acceptAllBtn = document.getElementById('prefsAcceptAll');
+  var saveBtn = document.getElementById('prefsSave');
+  var swAnalytics = document.getElementById('switchAnalytics');
+  var swAds = document.getElementById('switchAds');
+  var gaLoaded = false, adsLoaded = false;
 
   function loadScript(src, attrs) {
     var s = document.createElement('script');
     s.async = true; s.src = src;
     if (attrs) Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
     document.head.appendChild(s);
-    return s;
   }
-
-  function loadGoogle() {
-    if (loaded) return;
-    loaded = true;
-    // Google Analytics (GA4)
-    if (GA_ID.indexOf('XXX') === -1) {
+  function applyConsent(c) {
+    if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
+      gaLoaded = true;
       loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
-    // Google AdSense
-    if (ADSENSE_ID.indexOf('XXX') === -1) {
+    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
+      adsLoaded = true;
       loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
         { crossorigin: 'anonymous' });
     }
   }
 
-  function setConsent(v) { try { localStorage.setItem('pvn-consent', v); } catch (e) {} }
-  function getConsent() { try { return localStorage.getItem('pvn-consent'); } catch (e) { return null; } }
+  function readConsent() {
+    try {
+      var v2 = localStorage.getItem('pvn-consent-v2');
+      if (v2) return JSON.parse(v2);
+      // Vecais viena lēmuma formāts - pārtulkojam uz granulāro
+      var v1 = localStorage.getItem('pvn-consent');
+      if (v1 === 'granted') return { analytics: true, ads: true };
+      if (v1 === 'denied') return { analytics: false, ads: false };
+    } catch (e) {}
+    return null;
+  }
+  function saveConsent(c) {
+    try {
+      localStorage.setItem('pvn-consent-v2', JSON.stringify(c));
+      localStorage.removeItem('pvn-consent');
+    } catch (e) {}
+  }
 
-  function hideBanner() { banner.classList.remove('show'); }
+  function setSwitch(sw, on) { sw.setAttribute('aria-checked', String(on)); }
+  function getSwitch(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+  [swAnalytics, swAds].forEach(function (sw) {
+    sw.addEventListener('click', function () { setSwitch(sw, !getSwitch(sw)); });
+  });
+
   function showBanner() { banner.classList.add('show'); }
+  function hideBanner() { banner.classList.remove('show'); }
+  function openPrefs() {
+    var c = readConsent() || { analytics: false, ads: false };
+    setSwitch(swAnalytics, c.analytics);
+    setSwitch(swAds, c.ads);
+    prefs.classList.add('show');
+    prefsCloseBtn.focus();
+  }
+  function closePrefs(returnFocus) {
+    prefs.classList.remove('show');
+    if (returnFocus && banner.classList.contains('show')) settingsBtn.focus();
+  }
+  function finish(c) {
+    saveConsent(c);
+    applyConsent(c);
+    closePrefs(false);
+    hideBanner();
+  }
 
-  var consent = getConsent();
-  if (consent === 'granted') { loadGoogle(); }
-  else if (consent !== 'denied') { showBanner(); } // rāda tikai pirmajā reizē
+  acceptBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  settingsBtn.addEventListener('click', openPrefs);
+  prefsCloseBtn.addEventListener('click', function () { closePrefs(true); });
+  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false, ads: false }); });
+  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  saveBtn.addEventListener('click', function () {
+    finish({ analytics: getSwitch(swAnalytics), ads: getSwitch(swAds) });
+  });
+  prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true);
+  });
 
-  acceptBtn.addEventListener('click', function () { setConsent('granted'); hideBanner(); loadGoogle(); });
-  declineBtn.addEventListener('click', function () { setConsent('denied'); hideBanner(); });
+  var consent = readConsent();
+  if (consent) applyConsent(consent);
+  else showBanner(); // rāda tikai, kamēr izvēle vēl nav izdarīta
 
-  // Ļauj vēlāk atkārtoti atvērt joslu (piem. no privātuma politikas): #cookies
-  window.pvnOpenCookieBanner = showBanner;
-  if (location.hash === '#cookies') showBanner();
+  // Preferenču atkārtota atvēršana (piem. no privātuma politikas): #cookies
+  window.pvnOpenCookieBanner = openPrefs;
+  if (location.hash === '#cookies') openPrefs();
 })();
 </script>
 
