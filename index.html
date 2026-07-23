@@ -306,6 +306,18 @@
   }
   @media (hover: hover) { #clearBtn:hover { color: var(--accent); } }
 
+  .home-info {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow);
+    padding: 20px 24px; margin: 0 0 24px;
+  }
+  .home-info h2 { font-size: 1.15rem; margin-bottom: 8px; }
+  .home-info p { color: var(--muted); font-size: .95rem; margin-bottom: 10px; }
+  .home-info p:last-child { margin-bottom: 0; }
+  .home-info a { color: var(--accent); text-decoration: none; }
+  @media (hover: hover) { .home-info a:hover { text-decoration: underline; } }
+  .home-info .home-note { font-size: .88rem; }
+
   footer {
     border-top: 1px solid var(--border); padding: 22px 0 34px;
     color: var(--muted); font-size: .88rem; text-align: center;
@@ -534,6 +546,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -621,11 +634,19 @@
     </button>
   </div>
 
+  <section class="home-info" id="homeInfo">
+    <h2>Par PVN kalkulatoru</h2>
+    <p>Šis bezmaksas PVN kalkulators palīdz ātri pieskaitīt vai atdalīt pievienotās vērtības nodokli - Latvijas 21%, 12% un 5% likmei, kā arī visu 27 ES dalībvalstu likmēm. Ieraksti summu jebkurā laukā, un otrs, kā arī PVN daļa, aprēķinās automātiski. Tas noder e-komercijai, rēķinu sagatavošanai un OSS deklarācijām.</p>
+    <p>Ja vēlies saprast, kā PVN darbojas un kad kuru likmi piemēro, sāc ar <a href="pvn-latvija">PVN rokasgrāmatu</a>. Praktiskus aprēķina piemērus atradīsi <a href="instrukcijas">instrukcijās</a>, bet atbildes uz biežākajiem jautājumiem - <a href="buj">BUJ sadaļā</a>. Visu ES valstu likmju pārskatu skaties sadaļā <a href="likmes">Likmes</a>.</p>
+    <p class="home-note">Kalkulators ir informatīvs palīgrīks. Oficiāliem rēķiniem un deklarācijām pārbaudi piemērojamo likmi oficiālajos avotos vai ar grāmatvedi.</p>
+  </section>
+
 </main>
 
 <footer>
   <div class="wrap">
     <div class="footer-links">
+      <a href="pvn-latvija" id="footerGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footerInstrukcijas">Instrukcijas</a> ·
       <a href="privatuma-politika" id="footerPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footerContact">Kontakti</a>
@@ -766,9 +787,14 @@
     lv: {
       pageTitle: 'PVN Kalkulators - PVN aprēķins Latvijai un visai ES',
       pageDescription: 'Bezmaksas PVN kalkulators ar visu ES valstu likmēm - noderīgs e-komercijai un OSS (One Stop Shop) deklarācijām. Ar iebūvētu papildu kalkulatoru.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN kalkulators',
       subtitleHtml: 'Raksti summu <strong>jebkurā</strong> no laukiem - pārējais aprēķinās automātiski.',
+      homeInfoHtml:
+        '<h2>Par PVN kalkulatoru</h2>' +
+        '<p>Šis bezmaksas PVN kalkulators palīdz ātri pieskaitīt vai atdalīt pievienotās vērtības nodokli - Latvijas 21%, 12% un 5% likmei, kā arī visu 27 ES dalībvalstu likmēm. Ieraksti summu jebkurā laukā, un otrs, kā arī PVN daļa, aprēķinās automātiski. Tas noder e-komercijai, rēķinu sagatavošanai un OSS deklarācijām.</p>' +
+        '<p>Ja vēlies saprast, kā PVN darbojas un kad kuru likmi piemēro, sāc ar <a href="pvn-latvija">PVN rokasgrāmatu</a>. Praktiskus aprēķina piemērus atradīsi <a href="instrukcijas">instrukcijās</a>, bet atbildes uz biežākajiem jautājumiem - <a href="buj">BUJ sadaļā</a>. Visu ES valstu likmju pārskatu skaties sadaļā <a href="likmes">Likmes</a>.</p>' +
+        '<p class="home-note">Kalkulators ir informatīvs palīgrīks. Oficiāliem rēķiniem un deklarācijām pārbaudi piemērojamo likmi oficiālajos avotos vai ar grāmatvedi.</p>',
       valstsLabel: 'Valsts', likmeLabel: 'PVN likme',
       customPlaceholder: 'Cita', customTitle: 'Ievadi savu PVN likmi procentos',
       netLabel: 'Summa bez PVN', grossLabel: 'Summa ar PVN',
@@ -787,7 +813,7 @@
       mcInsertNetTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa bez PVN”',
       mcInsertGrossTitle: 'Ielikt displejā redzamo skaitli PVN kalkulatora laukā “Summa ar PVN”',
       footer: '© 2026 pvnkalkulators.eu',
-      footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
+      footerGuide: 'Rokasgrāmata', footerInstrukcijas: 'Instrukcijas', footerPrivacy: 'Privātuma politika', footerContact: 'Kontakti',
       cookieTitle: 'Mēs cienām tavu privātumu',
       cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
         '<a href="privatuma-politika">Uzzini vairāk</a>',
@@ -808,9 +834,14 @@
     ru: {
       pageTitle: 'Калькулятор НДС - расчёт НДС для Латвии и всего ЕС',
       pageDescription: 'Бесплатный калькулятор НДС со ставками всех стран ЕС - удобен для e-commerce и деклараций OSS (One Stop Shop). Со встроенным дополнительным калькулятором.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Калькулятор НДС',
       subtitleHtml: 'Введите сумму в <strong>любое</strong> поле - остальное рассчитается автоматически.',
+      homeInfoHtml:
+        '<h2>О калькуляторе НДС</h2>' +
+        '<p>Этот бесплатный калькулятор НДС помогает быстро прибавить или выделить налог на добавленную стоимость - по латвийским ставкам 21%, 12% и 5%, а также по ставкам всех 27 стран ЕС. Введите сумму в любое поле, и второе, а также доля НДС, рассчитаются автоматически. Это удобно для электронной коммерции, подготовки счетов и деклараций OSS.</p>' +
+        '<p>Если вы хотите понять, как работает НДС и когда применяется та или иная ставка, начните с <a href="pvn-latvija">руководства по НДС</a>. Практические примеры расчёта есть в <a href="instrukcijas">инструкциях</a>, а ответы на частые вопросы - в разделе <a href="buj">Вопросы</a>. Обзор ставок всех стран ЕС смотрите в разделе <a href="likmes">Ставки</a>.</p>' +
+        '<p class="home-note">Калькулятор - это информационный вспомогательный инструмент. Для официальных счетов и деклараций проверяйте применяемую ставку в официальных источниках или у бухгалтера.</p>',
       valstsLabel: 'Страна', likmeLabel: 'Ставка НДС',
       customPlaceholder: 'Другая', customTitle: 'Введите свою ставку НДС в процентах',
       netLabel: 'Сумма без НДС', grossLabel: 'Сумма с НДС',
@@ -829,7 +860,7 @@
       mcInsertNetTitle: 'Вставить число с экрана в поле «Сумма без НДС»',
       mcInsertGrossTitle: 'Вставить число с экрана в поле «Сумма с НДС»',
       footer: '© 2026 pvnkalkulators.eu',
-      footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
+      footerGuide: 'Руководство', footerInstrukcijas: 'Инструкции', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
       cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
         '<a href="privatuma-politika">Узнать больше</a>',
@@ -850,9 +881,14 @@
     en: {
       pageTitle: 'VAT Calculator - VAT calculation for Latvia and the whole EU',
       pageDescription: 'Free VAT calculator with rates for every EU country - handy for e-commerce and OSS (One Stop Shop) returns. Includes a built-in extra calculator.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT Calculator',
       subtitleHtml: 'Type an amount into <strong>either</strong> field - the other calculates automatically.',
+      homeInfoHtml:
+        '<h2>About the VAT calculator</h2>' +
+        '<p>This free VAT calculator helps you quickly add or remove value-added tax - for Latvia\'s 21%, 12% and 5% rates as well as the rates of all 27 EU countries. Type an amount into either field and the other, along with the VAT part, is calculated automatically. It is handy for e-commerce, preparing invoices and OSS returns.</p>' +
+        '<p>If you want to understand how VAT works and when each rate applies, start with the <a href="pvn-latvija">VAT guide</a>. Practical calculation examples are in the <a href="instrukcijas">instructions</a>, and answers to common questions are in the <a href="buj">FAQ</a>. See an overview of the rates for all EU countries in the <a href="likmes">Rates</a> section.</p>' +
+        '<p class="home-note">The calculator is an informational helper tool. For official invoices and returns, check the applicable rate in official sources or with an accountant.</p>',
       valstsLabel: 'Country', likmeLabel: 'VAT rate',
       customPlaceholder: 'Other', customTitle: 'Enter your own VAT rate in percent',
       netLabel: 'Amount without VAT', grossLabel: 'Amount with VAT',
@@ -871,7 +907,7 @@
       mcInsertNetTitle: 'Insert the number shown on the display into the “Amount without VAT” field',
       mcInsertGrossTitle: 'Insert the number shown on the display into the “Amount with VAT” field',
       footer: '© 2026 pvnkalkulators.eu',
-      footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
+      footerGuide: 'Guide', footerInstrukcijas: 'Instructions', footerPrivacy: 'Privacy policy', footerContact: 'Contact',
       cookieTitle: 'We respect your privacy',
       cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
         '<a href="privatuma-politika">Learn more</a>',
@@ -955,12 +991,14 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
 
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
     document.getElementById('navKontakti').textContent = t.navKontakti;
     document.getElementById('mainH1').textContent = t.h1;
     document.getElementById('subtitleText').innerHTML = t.subtitleHtml;
+    document.getElementById('homeInfo').innerHTML = t.homeInfoHtml;
     document.getElementById('countryLabel').textContent = t.valstsLabel;
     document.getElementById('likmeLabel').textContent = t.likmeLabel;
     customEl.placeholder = t.customPlaceholder;
@@ -988,6 +1026,7 @@
     document.getElementById('mcInsertGross').title = t.mcInsertGrossTitle;
 
     document.getElementById('footerText').textContent = t.footer;
+    document.getElementById('footerGuide').textContent = t.footerGuide;
     document.getElementById('footerInstrukcijas').textContent = t.footerInstrukcijas;
     document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
     document.getElementById('footerContact').textContent = t.footerContact;

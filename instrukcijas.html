@@ -137,6 +137,10 @@
   }
   .tip strong { color: var(--text); }
 
+  .more { margin-top: 18px; color: var(--muted); font-size: .95rem; }
+  .more a { color: var(--accent); text-decoration: none; }
+  .more a:hover { text-decoration: underline; }
+
   .back-link { display: inline-block; margin-top: 4px; color: var(--accent); text-decoration: none; font-size: .95rem; }
   .back-link:hover { text-decoration: underline; }
 
@@ -268,6 +272,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -304,6 +309,18 @@
     <div class="tip" id="tipText"><strong>Padoms:</strong> spiežot “Kopēt” jebkuram PVN kalkulatora laukam, vērtība automātiski nonāk arī peldošajā kalkulatorā - vari uzreiz turpināt ar to rēķināt.</div>
   </div>
 
+  <div class="step-card">
+    <h2 id="card3Title">Piemērs soli pa solim</h2>
+    <ol id="card3List">
+      <li>Pieskaitīt PVN: ievadi 100 laukā “Summa bez PVN”. Pie 21% likmes lauks “Summa ar PVN” parāda 121,00 EUR, un “PVN summa” ir 21,00 EUR.</li>
+      <li>Atdalīt PVN: ievadi 121 laukā “Summa ar PVN”. Lauks “Summa bez PVN” parāda 100,00 EUR, un “PVN summa” atkal ir 21,00 EUR.</li>
+      <li>Cita likme: ievadi vēlamo procentu laukā “Cita %” (piemēram, 9), un aprēķins notiek pēc tās pašas formulas.</li>
+      <li>Cita valsts: izvēlnē “Valsts” izvēlies, piemēram, Vāciju, lai rēķinātu pēc tās likmēm - noderīgi pārrobežu pārdošanā.</li>
+    </ol>
+  </div>
+
+  <p class="more" id="moreText">Uzzini vairāk: <a href="pvn-latvija">PVN rokasgrāmata</a> · <a href="buj">biežāk uzdotie jautājumi</a> · <a href="likmes">PVN likmes</a>.</p>
+
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
@@ -311,6 +328,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
@@ -378,7 +396,7 @@
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Kā lietot kalkulatoru',
       pageDescription: 'Īss ceļvedis, kā lietot PVN kalkulatoru un iebūvēto peldošo kalkulatoru - soli pa solim.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'Kā lietot kalkulatoru',
       lead: 'Īss ceļvedis PVN kalkulatoram un iebūvētajam papildu kalkulatoram.',
       card1Title: 'PVN kalkulators',
@@ -397,8 +415,16 @@
         'Kalkulatoru vari aizvērt ar “✕” pogu vai spiežot vēlreiz uz mēlītes.'
       ],
       tipHtml: '<strong>Padoms:</strong> spiežot “Kopēt” jebkuram PVN kalkulatora laukam, vērtība automātiski nonāk arī peldošajā kalkulatorā - vari uzreiz turpināt ar to rēķināt.',
+      card3Title: 'Piemērs soli pa solim',
+      card3: [
+        'Pieskaitīt PVN: ievadi 100 laukā “Summa bez PVN”. Pie 21% likmes lauks “Summa ar PVN” parāda 121,00 EUR, un “PVN summa” ir 21,00 EUR.',
+        'Atdalīt PVN: ievadi 121 laukā “Summa ar PVN”. Lauks “Summa bez PVN” parāda 100,00 EUR, un “PVN summa” atkal ir 21,00 EUR.',
+        'Cita likme: ievadi vēlamo procentu laukā “Cita %” (piemēram, 9), un aprēķins notiek pēc tās pašas formulas.',
+        'Cita valsts: izvēlnē “Valsts” izvēlies, piemēram, Vāciju, lai rēķinātu pēc tās likmēm - noderīgi pārrobežu pārdošanā.'
+      ],
+      moreHtml: 'Uzzini vairāk: <a href="pvn-latvija">PVN rokasgrāmata</a> · <a href="buj">biežāk uzdotie jautājumi</a> · <a href="likmes">PVN likmes</a>.',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes',
       footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
@@ -422,7 +448,7 @@
     ru: {
       htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Как пользоваться калькулятором',
       pageDescription: 'Краткое руководство по использованию калькулятора НДС и встроенного плавающего калькулятора - пошагово.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Как пользоваться калькулятором',
       lead: 'Краткое руководство по калькулятору НДС и встроенному дополнительному калькулятору.',
       card1Title: 'Калькулятор НДС',
@@ -441,8 +467,16 @@
         'Калькулятор можно закрыть кнопкой «✕» или повторным нажатием на ярлычок.'
       ],
       tipHtml: '<strong>Совет:</strong> нажимая «Копировать» у любого поля калькулятора НДС, значение автоматически попадает и в плавающий калькулятор - можно сразу продолжить с ним считать.',
+      card3Title: 'Пример шаг за шагом',
+      card3: [
+        'Прибавить НДС: введите 100 в поле «Сумма без НДС». При ставке 21% поле «Сумма с НДС» показывает 121,00 EUR, а «Сумма НДС» - 21,00 EUR.',
+        'Выделить НДС: введите 121 в поле «Сумма с НДС». Поле «Сумма без НДС» показывает 100,00 EUR, а «Сумма НДС» снова 21,00 EUR.',
+        'Другая ставка: введите нужный процент в поле «Другая %» (например, 9), и расчёт идёт по той же формуле.',
+        'Другая страна: в меню «Страна» выберите, например, Германию, чтобы считать по её ставкам - удобно при трансграничных продажах.'
+      ],
+      moreHtml: 'Узнать больше: <a href="pvn-latvija">руководство по НДС</a> · <a href="buj">частые вопросы</a> · <a href="likmes">ставки НДС</a>.',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки',
       footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
@@ -466,7 +500,7 @@
     en: {
       htmlLang: 'en', pageTitle: 'VAT Calculator - How to use the calculator',
       pageDescription: 'A quick step-by-step guide on how to use the VAT calculator and the built-in floating calculator.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'How to use the calculator',
       lead: 'A quick guide to the VAT calculator and the built-in extra calculator.',
       card1Title: 'VAT calculator',
@@ -485,8 +519,16 @@
         'Close the calculator with the “✕” button or by clicking the tab again.'
       ],
       tipHtml: '<strong>Tip:</strong> clicking “Copy” on any VAT calculator field also sends the value into the floating calculator, so you can keep calculating with it right away.',
+      card3Title: 'A step-by-step example',
+      card3: [
+        'Adding VAT: enter 100 in the “Amount without VAT” field. At a 21% rate the “Amount with VAT” field shows 121.00 EUR, and “VAT amount” is 21.00 EUR.',
+        'Removing VAT: enter 121 in the “Amount with VAT” field. The “Amount without VAT” field shows 100.00 EUR, and “VAT amount” is again 21.00 EUR.',
+        'A different rate: type the percentage you need into the “Other %” field (for example 9), and the calculation uses the same formula.',
+        'A different country: in the “Country” menu pick, for example, Germany to calculate at its rates - handy for cross-border sales.'
+      ],
+      moreHtml: 'Learn more: <a href="pvn-latvija">VAT guide</a> · <a href="buj">frequently asked questions</a> · <a href="likmes">VAT rates</a>.',
       back: '← Back to the calculator',
-      footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates',
       footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
@@ -529,6 +571,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -540,8 +583,12 @@
     document.getElementById('card2Title').textContent = t.card2Title;
     renderList(document.getElementById('card2List'), t.card2);
     document.getElementById('tipText').innerHTML = t.tipHtml;
+    document.getElementById('card3Title').textContent = t.card3Title;
+    renderList(document.getElementById('card3List'), t.card3);
+    document.getElementById('moreText').innerHTML = t.moreHtml;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;

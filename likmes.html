@@ -189,6 +189,20 @@
   .rate-card li { margin-bottom: 4px; }
   .rate-card p { color: var(--muted); font-size: .95rem; margin-top: 10px; }
 
+  .info { margin-top: 30px; }
+  .info h2 { font-size: 1.22rem; margin: 28px 0 8px; }
+  .info h2:first-child { margin-top: 0; }
+  .info p { margin-bottom: 12px; }
+  .info ul { margin: 0 0 14px 20px; }
+  .info li { margin-bottom: 6px; }
+  .info a { color: var(--accent); text-decoration: none; }
+  .info a:hover { text-decoration: underline; }
+  .info strong { color: var(--text); }
+  .info .disclaimer {
+    font-size: .88rem; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 24px;
+  }
+
   .back-link { display: inline-block; margin-top: 18px; color: var(--accent); text-decoration: none; font-size: .95rem; }
   .back-link:hover { text-decoration: underline; }
 
@@ -320,6 +334,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -344,6 +359,32 @@
     <div class="rate-card" id="rateCard" aria-live="polite"></div>
   </section>
 
+  <article class="info" id="ratesInfo">
+    <h2>Standarta, samazinātās un nulles likmes</h2>
+    <p>Katrā ES valstī ir viena standarta PVN likme, ko piemēro lielākajai daļai preču un pakalpojumu. Papildus tai var būt viena vai vairākas samazinātās likmes noteiktām grupām - piemēram, pārtikai, medikamentiem, grāmatām, presei, pasažieru transportam vai izmitināšanai. Dažām precēm piemēro arī 0% likmi, kas nav tas pats, kas atbrīvojums no PVN: pie nulles likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli.</p>
+    <p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>
+
+    <h2>PVN likmes Latvijā</h2>
+    <ul>
+      <li><strong>21%</strong> - standarta likme lielākajai daļai preču un pakalpojumu.</li>
+      <li><strong>12%</strong> - samazinātā likme, piemēram, recepšu medikamentiem un medicīnas ierīcēm, sabiedriskajam transportam, izmitināšanai un centralizētajai siltumapgādei mājsaimniecībām.</li>
+      <li><strong>5%</strong> - samazinātā likme atsevišķām pārtikas un preses izdevumu grupām.</li>
+      <li><strong>0%</strong> - nulles likme, piemēram, eksportam un preču piegādēm citu ES valstu PVN maksātājiem.</li>
+    </ul>
+    <p>Vairāk par to, kā šīs likmes darbojas un kad tās piemēro, lasi <a href="pvn-latvija">PVN rokasgrāmatā</a>. Lai ātri aprēķinātu summu pēc jebkuras likmes, izmanto <a href="/">kalkulatoru</a>.</p>
+
+    <h2>Kāpēc likmes ES valstīs atšķiras</h2>
+    <p>PVN Eiropas Savienībā ir daļēji saskaņots, bet katra dalībvalsts pati nosaka savas likmes noteiktās robežās. Tāpēc standarta likme svārstās no 17% Luksemburgā līdz 27% Ungārijā. Tas ir svarīgi pārrobežu tirdzniecībā: pārdodot privātpersonām citās ES valstīs, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā.</p>
+
+    <h2>Avoti un atruna</h2>
+    <p>Likmes ir informatīvas un atspoguļo situāciju lapas pēdējās pārbaudes brīdī. Aktuālās likmes skaties oficiālajos avotos:</p>
+    <ul>
+      <li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a> (Latvija).</li>
+      <li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a> (visas ES valstis).</li>
+    </ul>
+    <p class="disclaimer">Šī lapa ir informatīva un nav nodokļu konsultācija. Likmes un to piemērošanas nosacījumi var mainīties.</p>
+  </article>
+
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
@@ -351,6 +392,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
@@ -418,7 +460,7 @@
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN Kalkulators - PVN likmes Latvijā un ES',
       pageDescription: 'PVN likmju pārskats ar piemēriem: Latvijas 21%, 12%, 5% un 0% likmes un visu 27 ES dalībvalstu PVN likmes - kam katra likme piemērojama.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'PVN likmes',
       lead: 'Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.',
       countryLabel: 'Valsts',
@@ -427,8 +469,29 @@
       redOne: 'samazinātā likme atsevišķām preču un pakalpojumu grupām',
       zero: 'atsevišķiem darījumiem, piemēram, eksportam',
       noRed: 'Šajā valstī samazinātu PVN likmju nav - gandrīz visam piemēro standarta likmi.',
+      infoHtml:
+        '<h2>Standarta, samazinātās un nulles likmes</h2>' +
+        '<p>Katrā ES valstī ir viena standarta PVN likme, ko piemēro lielākajai daļai preču un pakalpojumu. Papildus tai var būt viena vai vairākas samazinātās likmes noteiktām grupām - piemēram, pārtikai, medikamentiem, grāmatām, presei, pasažieru transportam vai izmitināšanai. Dažām precēm piemēro arī 0% likmi, kas nav tas pats, kas atbrīvojums no PVN: pie nulles likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli.</p>' +
+        '<p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>' +
+        '<h2>PVN likmes Latvijā</h2>' +
+        '<ul>' +
+          '<li><strong>21%</strong> - standarta likme lielākajai daļai preču un pakalpojumu.</li>' +
+          '<li><strong>12%</strong> - samazinātā likme, piemēram, recepšu medikamentiem un medicīnas ierīcēm, sabiedriskajam transportam, izmitināšanai un centralizētajai siltumapgādei mājsaimniecībām.</li>' +
+          '<li><strong>5%</strong> - samazinātā likme atsevišķām pārtikas un preses izdevumu grupām.</li>' +
+          '<li><strong>0%</strong> - nulles likme, piemēram, eksportam un preču piegādēm citu ES valstu PVN maksātājiem.</li>' +
+        '</ul>' +
+        '<p>Vairāk par to, kā šīs likmes darbojas un kad tās piemēro, lasi <a href="pvn-latvija">PVN rokasgrāmatā</a>. Lai ātri aprēķinātu summu pēc jebkuras likmes, izmanto <a href="/">kalkulatoru</a>.</p>' +
+        '<h2>Kāpēc likmes ES valstīs atšķiras</h2>' +
+        '<p>PVN Eiropas Savienībā ir daļēji saskaņots, bet katra dalībvalsts pati nosaka savas likmes noteiktās robežās. Tāpēc standarta likme svārstās no 17% Luksemburgā līdz 27% Ungārijā. Tas ir svarīgi pārrobežu tirdzniecībā: pārdodot privātpersonām citās ES valstīs, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā.</p>' +
+        '<h2>Avoti un atruna</h2>' +
+        '<p>Likmes ir informatīvas un atspoguļo situāciju lapas pēdējās pārbaudes brīdī. Aktuālās likmes skaties oficiālajos avotos:</p>' +
+        '<ul>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a> (Latvija).</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a> (visas ES valstis).</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Šī lapa ir informatīva un nav nodokļu konsultācija. Likmes un to piemērošanas nosacījumi var mainīties.</p>',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -451,7 +514,7 @@
     ru: {
       htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Ставки НДС в Латвии и ЕС',
       pageDescription: 'Обзор ставок НДС с примерами: латвийские ставки 21%, 12%, 5% и 0%, а также ставки НДС всех 27 стран ЕС - какая ставка применяется к какой категории.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Ставки НДС',
       lead: 'Ставки налога на добавленную стоимость в Латвии и других странах ЕС.',
       countryLabel: 'Страна',
@@ -460,8 +523,29 @@
       redOne: 'сниженная ставка для отдельных групп товаров и услуг',
       zero: 'отдельные операции, например экспорт',
       noRed: 'В этой стране нет сниженных ставок НДС - почти ко всему применяется стандартная ставка.',
+      infoHtml:
+        '<h2>Стандартная, сниженные и нулевая ставки</h2>' +
+        '<p>В каждой стране ЕС есть одна стандартная ставка НДС, которая применяется к большинству товаров и услуг. Дополнительно могут действовать одна или несколько сниженных ставок для определённых групп - например, для продуктов питания, лекарств, книг, прессы, пассажирского транспорта или размещения. К отдельным товарам применяется и ставка 0%, что не то же самое, что освобождение от НДС: при нулевой ставке предприятие сохраняет право на вычет входного налога.</p>' +
+        '<p>Выберите страну вверху, чтобы увидеть её стандартную ставку и основные примеры сниженных ставок. Точную ставку для конкретного товара всегда проверяйте в материалах налогового органа соответствующей страны.</p>' +
+        '<h2>Ставки НДС в Латвии</h2>' +
+        '<ul>' +
+          '<li><strong>21%</strong> - стандартная ставка для большинства товаров и услуг.</li>' +
+          '<li><strong>12%</strong> - сниженная ставка, например, для рецептурных медикаментов и медицинских изделий, общественного транспорта, размещения и централизованного теплоснабжения для домохозяйств.</li>' +
+          '<li><strong>5%</strong> - сниженная ставка для отдельных групп продуктов питания и периодических изданий.</li>' +
+          '<li><strong>0%</strong> - нулевая ставка, например, для экспорта и поставок товаров плательщикам НДС из других стран ЕС.</li>' +
+        '</ul>' +
+        '<p>Подробнее о том, как эти ставки работают и когда применяются, читайте в <a href="pvn-latvija">руководстве по НДС</a>. Чтобы быстро рассчитать сумму по любой ставке, используйте <a href="/">калькулятор</a>.</p>' +
+        '<h2>Почему ставки в странах ЕС различаются</h2>' +
+        '<p>НДС в Европейском союзе частично гармонизирован, но каждая страна сама устанавливает свои ставки в определённых пределах. Поэтому стандартная ставка колеблется от 17% в Люксембурге до 27% в Венгрии. Это важно в трансграничной торговле: при продаже частным лицам в других странах ЕС НДС часто нужно применять по ставке страны покупателя и декларировать через систему OSS (One Stop Shop).</p>' +
+        '<h2>Источники и оговорка</h2>' +
+        '<p>Ставки носят информационный характер и отражают ситуацию на момент последней проверки страницы. Актуальные ставки смотрите в официальных источниках:</p>' +
+        '<ul>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Министерство финансов - ставки НДС</a> (Латвия).</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Европейская комиссия - НДС</a> (все страны ЕС).</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Ставки и условия их применения могут меняться.</p>',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -484,7 +568,7 @@
     en: {
       htmlLang: 'en', pageTitle: 'VAT Calculator - VAT rates in Latvia and the EU',
       pageDescription: 'Overview of VAT rates with examples: Latvia\'s 21%, 12%, 5% and 0% rates and VAT rates for all 27 EU countries - which rate applies to which category.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'VAT rates',
       lead: 'Value-added tax rates in Latvia and other EU countries.',
       countryLabel: 'Country',
@@ -493,8 +577,29 @@
       redOne: 'a reduced rate for certain groups of goods and services',
       zero: 'certain transactions, e.g. exports',
       noRed: 'This country has no reduced VAT rates - the standard rate applies to almost everything.',
+      infoHtml:
+        '<h2>Standard, reduced and zero rates</h2>' +
+        '<p>Each EU country has one standard VAT rate applied to most goods and services. On top of that there may be one or more reduced rates for certain groups - for example food, medicines, books, the press, passenger transport or accommodation. Some goods are also taxed at 0%, which is not the same as a VAT exemption: at the zero rate a business keeps the right to deduct input VAT.</p>' +
+        '<p>Pick a country above to see its standard rate and the main examples of reduced rates. Always check the exact rate for a specific product in the materials of that country\'s tax authority.</p>' +
+        '<h2>VAT rates in Latvia</h2>' +
+        '<ul>' +
+          '<li><strong>21%</strong> - the standard rate for most goods and services.</li>' +
+          '<li><strong>12%</strong> - a reduced rate, e.g. for prescription medicines and medical devices, public transport, accommodation and district heating for households.</li>' +
+          '<li><strong>5%</strong> - a reduced rate for certain groups of food products and periodicals.</li>' +
+          '<li><strong>0%</strong> - the zero rate, e.g. for exports and supplies of goods to VAT payers in other EU countries.</li>' +
+        '</ul>' +
+        '<p>Read more about how these rates work and when they apply in the <a href="pvn-latvija">VAT guide</a>. To quickly work out an amount at any rate, use the <a href="/">calculator</a>.</p>' +
+        '<h2>Why rates differ across EU countries</h2>' +
+        '<p>VAT in the European Union is partly harmonised, but each member state sets its own rates within certain limits. That is why the standard rate ranges from 17% in Luxembourg to 27% in Hungary. This matters in cross-border trade: when selling to private individuals in other EU countries, VAT often has to be applied at the buyer\'s country rate and reported via the One Stop Shop (OSS) scheme.</p>' +
+        '<h2>Sources and disclaimer</h2>' +
+        '<p>The rates are informational and reflect the situation at the time the page was last checked. See the current rates in official sources:</p>' +
+        '<ul>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Ministry of Finance - VAT rates</a> (Latvia).</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">European Commission - VAT</a> (all EU countries).</li>' +
+        '</ul>' +
+        '<p class="disclaimer">This page is informational and is not tax advice. Rates and the conditions for applying them can change.</p>',
       back: '← Back to the calculator',
-      footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -955,6 +1060,7 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('lastChecked').textContent = formatCheckedDate(l);
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -965,8 +1071,10 @@
     renderCountryBtn();
     renderCountryList();
     renderCard();
+    document.getElementById('ratesInfo').innerHTML = t.infoHtml;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;

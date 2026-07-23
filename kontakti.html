@@ -289,6 +289,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -334,6 +335,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
@@ -404,7 +406,7 @@
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Kontakti',
       pageDescription: 'Sazinies ar pvnkalkulators.eu - jautājumi, idejas un sadarbības piedāvājumi. Atbildēsim vienas darba dienas laikā.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       title: 'Sazinies ar mums',
       text: 'Jautājums, ideja vai sadarbības piedāvājums? Uzraksti - atbildēsim vienas darba dienas laikā.',
       lblName: 'Vārds', phName: 'Jūsu vārds',
@@ -416,7 +418,7 @@
       errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
       errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
       altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -439,7 +441,7 @@
     ru: {
       htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Контакты',
       pageDescription: 'Свяжитесь с pvnkalkulators.eu - вопросы, идеи и предложения о сотрудничестве. Ответим в течение одного рабочего дня.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       title: 'Свяжитесь с нами',
       text: 'Вопрос, идея или предложение о сотрудничестве? Напишите нам - ответим в течение одного рабочего дня.',
       lblName: 'Имя', phName: 'Ваше имя',
@@ -451,7 +453,7 @@
       errEmail: 'Пожалуйста, введите корректный e-mail.',
       errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
       altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
-      footHome: 'Главная', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -474,7 +476,7 @@
     en: {
       htmlLang: 'en', pageTitle: 'VAT Calculator - Contact',
       pageDescription: 'Contact pvnkalkulators.eu - questions, ideas and partnership offers. We\'ll reply within one working day.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       title: 'Get in touch',
       text: 'A question, an idea or a partnership proposal? Drop us a line \u2014 we\u2019ll reply within one working day.',
       lblName: 'Name', phName: 'Your name',
@@ -486,7 +488,7 @@
       errEmail: 'Please enter a valid email address.',
       errSend: 'Could not send. Try again later or email us directly.',
       altMail: 'Or write to us directly:', back: '← Back to the calculator',
-      footHome: 'Home', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator',
       cookieTitle: 'We respect your privacy',
@@ -529,6 +531,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -544,6 +547,7 @@
     submitBtn.textContent = t.send;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;

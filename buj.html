@@ -57,6 +57,70 @@
         "@type": "Answer",
         "text": "Galvenokārt e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā. Kalkulatorā izvēlies attiecīgo valsti un aprēķini precīzu summu."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Kas ir PVN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pievienotās vērtības nodoklis (PVN) ir patēriņa nodoklis, ko piemēro gandrīz visām precēm un pakalpojumiem. To samaksā pircējs, bet valstij iekasē un pārskaita pārdevējs. Katrs uzņēmums pieskaita PVN pārdošanas cenai un atskaita PVN, ko pats samaksājis iepirkumos, tāpēc nodoklis gulstas uz galapatērētāju."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kādas PVN likmes ir spēkā Latvijā?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Latvijā ir standarta likme 21%, ko piemēro lielākajai daļai preču un pakalpojumu, divas samazinātās likmes 12% un 5% atsevišķām preču un pakalpojumu grupām, kā arī 0% likme, piemēram, eksportam un preču piegādēm citu ES valstu PVN maksātājiem. Konkrētās likmes piemērošanu pārbaudi VID materiālos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kad uzņēmumam jāreģistrējas PVN maksātājam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reģistrācija VID PVN maksātāju reģistrā kļūst obligāta, kad ar nodokli apliekamo darījumu vērtība kalendārā gadā sasniedz 50 000 eiro. Reģistrēties var arī brīvprātīgi jau agrāk. Slieksnis un aprēķina kārtība laika gaitā mainās, tāpēc aktuālo informāciju skaties VID vietnē."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar kuras valsts likmi jārēķina PVN, pārdodot citā ES valstī?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pārdodot privātpersonām citās ES valstīs, pēc kopējā tālpārdošanas sliekšņa pārsniegšanas PVN parasti piemēro pēc pircēja valsts likmes un deklarē OSS sistēmā. Darījumos starp diviem PVN maksātājiem bieži piemēro apgriezto PVN. Kalkulatorā izvēlies pircēja valsti, lai aprēķinātu summu pēc tās likmes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kā pārbaudīt darījumu partnera PVN numuru?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ES PVN reģistrācijas numura derīgumu var pārbaudīt Eiropas Komisijas VIES sistēmā. Tas ir svarīgi pirms rēķina izrakstīšanas ar 0% likmi vai apgriezto PVN, jo derīgs partnera numurs ir viens no nosacījumiem šādu likmju piemērošanai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kas ir priekšnodoklis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Priekšnodoklis ir PVN, ko uzņēmums samaksājis, iepērkot preces un pakalpojumus savai saimnieciskajai darbībai. PVN deklarācijā to atskaita no iekasētā PVN, un valstij pārskaita starpību. Ja priekšnodoklis ir lielāks, pārmaksu var atgūt vai novirzīt nākamajiem periodiem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kāda ir atšķirība starp 0% likmi un atbrīvojumu no PVN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pie 0% likmes darījums ir apliekams ar PVN, tikai pēc nulles likmes, un uzņēmums saglabā tiesības atskaitīt priekšnodokli. Atbrīvotos darījumos PVN nepiemēro vispār, un priekšnodokli par tiem parasti atskaitīt nevar. Tāpēc tie nav viens un tas pats."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai šo kalkulatoru drīkst izmantot grāmatvedībā?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kalkulators ir bezmaksas palīgrīks ātrai PVN aprēķināšanai, un ievadītie skaitļi netiek nosūtīti serverim, bet aprēķināti tavā pārlūkā. Tomēr tas ir informatīvs un neaizstāj grāmatvedības programmu vai konsultāciju. Oficiāliem rēķiniem un deklarācijām pārbaudi rezultātus un piemērojamo likmi ar grāmatvedi."
+      }
     }
   ]
 }
@@ -319,6 +383,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -376,6 +441,74 @@
         attiecīgo valsti un aprēķini precīzu summu.
       </div>
     </details>
+    <details class="faq-item">
+      <summary id="faq6Summary">Kas ir PVN?</summary>
+      <div class="faq-body" id="faq6Body">
+        Pievienotās vērtības nodoklis (PVN) ir patēriņa nodoklis, ko piemēro gandrīz visām precēm un
+        pakalpojumiem. To samaksā pircējs, bet valstij iekasē un pārskaita pārdevējs. Katrs uzņēmums
+        pieskaita PVN pārdošanas cenai un atskaita PVN, ko pats samaksājis iepirkumos, tāpēc nodoklis
+        gulstas uz galapatērētāju. Vairāk lasi <a href="pvn-latvija">rokasgrāmatā</a>.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq7Summary">Kādas PVN likmes ir spēkā Latvijā?</summary>
+      <div class="faq-body" id="faq7Body">
+        Latvijā ir standarta likme <strong>21%</strong>, ko piemēro lielākajai daļai preču un pakalpojumu,
+        divas samazinātās likmes <strong>12%</strong> un <strong>5%</strong> atsevišķām grupām, kā arī
+        <strong>0%</strong> likme, piemēram, eksportam. Visu ES valstu likmes skaties sadaļā
+        <a href="likmes">Likmes</a>, bet konkrētās likmes piemērošanu pārbaudi VID materiālos.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq8Summary">Kad uzņēmumam jāreģistrējas PVN maksātājam?</summary>
+      <div class="faq-body" id="faq8Body">
+        Reģistrācija VID PVN maksātāju reģistrā kļūst obligāta, kad ar nodokli apliekamo darījumu vērtība
+        kalendārā gadā sasniedz <strong>50 000 eiro</strong>. Reģistrēties var arī brīvprātīgi jau agrāk.
+        Slieksnis un aprēķina kārtība laika gaitā mainās, tāpēc aktuālo informāciju skaties VID vietnē.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq9Summary">Ar kuras valsts likmi jārēķina PVN, pārdodot citā ES valstī?</summary>
+      <div class="faq-body" id="faq9Body">
+        Pārdodot privātpersonām citās ES valstīs, pēc kopējā tālpārdošanas sliekšņa pārsniegšanas PVN
+        parasti piemēro pēc <strong>pircēja</strong> valsts likmes un deklarē OSS sistēmā. Darījumos starp
+        diviem PVN maksātājiem bieži piemēro apgriezto PVN. Kalkulatorā izvēlies pircēja valsti, lai
+        aprēķinātu summu pēc tās likmes.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq10Summary">Kā pārbaudīt darījumu partnera PVN numuru?</summary>
+      <div class="faq-body" id="faq10Body">
+        ES PVN reģistrācijas numura derīgumu var pārbaudīt Eiropas Komisijas
+        <a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">VIES</a> sistēmā.
+        Tas ir svarīgi pirms rēķina izrakstīšanas ar 0% likmi vai apgriezto PVN, jo derīgs partnera numurs
+        ir viens no nosacījumiem šādu likmju piemērošanai.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq11Summary">Kas ir priekšnodoklis?</summary>
+      <div class="faq-body" id="faq11Body">
+        Priekšnodoklis ir PVN, ko uzņēmums samaksājis, iepērkot preces un pakalpojumus savai saimnieciskajai
+        darbībai. PVN deklarācijā to atskaita no iekasētā PVN, un valstij pārskaita starpību. Ja
+        priekšnodoklis ir lielāks, pārmaksu var atgūt vai novirzīt nākamajiem periodiem.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq12Summary">Kāda ir atšķirība starp 0% likmi un atbrīvojumu no PVN?</summary>
+      <div class="faq-body" id="faq12Body">
+        Pie 0% likmes darījums ir apliekams ar PVN, tikai pēc nulles likmes, un uzņēmums saglabā tiesības
+        atskaitīt priekšnodokli. Atbrīvotos darījumos PVN nepiemēro vispār, un priekšnodokli par tiem
+        parasti atskaitīt nevar. Tāpēc tie nav viens un tas pats.
+      </div>
+    </details>
+    <details class="faq-item">
+      <summary id="faq13Summary">Vai šo kalkulatoru drīkst izmantot grāmatvedībā?</summary>
+      <div class="faq-body" id="faq13Body">
+        Kalkulators ir bezmaksas palīgrīks ātrai PVN aprēķināšanai, un ievadītie skaitļi netiek nosūtīti
+        serverim, bet aprēķināti tavā pārlūkā. Tomēr tas ir informatīvs un neaizstāj grāmatvedības programmu
+        vai konsultāciju. Oficiāliem rēķiniem un deklarācijām pārbaudi rezultātus un piemērojamo likmi ar grāmatvedi.
+      </div>
+    </details>
   </section>
 
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
@@ -385,6 +518,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
@@ -452,7 +586,7 @@
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Biežāk uzdotie jautājumi',
       pageDescription: 'Atbildes uz biežāk uzdotajiem jautājumiem par PVN aprēķinu - kā pieskaitīt un atskaitīt PVN, lietot citu likmi un kā tiek noapaļoti rezultāti.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       h1: 'Biežāk uzdotie jautājumi',
       lead: 'Atbildes uz visbiežāk uzdotajiem jautājumiem par PVN aprēķinu.',
       faq1Summary: 'Kā pieskaitīt PVN summai?',
@@ -473,8 +607,43 @@
       faq5Body: 'Galvenokārt e-komercijai: pārdodot preces vai pakalpojumus citu ES valstu pircējiem, PVN bieži ' +
         'jāpiemēro pēc pircēja valsts likmes un jādeklarē OSS (One Stop Shop) sistēmā. Kalkulatorā izvēlies ' +
         'attiecīgo valsti un aprēķini precīzu summu.',
+      faq6Summary: 'Kas ir PVN?',
+      faq6Body: 'Pievienotās vērtības nodoklis (PVN) ir patēriņa nodoklis, ko piemēro gandrīz visām precēm un ' +
+        'pakalpojumiem. To samaksā pircējs, bet valstij iekasē un pārskaita pārdevējs. Katrs uzņēmums pieskaita PVN ' +
+        'pārdošanas cenai un atskaita PVN, ko pats samaksājis iepirkumos, tāpēc nodoklis gulstas uz galapatērētāju. ' +
+        'Vairāk lasi <a href="pvn-latvija">rokasgrāmatā</a>.',
+      faq7Summary: 'Kādas PVN likmes ir spēkā Latvijā?',
+      faq7Body: 'Latvijā ir standarta likme <strong>21%</strong>, ko piemēro lielākajai daļai preču un pakalpojumu, ' +
+        'divas samazinātās likmes <strong>12%</strong> un <strong>5%</strong> atsevišķām grupām, kā arī ' +
+        '<strong>0%</strong> likme, piemēram, eksportam. Visu ES valstu likmes skaties sadaļā ' +
+        '<a href="likmes">Likmes</a>, bet konkrētās likmes piemērošanu pārbaudi VID materiālos.',
+      faq8Summary: 'Kad uzņēmumam jāreģistrējas PVN maksātājam?',
+      faq8Body: 'Reģistrācija VID PVN maksātāju reģistrā kļūst obligāta, kad ar nodokli apliekamo darījumu vērtība ' +
+        'kalendārā gadā sasniedz <strong>50 000 eiro</strong>. Reģistrēties var arī brīvprātīgi jau agrāk. ' +
+        'Slieksnis un aprēķina kārtība laika gaitā mainās, tāpēc aktuālo informāciju skaties VID vietnē.',
+      faq9Summary: 'Ar kuras valsts likmi jārēķina PVN, pārdodot citā ES valstī?',
+      faq9Body: 'Pārdodot privātpersonām citās ES valstīs, pēc kopējā tālpārdošanas sliekšņa pārsniegšanas PVN ' +
+        'parasti piemēro pēc <strong>pircēja</strong> valsts likmes un deklarē OSS sistēmā. Darījumos starp diviem ' +
+        'PVN maksātājiem bieži piemēro apgriezto PVN. Kalkulatorā izvēlies pircēja valsti, lai aprēķinātu summu pēc tās likmes.',
+      faq10Summary: 'Kā pārbaudīt darījumu partnera PVN numuru?',
+      faq10Body: 'ES PVN reģistrācijas numura derīgumu var pārbaudīt Eiropas Komisijas ' +
+        '<a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">VIES</a> sistēmā. ' +
+        'Tas ir svarīgi pirms rēķina izrakstīšanas ar 0% likmi vai apgriezto PVN, jo derīgs partnera numurs ' +
+        'ir viens no nosacījumiem šādu likmju piemērošanai.',
+      faq11Summary: 'Kas ir priekšnodoklis?',
+      faq11Body: 'Priekšnodoklis ir PVN, ko uzņēmums samaksājis, iepērkot preces un pakalpojumus savai saimnieciskajai ' +
+        'darbībai. PVN deklarācijā to atskaita no iekasētā PVN, un valstij pārskaita starpību. Ja priekšnodoklis ir ' +
+        'lielāks, pārmaksu var atgūt vai novirzīt nākamajiem periodiem.',
+      faq12Summary: 'Kāda ir atšķirība starp 0% likmi un atbrīvojumu no PVN?',
+      faq12Body: 'Pie 0% likmes darījums ir apliekams ar PVN, tikai pēc nulles likmes, un uzņēmums saglabā tiesības ' +
+        'atskaitīt priekšnodokli. Atbrīvotos darījumos PVN nepiemēro vispār, un priekšnodokli par tiem parasti ' +
+        'atskaitīt nevar. Tāpēc tie nav viens un tas pats.',
+      faq13Summary: 'Vai šo kalkulatoru drīkst izmantot grāmatvedībā?',
+      faq13Body: 'Kalkulators ir bezmaksas palīgrīks ātrai PVN aprēķināšanai, un ievadītie skaitļi netiek nosūtīti ' +
+        'serverim, bet aprēķināti tavā pārlūkā. Tomēr tas ir informatīvs un neaizstāj grāmatvedības programmu vai ' +
+        'konsultāciju. Oficiāliem rēķiniem un deklarācijām pārbaudi rezultātus un piemērojamo likmi ar grāmatvedi.',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -497,7 +666,7 @@
     ru: {
       htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Часто задаваемые вопросы',
       pageDescription: 'Ответы на самые частые вопросы о расчёте НДС - как прибавить и вычесть НДС, использовать другую ставку и как округляются результаты.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       h1: 'Часто задаваемые вопросы',
       lead: 'Ответы на самые частые вопросы о расчёте НДС.',
       faq1Summary: 'Как прибавить НДС к сумме?',
@@ -518,8 +687,45 @@
       faq5Body: 'Прежде всего для e-commerce: при продаже товаров или услуг покупателям из других стран ЕС НДС часто ' +
         'применяется по ставке страны покупателя и декларируется через OSS (One Stop Shop). Выберите нужную страну ' +
         'в калькуляторе и рассчитайте точную сумму.',
+      faq6Summary: 'Что такое НДС?',
+      faq6Body: 'Налог на добавленную стоимость (НДС) - это налог на потребление, который применяется почти ко всем ' +
+        'товарам и услугам. Его оплачивает покупатель, а собирает и перечисляет государству продавец. Каждое ' +
+        'предприятие прибавляет НДС к цене продажи и вычитает НДС, уплаченный при закупках, поэтому налог ложится ' +
+        'на конечного потребителя. Подробнее - в <a href="pvn-latvija">руководстве</a>.',
+      faq7Summary: 'Какие ставки НДС действуют в Латвии?',
+      faq7Body: 'В Латвии есть стандартная ставка <strong>21%</strong> для большинства товаров и услуг, две сниженные ' +
+        'ставки <strong>12%</strong> и <strong>5%</strong> для отдельных групп, а также ставка <strong>0%</strong>, ' +
+        'например для экспорта. Ставки всех стран ЕС смотрите в разделе <a href="likmes">Ставки</a>, а применение ' +
+        'конкретной ставки уточняйте в материалах VID.',
+      faq8Summary: 'Когда предприятию нужно регистрироваться плательщиком НДС?',
+      faq8Body: 'Регистрация в реестре плательщиков НДС VID становится обязательной, когда стоимость облагаемых налогом ' +
+        'операций за календарный год достигает <strong>50 000 евро</strong>. Зарегистрироваться можно и добровольно ' +
+        'раньше. Порог и порядок расчёта со временем меняются, поэтому актуальную информацию смотрите на сайте VID.',
+      faq9Summary: 'По ставке какой страны считать НДС при продаже в другой стране ЕС?',
+      faq9Body: 'При продаже частным лицам в других странах ЕС, после превышения общего порога дистанционных продаж, НДС ' +
+        'обычно применяют по ставке страны <strong>покупателя</strong> и декларируют через OSS. В операциях между двумя ' +
+        'плательщиками НДС часто применяется обратное начисление. В калькуляторе выберите страну покупателя, чтобы ' +
+        'рассчитать сумму по её ставке.',
+      faq10Summary: 'Как проверить номер НДС партнёра?',
+      faq10Body: 'Действительность номера регистрации НДС в ЕС можно проверить в системе ' +
+        '<a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">VIES</a> Европейской ' +
+        'комиссии. Это важно перед выставлением счёта со ставкой 0% или обратным начислением, так как действительный ' +
+        'номер партнёра - одно из условий применения таких ставок.',
+      faq11Summary: 'Что такое входной налог?',
+      faq11Body: 'Входной налог - это НДС, уплаченный предприятием при закупке товаров и услуг для своей хозяйственной ' +
+        'деятельности. В декларации его вычитают из собранного НДС и перечисляют государству разницу. Если входной ' +
+        'налог больше, переплату можно вернуть или направить на следующие периоды.',
+      faq12Summary: 'В чём разница между ставкой 0% и освобождением от НДС?',
+      faq12Body: 'При ставке 0% операция облагается НДС, только по нулевой ставке, и предприятие сохраняет право на ' +
+        'вычет входного налога. При освобождённых операциях НДС не применяется вовсе, и входной налог по ним обычно ' +
+        'вычесть нельзя. Поэтому это не одно и то же.',
+      faq13Summary: 'Можно ли использовать этот калькулятор в бухгалтерии?',
+      faq13Body: 'Калькулятор - это бесплатный вспомогательный инструмент для быстрого расчёта НДС, и введённые числа ' +
+        'не отправляются на сервер, а считаются в вашем браузере. Тем не менее он носит информационный характер и не ' +
+        'заменяет бухгалтерскую программу или консультацию. Для официальных счетов и деклараций сверяйте результаты и ' +
+        'ставку с бухгалтером.',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -542,7 +748,7 @@
     en: {
       htmlLang: 'en', pageTitle: 'VAT Calculator - Frequently Asked Questions',
       pageDescription: 'Answers to the most common questions about VAT calculation - how to add and deduct VAT, use a different rate, and how results are rounded.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       h1: 'Frequently asked questions',
       lead: 'Answers to the most common questions about VAT calculation.',
       faq1Summary: 'How do I add VAT to an amount?',
@@ -563,8 +769,44 @@
       faq5Body: 'Mainly for e-commerce: when selling goods or services to buyers in other EU countries, VAT is often ' +
         'charged at the buyer\'s country rate and reported via the OSS (One Stop Shop) scheme. Pick the country ' +
         'in the calculator and work out the exact amount.',
+      faq6Summary: 'What is VAT?',
+      faq6Body: 'Value-added tax (VAT) is a consumption tax applied to almost all goods and services. It is paid by the ' +
+        'buyer, but collected and passed on to the state by the seller. Each business adds VAT to its selling price and ' +
+        'deducts the VAT it paid on purchases, so the tax falls on the final consumer. Read more in the ' +
+        '<a href="pvn-latvija">guide</a>.',
+      faq7Summary: 'What VAT rates apply in Latvia?',
+      faq7Body: 'Latvia has a standard rate of <strong>21%</strong> for most goods and services, two reduced rates of ' +
+        '<strong>12%</strong> and <strong>5%</strong> for certain groups, and a <strong>0%</strong> rate, for example ' +
+        'for exports. See the rates for all EU countries in the <a href="likmes">Rates</a> section, and check how a ' +
+        'specific rate applies in VID materials.',
+      faq8Summary: 'When must a business register for VAT?',
+      faq8Body: 'Registration in the VID VAT register becomes mandatory once the value of taxable transactions reaches ' +
+        '<strong>50,000 euro</strong> in a calendar year. You can also register voluntarily earlier. The threshold and ' +
+        'the way it is calculated change over time, so check the current information on the VID website.',
+      faq9Summary: 'Which country\'s rate applies when selling in another EU country?',
+      faq9Body: 'When selling to private individuals in other EU countries, once the EU-wide distance-selling threshold is ' +
+        'exceeded, VAT is usually applied at the <strong>buyer\'s</strong> country rate and reported via OSS. Between two ' +
+        'VAT payers the reverse charge often applies. Pick the buyer\'s country in the calculator to work out the amount ' +
+        'at its rate.',
+      faq10Summary: 'How do I check a partner\'s VAT number?',
+      faq10Body: 'You can check whether an EU VAT registration number is valid in the European Commission ' +
+        '<a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">VIES</a> system. This ' +
+        'matters before issuing an invoice at 0% or with the reverse charge, because a valid partner number is one of the ' +
+        'conditions for applying those rates.',
+      faq11Summary: 'What is input VAT?',
+      faq11Body: 'Input VAT is the VAT a business has paid when buying goods and services for its economic activity. On the ' +
+        'VAT return it is deducted from the VAT collected, and the difference is paid to the state. If input VAT is ' +
+        'greater, the overpayment can be refunded or carried forward to later periods.',
+      faq12Summary: 'What is the difference between the 0% rate and a VAT exemption?',
+      faq12Body: 'At the 0% rate the transaction is taxable, just at a zero rate, and the business keeps the right to deduct ' +
+        'input VAT. For exempt transactions no VAT is applied at all, and input VAT on them usually cannot be deducted. So ' +
+        'they are not the same thing.',
+      faq13Summary: 'Can I use this calculator for accounting?',
+      faq13Body: 'The calculator is a free helper tool for quick VAT calculation, and the numbers you enter are not sent to a ' +
+        'server but computed in your browser. However, it is informational and does not replace accounting software or ' +
+        'advice. For official invoices and returns, verify the results and the applicable rate with an accountant.',
       back: '← Back to the calculator',
-      footHome: 'Home', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -614,6 +856,7 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
     document.getElementById('lastChecked').textContent = formatCheckedDate(l);
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -630,8 +873,25 @@
     document.getElementById('faq4Body').innerHTML = t.faq4Body;
     document.getElementById('faq5Summary').textContent = t.faq5Summary;
     document.getElementById('faq5Body').innerHTML = t.faq5Body;
+    document.getElementById('faq6Summary').textContent = t.faq6Summary;
+    document.getElementById('faq6Body').innerHTML = t.faq6Body;
+    document.getElementById('faq7Summary').textContent = t.faq7Summary;
+    document.getElementById('faq7Body').innerHTML = t.faq7Body;
+    document.getElementById('faq8Summary').textContent = t.faq8Summary;
+    document.getElementById('faq8Body').innerHTML = t.faq8Body;
+    document.getElementById('faq9Summary').textContent = t.faq9Summary;
+    document.getElementById('faq9Body').innerHTML = t.faq9Body;
+    document.getElementById('faq10Summary').textContent = t.faq10Summary;
+    document.getElementById('faq10Body').innerHTML = t.faq10Body;
+    document.getElementById('faq11Summary').textContent = t.faq11Summary;
+    document.getElementById('faq11Body').innerHTML = t.faq11Body;
+    document.getElementById('faq12Summary').textContent = t.faq12Summary;
+    document.getElementById('faq12Body').innerHTML = t.faq12Body;
+    document.getElementById('faq13Summary').textContent = t.faq13Summary;
+    document.getElementById('faq13Body').innerHTML = t.faq13Body;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;

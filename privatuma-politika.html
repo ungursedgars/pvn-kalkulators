@@ -267,6 +267,7 @@
           </svg>
         </button>
         <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
@@ -290,6 +291,7 @@
   <div class="wrap">
     <div class="footer-links">
       <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a> ·
@@ -357,11 +359,11 @@
       htmlLang: 'lv',
       pageTitle: 'PVN Kalkulators - Privātuma politika',
       pageDescription: 'PVN kalkulatora privātuma politika - sīkdatnes, Google Analytics, Google reklāmas (AdSense) un tavas tiesības.',
-      navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
       title: 'Privātuma politika',
       updated: 'Pēdējoreiz atjaunināta: 2026. gada 7. jūlijā',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti', footCookies: 'Pārvaldīt sīkdatnes',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti', footCookies: 'Pārvaldīt sīkdatnes',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -456,11 +458,11 @@
       htmlLang: 'ru',
       pageTitle: 'Калькулятор НДС - Политика конфиденциальности',
       pageDescription: 'Политика конфиденциальности калькулятора НДС - cookie, Google Analytics, Google Ads (AdSense) и ваши права.',
-      navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
       title: 'Политика конфиденциальности',
       updated: 'Последнее обновление: 7 июля 2026 года',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты', footCookies: 'Управление cookie',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты', footCookies: 'Управление cookie',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -555,11 +557,11 @@
       htmlLang: 'en',
       pageTitle: 'VAT Calculator - Privacy Policy',
       pageDescription: 'VAT calculator privacy policy - cookies, Google Analytics, Google Ads (AdSense), and your rights.',
-      navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
       title: 'Privacy Policy',
       updated: 'Last updated: 7 July 2026',
       back: '← Back to the calculator',
-      footHome: 'Home', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact', footCookies: 'Manage cookies',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact', footCookies: 'Manage cookies',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -659,6 +661,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
@@ -668,6 +671,7 @@
     document.getElementById('legalBody').innerHTML = t.body;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
+<link rel="apple-touch-icon" href="/logo-192.png">
+<title>PVN Kalkulators - Kas ir PVN un kā to aprēķina</title>
+<meta name="description" content="Praktisks ceļvedis par PVN Latvijā un ES: likmes, aprēķina formulas ar piemēriem, reģistrācijas slieksnis, deklarēšana, OSS un pārrobežu tirdzniecība. Ar saitēm uz oficiālajiem avotiem.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://pvnkalkulators.eu/pvn-latvija">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<meta name="google-adsense-account" content="ca-pub-1040653408011392">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="Kas ir PVN un kā to aprēķina">
+<meta property="og:description" content="Praktisks ceļvedis par PVN Latvijā un ES: likmes, aprēķins, reģistrācija, deklarēšana un OSS.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Kas ir PVN un kā to aprēķina",
+  "description": "Praktisks ceļvedis par PVN Latvijā un ES: likmes, aprēķina formulas ar piemēriem, reģistrācijas slieksnis, deklarēšana, OSS un pārrobežu tirdzniecība.",
+  "inLanguage": "lv",
+  "url": "https://pvnkalkulators.eu/pvn-latvija",
+  "publisher": {
+    "@type": "Organization",
+    "name": "pvnkalkulators.eu",
+    "url": "https://pvnkalkulators.eu/"
+  },
+  "mainEntityOfPage": "https://pvnkalkulators.eu/pvn-latvija"
+}
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-dropdown { position: relative; }
+  #langBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    height: 30px; padding: 0 10px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+    font-size: .8rem; font-weight: 700;
+  }
+  #langBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 130px;
+  }
+  .lang-dropdown.open .lang-list { display: block; }
+  .lang-list button {
+    display: block; width: 100%; padding: 9px 12px; border: none; border-radius: 8px;
+    background: none; color: var(--text); cursor: pointer; text-align: left;
+    font-size: .95rem; white-space: nowrap;
+  }
+  .lang-list button:hover { background: var(--accent-soft); color: var(--accent); }
+  .lang-list button.active { background: var(--accent); color: #fff; }
+  #sepBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700;
+    color: var(--text); display: flex; align-items: center; justify-content: center;
+  }
+  #sepBtn:hover { border-color: var(--accent); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .header-inner { padding: 9px 16px; }
+    nav { gap: 8px; }
+    .logo { font-size: 1.05rem; }
+    #sepBtn, #themeBtn, #menuBtn { width: 28px; height: 28px; }
+    #sepBtn { font-size: 1rem; }
+    #langBtn { height: 28px; padding: 0 8px; }
+  }
+
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 8px; }
+  .updated { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+
+  .guide h2 { font-size: 1.22rem; margin: 30px 0 8px; }
+  .guide h2:first-child { margin-top: 0; }
+  .guide p { margin-bottom: 12px; }
+  .guide ul { margin: 0 0 14px 20px; }
+  .guide li { margin-bottom: 6px; }
+  .guide a { color: var(--accent); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .guide code {
+    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
+    font-size: .9em; color: var(--text);
+  }
+  .guide .callout {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 16px; margin: 4px 0 16px;
+  }
+  .guide .callout p:last-child { margin-bottom: 0; }
+  .guide .disclaimer {
+    font-size: .88rem; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px;
+  }
+  .toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px 14px 34px; margin-bottom: 24px;
+  }
+  .toc li { margin-bottom: 5px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .back-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+
+  /* ===== Sīkdatņu piekrišanas josla ===== */
+  #cookieBanner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: var(--card); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(20,30,50,.14);
+    padding: 16px; display: none;
+  }
+  #cookieBanner.show { display: block; }
+  .cookie-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .cookie-text { flex: 1; min-width: 240px; font-size: .9rem; color: var(--text); line-height: 1.5; }
+  .cookie-text a { color: var(--accent); }
+  .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .cookie-actions button {
+    padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer;
+    border-radius: 9px; border: 1px solid var(--border);
+  }
+  #cookieSettingsBtn { background: var(--card); color: var(--muted); }
+  #cookieSettingsBtn:hover { border-color: var(--accent); color: var(--accent); }
+  #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
+  #cookieAccept:hover { filter: brightness(1.05); }
+  @media (max-width: 560px) {
+    .cookie-actions { width: 100%; }
+    .cookie-actions button { flex: 1; }
+  }
+
+  /* ===== Sīkdatņu preferenču logs ===== */
+  .cookie-title { display: block; margin-bottom: 2px; }
+  #cookiePrefs {
+    display: none; position: fixed; inset: 0; z-index: 70;
+    background: rgba(10, 16, 26, .5); padding: 16px;
+  }
+  #cookiePrefs.show { display: flex; align-items: center; justify-content: center; }
+  .prefs-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); width: 100%; max-width: 480px;
+    max-height: calc(100vh - 32px); overflow-y: auto; padding: 20px;
+  }
+  .prefs-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .prefs-head h2 { font-size: 1.15rem; }
+  #prefsClose {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 1.05rem; padding: 4px 9px; border-radius: 8px; line-height: 1;
+  }
+  @media (hover: hover) { #prefsClose:hover { background: var(--accent-soft); color: var(--accent); } }
+  .prefs-top-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+  .prefs-top-actions button {
+    flex: 1; padding: 10px 12px; border-radius: 9px; font-size: .92rem; font-weight: 600; cursor: pointer;
+  }
+  #prefsRejectAll { background: var(--card); border: 1px solid var(--border); color: var(--muted); }
+  @media (hover: hover) { #prefsRejectAll:hover { border-color: var(--accent); color: var(--accent); } }
+  #prefsAcceptAll { background: var(--accent); border: 1px solid var(--accent); color: #fff; }
+  @media (hover: hover) { #prefsAcceptAll:hover { filter: brightness(1.05); } }
+  .prefs-intro { color: var(--muted); font-size: .9rem; margin-bottom: 4px; }
+  .prefs-cat { border-top: 1px solid var(--border); padding: 12px 0; }
+  .prefs-cat-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .prefs-cat-name { font-weight: 600; }
+  .prefs-always { color: var(--accent); font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .switch {
+    width: 44px; height: 24px; border-radius: 12px; border: none; padding: 0;
+    background: var(--border); position: relative; cursor: pointer; flex-shrink: 0;
+    transition: background .15s;
+  }
+  .switch .knob {
+    position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); transition: left .15s;
+  }
+  .switch[aria-checked="true"] { background: var(--accent); }
+  .switch[aria-checked="true"] .knob { left: 22px; }
+  .prefs-cat-desc { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  #prefsSave {
+    width: 100%; margin-top: 14px; padding: 12px; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
+  }
+  @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
+</style>
+<script>
+  // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('pvn-theme'); } catch (e) {}
+    t = t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#1b212a' : '#ffffff');
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="/">PVN<span>kalkulators</span></a>
+    <nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button type="button" id="langBtn" title="Mainīt valodu" aria-haspopup="true" aria-expanded="false" aria-controls="langSwitch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langCurrent">LV</span>
+        </button>
+        <div class="lang-list" id="langSwitch" role="menu">
+          <button type="button" data-lang="lv" role="menuitemradio" aria-checked="true">Latviešu</button>
+          <button type="button" data-lang="ru" role="menuitemradio" aria-checked="false">Русский</button>
+          <button type="button" data-lang="en" role="menuitemradio" aria-checked="false">English</button>
+        </div>
+      </div>
+      <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
+          <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="kontakti" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 id="pageTitle">Kas ir PVN un kā to aprēķina</h1>
+  <p class="lead" id="pageLead">Praktisks ceļvedis par pievienotās vērtības nodokli Latvijā un Eiropas Savienībā - likmes, aprēķins, reģistrācija un deklarēšana.</p>
+  <p class="updated" id="lastChecked"></p>
+
+  <article class="guide" id="guideBody">
+    <ul class="toc">
+      <li><a href="#kas-ir-pvn">Kas ir PVN?</a></li>
+      <li><a href="#likmes">PVN likmes Latvijā</a></li>
+      <li><a href="#aprekins">Kā aprēķināt PVN</a></li>
+      <li><a href="#registracija">Kad jāreģistrējas PVN maksātājam</a></li>
+      <li><a href="#deklaracija">PVN deklarācija un termiņi</a></li>
+      <li><a href="#parrobezu">Pārrobežu darījumi un OSS</a></li>
+      <li><a href="#kludas">Biežākās kļūdas</a></li>
+      <li><a href="#saites">Noderīgas saites</a></li>
+    </ul>
+
+    <h2 id="kas-ir-pvn">Kas ir PVN?</h2>
+    <p>Pievienotās vērtības nodoklis (PVN) ir patēriņa nodoklis, ko piemēro gandrīz visām precēm un pakalpojumiem Latvijā un pārējā Eiropas Savienībā. Nodokli galarezultātā samaksā pircējs, bet valstij to iekasē un pārskaita uzņēmums, kas preci vai pakalpojumu pārdod.</p>
+    <p>Katrā piegādes ķēdes posmā uzņēmums pieskaita PVN savai pārdošanas cenai un vienlaikus atskaita PVN, ko pats jau samaksājis iepirkumos (priekšnodoklis). Tāpēc nodokļa slogs galu galā gulstas tikai uz galapatērētāju, nevis uz katru ķēdes uzņēmumu atsevišķi. Tieši šī iemesla dēļ PVN maksātājam ir svarīgi precīzi zināt, cik liela ir nodokļa daļa summā.</p>
+    <div class="callout">
+      <p>Ar <a href="/">PVN kalkulatoru</a> vari ātri pieskaitīt vai atdalīt PVN jebkurai summai un jebkurai ES valsts likmei.</p>
+    </div>
+
+    <h2 id="likmes">PVN likmes Latvijā</h2>
+    <p>Latvijā pastāv viena standarta un divas samazinātās PVN likmes, kā arī 0% likme atsevišķiem darījumiem:</p>
+    <ul>
+      <li><strong>21% - standarta likme.</strong> To piemēro lielākajai daļai preču un pakalpojumu.</li>
+      <li><strong>12% - samazinātā likme.</strong> Piemēram, recepšu medikamentiem un medicīnas ierīcēm, sabiedriskajam transportam, izmitināšanas pakalpojumiem un centralizētajai siltumapgādei mājsaimniecībām.</li>
+      <li><strong>5% - samazinātā likme.</strong> Atsevišķām pārtikas un preses izdevumu grupām.</li>
+      <li><strong>0% - nulles likme.</strong> Piemēram, preču eksportam ārpus ES, preču piegādēm citu ES valstu PVN maksātājiem un starptautiskajam transportam. Nulles likme nav tas pats, kas atbrīvojums no PVN: pie 0% likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli, bet atbrīvotos darījumos - ne.</li>
+    </ul>
+    <p>Samazināto likmju piemērošanas nosacījumi laika gaitā mainās, tāpēc konkrētai precei vai pakalpojumam vienmēr pārbaudi aktuālo likmi Valsts ieņēmumu dienesta (VID) un Finanšu ministrijas materiālos. Visu 27 ES valstu standarta un samazinātās likmes vari apskatīt sadaļā <a href="likmes">Likmes</a>.</p>
+
+    <h2 id="aprekins">Kā aprēķināt PVN</h2>
+    <p><strong>Pieskaitīt PVN.</strong> Ja zini cenu bez nodokļa, reizini to ar koeficientu <code>1 + likme / 100</code>. Piemēram, 100 € ar 21% likmi: <code>100 × 1,21 = 121 €</code>, no kā PVN daļa ir 21 €.</p>
+    <p><strong>Atdalīt PVN.</strong> Ja zini cenu ar nodokli un vēlies uzzināt summu bez PVN, dali to ar to pašu koeficientu: <code>121 ÷ 1,21 = 100 €</code>. PVN daļa arī šeit ir 21 €.</p>
+    <p>Bieža kļūda ir vienkārši atņemt 21% no gala summas - tāds rezultāts ir nepareizs, jo procentus rēķina no cenas bez nodokļa, nevis no cenas ar nodokli. Abus aprēķinus automātiski veic <a href="/">kalkulators</a>: ieraksti summu vajadzīgajā laukā un otrs aizpildīsies pats. Soli pa solim tas aprakstīts sadaļā <a href="instrukcijas">Instrukcijas</a>.</p>
+
+    <h2 id="registracija">Kad jāreģistrējas PVN maksātājam</h2>
+    <p>Saimnieciskās darbības veicējam Latvijā PVN maksātāja reģistrācija VID kļūst obligāta, kad ar nodokli apliekamo darījumu vērtība kalendārā gadā sasniedz 50 000 eiro. Reģistrēties var arī brīvprātīgi, pirms sliekšņa sasniegšanas - tas bieži ir izdevīgi uzņēmumiem, kuru pircēji paši ir PVN maksātāji, jo ļauj atskaitīt priekšnodokli.</p>
+    <p>Pēc reģistrācijas uzņēmums saņem PVN reģistrācijas numuru (Latvijā tas sākas ar <code>LV</code>) un sāk savos rēķinos norādīt PVN. Slieksnis un tā aprēķina kārtība pēdējos gados ir mainījušies, tāpēc aktuālo informāciju pārbaudi VID vietnē.</p>
+
+    <h2 id="deklaracija">PVN deklarācija un termiņi</h2>
+    <p>Reģistrēts PVN maksātājs iesniedz PVN deklarāciju VID Elektroniskās deklarēšanas sistēmā (EDS). Atkarībā no apgrozījuma un darījumu veida tas notiek katru mēnesi vai reizi ceturksnī. Deklarācijā norāda gan iekasēto PVN par pārdoto, gan priekšnodokli par iepirkto, un valstij pārskaita starpību. Ja priekšnodoklis ir lielāks par iekasēto nodokli, pārmaksu var atgūt vai novirzīt nākamajiem periodiem.</p>
+    <p>Deklarācija un maksājums parasti jāveic līdz nākamā mēneša 20. datumam. Precīzus termiņus, periodu un deklarācijas formu skaties VID materiālos.</p>
+
+    <h2 id="parrobezu">Pārrobežu darījumi un OSS</h2>
+    <p>Pārdodot preces vai pakalpojumus privātpersonām citās ES valstīs (e-komercija), PVN bieži jāpiemēro pēc <strong>pircēja</strong> valsts likmes, tiklīdz pārsniegts ES kopējais tālpārdošanas slieksnis. Lai nevajadzētu reģistrēties katrā valstī atsevišķi, var izmantot vienas pieturas aģentūras sistēmu OSS (One Stop Shop) un deklarēt visu vienuviet. Tāpēc kalkulatorā vari izvēlēties jebkuru ES valsti un aprēķināt summu pēc tās likmes.</p>
+    <p>Darījumos starp diviem PVN maksātājiem no dažādām ES valstīm bieži piemēro apgriezto PVN (reverse charge), kad nodokli deklarē pircējs, nevis pārdevējs. Partnera PVN numura derīgumu pirms rēķina izrakstīšanas vari pārbaudīt ES VIES sistēmā.</p>
+
+    <h2 id="kludas">Biežākās kļūdas</h2>
+    <ul>
+      <li>PVN atdalīšana, atņemot procentus no gala summas, nevis dalot ar koeficientu.</li>
+      <li>Nepareizas likmes lietošana - piemēram, standarta likme precei, kurai pienākas samazinātā, vai otrādi.</li>
+      <li>Noapaļošana katrā rēķina rindā atsevišķi, kas var radīt dažu centu starpību ar kopsummu.</li>
+      <li>Pārrobežu tirdzniecībā - savas, nevis pircēja valsts likmes piemērošana.</li>
+      <li>0% likmes jaukšana ar atbrīvojumu no PVN - tās nav viens un tas pats.</li>
+    </ul>
+
+    <h2 id="saites">Noderīgas saites</h2>
+    <ul>
+      <li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - reģistrācija, deklarācijas un aktuālās likmes.</li>
+      <li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>
+      <li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ES VIES</a> - PVN numuru pārbaude.</li>
+      <li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>
+    </ul>
+
+    <p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. PVN likmes, sliekšņi un noteikumi laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>
+  </article>
+
+  <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
+      <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj" id="footBuj">BUJ</a> ·
+      <a href="likmes" id="footLikmes">Likmes</a> ·
+      <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti" id="footContact">Kontakti</a>
+    </div>
+    <div id="footDisclaimer">© 2026 pvnkalkulators.eu</div>
+  </div>
+</footer>
+
+<!-- Sīkdatņu piekrišana: pirmais slānis -->
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong class="cookie-title" id="cookieTitle">Mēs cienām tavu privātumu</strong>
+      <span id="cookieText">Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. <a href="privatuma-politika">Uzzini vairāk</a></span>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookieSettingsBtn" type="button">Iestatījumi</button>
+      <button id="cookieAccept" type="button">Piekrītu</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sīkdatņu piekrišana: preferenču logs -->
+<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
+  <div class="prefs-card">
+    <div class="prefs-head">
+      <h2 id="prefsTitle">Pārvaldīt sīkdatņu preferences</h2>
+      <button id="prefsClose" type="button" aria-label="Aizvērt">✕</button>
+    </div>
+    <div class="prefs-top-actions">
+      <button id="prefsRejectAll" type="button">Noraidīt visu</button>
+      <button id="prefsAcceptAll" type="button">Pieņemt visas</button>
+    </div>
+    <p class="prefs-intro" id="prefsIntro">Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. Pārējās tiek ielādētas tikai ar tavu piekrišanu.</p>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catNecessaryName">Nepieciešamās sīkdatnes</span>
+        <span class="prefs-always" id="catNecessaryAlways">Vienmēr atļauts</span>
+      </div>
+      <p class="prefs-cat-desc" id="catNecessaryDesc">Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.</p>
+    </div>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catAnalyticsName">Analītikas sīkdatnes</span>
+        <button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button>
+      </div>
+      <p class="prefs-cat-desc" id="catAnalyticsDesc">Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.</p>
+    </div>
+    <div class="prefs-cat">
+      <div class="prefs-cat-row">
+        <span class="prefs-cat-name" id="catAdsName">Reklāmas sīkdatnes</span>
+        <button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button>
+      </div>
+      <p class="prefs-cat-desc" id="catAdsDesc">Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.</p>
+    </div>
+    <button id="prefsSave" type="button">Saglabāt preferences</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var I18N = {
+    lv: {
+      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Kas ir PVN un kā to aprēķina',
+      pageDescription: 'Praktisks ceļvedis par PVN Latvijā un ES: likmes, aprēķina formulas ar piemēriem, reģistrācijas slieksnis, deklarēšana, OSS un pārrobežu tirdzniecība. Ar saitēm uz oficiālajiem avotiem.',
+      navGuide: 'Rokasgrāmata', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      h1: 'Kas ir PVN un kā to aprēķina',
+      lead: 'Praktisks ceļvedis par pievienotās vērtības nodokli Latvijā un Eiropas Savienībā - likmes, aprēķins, reģistrācija un deklarēšana.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#kas-ir-pvn">Kas ir PVN?</a></li>' +
+          '<li><a href="#likmes">PVN likmes Latvijā</a></li>' +
+          '<li><a href="#aprekins">Kā aprēķināt PVN</a></li>' +
+          '<li><a href="#registracija">Kad jāreģistrējas PVN maksātājam</a></li>' +
+          '<li><a href="#deklaracija">PVN deklarācija un termiņi</a></li>' +
+          '<li><a href="#parrobezu">Pārrobežu darījumi un OSS</a></li>' +
+          '<li><a href="#kludas">Biežākās kļūdas</a></li>' +
+          '<li><a href="#saites">Noderīgas saites</a></li>' +
+        '</ul>' +
+        '<h2 id="kas-ir-pvn">Kas ir PVN?</h2>' +
+        '<p>Pievienotās vērtības nodoklis (PVN) ir patēriņa nodoklis, ko piemēro gandrīz visām precēm un pakalpojumiem Latvijā un pārējā Eiropas Savienībā. Nodokli galarezultātā samaksā pircējs, bet valstij to iekasē un pārskaita uzņēmums, kas preci vai pakalpojumu pārdod.</p>' +
+        '<p>Katrā piegādes ķēdes posmā uzņēmums pieskaita PVN savai pārdošanas cenai un vienlaikus atskaita PVN, ko pats jau samaksājis iepirkumos (priekšnodoklis). Tāpēc nodokļa slogs galu galā gulstas tikai uz galapatērētāju, nevis uz katru ķēdes uzņēmumu atsevišķi. Tieši šī iemesla dēļ PVN maksātājam ir svarīgi precīzi zināt, cik liela ir nodokļa daļa summā.</p>' +
+        '<div class="callout"><p>Ar <a href="/">PVN kalkulatoru</a> vari ātri pieskaitīt vai atdalīt PVN jebkurai summai un jebkurai ES valsts likmei.</p></div>' +
+        '<h2 id="likmes">PVN likmes Latvijā</h2>' +
+        '<p>Latvijā pastāv viena standarta un divas samazinātās PVN likmes, kā arī 0% likme atsevišķiem darījumiem:</p>' +
+        '<ul>' +
+          '<li><strong>21% - standarta likme.</strong> To piemēro lielākajai daļai preču un pakalpojumu.</li>' +
+          '<li><strong>12% - samazinātā likme.</strong> Piemēram, recepšu medikamentiem un medicīnas ierīcēm, sabiedriskajam transportam, izmitināšanas pakalpojumiem un centralizētajai siltumapgādei mājsaimniecībām.</li>' +
+          '<li><strong>5% - samazinātā likme.</strong> Atsevišķām pārtikas un preses izdevumu grupām.</li>' +
+          '<li><strong>0% - nulles likme.</strong> Piemēram, preču eksportam ārpus ES, preču piegādēm citu ES valstu PVN maksātājiem un starptautiskajam transportam. Nulles likme nav tas pats, kas atbrīvojums no PVN: pie 0% likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli, bet atbrīvotos darījumos - ne.</li>' +
+        '</ul>' +
+        '<p>Samazināto likmju piemērošanas nosacījumi laika gaitā mainās, tāpēc konkrētai precei vai pakalpojumam vienmēr pārbaudi aktuālo likmi Valsts ieņēmumu dienesta (VID) un Finanšu ministrijas materiālos. Visu 27 ES valstu standarta un samazinātās likmes vari apskatīt sadaļā <a href="likmes">Likmes</a>.</p>' +
+        '<h2 id="aprekins">Kā aprēķināt PVN</h2>' +
+        '<p><strong>Pieskaitīt PVN.</strong> Ja zini cenu bez nodokļa, reizini to ar koeficientu <code>1 + likme / 100</code>. Piemēram, 100 € ar 21% likmi: <code>100 × 1,21 = 121 €</code>, no kā PVN daļa ir 21 €.</p>' +
+        '<p><strong>Atdalīt PVN.</strong> Ja zini cenu ar nodokli un vēlies uzzināt summu bez PVN, dali to ar to pašu koeficientu: <code>121 ÷ 1,21 = 100 €</code>. PVN daļa arī šeit ir 21 €.</p>' +
+        '<p>Bieža kļūda ir vienkārši atņemt 21% no gala summas - tāds rezultāts ir nepareizs, jo procentus rēķina no cenas bez nodokļa, nevis no cenas ar nodokli. Abus aprēķinus automātiski veic <a href="/">kalkulators</a>: ieraksti summu vajadzīgajā laukā un otrs aizpildīsies pats. Soli pa solim tas aprakstīts sadaļā <a href="instrukcijas">Instrukcijas</a>.</p>' +
+        '<h2 id="registracija">Kad jāreģistrējas PVN maksātājam</h2>' +
+        '<p>Saimnieciskās darbības veicējam Latvijā PVN maksātāja reģistrācija VID kļūst obligāta, kad ar nodokli apliekamo darījumu vērtība kalendārā gadā sasniedz 50 000 eiro. Reģistrēties var arī brīvprātīgi, pirms sliekšņa sasniegšanas - tas bieži ir izdevīgi uzņēmumiem, kuru pircēji paši ir PVN maksātāji, jo ļauj atskaitīt priekšnodokli.</p>' +
+        '<p>Pēc reģistrācijas uzņēmums saņem PVN reģistrācijas numuru (Latvijā tas sākas ar <code>LV</code>) un sāk savos rēķinos norādīt PVN. Slieksnis un tā aprēķina kārtība pēdējos gados ir mainījušies, tāpēc aktuālo informāciju pārbaudi VID vietnē.</p>' +
+        '<h2 id="deklaracija">PVN deklarācija un termiņi</h2>' +
+        '<p>Reģistrēts PVN maksātājs iesniedz PVN deklarāciju VID Elektroniskās deklarēšanas sistēmā (EDS). Atkarībā no apgrozījuma un darījumu veida tas notiek katru mēnesi vai reizi ceturksnī. Deklarācijā norāda gan iekasēto PVN par pārdoto, gan priekšnodokli par iepirkto, un valstij pārskaita starpību. Ja priekšnodoklis ir lielāks par iekasēto nodokli, pārmaksu var atgūt vai novirzīt nākamajiem periodiem.</p>' +
+        '<p>Deklarācija un maksājums parasti jāveic līdz nākamā mēneša 20. datumam. Precīzus termiņus, periodu un deklarācijas formu skaties VID materiālos.</p>' +
+        '<h2 id="parrobezu">Pārrobežu darījumi un OSS</h2>' +
+        '<p>Pārdodot preces vai pakalpojumus privātpersonām citās ES valstīs (e-komercija), PVN bieži jāpiemēro pēc <strong>pircēja</strong> valsts likmes, tiklīdz pārsniegts ES kopējais tālpārdošanas slieksnis. Lai nevajadzētu reģistrēties katrā valstī atsevišķi, var izmantot vienas pieturas aģentūras sistēmu OSS (One Stop Shop) un deklarēt visu vienuviet. Tāpēc kalkulatorā vari izvēlēties jebkuru ES valsti un aprēķināt summu pēc tās likmes.</p>' +
+        '<p>Darījumos starp diviem PVN maksātājiem no dažādām ES valstīm bieži piemēro apgriezto PVN (reverse charge), kad nodokli deklarē pircējs, nevis pārdevējs. Partnera PVN numura derīgumu pirms rēķina izrakstīšanas vari pārbaudīt ES VIES sistēmā.</p>' +
+        '<h2 id="kludas">Biežākās kļūdas</h2>' +
+        '<ul>' +
+          '<li>PVN atdalīšana, atņemot procentus no gala summas, nevis dalot ar koeficientu.</li>' +
+          '<li>Nepareizas likmes lietošana - piemēram, standarta likme precei, kurai pienākas samazinātā, vai otrādi.</li>' +
+          '<li>Noapaļošana katrā rēķina rindā atsevišķi, kas var radīt dažu centu starpību ar kopsummu.</li>' +
+          '<li>Pārrobežu tirdzniecībā - savas, nevis pircēja valsts likmes piemērošana.</li>' +
+          '<li>0% likmes jaukšana ar atbrīvojumu no PVN - tās nav viens un tas pats.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Noderīgas saites</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - reģistrācija, deklarācijas un aktuālās likmes.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ES VIES</a> - PVN numuru pārbaude.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. PVN likmes, sliekšņi un noteikumi laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu',
+      cookieTitle: 'Mēs cienām tavu privātumu',
+      cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
+        '<a href="privatuma-politika">Uzzini vairāk</a>',
+      cookieAccept: 'Piekrītu', cookieSettings: 'Iestatījumi',
+      prefsTitle: 'Pārvaldīt sīkdatņu preferences', prefsCloseLabel: 'Aizvērt',
+      prefsRejectAll: 'Noraidīt visu', prefsAcceptAll: 'Pieņemt visas',
+      prefsIntro: 'Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. ' +
+        'Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. ' +
+        'Pārējās tiek ielādētas tikai ar tavu piekrišanu.',
+      catNecessaryName: 'Nepieciešamās sīkdatnes', alwaysOn: 'Vienmēr atļauts',
+      catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
+      catAnalyticsName: 'Analītikas sīkdatnes',
+      catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
+      catAdsName: 'Reklāmas sīkdatnes',
+      catAdsDesc: 'Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.',
+      prefsSave: 'Saglabāt preferences'
+    },
+    ru: {
+      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Что такое НДС и как его рассчитать',
+      pageDescription: 'Практическое руководство по НДС в Латвии и ЕС: ставки, формулы расчёта с примерами, порог регистрации, декларирование, OSS и трансграничная торговля. Со ссылками на официальные источники.',
+      navGuide: 'Руководство', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      h1: 'Что такое НДС и как его рассчитать',
+      lead: 'Практическое руководство по налогу на добавленную стоимость в Латвии и Европейском союзе - ставки, расчёт, регистрация и декларирование.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#kas-ir-pvn">Что такое НДС?</a></li>' +
+          '<li><a href="#likmes">Ставки НДС в Латвии</a></li>' +
+          '<li><a href="#aprekins">Как рассчитать НДС</a></li>' +
+          '<li><a href="#registracija">Когда нужно регистрироваться плательщиком НДС</a></li>' +
+          '<li><a href="#deklaracija">Декларация по НДС и сроки</a></li>' +
+          '<li><a href="#parrobezu">Трансграничные операции и OSS</a></li>' +
+          '<li><a href="#kludas">Частые ошибки</a></li>' +
+          '<li><a href="#saites">Полезные ссылки</a></li>' +
+        '</ul>' +
+        '<h2 id="kas-ir-pvn">Что такое НДС?</h2>' +
+        '<p>Налог на добавленную стоимость (НДС) - это налог на потребление, который применяется почти ко всем товарам и услугам в Латвии и остальной части Европейского союза. В итоге налог оплачивает покупатель, а государству его собирает и перечисляет предприятие, которое продаёт товар или услугу.</p>' +
+        '<p>На каждом этапе цепочки поставок предприятие прибавляет НДС к своей цене продажи и одновременно вычитает НДС, уже уплаченный при закупках (входной налог). Поэтому налоговая нагрузка в итоге ложится только на конечного потребителя, а не на каждое предприятие цепочки. Именно поэтому плательщику НДС важно точно знать, какая часть суммы приходится на налог.</p>' +
+        '<div class="callout"><p>С помощью <a href="/">калькулятора НДС</a> вы можете быстро прибавить или выделить НДС для любой суммы и любой ставки страны ЕС.</p></div>' +
+        '<h2 id="likmes">Ставки НДС в Латвии</h2>' +
+        '<p>В Латвии действует одна стандартная и две сниженные ставки НДС, а также ставка 0% для отдельных операций:</p>' +
+        '<ul>' +
+          '<li><strong>21% - стандартная ставка.</strong> Применяется к большинству товаров и услуг.</li>' +
+          '<li><strong>12% - сниженная ставка.</strong> Например, рецептурные медикаменты и медицинские изделия, общественный транспорт, услуги размещения и централизованное теплоснабжение для домохозяйств.</li>' +
+          '<li><strong>5% - сниженная ставка.</strong> Для отдельных групп продуктов питания и периодических изданий.</li>' +
+          '<li><strong>0% - нулевая ставка.</strong> Например, экспорт товаров за пределы ЕС, поставки товаров плательщикам НДС из других стран ЕС и международные перевозки. Нулевая ставка - это не то же самое, что освобождение от НДС: при ставке 0% предприятие сохраняет право на вычет входного налога, а при освобождённых операциях - нет.</li>' +
+        '</ul>' +
+        '<p>Условия применения сниженных ставок со временем меняются, поэтому для конкретного товара или услуги всегда проверяйте актуальную ставку в материалах Службы государственных доходов (VID) и Министерства финансов. Ставки всех 27 стран ЕС можно посмотреть в разделе <a href="likmes">Ставки</a>.</p>' +
+        '<h2 id="aprekins">Как рассчитать НДС</h2>' +
+        '<p><strong>Прибавить НДС.</strong> Если вы знаете цену без налога, умножьте её на коэффициент <code>1 + ставка / 100</code>. Например, 100 € при ставке 21%: <code>100 × 1,21 = 121 €</code>, из которых доля НДС - 21 €.</p>' +
+        '<p><strong>Выделить НДС.</strong> Если вы знаете цену с налогом и хотите узнать сумму без НДС, разделите её на тот же коэффициент: <code>121 ÷ 1,21 = 100 €</code>. Доля НДС и здесь - 21 €.</p>' +
+        '<p>Частая ошибка - просто вычесть 21% из итоговой суммы: такой результат неверен, потому что проценты считаются от цены без налога, а не от цены с налогом. Оба расчёта автоматически выполняет <a href="/">калькулятор</a>: введите сумму в нужное поле, и второе заполнится само. Пошагово это описано в разделе <a href="instrukcijas">Инструкции</a>.</p>' +
+        '<h2 id="registracija">Когда нужно регистрироваться плательщиком НДС</h2>' +
+        '<p>Для лица, ведущего хозяйственную деятельность в Латвии, регистрация плательщиком НДС в VID становится обязательной, когда стоимость облагаемых налогом операций за календарный год достигает 50 000 евро. Зарегистрироваться можно и добровольно, до достижения порога - это часто выгодно предприятиям, чьи покупатели сами являются плательщиками НДС, так как позволяет вычитать входной налог.</p>' +
+        '<p>После регистрации предприятие получает регистрационный номер НДС (в Латвии он начинается с <code>LV</code>) и начинает указывать НДС в своих счетах. Порог и порядок его расчёта в последние годы менялись, поэтому актуальную информацию проверяйте на сайте VID.</p>' +
+        '<h2 id="deklaracija">Декларация по НДС и сроки</h2>' +
+        '<p>Зарегистрированный плательщик НДС подаёт декларацию по НДС в Системе электронного декларирования VID (EDS). В зависимости от оборота и вида операций это происходит ежемесячно или раз в квартал. В декларации указывают как собранный НДС с продаж, так и входной налог с закупок, и перечисляют государству разницу. Если входной налог больше собранного, переплату можно вернуть или направить на следующие периоды.</p>' +
+        '<p>Декларацию и платёж обычно нужно подать до 20-го числа следующего месяца. Точные сроки, период и форму декларации смотрите в материалах VID.</p>' +
+        '<h2 id="parrobezu">Трансграничные операции и OSS</h2>' +
+        '<p>При продаже товаров или услуг частным лицам в других странах ЕС (электронная коммерция) НДС часто нужно применять по ставке страны <strong>покупателя</strong>, как только превышен общий порог дистанционных продаж ЕС. Чтобы не регистрироваться в каждой стране отдельно, можно использовать систему одного окна OSS (One Stop Shop) и декларировать всё в одном месте. Поэтому в калькуляторе можно выбрать любую страну ЕС и рассчитать сумму по её ставке.</p>' +
+        '<p>В операциях между двумя плательщиками НДС из разных стран ЕС часто применяется обратное начисление НДС (reverse charge), когда налог декларирует покупатель, а не продавец. Действительность номера НДС партнёра перед выставлением счёта можно проверить в системе ЕС VIES.</p>' +
+        '<h2 id="kludas">Частые ошибки</h2>' +
+        '<ul>' +
+          '<li>Выделение НДС путём вычитания процентов из итоговой суммы, а не деления на коэффициент.</li>' +
+          '<li>Применение неверной ставки - например, стандартной для товара, которому положена сниженная, или наоборот.</li>' +
+          '<li>Округление в каждой строке счёта отдельно, что может дать расхождение в несколько центов с итогом.</li>' +
+          '<li>В трансграничной торговле - применение своей ставки вместо ставки страны покупателя.</li>' +
+          '<li>Путаница между ставкой 0% и освобождением от НДС - это не одно и то же.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Полезные ссылки</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Служба государственных доходов (VID)</a> - регистрация, декларации и актуальные ставки.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Министерство финансов - ставки НДС</a>.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ЕС VIES</a> - проверка номеров НДС.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Европейская комиссия - НДС</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Ставки, пороги и правила НДС со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footGuide: 'Руководство', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      themeTitle: 'Переключить светлый/тёмный режим',
+      cookieTitle: 'Мы уважаем вашу конфиденциальность',
+      cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
+        '<a href="privatuma-politika">Узнать больше</a>',
+      cookieAccept: 'Принимаю', cookieSettings: 'Настройки',
+      prefsTitle: 'Управление настройками cookie', prefsCloseLabel: 'Закрыть',
+      prefsRejectAll: 'Отклонить все', prefsAcceptAll: 'Принять все',
+      prefsIntro: 'Мы используем cookie, чтобы сайт работал правильно и чтобы понимать, как им пользуются. ' +
+        'Необходимые cookie нельзя отключить - они хранят только ваши настройки. ' +
+        'Остальные загружаются только с вашего согласия.',
+      catNecessaryName: 'Необходимые cookie', alwaysOn: 'Всегда включены',
+      catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
+      catAnalyticsName: 'Аналитические cookie',
+      catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
+      catAdsName: 'Рекламные cookie',
+      catAdsDesc: 'Google AdSense - позволяет показывать рекламу, которая поддерживает бесплатную работу сайта.',
+      prefsSave: 'Сохранить настройки'
+    },
+    en: {
+      htmlLang: 'en', pageTitle: 'VAT Calculator - What is VAT and how to calculate it',
+      pageDescription: 'A practical guide to VAT in Latvia and the EU: rates, calculation formulas with examples, the registration threshold, filing, OSS and cross-border trade. With links to official sources.',
+      navGuide: 'Guide', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      h1: 'What is VAT and how to calculate it',
+      lead: 'A practical guide to value-added tax in Latvia and the European Union - rates, calculation, registration and filing.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#kas-ir-pvn">What is VAT?</a></li>' +
+          '<li><a href="#likmes">VAT rates in Latvia</a></li>' +
+          '<li><a href="#aprekins">How to calculate VAT</a></li>' +
+          '<li><a href="#registracija">When you must register for VAT</a></li>' +
+          '<li><a href="#deklaracija">VAT returns and deadlines</a></li>' +
+          '<li><a href="#parrobezu">Cross-border transactions and OSS</a></li>' +
+          '<li><a href="#kludas">Common mistakes</a></li>' +
+          '<li><a href="#saites">Useful links</a></li>' +
+        '</ul>' +
+        '<h2 id="kas-ir-pvn">What is VAT?</h2>' +
+        '<p>Value-added tax (VAT) is a consumption tax applied to almost all goods and services in Latvia and the rest of the European Union. The tax is ultimately paid by the buyer, but it is collected and passed on to the state by the business that sells the goods or service.</p>' +
+        '<p>At each stage of the supply chain a business adds VAT to its selling price and at the same time deducts the VAT it has already paid on its purchases (input VAT). As a result the tax burden falls only on the final consumer, not on each business in the chain. This is exactly why a VAT payer needs to know precisely how much of an amount is tax.</p>' +
+        '<div class="callout"><p>With the <a href="/">VAT calculator</a> you can quickly add or remove VAT for any amount and any EU country rate.</p></div>' +
+        '<h2 id="likmes">VAT rates in Latvia</h2>' +
+        '<p>Latvia has one standard and two reduced VAT rates, plus a 0% rate for certain transactions:</p>' +
+        '<ul>' +
+          '<li><strong>21% - the standard rate.</strong> Applied to most goods and services.</li>' +
+          '<li><strong>12% - a reduced rate.</strong> For example, prescription medicines and medical devices, public transport, accommodation services and district heating for households.</li>' +
+          '<li><strong>5% - a reduced rate.</strong> For certain groups of food products and periodicals.</li>' +
+          '<li><strong>0% - the zero rate.</strong> For example, the export of goods outside the EU, supplies of goods to VAT payers in other EU countries and international transport. The zero rate is not the same as an exemption from VAT: at 0% the business keeps the right to deduct input VAT, whereas for exempt transactions it does not.</li>' +
+        '</ul>' +
+        '<p>The conditions for reduced rates change over time, so for a specific product or service always check the current rate in materials from the State Revenue Service (VID) and the Ministry of Finance. You can view the standard and reduced rates for all 27 EU countries in the <a href="likmes">Rates</a> section.</p>' +
+        '<h2 id="aprekins">How to calculate VAT</h2>' +
+        '<p><strong>Adding VAT.</strong> If you know the price without tax, multiply it by the factor <code>1 + rate / 100</code>. For example, €100 at a 21% rate: <code>100 × 1.21 = €121</code>, of which the VAT part is €21.</p>' +
+        '<p><strong>Removing VAT.</strong> If you know the price with tax and want the amount without VAT, divide it by the same factor: <code>121 ÷ 1.21 = €100</code>. The VAT part here is also €21.</p>' +
+        '<p>A common mistake is to simply subtract 21% from the total - that result is wrong, because the percentage is calculated from the price without tax, not the price with tax. The <a href="/">calculator</a> does both calculations automatically: type an amount into the field you need and the other fills in by itself. This is explained step by step in the <a href="instrukcijas">Instructions</a>.</p>' +
+        '<h2 id="registracija">When you must register for VAT</h2>' +
+        '<p>For a person carrying out economic activity in Latvia, VAT registration with VID becomes mandatory once the value of taxable transactions reaches 50,000 euro in a calendar year. You can also register voluntarily before reaching the threshold - this is often worthwhile for businesses whose customers are themselves VAT payers, because it allows input VAT to be deducted.</p>' +
+        '<p>After registration a business receives a VAT registration number (in Latvia it starts with <code>LV</code>) and begins showing VAT on its invoices. The threshold and the way it is calculated have changed in recent years, so check the current information on the VID website.</p>' +
+        '<h2 id="deklaracija">VAT returns and deadlines</h2>' +
+        '<p>A registered VAT payer files a VAT return in the VID Electronic Declaration System (EDS). Depending on turnover and the type of transactions, this is done monthly or once a quarter. The return states both the VAT collected on sales and the input VAT on purchases, and the difference is paid to the state. If input VAT is greater than the VAT collected, the overpayment can be refunded or carried forward to later periods.</p>' +
+        '<p>The return and payment usually have to be submitted by the 20th of the following month. Check the exact deadlines, period and return form in VID materials.</p>' +
+        '<h2 id="parrobezu">Cross-border transactions and OSS</h2>' +
+        '<p>When selling goods or services to private individuals in other EU countries (e-commerce), VAT often has to be applied at the <strong>buyer\'s</strong> country rate once the EU-wide distance-selling threshold is exceeded. To avoid registering in each country separately, you can use the One Stop Shop (OSS) scheme and declare everything in one place. This is why the calculator lets you pick any EU country and work out the amount at its rate.</p>' +
+        '<p>In transactions between two VAT payers from different EU countries, the reverse charge often applies, where the buyer rather than the seller accounts for the tax. You can check the validity of a partner\'s VAT number before issuing an invoice in the EU VIES system.</p>' +
+        '<h2 id="kludas">Common mistakes</h2>' +
+        '<ul>' +
+          '<li>Removing VAT by subtracting the percentage from the total instead of dividing by the factor.</li>' +
+          '<li>Using the wrong rate - for example, the standard rate on a product that qualifies for a reduced one, or vice versa.</li>' +
+          '<li>Rounding each invoice line separately, which can create a few-cent difference from the total.</li>' +
+          '<li>In cross-border trade, applying your own rate instead of the buyer\'s country rate.</li>' +
+          '<li>Confusing the 0% rate with an exemption from VAT - they are not the same.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Useful links</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">State Revenue Service (VID)</a> - registration, returns and current rates.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Ministry of Finance - VAT rates</a>.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">EU VIES</a> - VAT number validation.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">European Commission - VAT</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">This page is informational and is not tax advice. VAT rates, thresholds and rules change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
+      back: '← Back to the calculator',
+      footHome: 'Home', footGuide: 'Guide', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      themeTitle: 'Toggle light/dark mode',
+      cookieTitle: 'We respect your privacy',
+      cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
+        '<a href="privatuma-politika">Learn more</a>',
+      cookieAccept: 'I agree', cookieSettings: 'Settings',
+      prefsTitle: 'Manage cookie preferences', prefsCloseLabel: 'Close',
+      prefsRejectAll: 'Reject all', prefsAcceptAll: 'Accept all',
+      prefsIntro: 'We use cookies so the site works properly and to understand how it is used. ' +
+        'Necessary cookies cannot be turned off - they only store your settings. ' +
+        'All others load only with your consent.',
+      catNecessaryName: 'Necessary cookies', alwaysOn: 'Always on',
+      catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
+      catAnalyticsName: 'Analytics cookies',
+      catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
+      catAdsName: 'Advertising cookies',
+      catAdsDesc: 'Google AdSense - lets us show ads that keep the site free.',
+      prefsSave: 'Save preferences'
+    }
+  };
+
+  function formatCheckedDate(l) {
+    var d = new Date();
+    var day = d.getDate();
+    var m = d.getMonth();
+    if (l === 'lv') {
+      var monthsLv = ['janvārī', 'februārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'];
+      return 'Pēdējoreiz pārbaudīts: ' + d.getFullYear() + '. gada ' + day + '. ' + monthsLv[m];
+    }
+    if (l === 'ru') {
+      var monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+      return 'Последняя проверка: ' + day + ' ' + monthsRu[m] + ' ' + d.getFullYear() + ' года';
+    }
+    var monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return 'Last checked: ' + day + ' ' + monthsEn[m] + ' ' + d.getFullYear();
+  }
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+  var lang = 'lv';
+
+  function apply(l) {
+    var t = I18N[l]; if (!t) return;
+    lang = l;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('lastChecked').textContent = formatCheckedDate(l);
+    document.getElementById('navGuide').textContent = t.navGuide;
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('guideBody').innerHTML = t.guideHtml;
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
+    document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      var active = b.dataset.lang === l;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-checked', String(active));
+    });
+    document.getElementById('langCurrent').textContent = l.toUpperCase();
+    document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[l];
+    try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+    var cookieIds = {
+      cookieTitle: t.cookieTitle, cookieAccept: t.cookieAccept, cookieSettingsBtn: t.cookieSettings,
+      prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
+      prefsIntro: t.prefsIntro, catNecessaryName: t.catNecessaryName, catNecessaryAlways: t.alwaysOn,
+      catNecessaryDesc: t.catNecessaryDesc, catAnalyticsName: t.catAnalyticsName,
+      catAnalyticsDesc: t.catAnalyticsDesc, catAdsName: t.catAdsName, catAdsDesc: t.catAdsDesc,
+      prefsSave: t.prefsSave
+    };
+    Object.keys(cookieIds).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = cookieIds[id];
+    });
+    var cookieText = document.getElementById('cookieText');
+    if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var prefsCloseEl = document.getElementById('prefsClose');
+    if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    return 'lv';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); closeLang(); });
+  });
+
+  /* --- Valodu nolaižamā saraksta pārslēgšana --- */
+  var langDropdown = document.getElementById('langDropdown');
+  var langBtn = document.getElementById('langBtn');
+  function closeLang() {
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  }
+  langBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = langDropdown.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', String(open));
+  });
+  var langDropdownPointer = false;
+  function langDropdownPointerArm() { langDropdownPointer = true; setTimeout(function () { langDropdownPointer = false; }, 0); }
+  langDropdown.addEventListener('mousedown', langDropdownPointerArm);
+  langDropdown.addEventListener('touchstart', langDropdownPointerArm, { passive: true });
+  langDropdown.addEventListener('focusout', function (e) {
+    if (langDropdownPointer) return;
+    if (!langDropdown.contains(e.relatedTarget)) closeLang();
+  });
+  document.addEventListener('click', function (e) {
+    if (!langDropdown.contains(e.target)) closeLang();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLang();
+  });
+  apply(initialLang());
+
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  var menuDropdownPointer = false;
+  function menuDropdownPointerArm() { menuDropdownPointer = true; setTimeout(function () { menuDropdownPointer = false; }, 0); }
+  menuDropdown.addEventListener('mousedown', menuDropdownPointerArm);
+  menuDropdown.addEventListener('touchstart', menuDropdownPointerArm, { passive: true });
+  menuDropdown.addEventListener('focusout', function (e) {
+    if (menuDropdownPointer) return;
+    if (!menuDropdown.contains(e.relatedTarget)) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Tēma - tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    var tcMeta = document.querySelector('meta[name="theme-color"]');
+    if (tcMeta) tcMeta.setAttribute('content', th === 'dark' ? '#1b212a' : '#ffffff');
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var sepBtn = document.getElementById('sepBtn');
+  function applySep(sep) {
+    sepBtn.textContent = sep === 'comma' ? ',' : '.';
+    try { localStorage.setItem('pvn-decimal-sep', sep); } catch (e) {}
+  }
+  var savedSep = null;
+  try { savedSep = localStorage.getItem('pvn-decimal-sep'); } catch (e) {}
+  applySep(savedSep === 'period' ? 'period' : 'comma');
+  sepBtn.addEventListener('click', function () {
+    applySep(sepBtn.textContent === ',' ? 'period' : 'comma');
+  });
+})();
+
+/* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
+(function () {
+  var GA_ID = 'G-VSLEWS7DRR';               // Google Analytics 4 mērījuma ID
+  var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
+
+  var banner = document.getElementById('cookieBanner');
+  var prefs = document.getElementById('cookiePrefs');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var settingsBtn = document.getElementById('cookieSettingsBtn');
+  var prefsCloseBtn = document.getElementById('prefsClose');
+  var rejectAllBtn = document.getElementById('prefsRejectAll');
+  var acceptAllBtn = document.getElementById('prefsAcceptAll');
+  var saveBtn = document.getElementById('prefsSave');
+  var swAnalytics = document.getElementById('switchAnalytics');
+  var swAds = document.getElementById('switchAds');
+  var gaLoaded = false, adsLoaded = false;
+
+  function loadScript(src, attrs) {
+    var s = document.createElement('script');
+    s.async = true; s.src = src;
+    if (attrs) Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
+    document.head.appendChild(s);
+  }
+  function applyConsent(c) {
+    if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
+      gaLoaded = true;
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
+    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
+      adsLoaded = true;
+      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
+        { crossorigin: 'anonymous' });
+    }
+  }
+
+  function readConsent() {
+    try {
+      var v2 = localStorage.getItem('pvn-consent-v2');
+      if (v2) return JSON.parse(v2);
+      var v1 = localStorage.getItem('pvn-consent');
+      if (v1 === 'granted') return { analytics: true, ads: true };
+      if (v1 === 'denied') return { analytics: false, ads: false };
+    } catch (e) {}
+    return null;
+  }
+  function saveConsent(c) {
+    try {
+      localStorage.setItem('pvn-consent-v2', JSON.stringify(c));
+      localStorage.removeItem('pvn-consent');
+    } catch (e) {}
+  }
+
+  function setSwitch(sw, on) { sw.setAttribute('aria-checked', String(on)); }
+  function getSwitch(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+  [swAnalytics, swAds].forEach(function (sw) {
+    sw.addEventListener('click', function () { setSwitch(sw, !getSwitch(sw)); });
+  });
+
+  function showBanner() { banner.classList.add('show'); }
+  function hideBanner() { banner.classList.remove('show'); }
+  function openPrefs() {
+    var c = readConsent() || { analytics: false, ads: false };
+    setSwitch(swAnalytics, c.analytics);
+    setSwitch(swAds, c.ads);
+    prefs.classList.add('show');
+    prefsCloseBtn.focus();
+  }
+  function closePrefs(returnFocus) {
+    prefs.classList.remove('show');
+    if (returnFocus && banner.classList.contains('show')) settingsBtn.focus();
+  }
+  function finish(c) {
+    saveConsent(c);
+    applyConsent(c);
+    closePrefs(false);
+    hideBanner();
+  }
+
+  acceptBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  settingsBtn.addEventListener('click', openPrefs);
+  prefsCloseBtn.addEventListener('click', function () { closePrefs(true); });
+  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false, ads: false }); });
+  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  saveBtn.addEventListener('click', function () {
+    finish({ analytics: getSwitch(swAnalytics), ads: getSwitch(swAds) });
+  });
+  prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true);
+  });
+
+  var consent = readConsent();
+  if (consent) applyConsent(consent);
+  else showBanner();
+
+  window.pvnOpenCookieBanner = openPrefs;
+  if (location.hash === '#cookies') openPrefs();
+})();
+</script>
+
+</body>
+</html>
