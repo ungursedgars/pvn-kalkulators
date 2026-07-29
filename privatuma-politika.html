@@ -823,8 +823,7 @@
 
 /* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
 (function () {
-  var GA_ID = 'G-VSLEWS7DRR';               // Google Analytics 4 mērījuma ID
-  var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
+  var GA_ID = 'G-VSLEWS7DRR'; // Google Analytics 4 mērījuma ID
 
   var banner = document.getElementById('cookieBanner');
   var prefs = document.getElementById('cookiePrefs');
@@ -836,7 +835,7 @@
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
   var swAds = document.getElementById('switchAds');
-  var gaLoaded = false, adsLoaded = false;
+  var gaLoaded = false;
 
   function loadScript(src, attrs) {
     var s = document.createElement('script');
@@ -853,11 +852,7 @@
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
-    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
-      adsLoaded = true;
-      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
-        { crossorigin: 'anonymous' });
-    }
+    // Reklāmas šai lapai apzināti netiek ielādētas - privātuma politika bez publicēta satura (AdSense politika).
   }
 
   function readConsent() {
