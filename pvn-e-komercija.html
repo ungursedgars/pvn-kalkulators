@@ -6,13 +6,33 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
 <link rel="apple-touch-icon" href="/logo-192.png">
-<title>PVN Kalkulators - Kontakti</title>
-<meta name="description" content="Sazinies ar pvnkalkulators.eu - jautājumi, idejas un sadarbības piedāvājumi. Atbildēsim vienas darba dienas laikā.">
+<title>PVN Kalkulators - PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība</title>
+<meta name="description" content="Kā piemērot PVN, pārdodot preces vai pakalpojumus citu ES valstu pircējiem: tālpārdošanas slieksnis, OSS un IOSS deklarēšana, platformu atbildība un praktisks piemērs.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://pvnkalkulators.eu/kontakti">
+<link rel="canonical" href="https://pvnkalkulators.eu/pvn-e-komercija">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <meta name="google-adsense-account" content="ca-pub-1040653408011392">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība">
+<meta property="og:description" content="Kā piemērot PVN, pārdodot citu ES valstu pircējiem, un kā darbojas OSS un IOSS sistēmas.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība",
+  "description": "Kā piemērot PVN, pārdodot preces vai pakalpojumus citu ES valstu pircējiem: tālpārdošanas slieksnis, OSS un IOSS deklarēšana, platformu atbildība un praktisks piemērs.",
+  "inLanguage": "lv",
+  "url": "https://pvnkalkulators.eu/pvn-e-komercija",
+  "publisher": {
+    "@type": "Organization",
+    "name": "pvnkalkulators.eu",
+    "url": "https://pvnkalkulators.eu/"
+  },
+  "mainEntityOfPage": "https://pvnkalkulators.eu/pvn-e-komercija"
+}
+</script>
 <style>
   :root {
     color-scheme: light;
@@ -25,8 +45,6 @@
     --border: #dfe3e8;
     --result-bg: #f0f5ff;
     --shadow: 0 2px 12px rgba(20, 30, 50, .08);
-    --ok: #2e9e5b; --ok-soft: rgba(46,158,91,.1);
-    --err: #d0433f; --err-soft: rgba(208,67,63,.1);
   }
   [data-theme="dark"] {
     color-scheme: dark;
@@ -39,8 +57,6 @@
     --border: #2c3440;
     --result-bg: #202a3a;
     --shadow: 0 2px 12px rgba(0, 0, 0, .4);
-    --ok: #4ec27e; --ok-soft: rgba(78,194,126,.14);
-    --err: #ff6b68; --err-soft: rgba(255,107,104,.14);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { overflow-y: scroll; scrollbar-gutter: stable; }
@@ -123,42 +139,40 @@
     #langBtn { height: 28px; padding: 0 8px; }
   }
 
-  main { padding: 40px 0 60px; }
-  .contact-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; box-shadow: var(--shadow); padding: 34px 28px;
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 8px; }
+  .updated { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+
+  .guide h2 { font-size: 1.22rem; margin: 30px 0 8px; }
+  .guide h2:first-child { margin-top: 0; }
+  .guide p { margin-bottom: 12px; }
+  .guide ul { margin: 0 0 14px 20px; }
+  .guide li { margin-bottom: 6px; }
+  .guide a { color: var(--accent); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .guide code {
+    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
+    font-size: .9em; color: var(--text);
   }
-  .contact-card h1 { font-size: 1.6rem; margin-bottom: 8px; text-align: center; }
-  .contact-card .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 26px; text-align: center; }
-
-  form { display: flex; flex-direction: column; gap: 14px; }
-  .field-label { font-weight: 600; font-size: .9rem; margin-bottom: 5px; display: block; }
-  .field-label .req { color: var(--accent); }
-  input, textarea {
-    width: 100%; font-family: inherit; font-size: 1rem; padding: 11px 13px;
-    border: 2px solid var(--border); border-radius: 10px;
-    background: var(--bg); color: var(--text); resize: vertical;
+  .guide .callout {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 16px; margin: 4px 0 16px;
   }
-  input:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--accent-soft); }
-  textarea { min-height: 130px; }
-  .honey { position: absolute; left: -9999px; top: -9999px; }
-
-  .submit-btn {
-    margin-top: 4px; padding: 13px 20px; font-size: 1.05rem; font-weight: 600; cursor: pointer;
-    border: none; border-radius: 11px; background: var(--accent); color: #fff;
-    box-shadow: 0 4px 14px rgba(31,111,235,.25);
+  .guide .callout p:last-child { margin-bottom: 0; }
+  .guide .disclaimer {
+    font-size: .88rem; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px;
   }
-  .submit-btn:hover { filter: brightness(1.05); }
-  .submit-btn:disabled { opacity: .6; cursor: default; filter: none; }
+  .toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px 14px 34px; margin-bottom: 24px;
+  }
+  .toc li { margin-bottom: 5px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
 
-  .form-msg { display: none; padding: 12px 14px; border-radius: 10px; font-size: .95rem; }
-  .form-msg.show { display: block; }
-  .form-msg.ok { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok); }
-  .form-msg.err { background: var(--err-soft); color: var(--err); border: 1px solid var(--err); }
-
-  .alt-mail { margin-top: 18px; text-align: center; font-size: .9rem; color: var(--muted); }
-  .alt-mail a { color: var(--accent); }
-  .back-link { display: block; margin-top: 20px; text-align: center; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-size: .95rem; }
   .back-link:hover { text-decoration: underline; }
 
   footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
@@ -303,34 +317,57 @@
 </header>
 
 <main class="wrap">
-  <div class="contact-card">
-    <h1 id="contactTitle">Sazinies ar mums</h1>
-    <p class="lead" id="contactText">Jautājums, ideja vai sadarbības piedāvājums? Uzraksti - atbildēsim vienas darba dienas laikā.</p>
+  <h1 id="pageTitle">PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība</h1>
+  <p class="lead" id="pageLead">Kā piemērot PVN, pārdodot preces vai pakalpojumus citu ES valstu pircējiem, un kā darbojas OSS un IOSS deklarēšanas sistēmas.</p>
+  <p class="updated" id="lastChecked"></p>
 
-    <form id="contactForm" method="POST">
-      <div>
-        <label class="field-label" for="cfName" id="lblName">Vārds</label>
-        <input type="text" id="cfName" name="name" autocomplete="name" placeholder="Jūsu vārds">
-      </div>
-      <div>
-        <label class="field-label" for="cfEmail" id="lblEmail">E-pasts <span class="req">*</span></label>
-        <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="jusu@epasts.lv">
-      </div>
-      <div>
-        <label class="field-label" for="cfMsg" id="lblMsg">Ziņojums <span class="req">*</span></label>
-        <textarea id="cfMsg" name="message" required placeholder="Jūsu ziņojums…"></textarea>
-      </div>
+  <article class="guide" id="guideBody">
+    <ul class="toc">
+      <li><a href="#slieksnis">Kad piemēro pircēja valsts likmi</a></li>
+      <li><a href="#oss">OSS (One Stop Shop)</a></li>
+      <li><a href="#ioss">IOSS importa precēm</a></li>
+      <li><a href="#platformas">Tirdzniecības platformu atbildība</a></li>
+      <li><a href="#b2b">B2B pārrobežu darījumi</a></li>
+      <li><a href="#piemers">Piemērs</a></li>
+      <li><a href="#saites">Avoti un atruna</a></li>
+    </ul>
 
-      <!-- Pretmēstuļu slazds (netiek rādīts cilvēkiem) -->
-      <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+    <h2 id="slieksnis">Kad piemēro pircēja valsts likmi</h2>
+    <p>Pārdodot preces vai pakalpojumus privātpersonām (B2C) citās ES valstīs, kopš 2021. gada ES mēroga reformas darbojas viens kopējais tālpārdošanas slieksnis - 10 000 EUR gadā visiem pārrobežu B2C darījumiem kopā, nevis atsevišķs slieksnis katrai valstij. Zem šī sliekšņa var turpināt piemērot pārdevēja valsts, piemēram, Latvijas, PVN likmi.</p>
+    <p>Tiklīdz kopējais apgrozījums pārsniedz 10 000 EUR, PVN jāpiemēro pēc pircēja valsts likmes - tas nozīmē, ka pārdevējam praktiski jāpārzina visu attiecīgo valstu likmes.</p>
+    <div class="callout">
+      <p>Izvēlies pircēja valsti <a href="/">PVN kalkulatorā</a> vai apskati visu ES valstu likmes sadaļā <a href="likmes">Likmes</a>.</p>
+    </div>
 
-      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+    <h2 id="oss">OSS (One Stop Shop)</h2>
+    <p>Lai nebūtu jāreģistrējas PVN maksātājam katrā ES valstī atsevišķi, var izmantot OSS (One Stop Shop) sistēmu - reģistrējies vienā ES valstī, parasti savā, un ceturkšņa deklarācijā uzrādi visus pārrobežu B2C darījumus pa valstīm un likmēm, samaksājot vienu kopējo summu.</p>
+    <p>Latvijā OSS reģistrācija un deklarēšana notiek caur VID Elektroniskās deklarēšanas sistēmu (EDS). OSS neatbrīvo no PVN maksāšanas - tas tikai vienkāršo administrēšanu, aizstājot reģistrāciju katrā atsevišķā valstī.</p>
 
-      <button type="submit" class="submit-btn" id="submitBtn">Nosūtīt</button>
-    </form>
+    <h2 id="ioss">IOSS importa precēm</h2>
+    <p>IOSS (Import One Stop Shop) attiecas uz precēm, kas tiek importētas no valstīm ārpus ES un kuru sūtījuma vērtība nepārsniedz 150 EUR. IOSS ļauj PVN iekasēt jau pārdošanas brīdī un deklarēt to vienuviet, nevis liek pircējam maksāt PVN un muitas nodevas saņemšanas brīdī.</p>
+    <p>Precēm virs 150 EUR vai ja IOSS netiek izmantots, PVN parasti iekasē importēšanas brīdī atbilstoši standarta muitas procedūrām.</p>
 
-    <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
-  </div>
+    <h2 id="platformas">Tirdzniecības platformu atbildība</h2>
+    <p>Pārdodot caur lielām tirdzniecības platformām, platforma dažos gadījumos pati kļūst par "uzskatāmo piegādātāju" (deemed supplier) un uzņemas atbildību par PVN iekasēšanu un deklarēšanu konkrētajam darījumam - visbiežāk tas attiecas uz importa precēm līdz 150 EUR un dažiem darījumiem, ko trešo valstu pārdevēji veic caur platformu. Pārbaudi ar konkrēto platformu, kā tā risina PVN šajos gadījumos.</p>
+
+    <h2 id="b2b">B2B pārrobežu darījumi</h2>
+    <p>Pārdodot preces vai pakalpojumus citam PVN maksātājam citā ES valstī (B2B), bieži piemēro apgriezto PVN maksāšanu - pircējs pats deklarē un samaksā PVN savā valstī, bet pārdevējs rēķinā PVN nenorāda. Pirms rēķina izrakstīšanas pārbaudi partnera PVN numura derīgumu ES VIES sistēmā - tas ir priekšnoteikums 0% likmes vai apgrieztās maksāšanas piemērošanai.</p>
+
+    <h2 id="piemers">Piemērs</h2>
+    <p>Latvijas uzņēmums pārdod preces privātpersonām Vācijā un Francijā. Kamēr visu ES B2C tālpārdošanas darījumu kopsumma gadā nepārsniedz 10 000 EUR, uzņēmums piemēro Latvijas 21% likmi. Tiklīdz kopsumma pārsniedz slieksni, turpmākajiem darījumiem ar Vācijas pircējiem jāpiemēro Vācijas likme, bet ar Francijas pircējiem - Francijas likme; abus var deklarēt vienā OSS deklarācijā VID EDS sistēmā, nevis reģistrējoties atsevišķi katrā valstī.</p>
+
+    <h2 id="saites">Avoti un atruna</h2>
+    <ul>
+      <li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - OSS un IOSS reģistrācija un deklarēšana.</li>
+      <li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>
+      <li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a> - OSS/IOSS shēmu apraksts.</li>
+      <li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ES VIES</a> - PVN numuru pārbaude.</li>
+    </ul>
+
+    <p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Sliekšņi, likmes un OSS/IOSS noteikumi laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>
+  </article>
+
+  <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
 <footer>
@@ -341,6 +378,8 @@
       <a href="pvn-rekinos" id="footInvoicing">PVN rēķinos</a> ·
       <a href="pvn-e-komercija" id="footEcommerce">PVN e-komercijā</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj" id="footBuj">BUJ</a> ·
+      <a href="likmes" id="footLikmes">Likmes</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
     </div>
@@ -401,30 +440,51 @@
 
 <script>
 (function () {
-  // Formas ziņojumi iet caur Web3Forms (bezmaksas serviss) - piekļuves atslēga ir
-  // publiska pēc dizaina (Web3Forms to tā arī apraksta), e-pasts pats nekad
-  // nav redzams lapas kodā, jo ir piesaistīts atslēgai viņu panelī.
-  var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
-
   var I18N = {
     lv: {
-      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Kontakti',
-      pageDescription: 'Sazinies ar pvnkalkulators.eu - jautājumi, idejas un sadarbības piedāvājumi. Atbildēsim vienas darba dienas laikā.',
+      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība',
+      pageDescription: 'Kā piemērot PVN, pārdodot preces vai pakalpojumus citu ES valstu pircējiem: tālpārdošanas slieksnis, OSS un IOSS deklarēšana, platformu atbildība un praktisks piemērs.',
       navGuide: 'Rokasgrāmata', navInvoicing: 'PVN rēķinos', navEcommerce: 'PVN e-komercijā', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
-      title: 'Sazinies ar mums',
-      text: 'Jautājums, ideja vai sadarbības piedāvājums? Uzraksti - atbildēsim vienas darba dienas laikā.',
-      lblName: 'Vārds', phName: 'Jūsu vārds',
-      lblEmail: 'E-pasts', phEmail: 'jusu@epasts.lv',
-      lblMsg: 'Ziņojums', phMsg: 'Jūsu ziņojums…',
-      send: 'Nosūtīt', sending: 'Sūta…',
-      ok: 'Paldies! Ziņojums nosūtīts. Atbildēsim pēc iespējas ātrāk.',
-      errFields: 'Lūdzu, ievadiet e-pastu un ziņojumu.',
-      errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
-      errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
-      altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      h1: 'PVN e-komercijā: OSS, IOSS un pārrobežu tirdzniecība',
+      lead: 'Kā piemērot PVN, pārdodot preces vai pakalpojumus citu ES valstu pircējiem, un kā darbojas OSS un IOSS deklarēšanas sistēmas.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#slieksnis">Kad piemēro pircēja valsts likmi</a></li>' +
+          '<li><a href="#oss">OSS (One Stop Shop)</a></li>' +
+          '<li><a href="#ioss">IOSS importa precēm</a></li>' +
+          '<li><a href="#platformas">Tirdzniecības platformu atbildība</a></li>' +
+          '<li><a href="#b2b">B2B pārrobežu darījumi</a></li>' +
+          '<li><a href="#piemers">Piemērs</a></li>' +
+          '<li><a href="#saites">Avoti un atruna</a></li>' +
+        '</ul>' +
+        '<h2 id="slieksnis">Kad piemēro pircēja valsts likmi</h2>' +
+        '<p>Pārdodot preces vai pakalpojumus privātpersonām (B2C) citās ES valstīs, kopš 2021. gada ES mēroga reformas darbojas viens kopējais tālpārdošanas slieksnis - 10 000 EUR gadā visiem pārrobežu B2C darījumiem kopā, nevis atsevišķs slieksnis katrai valstij. Zem šī sliekšņa var turpināt piemērot pārdevēja valsts, piemēram, Latvijas, PVN likmi.</p>' +
+        '<p>Tiklīdz kopējais apgrozījums pārsniedz 10 000 EUR, PVN jāpiemēro pēc pircēja valsts likmes - tas nozīmē, ka pārdevējam praktiski jāpārzina visu attiecīgo valstu likmes.</p>' +
+        '<div class="callout"><p>Izvēlies pircēja valsti <a href="/">PVN kalkulatorā</a> vai apskati visu ES valstu likmes sadaļā <a href="likmes">Likmes</a>.</p></div>' +
+        '<h2 id="oss">OSS (One Stop Shop)</h2>' +
+        '<p>Lai nebūtu jāreģistrējas PVN maksātājam katrā ES valstī atsevišķi, var izmantot OSS (One Stop Shop) sistēmu - reģistrējies vienā ES valstī, parasti savā, un ceturkšņa deklarācijā uzrādi visus pārrobežu B2C darījumus pa valstīm un likmēm, samaksājot vienu kopējo summu.</p>' +
+        '<p>Latvijā OSS reģistrācija un deklarēšana notiek caur VID Elektroniskās deklarēšanas sistēmu (EDS). OSS neatbrīvo no PVN maksāšanas - tas tikai vienkāršo administrēšanu, aizstājot reģistrāciju katrā atsevišķā valstī.</p>' +
+        '<h2 id="ioss">IOSS importa precēm</h2>' +
+        '<p>IOSS (Import One Stop Shop) attiecas uz precēm, kas tiek importētas no valstīm ārpus ES un kuru sūtījuma vērtība nepārsniedz 150 EUR. IOSS ļauj PVN iekasēt jau pārdošanas brīdī un deklarēt to vienuviet, nevis liek pircējam maksāt PVN un muitas nodevas saņemšanas brīdī.</p>' +
+        '<p>Precēm virs 150 EUR vai ja IOSS netiek izmantots, PVN parasti iekasē importēšanas brīdī atbilstoši standarta muitas procedūrām.</p>' +
+        '<h2 id="platformas">Tirdzniecības platformu atbildība</h2>' +
+        '<p>Pārdodot caur lielām tirdzniecības platformām, platforma dažos gadījumos pati kļūst par "uzskatāmo piegādātāju" (deemed supplier) un uzņemas atbildību par PVN iekasēšanu un deklarēšanu konkrētajam darījumam - visbiežāk tas attiecas uz importa precēm līdz 150 EUR un dažiem darījumiem, ko trešo valstu pārdevēji veic caur platformu. Pārbaudi ar konkrēto platformu, kā tā risina PVN šajos gadījumos.</p>' +
+        '<h2 id="b2b">B2B pārrobežu darījumi</h2>' +
+        '<p>Pārdodot preces vai pakalpojumus citam PVN maksātājam citā ES valstī (B2B), bieži piemēro apgriezto PVN maksāšanu - pircējs pats deklarē un samaksā PVN savā valstī, bet pārdevējs rēķinā PVN nenorāda. Pirms rēķina izrakstīšanas pārbaudi partnera PVN numura derīgumu ES VIES sistēmā - tas ir priekšnoteikums 0% likmes vai apgrieztās maksāšanas piemērošanai.</p>' +
+        '<h2 id="piemers">Piemērs</h2>' +
+        '<p>Latvijas uzņēmums pārdod preces privātpersonām Vācijā un Francijā. Kamēr visu ES B2C tālpārdošanas darījumu kopsumma gadā nepārsniedz 10 000 EUR, uzņēmums piemēro Latvijas 21% likmi. Tiklīdz kopsumma pārsniedz slieksni, turpmākajiem darījumiem ar Vācijas pircējiem jāpiemēro Vācijas likme, bet ar Francijas pircējiem - Francijas likme; abus var deklarēt vienā OSS deklarācijā VID EDS sistēmā, nevis reģistrējoties atsevišķi katrā valstī.</p>' +
+        '<h2 id="saites">Avoti un atruna</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - OSS un IOSS reģistrācija un deklarēšana.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a> - OSS/IOSS shēmu apraksts.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ES VIES</a> - PVN numuru pārbaude.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Sliekšņi, likmes un OSS/IOSS noteikumi laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
       cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
         '<a href="privatuma-politika">Uzzini vairāk</a>',
@@ -443,23 +503,49 @@
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
-      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Контакты',
-      pageDescription: 'Свяжитесь с pvnkalkulators.eu - вопросы, идеи и предложения о сотрудничестве. Ответим в течение одного рабочего дня.',
+      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - НДС в e-commerce: OSS, IOSS и трансграничная торговля',
+      pageDescription: 'Как применять НДС при продаже покупателям в других странах ЕС: порог дистанционных продаж, декларирование через OSS и IOSS, ответственность платформ и практический пример.',
       navGuide: 'Руководство', navInvoicing: 'Счета с НДС', navEcommerce: 'НДС в e-commerce', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
-      title: 'Свяжитесь с нами',
-      text: 'Вопрос, идея или предложение о сотрудничестве? Напишите нам - ответим в течение одного рабочего дня.',
-      lblName: 'Имя', phName: 'Ваше имя',
-      lblEmail: 'E-mail', phEmail: 'vash@email.com',
-      lblMsg: 'Сообщение', phMsg: 'Ваше сообщение…',
-      send: 'Отправить', sending: 'Отправка…',
-      ok: 'Спасибо! Сообщение отправлено. Ответим как можно скорее.',
-      errFields: 'Пожалуйста, введите e-mail и сообщение.',
-      errEmail: 'Пожалуйста, введите корректный e-mail.',
-      errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
-      altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      h1: 'НДС в e-commerce: OSS, IOSS и трансграничная торговля',
+      lead: 'Как применять НДС при продаже товаров или услуг покупателям в других странах ЕС и как работают системы декларирования OSS и IOSS.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#slieksnis">Когда применяется ставка страны покупателя</a></li>' +
+          '<li><a href="#oss">OSS (One Stop Shop)</a></li>' +
+          '<li><a href="#ioss">IOSS для импортных товаров</a></li>' +
+          '<li><a href="#platformas">Ответственность торговых платформ</a></li>' +
+          '<li><a href="#b2b">Трансграничные операции B2B</a></li>' +
+          '<li><a href="#piemers">Пример</a></li>' +
+          '<li><a href="#saites">Источники и оговорка</a></li>' +
+        '</ul>' +
+        '<h2 id="slieksnis">Когда применяется ставка страны покупателя</h2>' +
+        '<p>При продаже товаров или услуг частным лицам (B2C) в других странах ЕС, начиная с реформы 2021 года, действует единый общий порог дистанционных продаж - 10 000 евро в год для всех трансграничных B2C операций вместе, а не отдельный порог для каждой страны. Ниже этого порога можно продолжать применять ставку страны продавца, например, Латвии.</p>' +
+        '<p>Как только общий оборот превышает 10 000 евро, НДС нужно применять по ставке страны покупателя - это означает, что продавцу на практике нужно знать ставки всех соответствующих стран.</p>' +
+        '<div class="callout"><p>Выберите страну покупателя в <a href="/">калькуляторе НДС</a> или посмотрите ставки всех стран ЕС в разделе <a href="likmes">Ставки</a>.</p></div>' +
+        '<h2 id="oss">OSS (One Stop Shop)</h2>' +
+        '<p>Чтобы не регистрироваться плательщиком НДС в каждой стране ЕС отдельно, можно использовать систему OSS (One Stop Shop) - зарегистрироваться в одной стране ЕС, обычно в своей, и в квартальной декларации указывать все трансграничные B2C операции по странам и ставкам, уплачивая одну общую сумму.</p>' +
+        '<p>В Латвии регистрация и декларирование по OSS происходит через Систему электронного декларирования VID (EDS). OSS не освобождает от уплаты НДС - он лишь упрощает администрирование, заменяя регистрацию в каждой отдельной стране.</p>' +
+        '<h2 id="ioss">IOSS для импортных товаров</h2>' +
+        '<p>IOSS (Import One Stop Shop) применяется к товарам, импортируемым из стран за пределами ЕС, стоимость отправления которых не превышает 150 евро. IOSS позволяет взимать НДС уже в момент продажи и декларировать его в одном месте, вместо того чтобы заставлять покупателя платить НДС и таможенные сборы при получении.</p>' +
+        '<p>Для товаров дороже 150 евро или если IOSS не используется, НДС обычно взимается в момент импорта по стандартным таможенным процедурам.</p>' +
+        '<h2 id="platformas">Ответственность торговых платформ</h2>' +
+        '<p>При продаже через крупные торговые платформы платформа в некоторых случаях сама становится "предполагаемым поставщиком" (deemed supplier) и берёт на себя ответственность за взимание и декларирование НДС по конкретной операции - чаще всего это касается импортных товаров стоимостью до 150 евро и некоторых операций, которые продавцы из третьих стран совершают через платформу. Уточните у конкретной платформы, как она решает вопрос НДС в этих случаях.</p>' +
+        '<h2 id="b2b">Трансграничные операции B2B</h2>' +
+        '<p>При продаже товаров или услуг другому плательщику НДС в другой стране ЕС (B2B) часто применяется обратное начисление НДС - покупатель сам декларирует и уплачивает НДС в своей стране, а продавец не указывает НДС в счёте. Перед выставлением счёта проверьте действительность номера НДС партнёра в системе ЕС VIES - это необходимое условие для применения ставки 0% или обратного начисления.</p>' +
+        '<h2 id="piemers">Пример</h2>' +
+        '<p>Латвийское предприятие продаёт товары частным лицам в Германии и Франции. Пока общая сумма всех B2C дистанционных продаж по ЕС за год не превышает 10 000 евро, предприятие применяет латвийскую ставку 21%. Как только сумма превышает порог, к дальнейшим операциям с немецкими покупателями нужно применять немецкую ставку, а с французскими - французскую; обе можно задекларировать в одной декларации OSS в системе VID EDS, не регистрируясь отдельно в каждой стране.</p>' +
+        '<h2 id="saites">Источники и оговорка</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Служба государственных доходов (VID)</a> - регистрация и декларирование по OSS и IOSS.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Министерство финансов - ставки НДС</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Европейская комиссия - НДС</a> - описание схем OSS/IOSS.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">ЕС VIES</a> - проверка номеров НДС.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Пороги, ставки и правила OSS/IOSS со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС',
+      themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
       cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
         '<a href="privatuma-politika">Узнать больше</a>',
@@ -478,23 +564,49 @@
       prefsSave: 'Сохранить настройки'
     },
     en: {
-      htmlLang: 'en', pageTitle: 'VAT Calculator - Contact',
-      pageDescription: 'Contact pvnkalkulators.eu - questions, ideas and partnership offers. We\'ll reply within one working day.',
+      htmlLang: 'en', pageTitle: 'VAT Calculator - VAT in e-commerce: OSS, IOSS and cross-border trade',
+      pageDescription: 'How to apply VAT when selling to buyers in other EU countries: the distance-selling threshold, OSS and IOSS filing, marketplace liability and a worked example.',
       navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
-      title: 'Get in touch',
-      text: 'A question, an idea or a partnership proposal? Drop us a line \u2014 we\u2019ll reply within one working day.',
-      lblName: 'Name', phName: 'Your name',
-      lblEmail: 'Email', phEmail: 'you@email.com',
-      lblMsg: 'Message', phMsg: 'Your message…',
-      send: 'Send', sending: 'Sending…',
-      ok: 'Thank you! Your message has been sent. We’ll reply as soon as possible.',
-      errFields: 'Please enter your email and a message.',
-      errEmail: 'Please enter a valid email address.',
-      errSend: 'Could not send. Try again later or email us directly.',
-      altMail: 'Or write to us directly:', back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      h1: 'VAT in e-commerce: OSS, IOSS and cross-border trade',
+      lead: 'How to apply VAT when selling goods or services to buyers in other EU countries, and how the OSS and IOSS filing schemes work.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#slieksnis">When the buyer\'s country rate applies</a></li>' +
+          '<li><a href="#oss">OSS (One Stop Shop)</a></li>' +
+          '<li><a href="#ioss">IOSS for imported goods</a></li>' +
+          '<li><a href="#platformas">Marketplace liability</a></li>' +
+          '<li><a href="#b2b">Cross-border B2B transactions</a></li>' +
+          '<li><a href="#piemers">Example</a></li>' +
+          '<li><a href="#saites">Sources and disclaimer</a></li>' +
+        '</ul>' +
+        '<h2 id="slieksnis">When the buyer\'s country rate applies</h2>' +
+        '<p>When selling goods or services to private individuals (B2C) in other EU countries, since the EU-wide 2021 reform a single combined distance-selling threshold applies - 10,000 EUR a year for all cross-border B2C sales together, rather than a separate threshold per country. Below this threshold you can keep applying the seller\'s country rate, for example Latvia\'s.</p>' +
+        '<p>Once total turnover exceeds 10,000 EUR, VAT must be applied at the buyer\'s country rate - in practice the seller needs to know the rates of every country involved.</p>' +
+        '<div class="callout"><p>Pick the buyer\'s country in the <a href="/">VAT calculator</a> or see the rates for every EU country in the <a href="likmes">Rates</a> section.</p></div>' +
+        '<h2 id="oss">OSS (One Stop Shop)</h2>' +
+        '<p>To avoid registering for VAT in every EU country separately, you can use the OSS (One Stop Shop) scheme - register in one EU country, usually your own, and report all cross-border B2C sales by country and rate in a single quarterly return, paying one combined amount.</p>' +
+        '<p>In Latvia, OSS registration and filing is done through the VID Electronic Declaration System (EDS). OSS does not exempt you from paying VAT - it only simplifies administration by replacing registration in each individual country.</p>' +
+        '<h2 id="ioss">IOSS for imported goods</h2>' +
+        '<p>IOSS (Import One Stop Shop) applies to goods imported from outside the EU where the consignment value does not exceed 150 EUR. IOSS lets you collect VAT at the point of sale and declare it in one place, instead of the buyer having to pay VAT and customs fees on delivery.</p>' +
+        '<p>For goods over 150 EUR, or if IOSS is not used, VAT is usually collected at the point of import under standard customs procedures.</p>' +
+        '<h2 id="platformas">Marketplace liability</h2>' +
+        '<p>When selling through large marketplaces, the platform itself sometimes becomes the "deemed supplier" and takes on responsibility for collecting and declaring VAT on that transaction - this most often applies to imported goods up to 150 EUR and to certain sales made by non-EU sellers through the platform. Check with the specific marketplace how it handles VAT in these cases.</p>' +
+        '<h2 id="b2b">Cross-border B2B transactions</h2>' +
+        '<p>When selling goods or services to another VAT payer in a different EU country (B2B), the reverse charge often applies - the buyer accounts for and pays the VAT in their own country, and the seller does not show VAT on the invoice. Before issuing an invoice, check the validity of the partner\'s VAT number in the EU VIES system - this is a precondition for applying the 0% rate or the reverse charge.</p>' +
+        '<h2 id="piemers">Example</h2>' +
+        '<p>A Latvian business sells goods to private individuals in Germany and France. As long as the combined total of all EU B2C distance sales for the year stays under 10,000 EUR, the business applies Latvia\'s 21% rate. Once the total exceeds the threshold, further sales to German buyers must use the German rate and sales to French buyers the French rate; both can be declared in a single OSS return in the VID EDS system instead of registering separately in each country.</p>' +
+        '<h2 id="saites">Sources and disclaimer</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">State Revenue Service (VID)</a> - OSS and IOSS registration and filing.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Ministry of Finance - VAT rates</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">European Commission - VAT</a> - description of the OSS/IOSS schemes.</li>' +
+          '<li><a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank" rel="noopener">EU VIES</a> - VAT number validation.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">This page is informational and is not tax advice. Thresholds, rates and OSS/IOSS rules change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
+      back: '← Back to the calculator',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator',
+      themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
       cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
         '<a href="privatuma-politika">Learn more</a>',
@@ -514,19 +626,25 @@
     }
   };
 
+  function formatCheckedDate(l) {
+    var d = new Date();
+    var day = d.getDate();
+    var m = d.getMonth();
+    if (l === 'lv') {
+      var monthsLv = ['janvārī', 'februārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'];
+      return 'Pēdējoreiz pārbaudīts: ' + d.getFullYear() + '. gada ' + day + '. ' + monthsLv[m];
+    }
+    if (l === 'ru') {
+      var monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+      return 'Последняя проверка: ' + day + ' ' + monthsRu[m] + ' ' + d.getFullYear() + ' года';
+    }
+    var monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return 'Last checked: ' + day + ' ' + monthsEn[m] + ' ' + d.getFullYear();
+  }
+
   var langSwitch = document.getElementById('langSwitch');
   var themeBtn = document.getElementById('themeBtn');
-  var form = document.getElementById('contactForm');
-  var submitBtn = document.getElementById('submitBtn');
-  var formMsg = document.getElementById('formMsg');
-  var nameEl = document.getElementById('cfName');
-  var emailEl = document.getElementById('cfEmail');
-  var msgEl = document.getElementById('cfMsg');
-  var honeyEl = form.querySelector('[name="botcheck"]');
   var lang = 'lv';
-  var lastMsgKey = null; // atceramies rādīto ziņu (ok/errFields/errEmail/errSend), lai varam pārtulkot pēc valodas maiņas
-
-  function T() { return I18N[lang]; }
 
   function apply(l) {
     var t = I18N[l]; if (!t) return;
@@ -535,6 +653,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('lastChecked').textContent = formatCheckedDate(l);
     document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInvoicing').textContent = t.navInvoicing;
     document.getElementById('navEcommerce').textContent = t.navEcommerce;
@@ -542,21 +661,17 @@
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
     document.getElementById('navKontakti').textContent = t.navKontakti;
-    document.getElementById('contactTitle').textContent = t.title;
-    document.getElementById('contactText').textContent = t.text;
-    document.getElementById('lblName').innerHTML = t.lblName;
-    document.getElementById('lblEmail').innerHTML = t.lblEmail + ' <span class="req">*</span>';
-    document.getElementById('lblMsg').innerHTML = t.lblMsg + ' <span class="req">*</span>';
-    nameEl.placeholder = t.phName;
-    emailEl.placeholder = t.phEmail;
-    msgEl.placeholder = t.phMsg;
-    submitBtn.textContent = t.send;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('guideBody').innerHTML = t.guideHtml;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
     document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInvoicing').textContent = t.footInvoicing;
     document.getElementById('footEcommerce').textContent = t.footEcommerce;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;
     document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
@@ -569,7 +684,6 @@
     document.getElementById('langCurrent').textContent = l.toUpperCase();
     document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[l];
     try { localStorage.setItem('pvn-lang', l); } catch (e) {}
-    if (lastMsgKey) formMsg.textContent = t[lastMsgKey];
     var cookieIds = {
       cookieTitle: t.cookieTitle, cookieAccept: t.cookieAccept, cookieSettingsBtn: t.cookieSettings,
       prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
@@ -609,9 +723,6 @@
     var open = langDropdown.classList.toggle('open');
     langBtn.setAttribute('aria-expanded', String(open));
   });
-  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
-  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
-  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
   var langDropdownPointer = false;
   function langDropdownPointerArm() { langDropdownPointer = true; setTimeout(function () { langDropdownPointer = false; }, 0); }
   langDropdown.addEventListener('mousedown', langDropdownPointerArm);
@@ -639,9 +750,6 @@
     var open = menuDropdown.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', String(open));
   });
-  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
-  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
-  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
   var menuDropdownPointer = false;
   function menuDropdownPointerArm() { menuDropdownPointer = true; setTimeout(function () { menuDropdownPointer = false; }, 0); }
   menuDropdown.addEventListener('mousedown', menuDropdownPointerArm);
@@ -658,50 +766,6 @@
   });
   document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
-  });
-
-  // --- Formas nosūtīšana caur Web3Forms (fetch/JSON, bez lapas pārlādes) ---
-  function showMsg(kind, key) {
-    lastMsgKey = key;
-    formMsg.className = 'form-msg show ' + kind;
-    formMsg.textContent = T()[key];
-  }
-  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var t = T();
-    if (honeyEl.checked) return; // mēstule
-    if (!emailEl.value.trim() || !msgEl.value.trim()) { showMsg('err', 'errFields'); return; }
-    if (!validEmail(emailEl.value.trim())) { showMsg('err', 'errEmail'); return; }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = t.sending;
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_ACCESS_KEY,
-        name: nameEl.value.trim(),
-        email: emailEl.value.trim(),
-        message: msgEl.value.trim(),
-        subject: t.subject
-      })
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = t.send;
-      if (data.success) {
-        showMsg('ok', 'ok');
-        form.reset();
-      } else {
-        showMsg('err', 'errSend');
-      }
-    }).catch(function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = t.send;
-      showMsg('err', 'errSend');
-    });
   });
 
   // Tēma - tās pašas SVG ikonas kā index
@@ -745,6 +809,7 @@
 /* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
 (function () {
   var GA_ID = 'G-VSLEWS7DRR'; // Google Analytics 4 mērījuma ID
+  var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
 
   var banner = document.getElementById('cookieBanner');
   var prefs = document.getElementById('cookiePrefs');
@@ -756,7 +821,7 @@
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
   var swAds = document.getElementById('switchAds');
-  var gaLoaded = false;
+  var gaLoaded = false, adsLoaded = false;
 
   function loadScript(src, attrs) {
     var s = document.createElement('script');
@@ -773,14 +838,17 @@
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
-    // Reklāmas šai lapai apzināti netiek ielādētas - kontaktforma bez publicēta satura (AdSense politika).
+    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
+      adsLoaded = true;
+      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
+        { crossorigin: 'anonymous' });
+    }
   }
 
   function readConsent() {
     try {
       var v2 = localStorage.getItem('pvn-consent-v2');
       if (v2) return JSON.parse(v2);
-      // Vecais viena lēmuma formāts - pārtulkojam uz granulāro
       var v1 = localStorage.getItem('pvn-consent');
       if (v1 === 'granted') return { analytics: true, ads: true };
       if (v1 === 'denied') return { analytics: false, ads: false };
@@ -835,9 +903,8 @@
 
   var consent = readConsent();
   if (consent) applyConsent(consent);
-  else showBanner(); // rāda tikai, kamēr izvēle vēl nav izdarīta
+  else showBanner();
 
-  // Preferenču atkārtota atvēršana (piem. no privātuma politikas): #cookies
   window.pvnOpenCookieBanner = openPrefs;
   if (location.hash === '#cookies') openPrefs();
 })();

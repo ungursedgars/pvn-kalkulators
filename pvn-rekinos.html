@@ -6,13 +6,33 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
 <link rel="apple-touch-icon" href="/logo-192.png">
-<title>PVN Kalkulators - Kontakti</title>
-<meta name="description" content="Sazinies ar pvnkalkulators.eu - jautājumi, idejas un sadarbības piedāvājumi. Atbildēsim vienas darba dienas laikā.">
+<title>PVN Kalkulators - PVN rēķinos: rekvizīti un biežākās kļūdas</title>
+<meta name="description" content="Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu, kā rēķinā norādīt apgriezto PVN maksāšanu vai 0% likmi, un biežākās kļūdas rēķinu noformēšanā.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://pvnkalkulators.eu/kontakti">
+<link rel="canonical" href="https://pvnkalkulators.eu/pvn-rekinos">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <meta name="google-adsense-account" content="ca-pub-1040653408011392">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="PVN rēķinos: rekvizīti un biežākās kļūdas">
+<meta property="og:description" content="Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu un kā izvairīties no biežākajām kļūdām.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PVN rēķinos: rekvizīti un biežākās kļūdas",
+  "description": "Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu, kā norādīt apgriezto PVN maksāšanu vai 0% likmi, un biežākās kļūdas rēķinu noformēšanā.",
+  "inLanguage": "lv",
+  "url": "https://pvnkalkulators.eu/pvn-rekinos",
+  "publisher": {
+    "@type": "Organization",
+    "name": "pvnkalkulators.eu",
+    "url": "https://pvnkalkulators.eu/"
+  },
+  "mainEntityOfPage": "https://pvnkalkulators.eu/pvn-rekinos"
+}
+</script>
 <style>
   :root {
     color-scheme: light;
@@ -25,8 +45,6 @@
     --border: #dfe3e8;
     --result-bg: #f0f5ff;
     --shadow: 0 2px 12px rgba(20, 30, 50, .08);
-    --ok: #2e9e5b; --ok-soft: rgba(46,158,91,.1);
-    --err: #d0433f; --err-soft: rgba(208,67,63,.1);
   }
   [data-theme="dark"] {
     color-scheme: dark;
@@ -39,8 +57,6 @@
     --border: #2c3440;
     --result-bg: #202a3a;
     --shadow: 0 2px 12px rgba(0, 0, 0, .4);
-    --ok: #4ec27e; --ok-soft: rgba(78,194,126,.14);
-    --err: #ff6b68; --err-soft: rgba(255,107,104,.14);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { overflow-y: scroll; scrollbar-gutter: stable; }
@@ -123,42 +139,40 @@
     #langBtn { height: 28px; padding: 0 8px; }
   }
 
-  main { padding: 40px 0 60px; }
-  .contact-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; box-shadow: var(--shadow); padding: 34px 28px;
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 8px; }
+  .updated { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+
+  .guide h2 { font-size: 1.22rem; margin: 30px 0 8px; }
+  .guide h2:first-child { margin-top: 0; }
+  .guide p { margin-bottom: 12px; }
+  .guide ul { margin: 0 0 14px 20px; }
+  .guide li { margin-bottom: 6px; }
+  .guide a { color: var(--accent); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .guide code {
+    background: var(--result-bg); padding: 2px 6px; border-radius: 5px;
+    font-size: .9em; color: var(--text);
   }
-  .contact-card h1 { font-size: 1.6rem; margin-bottom: 8px; text-align: center; }
-  .contact-card .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 26px; text-align: center; }
-
-  form { display: flex; flex-direction: column; gap: 14px; }
-  .field-label { font-weight: 600; font-size: .9rem; margin-bottom: 5px; display: block; }
-  .field-label .req { color: var(--accent); }
-  input, textarea {
-    width: 100%; font-family: inherit; font-size: 1rem; padding: 11px 13px;
-    border: 2px solid var(--border); border-radius: 10px;
-    background: var(--bg); color: var(--text); resize: vertical;
+  .guide .callout {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 16px; margin: 4px 0 16px;
   }
-  input:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--accent-soft); }
-  textarea { min-height: 130px; }
-  .honey { position: absolute; left: -9999px; top: -9999px; }
-
-  .submit-btn {
-    margin-top: 4px; padding: 13px 20px; font-size: 1.05rem; font-weight: 600; cursor: pointer;
-    border: none; border-radius: 11px; background: var(--accent); color: #fff;
-    box-shadow: 0 4px 14px rgba(31,111,235,.25);
+  .guide .callout p:last-child { margin-bottom: 0; }
+  .guide .disclaimer {
+    font-size: .88rem; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 26px;
   }
-  .submit-btn:hover { filter: brightness(1.05); }
-  .submit-btn:disabled { opacity: .6; cursor: default; filter: none; }
+  .toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px 14px 34px; margin-bottom: 24px;
+  }
+  .toc li { margin-bottom: 5px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
 
-  .form-msg { display: none; padding: 12px 14px; border-radius: 10px; font-size: .95rem; }
-  .form-msg.show { display: block; }
-  .form-msg.ok { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok); }
-  .form-msg.err { background: var(--err-soft); color: var(--err); border: 1px solid var(--err); }
-
-  .alt-mail { margin-top: 18px; text-align: center; font-size: .9rem; color: var(--muted); }
-  .alt-mail a { color: var(--accent); }
-  .back-link { display: block; margin-top: 20px; text-align: center; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-size: .95rem; }
   .back-link:hover { text-decoration: underline; }
 
   footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
@@ -303,34 +317,69 @@
 </header>
 
 <main class="wrap">
-  <div class="contact-card">
-    <h1 id="contactTitle">Sazinies ar mums</h1>
-    <p class="lead" id="contactText">Jautājums, ideja vai sadarbības piedāvājums? Uzraksti - atbildēsim vienas darba dienas laikā.</p>
+  <h1 id="pageTitle">PVN rēķinos: rekvizīti un biežākās kļūdas</h1>
+  <p class="lead" id="pageLead">Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu un kā izvairīties no biežākajām kļūdām rēķinu noformēšanā.</p>
+  <p class="updated" id="lastChecked"></p>
 
-    <form id="contactForm" method="POST">
-      <div>
-        <label class="field-label" for="cfName" id="lblName">Vārds</label>
-        <input type="text" id="cfName" name="name" autocomplete="name" placeholder="Jūsu vārds">
-      </div>
-      <div>
-        <label class="field-label" for="cfEmail" id="lblEmail">E-pasts <span class="req">*</span></label>
-        <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="jusu@epasts.lv">
-      </div>
-      <div>
-        <label class="field-label" for="cfMsg" id="lblMsg">Ziņojums <span class="req">*</span></label>
-        <textarea id="cfMsg" name="message" required placeholder="Jūsu ziņojums…"></textarea>
-      </div>
+  <article class="guide" id="guideBody">
+    <ul class="toc">
+      <li><a href="#rekviziti">Kas jānorāda pilnā PVN rēķinā</a></li>
+      <li><a href="#vienkarsotais">Vienkāršotais rēķins</a></li>
+      <li><a href="#apgrieztais">Apgrieztā PVN maksāšana un 0% likme rēķinā</a></li>
+      <li><a href="#e-rekini">Elektroniskie rēķini</a></li>
+      <li><a href="#kludas">Biežākās kļūdas rēķinos</a></li>
+      <li><a href="#saites">Avoti un atruna</a></li>
+    </ul>
 
-      <!-- Pretmēstuļu slazds (netiek rādīts cilvēkiem) -->
-      <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+    <h2 id="rekviziti">Kas jānorāda pilnā PVN rēķinā</h2>
+    <p>PVN maksātājam par katru ar PVN apliekamu preču piegādi vai pakalpojumu jāizraksta rēķins ar noteiktiem obligātiem rekvizītiem. Rēķins ir gan grāmatvedības dokuments, gan pierādījums pircējam par tiesībām atskaitīt priekšnodokli.</p>
+    <div class="callout">
+      <p>Ar <a href="/">PVN kalkulatoru</a> vari ātri pārbaudīt, vai rēķinā pareizi aprēķināta PVN summa jebkurai likmei.</p>
+    </div>
+    <ul>
+      <li>Rēķina izdošanas datums un unikāls, secīgs rēķina numurs.</li>
+      <li>Pārdevēja nosaukums, adrese un PVN reģistrācijas numurs.</li>
+      <li>Pircēja nosaukums, adrese un PVN reģistrācijas numurs, ja pircējs ir PVN maksātājs.</li>
+      <li>Piegādes vai pakalpojuma sniegšanas datums, ja tas atšķiras no izdošanas datuma.</li>
+      <li>Preces vai pakalpojuma nosaukums un daudzums.</li>
+      <li>Cena bez PVN par vienību un atlaides, ja tās nav iekļautas cenā.</li>
+      <li>Piemērotā PVN likme un PVN summa - atsevišķi katrai likmei, ja rēķinā ir vairākas.</li>
+      <li>Kopējā summa bez PVN, PVN summa un kopsumma ar PVN.</li>
+    </ul>
 
-      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+    <h2 id="vienkarsotais">Vienkāršotais rēķins</h2>
+    <p>Nelielām summām - piemēram, kases čekiem un mazumtirdzniecības darījumiem - drīkst izsniegt vienkāršotu rēķinu bez pilna rekvizītu klāsta, bieži bez pircēja datiem. Precīzu summas robežu un nosacījumus, kad vienkāršotais rēķins ir pieļaujams, pārbaudi VID materiālos, jo tie var mainīties.</p>
+    <p>Vienkāršotajā rēķinā parasti tomēr jānorāda izdevēja PVN reģistrācijas numurs, datums, preces vai pakalpojuma apraksts un kopsumma ar PVN.</p>
 
-      <button type="submit" class="submit-btn" id="submitBtn">Nosūtīt</button>
-    </form>
+    <h2 id="apgrieztais">Apgrieztā PVN maksāšana un 0% likme rēķinā</h2>
+    <p>Ja darījumam piemēro apgriezto PVN maksāšanu (reverse charge) - piemēram, dažiem pārrobežu pakalpojumiem starp PVN maksātājiem - rēķinā PVN summu nenorāda, bet jāiekļauj atsauce, ka nodokli deklarē pircējs, piemēram, "Nodokli maksā pakalpojuma saņēmējs" vai "Reverse charge".</p>
+    <p>Ja piemēro 0% likmi vai darījums ir atbrīvots no PVN, rēķinā jānorāda atsauce uz tiesisko pamatu - attiecīgo likuma pantu vai ES direktīvas normu - nevis tikai jāatstāj PVN aile tukša.</p>
 
-    <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
-  </div>
+    <h2 id="e-rekini">Elektroniskie rēķini</h2>
+    <p>Elektroniskie rēķini (e-rēķini) arvien vairāk kļūst obligāti darījumos ar valsts un pašvaldību iestādēm, un šī prasība pakāpeniski paplašinās arī uz citiem darījumu veidiem. Aktuālo regulējumu un termiņus pārbaudi VID materiālos, jo šī joma pēdējos gados strauji mainās.</p>
+    <p>E-rēķinam jāsatur tie paši obligātie rekvizīti, kas parastam papīra rēķinam - tikai strukturētā, mašīnlasāmā formātā.</p>
+
+    <h2 id="kludas">Biežākās kļūdas rēķinos</h2>
+    <ul>
+      <li>Trūkstošs vai nepareizs pircēja vai pārdevēja PVN reģistrācijas numurs.</li>
+      <li>Nepareizas likmes piemērošana konkrētajai precei vai pakalpojumam.</li>
+      <li>Noapaļošanas kļūdas, ja PVN aprēķina katrai rindai atsevišķi, nevis no rindu kopsummas.</li>
+      <li>Trūkstoša atsauce uz apgriezto PVN maksāšanu vai 0% likmes tiesisko pamatu.</li>
+      <li>Rēķinu numuru secības pārtraukumi vai dublēšanās.</li>
+      <li>Piegādes datuma nesakritība ar izdošanas datumu bez skaidrojuma.</li>
+    </ul>
+
+    <h2 id="saites">Avoti un atruna</h2>
+    <ul>
+      <li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - rēķinu noformēšanas prasības un aktuālais regulējums.</li>
+      <li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>
+      <li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>
+    </ul>
+
+    <p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>
+  </article>
+
+  <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
 <footer>
@@ -341,6 +390,8 @@
       <a href="pvn-rekinos" id="footInvoicing">PVN rēķinos</a> ·
       <a href="pvn-e-komercija" id="footEcommerce">PVN e-komercijā</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj" id="footBuj">BUJ</a> ·
+      <a href="likmes" id="footLikmes">Likmes</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
     </div>
@@ -401,30 +452,64 @@
 
 <script>
 (function () {
-  // Formas ziņojumi iet caur Web3Forms (bezmaksas serviss) - piekļuves atslēga ir
-  // publiska pēc dizaina (Web3Forms to tā arī apraksta), e-pasts pats nekad
-  // nav redzams lapas kodā, jo ir piesaistīts atslēgai viņu panelī.
-  var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
-
   var I18N = {
     lv: {
-      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Kontakti',
-      pageDescription: 'Sazinies ar pvnkalkulators.eu - jautājumi, idejas un sadarbības piedāvājumi. Atbildēsim vienas darba dienas laikā.',
+      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - PVN rēķinos: rekvizīti un biežākās kļūdas',
+      pageDescription: 'Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu, kā rēķinā norādīt apgriezto PVN maksāšanu vai 0% likmi, un biežākās kļūdas rēķinu noformēšanā.',
       navGuide: 'Rokasgrāmata', navInvoicing: 'PVN rēķinos', navEcommerce: 'PVN e-komercijā', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
-      title: 'Sazinies ar mums',
-      text: 'Jautājums, ideja vai sadarbības piedāvājums? Uzraksti - atbildēsim vienas darba dienas laikā.',
-      lblName: 'Vārds', phName: 'Jūsu vārds',
-      lblEmail: 'E-pasts', phEmail: 'jusu@epasts.lv',
-      lblMsg: 'Ziņojums', phMsg: 'Jūsu ziņojums…',
-      send: 'Nosūtīt', sending: 'Sūta…',
-      ok: 'Paldies! Ziņojums nosūtīts. Atbildēsim pēc iespējas ātrāk.',
-      errFields: 'Lūdzu, ievadiet e-pastu un ziņojumu.',
-      errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
-      errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
-      altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      h1: 'PVN rēķinos: rekvizīti un biežākās kļūdas',
+      lead: 'Kas obligāti jānorāda PVN rēķinā, kad drīkst izsniegt vienkāršoto rēķinu un kā izvairīties no biežākajām kļūdām rēķinu noformēšanā.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#rekviziti">Kas jānorāda pilnā PVN rēķinā</a></li>' +
+          '<li><a href="#vienkarsotais">Vienkāršotais rēķins</a></li>' +
+          '<li><a href="#apgrieztais">Apgrieztā PVN maksāšana un 0% likme rēķinā</a></li>' +
+          '<li><a href="#e-rekini">Elektroniskie rēķini</a></li>' +
+          '<li><a href="#kludas">Biežākās kļūdas rēķinos</a></li>' +
+          '<li><a href="#saites">Avoti un atruna</a></li>' +
+        '</ul>' +
+        '<h2 id="rekviziti">Kas jānorāda pilnā PVN rēķinā</h2>' +
+        '<p>PVN maksātājam par katru ar PVN apliekamu preču piegādi vai pakalpojumu jāizraksta rēķins ar noteiktiem obligātiem rekvizītiem. Rēķins ir gan grāmatvedības dokuments, gan pierādījums pircējam par tiesībām atskaitīt priekšnodokli.</p>' +
+        '<div class="callout"><p>Ar <a href="/">PVN kalkulatoru</a> vari ātri pārbaudīt, vai rēķinā pareizi aprēķināta PVN summa jebkurai likmei.</p></div>' +
+        '<ul>' +
+          '<li>Rēķina izdošanas datums un unikāls, secīgs rēķina numurs.</li>' +
+          '<li>Pārdevēja nosaukums, adrese un PVN reģistrācijas numurs.</li>' +
+          '<li>Pircēja nosaukums, adrese un PVN reģistrācijas numurs, ja pircējs ir PVN maksātājs.</li>' +
+          '<li>Piegādes vai pakalpojuma sniegšanas datums, ja tas atšķiras no izdošanas datuma.</li>' +
+          '<li>Preces vai pakalpojuma nosaukums un daudzums.</li>' +
+          '<li>Cena bez PVN par vienību un atlaides, ja tās nav iekļautas cenā.</li>' +
+          '<li>Piemērotā PVN likme un PVN summa - atsevišķi katrai likmei, ja rēķinā ir vairākas.</li>' +
+          '<li>Kopējā summa bez PVN, PVN summa un kopsumma ar PVN.</li>' +
+        '</ul>' +
+        '<h2 id="vienkarsotais">Vienkāršotais rēķins</h2>' +
+        '<p>Nelielām summām - piemēram, kases čekiem un mazumtirdzniecības darījumiem - drīkst izsniegt vienkāršotu rēķinu bez pilna rekvizītu klāsta, bieži bez pircēja datiem. Precīzu summas robežu un nosacījumus, kad vienkāršotais rēķins ir pieļaujams, pārbaudi VID materiālos, jo tie var mainīties.</p>' +
+        '<p>Vienkāršotajā rēķinā parasti tomēr jānorāda izdevēja PVN reģistrācijas numurs, datums, preces vai pakalpojuma apraksts un kopsumma ar PVN.</p>' +
+        '<h2 id="apgrieztais">Apgrieztā PVN maksāšana un 0% likme rēķinā</h2>' +
+        '<p>Ja darījumam piemēro apgriezto PVN maksāšanu (reverse charge) - piemēram, dažiem pārrobežu pakalpojumiem starp PVN maksātājiem - rēķinā PVN summu nenorāda, bet jāiekļauj atsauce, ka nodokli deklarē pircējs, piemēram, "Nodokli maksā pakalpojuma saņēmējs" vai "Reverse charge".</p>' +
+        '<p>Ja piemēro 0% likmi vai darījums ir atbrīvots no PVN, rēķinā jānorāda atsauce uz tiesisko pamatu - attiecīgo likuma pantu vai ES direktīvas normu - nevis tikai jāatstāj PVN aile tukša.</p>' +
+        '<h2 id="e-rekini">Elektroniskie rēķini</h2>' +
+        '<p>Elektroniskie rēķini (e-rēķini) arvien vairāk kļūst obligāti darījumos ar valsts un pašvaldību iestādēm, un šī prasība pakāpeniski paplašinās arī uz citiem darījumu veidiem. Aktuālo regulējumu un termiņus pārbaudi VID materiālos, jo šī joma pēdējos gados strauji mainās.</p>' +
+        '<p>E-rēķinam jāsatur tie paši obligātie rekvizīti, kas parastam papīra rēķinam - tikai strukturētā, mašīnlasāmā formātā.</p>' +
+        '<h2 id="kludas">Biežākās kļūdas rēķinos</h2>' +
+        '<ul>' +
+          '<li>Trūkstošs vai nepareizs pircēja vai pārdevēja PVN reģistrācijas numurs.</li>' +
+          '<li>Nepareizas likmes piemērošana konkrētajai precei vai pakalpojumam.</li>' +
+          '<li>Noapaļošanas kļūdas, ja PVN aprēķina katrai rindai atsevišķi, nevis no rindu kopsummas.</li>' +
+          '<li>Trūkstoša atsauce uz apgriezto PVN maksāšanu vai 0% likmes tiesisko pamatu.</li>' +
+          '<li>Rēķinu numuru secības pārtraukumi vai dublēšanās.</li>' +
+          '<li>Piegādes datuma nesakritība ar izdošanas datumu bez skaidrojuma.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Avoti un atruna</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Valsts ieņēmumu dienests (VID)</a> - rēķinu noformēšanas prasības un aktuālais regulējums.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
       cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
         '<a href="privatuma-politika">Uzzini vairāk</a>',
@@ -443,23 +528,62 @@
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
-      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Контакты',
-      pageDescription: 'Свяжитесь с pvnkalkulators.eu - вопросы, идеи и предложения о сотрудничестве. Ответим в течение одного рабочего дня.',
+      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Счета с НДС: реквизиты и частые ошибки',
+      pageDescription: 'Что обязательно должно быть указано в счёте с НДС, когда можно выставить упрощённый счёт, как указать обратное начисление НДС или ставку 0%, и частые ошибки при оформлении счетов.',
       navGuide: 'Руководство', navInvoicing: 'Счета с НДС', navEcommerce: 'НДС в e-commerce', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
-      title: 'Свяжитесь с нами',
-      text: 'Вопрос, идея или предложение о сотрудничестве? Напишите нам - ответим в течение одного рабочего дня.',
-      lblName: 'Имя', phName: 'Ваше имя',
-      lblEmail: 'E-mail', phEmail: 'vash@email.com',
-      lblMsg: 'Сообщение', phMsg: 'Ваше сообщение…',
-      send: 'Отправить', sending: 'Отправка…',
-      ok: 'Спасибо! Сообщение отправлено. Ответим как можно скорее.',
-      errFields: 'Пожалуйста, введите e-mail и сообщение.',
-      errEmail: 'Пожалуйста, введите корректный e-mail.',
-      errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
-      altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      h1: 'Счета с НДС: реквизиты и частые ошибки',
+      lead: 'Что обязательно должно быть указано в счёте с НДС, когда можно выставить упрощённый счёт и как избежать частых ошибок при оформлении счетов.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#rekviziti">Что указывать в полном счёте с НДС</a></li>' +
+          '<li><a href="#vienkarsotais">Упрощённый счёт</a></li>' +
+          '<li><a href="#apgrieztais">Обратное начисление НДС и ставка 0% в счёте</a></li>' +
+          '<li><a href="#e-rekini">Электронные счета</a></li>' +
+          '<li><a href="#kludas">Частые ошибки в счетах</a></li>' +
+          '<li><a href="#saites">Источники и оговорка</a></li>' +
+        '</ul>' +
+        '<h2 id="rekviziti">Что указывать в полном счёте с НДС</h2>' +
+        '<p>Плательщик НДС обязан выставить счёт с определёнными обязательными реквизитами за каждую облагаемую НДС поставку товаров или услугу. Счёт - это одновременно бухгалтерский документ и подтверждение права покупателя на вычет входного налога.</p>' +
+        '<div class="callout"><p>С помощью <a href="/">калькулятора НДС</a> можно быстро проверить, правильно ли рассчитана сумма НДС в счёте для любой ставки.</p></div>' +
+        '<ul>' +
+          '<li>Дата выставления счёта и уникальный, последовательный номер счёта.</li>' +
+          '<li>Наименование, адрес и регистрационный номер НДС продавца.</li>' +
+          '<li>Наименование, адрес и регистрационный номер НДС покупателя, если покупатель - плательщик НДС.</li>' +
+          '<li>Дата поставки или оказания услуги, если она отличается от даты выставления счёта.</li>' +
+          '<li>Наименование и количество товара или услуги.</li>' +
+          '<li>Цена без НДС за единицу и скидки, если они не включены в цену.</li>' +
+          '<li>Применённая ставка НДС и сумма НДС - отдельно по каждой ставке, если в счёте их несколько.</li>' +
+          '<li>Общая сумма без НДС, сумма НДС и итоговая сумма с НДС.</li>' +
+        '</ul>' +
+        '<h2 id="vienkarsotais">Упрощённый счёт</h2>' +
+        '<p>Для небольших сумм - например, кассовых чеков и розничных операций - можно выставить упрощённый счёт без полного набора реквизитов, часто без данных покупателя. Точную границу суммы и условия, при которых допустим упрощённый счёт, проверяйте в материалах VID, так как они могут меняться.</p>' +
+        '<p>В упрощённом счёте обычно всё же должны быть указаны регистрационный номер НДС продавца, дата, описание товара или услуги и итоговая сумма с НДС.</p>' +
+        '<h2 id="apgrieztais">Обратное начисление НДС и ставка 0% в счёте</h2>' +
+        '<p>Если к операции применяется обратное начисление НДС (reverse charge) - например, к некоторым трансграничным услугам между плательщиками НДС - сумма НДС в счёте не указывается, но должна быть указана отметка о том, что налог декларирует покупатель, например: "Налог уплачивает получатель услуги" или "Reverse charge".</p>' +
+        '<p>Если применяется ставка 0% или операция освобождена от НДС, в счёте нужно указать ссылку на правовое основание - соответствующую статью закона или норму директивы ЕС - а не просто оставлять поле НДС пустым.</p>' +
+        '<h2 id="e-rekini">Электронные счета</h2>' +
+        '<p>Электронные счета (э-счета) всё чаще становятся обязательными в операциях с государственными и муниципальными учреждениями, и это требование постепенно расширяется и на другие виды операций. Актуальное регулирование и сроки проверяйте в материалах VID, так как эта область в последние годы быстро меняется.</p>' +
+        '<p>Электронный счёт должен содержать те же обязательные реквизиты, что и бумажный, только в структурированном, машиночитаемом формате.</p>' +
+        '<h2 id="kludas">Частые ошибки в счетах</h2>' +
+        '<ul>' +
+          '<li>Отсутствующий или неверный регистрационный номер НДС покупателя или продавца.</li>' +
+          '<li>Применение неверной ставки к конкретному товару или услуге.</li>' +
+          '<li>Ошибки округления, если НДС рассчитывается отдельно по каждой строке, а не от суммы строк.</li>' +
+          '<li>Отсутствующая отметка об обратном начислении НДС или правовом основании ставки 0%.</li>' +
+          '<li>Пропуски или дублирование в последовательности номеров счетов.</li>' +
+          '<li>Несовпадение даты поставки с датой выставления счёта без пояснения.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Источники и оговорка</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">Служба государственных доходов (VID)</a> - требования к оформлению счетов и актуальное регулирование.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Министерство финансов - ставки НДС</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Европейская комиссия - НДС</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Требования к оформлению счетов со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС',
+      themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
       cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
         '<a href="privatuma-politika">Узнать больше</a>',
@@ -478,23 +602,62 @@
       prefsSave: 'Сохранить настройки'
     },
     en: {
-      htmlLang: 'en', pageTitle: 'VAT Calculator - Contact',
-      pageDescription: 'Contact pvnkalkulators.eu - questions, ideas and partnership offers. We\'ll reply within one working day.',
+      htmlLang: 'en', pageTitle: 'VAT Calculator - VAT invoices: requirements and common mistakes',
+      pageDescription: 'What must appear on a VAT invoice, when a simplified invoice is allowed, how to show reverse charge or a 0% rate on an invoice, and common invoicing mistakes.',
       navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
-      title: 'Get in touch',
-      text: 'A question, an idea or a partnership proposal? Drop us a line \u2014 we\u2019ll reply within one working day.',
-      lblName: 'Name', phName: 'Your name',
-      lblEmail: 'Email', phEmail: 'you@email.com',
-      lblMsg: 'Message', phMsg: 'Your message…',
-      send: 'Send', sending: 'Sending…',
-      ok: 'Thank you! Your message has been sent. We’ll reply as soon as possible.',
-      errFields: 'Please enter your email and a message.',
-      errEmail: 'Please enter a valid email address.',
-      errSend: 'Could not send. Try again later or email us directly.',
-      altMail: 'Or write to us directly:', back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      h1: 'VAT invoices: requirements and common mistakes',
+      lead: 'What must appear on a VAT invoice, when a simplified invoice is allowed, and how to avoid the most common invoicing mistakes.',
+      guideHtml:
+        '<ul class="toc">' +
+          '<li><a href="#rekviziti">What a full VAT invoice must show</a></li>' +
+          '<li><a href="#vienkarsotais">Simplified invoices</a></li>' +
+          '<li><a href="#apgrieztais">Reverse charge and the 0% rate on an invoice</a></li>' +
+          '<li><a href="#e-rekini">Electronic invoices</a></li>' +
+          '<li><a href="#kludas">Common invoicing mistakes</a></li>' +
+          '<li><a href="#saites">Sources and disclaimer</a></li>' +
+        '</ul>' +
+        '<h2 id="rekviziti">What a full VAT invoice must show</h2>' +
+        '<p>A VAT payer must issue an invoice with certain mandatory details for every taxable supply of goods or services. The invoice is both an accounting record and the buyer\'s proof of the right to deduct input VAT.</p>' +
+        '<div class="callout"><p>Use the <a href="/">VAT calculator</a> to quickly check that the VAT amount on an invoice is calculated correctly for any rate.</p></div>' +
+        '<ul>' +
+          '<li>The issue date and a unique, sequential invoice number.</li>' +
+          '<li>The seller\'s name, address and VAT registration number.</li>' +
+          '<li>The buyer\'s name, address and VAT registration number, if the buyer is a VAT payer.</li>' +
+          '<li>The date of supply, if it differs from the issue date.</li>' +
+          '<li>The name and quantity of the goods or service.</li>' +
+          '<li>The price without VAT per unit and any discounts not already included in the price.</li>' +
+          '<li>The VAT rate applied and the VAT amount, shown separately for each rate if the invoice has more than one.</li>' +
+          '<li>The total without VAT, the VAT amount, and the total with VAT.</li>' +
+        '</ul>' +
+        '<h2 id="vienkarsotais">Simplified invoices</h2>' +
+        '<p>For small amounts - for example till receipts and retail transactions - a simplified invoice without the full set of details is allowed, often without the buyer\'s information. Check the exact amount threshold and conditions in VID materials, as they can change.</p>' +
+        '<p>A simplified invoice should still usually show the issuer\'s VAT registration number, the date, a description of the goods or service, and the total with VAT.</p>' +
+        '<h2 id="apgrieztais">Reverse charge and the 0% rate on an invoice</h2>' +
+        '<p>If a transaction is subject to the reverse charge - for example, certain cross-border services between VAT payers - the VAT amount is not shown on the invoice, but it must state that the buyer accounts for the tax, for example "Reverse charge" or "Customer to account for VAT".</p>' +
+        '<p>If a 0% rate applies or the transaction is exempt from VAT, the invoice must reference the legal basis - the relevant article of law or EU directive provision - rather than simply leaving the VAT field blank.</p>' +
+        '<h2 id="e-rekini">Electronic invoices</h2>' +
+        '<p>Electronic invoices (e-invoices) are increasingly mandatory for transactions with state and municipal institutions, and this requirement is gradually being extended to other types of transactions. Check the current rules and deadlines in VID materials, as this area has changed rapidly in recent years.</p>' +
+        '<p>An e-invoice must contain the same mandatory details as a paper invoice, just in a structured, machine-readable format.</p>' +
+        '<h2 id="kludas">Common invoicing mistakes</h2>' +
+        '<ul>' +
+          '<li>A missing or incorrect VAT registration number for the buyer or seller.</li>' +
+          '<li>Applying the wrong rate to a specific product or service.</li>' +
+          '<li>Rounding errors when VAT is calculated per line instead of on the line total.</li>' +
+          '<li>A missing reference to the reverse charge or the legal basis for a 0% rate.</li>' +
+          '<li>Gaps or duplicates in the invoice numbering sequence.</li>' +
+          '<li>A supply date that does not match the issue date, with no explanation.</li>' +
+        '</ul>' +
+        '<h2 id="saites">Sources and disclaimer</h2>' +
+        '<ul>' +
+          '<li><a href="https://www.vid.gov.lv/" target="_blank" rel="noopener">State Revenue Service (VID)</a> - invoicing requirements and current rules.</li>' +
+          '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Ministry of Finance - VAT rates</a>.</li>' +
+          '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">European Commission - VAT</a>.</li>' +
+        '</ul>' +
+        '<p class="disclaimer">This page is informational and is not tax advice. Invoicing requirements change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
+      back: '← Back to the calculator',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
-      themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator',
+      themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
       cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
         '<a href="privatuma-politika">Learn more</a>',
@@ -514,19 +677,25 @@
     }
   };
 
+  function formatCheckedDate(l) {
+    var d = new Date();
+    var day = d.getDate();
+    var m = d.getMonth();
+    if (l === 'lv') {
+      var monthsLv = ['janvārī', 'februārī', 'martā', 'aprīlī', 'maijā', 'jūnijā', 'jūlijā', 'augustā', 'septembrī', 'oktobrī', 'novembrī', 'decembrī'];
+      return 'Pēdējoreiz pārbaudīts: ' + d.getFullYear() + '. gada ' + day + '. ' + monthsLv[m];
+    }
+    if (l === 'ru') {
+      var monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+      return 'Последняя проверка: ' + day + ' ' + monthsRu[m] + ' ' + d.getFullYear() + ' года';
+    }
+    var monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return 'Last checked: ' + day + ' ' + monthsEn[m] + ' ' + d.getFullYear();
+  }
+
   var langSwitch = document.getElementById('langSwitch');
   var themeBtn = document.getElementById('themeBtn');
-  var form = document.getElementById('contactForm');
-  var submitBtn = document.getElementById('submitBtn');
-  var formMsg = document.getElementById('formMsg');
-  var nameEl = document.getElementById('cfName');
-  var emailEl = document.getElementById('cfEmail');
-  var msgEl = document.getElementById('cfMsg');
-  var honeyEl = form.querySelector('[name="botcheck"]');
   var lang = 'lv';
-  var lastMsgKey = null; // atceramies rādīto ziņu (ok/errFields/errEmail/errSend), lai varam pārtulkot pēc valodas maiņas
-
-  function T() { return I18N[lang]; }
 
   function apply(l) {
     var t = I18N[l]; if (!t) return;
@@ -535,6 +704,7 @@
     document.title = t.pageTitle;
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('lastChecked').textContent = formatCheckedDate(l);
     document.getElementById('navGuide').textContent = t.navGuide;
     document.getElementById('navInvoicing').textContent = t.navInvoicing;
     document.getElementById('navEcommerce').textContent = t.navEcommerce;
@@ -542,21 +712,17 @@
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
     document.getElementById('navKontakti').textContent = t.navKontakti;
-    document.getElementById('contactTitle').textContent = t.title;
-    document.getElementById('contactText').textContent = t.text;
-    document.getElementById('lblName').innerHTML = t.lblName;
-    document.getElementById('lblEmail').innerHTML = t.lblEmail + ' <span class="req">*</span>';
-    document.getElementById('lblMsg').innerHTML = t.lblMsg + ' <span class="req">*</span>';
-    nameEl.placeholder = t.phName;
-    emailEl.placeholder = t.phEmail;
-    msgEl.placeholder = t.phMsg;
-    submitBtn.textContent = t.send;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('guideBody').innerHTML = t.guideHtml;
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
     document.getElementById('footGuide').textContent = t.footGuide;
     document.getElementById('footInvoicing').textContent = t.footInvoicing;
     document.getElementById('footEcommerce').textContent = t.footEcommerce;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;
     document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
@@ -569,7 +735,6 @@
     document.getElementById('langCurrent').textContent = l.toUpperCase();
     document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[l];
     try { localStorage.setItem('pvn-lang', l); } catch (e) {}
-    if (lastMsgKey) formMsg.textContent = t[lastMsgKey];
     var cookieIds = {
       cookieTitle: t.cookieTitle, cookieAccept: t.cookieAccept, cookieSettingsBtn: t.cookieSettings,
       prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
@@ -609,9 +774,6 @@
     var open = langDropdown.classList.toggle('open');
     langBtn.setAttribute('aria-expanded', String(open));
   });
-  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
-  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
-  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
   var langDropdownPointer = false;
   function langDropdownPointerArm() { langDropdownPointer = true; setTimeout(function () { langDropdownPointer = false; }, 0); }
   langDropdown.addEventListener('mousedown', langDropdownPointerArm);
@@ -639,9 +801,6 @@
     var open = menuDropdown.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', String(open));
   });
-  // Aizver, kad fokuss ar Tab aiziet arpus izvelnes (klikska notikums to neker).
-  // Peles/pirksta spiediens iekspuse tiek ignorets, lai izvele nesalust parlukos,
-  // kur pogas klikskis nesanem fokusu (Safari, iOS) un relatedTarget ir null.
   var menuDropdownPointer = false;
   function menuDropdownPointerArm() { menuDropdownPointer = true; setTimeout(function () { menuDropdownPointer = false; }, 0); }
   menuDropdown.addEventListener('mousedown', menuDropdownPointerArm);
@@ -658,50 +817,6 @@
   });
   document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
-  });
-
-  // --- Formas nosūtīšana caur Web3Forms (fetch/JSON, bez lapas pārlādes) ---
-  function showMsg(kind, key) {
-    lastMsgKey = key;
-    formMsg.className = 'form-msg show ' + kind;
-    formMsg.textContent = T()[key];
-  }
-  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var t = T();
-    if (honeyEl.checked) return; // mēstule
-    if (!emailEl.value.trim() || !msgEl.value.trim()) { showMsg('err', 'errFields'); return; }
-    if (!validEmail(emailEl.value.trim())) { showMsg('err', 'errEmail'); return; }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = t.sending;
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_ACCESS_KEY,
-        name: nameEl.value.trim(),
-        email: emailEl.value.trim(),
-        message: msgEl.value.trim(),
-        subject: t.subject
-      })
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = t.send;
-      if (data.success) {
-        showMsg('ok', 'ok');
-        form.reset();
-      } else {
-        showMsg('err', 'errSend');
-      }
-    }).catch(function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = t.send;
-      showMsg('err', 'errSend');
-    });
   });
 
   // Tēma - tās pašas SVG ikonas kā index
@@ -745,6 +860,7 @@
 /* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
 (function () {
   var GA_ID = 'G-VSLEWS7DRR'; // Google Analytics 4 mērījuma ID
+  var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
 
   var banner = document.getElementById('cookieBanner');
   var prefs = document.getElementById('cookiePrefs');
@@ -756,7 +872,7 @@
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
   var swAds = document.getElementById('switchAds');
-  var gaLoaded = false;
+  var gaLoaded = false, adsLoaded = false;
 
   function loadScript(src, attrs) {
     var s = document.createElement('script');
@@ -773,14 +889,17 @@
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
-    // Reklāmas šai lapai apzināti netiek ielādētas - kontaktforma bez publicēta satura (AdSense politika).
+    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
+      adsLoaded = true;
+      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
+        { crossorigin: 'anonymous' });
+    }
   }
 
   function readConsent() {
     try {
       var v2 = localStorage.getItem('pvn-consent-v2');
       if (v2) return JSON.parse(v2);
-      // Vecais viena lēmuma formāts - pārtulkojam uz granulāro
       var v1 = localStorage.getItem('pvn-consent');
       if (v1 === 'granted') return { analytics: true, ads: true };
       if (v1 === 'denied') return { analytics: false, ads: false };
@@ -835,9 +954,8 @@
 
   var consent = readConsent();
   if (consent) applyConsent(consent);
-  else showBanner(); // rāda tikai, kamēr izvēle vēl nav izdarīta
+  else showBanner();
 
-  // Preferenču atkārtota atvēršana (piem. no privātuma politikas): #cookies
   window.pvnOpenCookieBanner = openPrefs;
   if (location.hash === '#cookies') openPrefs();
 })();
