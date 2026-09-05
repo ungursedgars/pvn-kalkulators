@@ -289,6 +289,22 @@
     border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
   }
   @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
+  .table-wrap { overflow-x: auto; margin: 0 0 18px; }
+  .rates-table {
+    width: 100%; border-collapse: collapse; font-size: .95rem;
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .rates-table th, .rates-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  .rates-table th { font-weight: 600; background: var(--result-bg); white-space: nowrap; }
+  .rates-table tr:last-child td { border-bottom: none; }
+  .country-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+  .country-item summary { padding: 10px 14px; cursor: pointer; font-weight: 600; list-style: none; }
+  .country-item summary::-webkit-details-marker { display: none; }
+  .country-item summary::after { content: "+"; float: right; color: var(--muted); }
+  .country-item[open] summary::after { content: "–"; }
+  .country-item ul { margin: 0 14px 12px 34px; color: var(--muted); font-size: .93rem; }
+  .country-item li { margin-bottom: 4px; }
+  .country-item p { margin: 0 14px 12px; color: var(--muted); font-size: .93rem; }
 </style>
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
@@ -340,6 +356,7 @@
           <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
           <a href="buj" id="navBuj" role="menuitem">BUJ</a>
           <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="par-vietni" id="navAbout" role="menuitem">Par vietni</a>
           <a href="kontakti" id="navKontakti" role="menuitem">Kontakti</a>
         </div>
       </div>
@@ -364,7 +381,7 @@
   <article class="info" id="ratesInfo">
     <h2>Standarta, samazinātās un nulles likmes</h2>
     <p>Katrā ES valstī ir viena standarta PVN likme, ko piemēro lielākajai daļai preču un pakalpojumu. Papildus tai var būt viena vai vairākas samazinātās likmes noteiktām grupām - piemēram, pārtikai, medikamentiem, grāmatām, presei, pasažieru transportam vai izmitināšanai. Dažām precēm piemēro arī 0% likmi, kas nav tas pats, kas atbrīvojums no PVN: pie nulles likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli.</p>
-    <p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>
+    <p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus, vai skati <a href="#visas-likmes">visu ES valstu tabulu</a> zemāk. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>
 
     <h2>PVN likmes Latvijā</h2>
     <ul>
@@ -387,6 +404,10 @@
     <p class="disclaimer">Šī lapa ir informatīva un nav nodokļu konsultācija. Likmes un to piemērošanas nosacījumi var mainīties.</p>
   </article>
 
+  <section class="info" id="ratesTable">
+    <h2 id="visas-likmes">Visu ES valstu PVN likmes</h2><p>Standarta un samazinātās PVN likmes visās 27 Eiropas Savienības dalībvalstīs. Pirmā ir standarta likme, pārējās - samazinātās; 0% likme un atbrīvojumi pastāv gandrīz visur atsevišķiem darījumiem, piemēram, eksportam.</p><div class="table-wrap"><table class="rates-table"><thead><tr><th>Valsts</th><th>Standarta likme</th><th>Samazinātās likmes</th></tr></thead><tbody><tr><td>Austrija</td><td><strong>20%</strong></td><td>13%, 10%</td></tr><tr><td>Beļģija</td><td><strong>21%</strong></td><td>12%, 6%</td></tr><tr><td>Bulgārija</td><td><strong>20%</strong></td><td>9%</td></tr><tr><td>Čehija</td><td><strong>21%</strong></td><td>12%</td></tr><tr><td>Dānija</td><td><strong>25%</strong></td><td>nav</td></tr><tr><td>Francija</td><td><strong>20%</strong></td><td>10%, 5,5%, 2,1%</td></tr><tr><td>Grieķija</td><td><strong>24%</strong></td><td>13%, 6%</td></tr><tr><td>Horvātija</td><td><strong>25%</strong></td><td>13%, 5%</td></tr><tr><td>Igaunija</td><td><strong>24%</strong></td><td>13%, 9%</td></tr><tr><td>Itālija</td><td><strong>22%</strong></td><td>10%, 5%, 4%</td></tr><tr><td>Īrija</td><td><strong>23%</strong></td><td>13,5%, 9%, 4,8%</td></tr><tr><td>Kipra</td><td><strong>19%</strong></td><td>9%, 5%, 3%</td></tr><tr><td>Latvija</td><td><strong>21%</strong></td><td>12%, 5%</td></tr><tr><td>Lietuva</td><td><strong>21%</strong></td><td>9%, 5%</td></tr><tr><td>Luksemburga</td><td><strong>17%</strong></td><td>14%, 8%, 3%</td></tr><tr><td>Malta</td><td><strong>18%</strong></td><td>12%, 7%, 5%</td></tr><tr><td>Nīderlande</td><td><strong>21%</strong></td><td>9%</td></tr><tr><td>Polija</td><td><strong>23%</strong></td><td>8%, 5%</td></tr><tr><td>Portugāle</td><td><strong>23%</strong></td><td>13%, 6%</td></tr><tr><td>Rumānija</td><td><strong>21%</strong></td><td>11%</td></tr><tr><td>Slovākija</td><td><strong>23%</strong></td><td>19%, 5%</td></tr><tr><td>Slovēnija</td><td><strong>22%</strong></td><td>9,5%, 5%</td></tr><tr><td>Somija</td><td><strong>25,5%</strong></td><td>14%, 10%</td></tr><tr><td>Spānija</td><td><strong>21%</strong></td><td>10%, 4%</td></tr><tr><td>Ungārija</td><td><strong>27%</strong></td><td>18%, 5%</td></tr><tr><td>Vācija</td><td><strong>19%</strong></td><td>7%</td></tr><tr><td>Zviedrija</td><td><strong>25%</strong></td><td>12%, 6%</td></tr></tbody></table></div><h2 id="likmes-pa-valstim">Samazināto likmju piemēri pa valstīm</h2><p>Atver valsti, lai redzētu, kādām preču un pakalpojumu grupām parasti piemēro katru samazināto likmi. Piemēri ir informatīvi - precīzu likmi konkrētai precei pārbaudi attiecīgās valsts nodokļu iestādē.</p><details class="country-item"><summary>Austrija - 20% / 13% / 10%</summary><ul><li><strong>20%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13%</strong> - samazinātā likme, piemēram, kultūras un sporta pasākumu biļetēm, kino, iekšzemes lidojumiem, malkai un augiem.</li><li><strong>10%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, pasažieru transportam, viesnīcām, dzīvokļa īrei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Beļģija - 21% / 12% / 6%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>12%</strong> - samazinātā likme, piemēram, restorānu un ēdināšanas pakalpojumiem (bez dzērieniem), margarīnam, akmeņoglēm.</li><li><strong>6%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām, ūdensapgādei, viesnīcām, pasažieru transportam.</li><li><strong>0%</strong> - dienas un nedēļas presei, kā arī atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Bulgārija - 20% / 9%</summary><ul><li><strong>20%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>9%</strong> - samazinātā likme, piemēram, viesnīcu izmitināšanai, grāmatām, zīdaiņu pārtikai un autiņbiksītēm.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Čehija - 21% / 12%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>12%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei un siltumam, sabiedriskajam transportam, viesnīcām, ēdināšanai.</li><li><strong>0%</strong> - grāmatām, kā arī atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Dānija - 25%</summary><ul><li><strong>25%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>0%</strong> - avīzēm, kā arī atsevišķiem darījumiem, piemēram, eksportam.</li></ul><p>Šajā valstī samazinātu PVN likmju nav - gandrīz visam piemēro standarta likmi.</p></details><details class="country-item"><summary>Francija - 20% / 10% / 5,5% / 2,1%</summary><ul><li><strong>20%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>10%</strong> - samazinātā likme, piemēram, restorāniem un ēdināšanai, pasažieru transportam, viesnīcām, mājokļu remontdarbiem.</li><li><strong>5,5%</strong> - samazinātā likme, piemēram, lielākajai daļai pārtikas, grāmatām, elektroenerģijai un gāzei, kino un koncertu biļetēm, invalīdu aprīkojumam.</li><li><strong>2,1%</strong> - īpaši samazinātā likme kompensējamiem medikamentiem un presei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Grieķija - 24% / 13% / 6%</summary><ul><li><strong>24%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13%</strong> - samazinātā likme, piemēram, pārtikai, ēdināšanai, viesnīcām, ūdensapgādei.</li><li><strong>6%</strong> - samazinātā likme, piemēram, medikamentiem, grāmatām, elektroenerģijai un gāzei, teātra un koncertu biļetēm.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Horvātija - 25% / 13% / 5%</summary><ul><li><strong>25%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13%</strong> - samazinātā likme, piemēram, viesnīcām un tūristu izmitināšanai, elektroenerģijai, ūdensapgādei, zīdaiņu pārtikai, žurnāliem.</li><li><strong>5%</strong> - samazinātā likme, piemēram, maizei, pienam, medikamentiem, grāmatām, dienas laikrakstiem, kino biļetēm.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Igaunija - 24% / 13% / 9%</summary><ul><li><strong>24%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13%</strong> - samazinātā likme viesnīcu izmitināšanai.</li><li><strong>9%</strong> - samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, grāmatām, avīzēm un žurnāliem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Itālija - 22% / 10% / 5% / 4%</summary><ul><li><strong>22%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>10%</strong> - samazinātā likme, piemēram, viesnīcām, restorāniem, elektroenerģijai un gāzei mājsaimniecībām, daļai pārtikas, pasažieru transportam.</li><li><strong>5%</strong> - samazinātā likme atsevišķiem pārtikas produktiem un sociālās aprūpes pakalpojumiem.</li><li><strong>4%</strong> - īpaši samazinātā likme, piemēram, pamatpārtikai (maizei, pienam, makaroniem), grāmatām un presei, invalīdu aprīkojumam.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Īrija - 23% / 13,5% / 9% / 4,8%</summary><ul><li><strong>23%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13,5%</strong> - samazinātā likme, piemēram, būvniecībai un remontdarbiem, kurināmajam, viesnīcu izmitināšanai.</li><li><strong>9%</strong> - samazinātā likme, piemēram, restorāniem un ēdināšanai, frizieru pakalpojumiem, elektroenerģijai un gāzei, sporta un izklaides pasākumiem.</li><li><strong>4,8%</strong> - īpaši samazinātā likme mājlopu tirdzniecībai.</li><li><strong>0%</strong> - pārtikai, grāmatām, bērnu apģērbam un apaviem, lielākajai daļai medikamentu, kā arī eksportam.</li></ul></details><details class="country-item"><summary>Kipra - 19% / 9% / 5% / 3%</summary><ul><li><strong>19%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>9%</strong> - samazinātā likme, piemēram, viesnīcām, restorāniem un ēdināšanai, iekšzemes pasažieru pārvadājumiem.</li><li><strong>5%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei, ieejas biļetēm pasākumos.</li><li><strong>3%</strong> - īpaši samazinātā likme, piemēram, grāmatām un presei, invalīdu aprīkojumam.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Latvija - 21% / 12% / 5%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>12%</strong> - samazinātā likme, piemēram, medikamentiem un medicīnas ierīcēm, zīdaiņu pārtikai, sabiedriskajam transportam, viesu izmitināšanai, siltumenerģijai un malkai iedzīvotājiem, svaigiem augļiem, ogām un dārzeņiem, kā arī (no 2026. gada jūlija) maizei, pienam, svaigai mājputnu gaļai un olām.</li><li><strong>5%</strong> - īpaši samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskā formātā).</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Lietuva - 21% / 9% / 5%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>9%</strong> - samazinātā likme, piemēram, grāmatām, viesnīcām, siltumenerģijai un malkai mājsaimniecībām, sabiedriskajam transportam.</li><li><strong>5%</strong> - samazinātā likme, piemēram, kompensējamiem medikamentiem, medicīnas palīglīdzekļiem, avīzēm un žurnāliem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Luksemburga - 17% / 14% / 8% / 3%</summary><ul><li><strong>17%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>14%</strong> - starplikme, piemēram, atsevišķiem vīniem, cietajam kurināmajam, reklāmas iespieddarbiem.</li><li><strong>8%</strong> - samazinātā likme, piemēram, elektroenerģijai un gāzei, frizieru pakalpojumiem, velosipēdu un apavu remontam, augiem.</li><li><strong>3%</strong> - īpaši samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, restorāniem, bērnu apģērbam un apaviem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Malta - 18% / 12% / 7% / 5%</summary><ul><li><strong>18%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>12%</strong> - samazinātā likme, piemēram, atsevišķiem veselības aprūpes pakalpojumiem, izpriecu kuģu īrei.</li><li><strong>7%</strong> - samazinātā likme viesnīcu izmitināšanai un sporta objektu izmantošanai.</li><li><strong>5%</strong> - samazinātā likme, piemēram, elektroenerģijai, grāmatām un presei, konditorejas izstrādājumiem, muzeju biļetēm.</li><li><strong>0%</strong> - pārtikai, medikamentiem, kā arī eksportam.</li></ul></details><details class="country-item"><summary>Nīderlande - 21% / 9%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>9%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, pasažieru transportam, kultūras un sporta pasākumiem, frizieru pakalpojumiem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Polija - 23% / 8% / 5%</summary><ul><li><strong>23%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>8%</strong> - samazinātā likme, piemēram, medikamentiem, pasažieru transportam, viesnīcām, restorāniem, daļai pārtikas produktu.</li><li><strong>5%</strong> - samazinātā likme, piemēram, pamatpārtikai (maizei, piena produktiem, gaļai), grāmatām un e-grāmatām.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Portugāle - 23% / 13% / 6%</summary><ul><li><strong>23%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>13%</strong> - samazinātā likme, piemēram, restorānu ēdieniem, vīnam, atsevišķiem pārtikas produktiem.</li><li><strong>6%</strong> - samazinātā likme, piemēram, pamatpārtikai, medikamentiem, grāmatām un presei, viesnīcām, pasažieru transportam, elektroenerģijai.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Rumānija - 21% / 11%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>11%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, grāmatām un presei, viesnīcām, restorāniem, ūdensapgādei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Slovākija - 23% / 19% / 5%</summary><ul><li><strong>23%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>19%</strong> - samazinātā likme, piemēram, pārtikai (izņemot pamatpārtiku), elektroenerģijai, bezalkoholiskajiem dzērieniem ēdināšanā.</li><li><strong>5%</strong> - samazinātā likme, piemēram, pamatpārtikai, medikamentiem, grāmatām un presei, viesnīcām, restorānu ēdieniem, sporta objektiem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Slovēnija - 22% / 9,5% / 5%</summary><ul><li><strong>22%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>9,5%</strong> - samazinātā likme, piemēram, pārtikai, medikamentiem, ūdensapgādei, viesnīcām, pasažieru transportam, kultūras pasākumiem.</li><li><strong>5%</strong> - samazinātā likme grāmatām, avīzēm un žurnāliem (arī elektroniskiem).</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Somija - 25,5% / 14% / 10%</summary><ul><li><strong>25,5%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>14%</strong> - samazinātā likme, piemēram, pārtikai, restorāniem un ēdināšanai, medikamentiem, grāmatām, viesnīcām, pasažieru transportam, kultūras un sporta pasākumiem.</li><li><strong>10%</strong> - samazinātā likme avīzēm un žurnāliem, sabiedriskajai apraidei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Spānija - 21% / 10% / 4%</summary><ul><li><strong>21%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>10%</strong> - samazinātā likme, piemēram, pārtikai, viesnīcām, restorāniem, pasažieru transportam, jauniem mājokļiem.</li><li><strong>4%</strong> - īpaši samazinātā likme, piemēram, pamatpārtikai (maizei, pienam, augļiem, dārzeņiem), medikamentiem, grāmatām un presei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Ungārija - 27% / 18% / 5%</summary><ul><li><strong>27%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>18%</strong> - samazinātā likme, piemēram, atsevišķiem piena un maizes izstrādājumiem, brīvdabas pasākumu biļetēm.</li><li><strong>5%</strong> - samazinātā likme, piemēram, medikamentiem, grāmatām un presei, jauniem mājokļiem, viesnīcām, restorānu ēdieniem, interneta piekļuvei, centralizētajai siltumapgādei.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Vācija - 19% / 7%</summary><ul><li><strong>19%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>7%</strong> - samazinātā likme, piemēram, pārtikai, grāmatām un presei, vietējam sabiedriskajam transportam, viesnīcu izmitināšanai, kultūras pasākumu biļetēm, kā arī (no 2026. gada) restorānu ēdieniem.</li><li><strong>0%</strong> - atsevišķiem darījumiem, piemēram, eksportam.</li></ul></details><details class="country-item"><summary>Zviedrija - 25% / 12% / 6%</summary><ul><li><strong>25%</strong> - standarta likme, ko piemēro lielākajai daļai preču un pakalpojumu.</li><li><strong>12%</strong> - samazinātā likme, piemēram, pārtikai, restorāniem, viesnīcām, velosipēdu, apavu un apģērbu remontam.</li><li><strong>6%</strong> - samazinātā likme, piemēram, grāmatām un presei, pasažieru transportam, koncertu un sporta pasākumu biļetēm.</li><li><strong>0%</strong> - recepšu medikamentiem, kā arī eksportam.</li></ul></details>
+  </section>
+
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
@@ -400,6 +421,8 @@
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
+      <a href="par-vietni" id="footAbout">Par vietni</a> ·
+      <a href="lietosanas-noteikumi" id="footTerms">Lietošanas noteikumi</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
     </div>
@@ -464,7 +487,7 @@
     lv: {
       htmlLang: 'lv', pageTitle: 'PVN Kalkulators - PVN likmes Latvijā un ES',
       pageDescription: 'PVN likmju pārskats ar piemēriem: Latvijas 21%, 12%, 5% un 0% likmes un visu 27 ES dalībvalstu PVN likmes - kam katra likme piemērojama.',
-      navGuide: 'Rokasgrāmata', navInvoicing: 'PVN rēķinos', navEcommerce: 'PVN e-komercijā', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navKontakti: 'Kontakti',
+      navGuide: 'Rokasgrāmata', navInvoicing: 'PVN rēķinos', navEcommerce: 'PVN e-komercijā', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navAbout: 'Par vietni', navKontakti: 'Kontakti',
       h1: 'PVN likmes',
       lead: 'Latvijas un citu ES valstu pievienotās vērtības nodokļa likmes.',
       countryLabel: 'Valsts',
@@ -473,10 +496,13 @@
       redOne: 'samazinātā likme atsevišķām preču un pakalpojumu grupām',
       zero: 'atsevišķiem darījumiem, piemēram, eksportam',
       noRed: 'Šajā valstī samazinātu PVN likmju nav - gandrīz visam piemēro standarta likmi.',
+      tableTitle: 'Visu ES valstu PVN likmes', tableIntro: 'Standarta un samazinātās PVN likmes visās 27 Eiropas Savienības dalībvalstīs. Pirmā ir standarta likme, pārējās - samazinātās; 0% likme un atbrīvojumi pastāv gandrīz visur atsevišķiem darījumiem, piemēram, eksportam.',
+      colCountry: 'Valsts', colStd: 'Standarta likme', colRed: 'Samazinātās likmes', noneLabel: 'nav',
+      detailsTitle: 'Samazināto likmju piemēri pa valstīm', detailsIntro: 'Atver valsti, lai redzētu, kādām preču un pakalpojumu grupām parasti piemēro katru samazināto likmi. Piemēri ir informatīvi - precīzu likmi konkrētai precei pārbaudi attiecīgās valsts nodokļu iestādē.',
       infoHtml:
         '<h2>Standarta, samazinātās un nulles likmes</h2>' +
         '<p>Katrā ES valstī ir viena standarta PVN likme, ko piemēro lielākajai daļai preču un pakalpojumu. Papildus tai var būt viena vai vairākas samazinātās likmes noteiktām grupām - piemēram, pārtikai, medikamentiem, grāmatām, presei, pasažieru transportam vai izmitināšanai. Dažām precēm piemēro arī 0% likmi, kas nav tas pats, kas atbrīvojums no PVN: pie nulles likmes uzņēmums saglabā tiesības atskaitīt priekšnodokli.</p>' +
-        '<p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>' +
+        '<p>Izvēlies valsti augšpusē, lai redzētu tās standarta likmi un galvenos samazināto likmju piemērus, vai skati <a href="#visas-likmes">visu ES valstu tabulu</a> zemāk. Precīzu likmi konkrētai precei vienmēr pārbaudi attiecīgās valsts nodokļu iestādes materiālos.</p>' +
         '<h2>PVN likmes Latvijā</h2>' +
         '<ul>' +
           '<li><strong>21%</strong> - standarta likme lielākajai daļai preču un pakalpojumu.</li>' +
@@ -495,7 +521,7 @@
         '</ul>' +
         '<p class="disclaimer">Šī lapa ir informatīva un nav nodokļu konsultācija. Likmes un to piemērošanas nosacījumi var mainīties.</p>',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -518,7 +544,7 @@
     ru: {
       htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Ставки НДС в Латвии и ЕС',
       pageDescription: 'Обзор ставок НДС с примерами: латвийские ставки 21%, 12%, 5% и 0%, а также ставки НДС всех 27 стран ЕС - какая ставка применяется к какой категории.',
-      navGuide: 'Руководство', navInvoicing: 'Счета с НДС', navEcommerce: 'НДС в e-commerce', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navKontakti: 'Контакты',
+      navGuide: 'Руководство', navInvoicing: 'Счета с НДС', navEcommerce: 'НДС в e-commerce', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navAbout: 'О сайте', navKontakti: 'Контакты',
       h1: 'Ставки НДС',
       lead: 'Ставки налога на добавленную стоимость в Латвии и других странах ЕС.',
       countryLabel: 'Страна',
@@ -527,6 +553,9 @@
       redOne: 'сниженная ставка для отдельных групп товаров и услуг',
       zero: 'отдельные операции, например экспорт',
       noRed: 'В этой стране нет сниженных ставок НДС - почти ко всему применяется стандартная ставка.',
+      tableTitle: 'Ставки НДС во всех странах ЕС', tableIntro: 'Стандартные и сниженные ставки НДС во всех 27 странах Европейского союза. Первая - стандартная ставка, остальные - сниженные; ставка 0% и освобождения существуют почти везде для отдельных операций, например экспорта.',
+      colCountry: 'Страна', colStd: 'Стандартная ставка', colRed: 'Сниженные ставки', noneLabel: 'нет',
+      detailsTitle: 'Примеры сниженных ставок по странам', detailsIntro: 'Откройте страну, чтобы увидеть, к каким группам товаров и услуг обычно применяется каждая сниженная ставка. Примеры носят информационный характер - точную ставку для конкретного товара проверяйте в налоговом органе соответствующей страны.',
       infoHtml:
         '<h2>Стандартная, сниженные и нулевая ставки</h2>' +
         '<p>В каждой стране ЕС есть одна стандартная ставка НДС, которая применяется к большинству товаров и услуг. Дополнительно могут действовать одна или несколько сниженных ставок для определённых групп - например, для продуктов питания, лекарств, книг, прессы, пассажирского транспорта или размещения. К отдельным товарам применяется и ставка 0%, что не то же самое, что освобождение от НДС: при нулевой ставке предприятие сохраняет право на вычет входного налога.</p>' +
@@ -549,7 +578,7 @@
         '</ul>' +
         '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Ставки и условия их применения могут меняться.</p>',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -572,7 +601,7 @@
     en: {
       htmlLang: 'en', pageTitle: 'VAT Calculator - VAT rates in Latvia and the EU',
       pageDescription: 'Overview of VAT rates with examples: Latvia\'s 21%, 12%, 5% and 0% rates and VAT rates for all 27 EU countries - which rate applies to which category.',
-      navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navKontakti: 'Contact',
+      navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navAbout: 'About', navKontakti: 'Contact',
       h1: 'VAT rates',
       lead: 'Value-added tax rates in Latvia and other EU countries.',
       countryLabel: 'Country',
@@ -581,6 +610,9 @@
       redOne: 'a reduced rate for certain groups of goods and services',
       zero: 'certain transactions, e.g. exports',
       noRed: 'This country has no reduced VAT rates - the standard rate applies to almost everything.',
+      tableTitle: 'VAT rates in every EU country', tableIntro: 'Standard and reduced VAT rates in all 27 European Union member states. The first figure is the standard rate, the others are reduced rates; a 0% rate and exemptions exist almost everywhere for certain transactions such as exports.',
+      colCountry: 'Country', colStd: 'Standard rate', colRed: 'Reduced rates', noneLabel: 'none',
+      detailsTitle: 'Reduced-rate examples by country', detailsIntro: 'Open a country to see which groups of goods and services each reduced rate typically applies to. The examples are informational - check the exact rate for a specific product with that country\'s tax authority.',
       infoHtml:
         '<h2>Standard, reduced and zero rates</h2>' +
         '<p>Each EU country has one standard VAT rate applied to most goods and services. On top of that there may be one or more reduced rates for certain groups - for example food, medicines, books, the press, passenger transport or accommodation. Some goods are also taxed at 0%, which is not the same as a VAT exemption: at the zero rate a business keeps the right to deduct input VAT.</p>' +
@@ -603,7 +635,7 @@
         '</ul>' +
         '<p class="disclaimer">This page is informational and is not tax advice. Rates and the conditions for applying them can change.</p>',
       back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -968,6 +1000,41 @@
     if (c.rates.length === 1) html += '<p>' + t.noRed + '</p>';
     rateCard.innerHTML = html;
   }
+  function fmtRateIn(r, l) {
+    var str = String(r);
+    return l === 'en' ? str : str.replace('.', ',');
+  }
+  // Pilna visu 27 valstu tabula un katras valsts samazināto likmju piemēri - statiskajā HTML
+  // ir LV versija, lai saturs būtu redzams arī bez JS; šī funkcija to pārzīmē izvēlētajā valodā.
+  function buildRatesTable(l, t) {
+    var list = EU.slice();
+    if (l !== 'lv') list.sort(function (a, b) { return a.name[l].localeCompare(b.name[l], l); });
+    var html = '<h2 id="visas-likmes">' + t.tableTitle + '</h2><p>' + t.tableIntro + '</p>';
+    html += '<div class="table-wrap"><table class="rates-table"><thead><tr><th>' + t.colCountry + '</th><th>' + t.colStd + '</th><th>' + t.colRed + '</th></tr></thead><tbody>';
+    list.forEach(function (c) {
+      var red = c.rates.slice(1).map(function (r) { return fmtRateIn(r, l) + '%'; }).join(', ');
+      html += '<tr><td>' + c.name[l] + '</td><td><strong>' + fmtRateIn(c.rates[0], l) + '%</strong></td><td>' + (red || t.noneLabel) + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<h2 id="likmes-pa-valstim">' + t.detailsTitle + '</h2><p>' + t.detailsIntro + '</p>';
+    list.forEach(function (c) {
+      var descs = RATE_DESC[c.code] || [];
+      var zero = ZERO_DESC[c.code];
+      html += '<details class="country-item"><summary>' + c.name[l] + ' - ' + c.rates.map(function (r) { return fmtRateIn(r, l) + '%'; }).join(' / ') + '</summary><ul>';
+      html += '<li><strong>' + fmtRateIn(c.rates[0], l) + '%</strong> - ' + t.std + '.</li>';
+      c.rates.slice(1).forEach(function (r, i) {
+        html += '<li><strong>' + fmtRateIn(r, l) + '%</strong> - ' + (descs[i] ? descs[i][l] : t.redOne) + '.</li>';
+      });
+      html += '<li><strong>0%</strong> - ' + (zero ? zero[l] : t.zero) + '.</li></ul>';
+      if (c.rates.length === 1) html += '<p>' + t.noRed + '</p>';
+      html += '</details>';
+    });
+    return html;
+  }
+  function renderRatesTable(l) {
+    document.getElementById('ratesTable').innerHTML = buildRatesTable(l, I18N[l]);
+  }
+
   function openCountry() {
     countryPicker.classList.add('open');
     countryBtn.setAttribute('aria-expanded', 'true');
@@ -1070,6 +1137,7 @@
     document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
     document.getElementById('navBuj').textContent = t.navBuj;
     document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navAbout').textContent = t.navAbout;
     document.getElementById('navKontakti').textContent = t.navKontakti;
     document.getElementById('pageTitle').textContent = t.h1;
     document.getElementById('pageLead').textContent = t.lead;
@@ -1078,6 +1146,7 @@
     renderCountryList();
     renderCard();
     document.getElementById('ratesInfo').innerHTML = t.infoHtml;
+    renderRatesTable(l);
     document.getElementById('backLink').textContent = t.back;
     document.getElementById('footHome').textContent = t.footHome;
     document.getElementById('footGuide').textContent = t.footGuide;
@@ -1086,6 +1155,8 @@
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footAbout').textContent = t.footAbout;
+    document.getElementById('footTerms').textContent = t.footTerms;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
     document.getElementById('footContact').textContent = t.footContact;
     document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
