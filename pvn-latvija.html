@@ -270,6 +270,15 @@
     if (m) m.setAttribute('content', t === 'dark' ? '#1b212a' : '#ffffff');
   })();
 </script>
+<script>
+  // Google Consent Mode v2: noklusējums "viss liegts" jāuzstāda pirms jebkura Google skripta.
+  // Piekrišanas dialogs to atjaunina (gtag("consent","update")); līdz tam - bez sīkdatnēm.
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1040653408011392" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -513,7 +522,7 @@
       catAnalyticsName: 'Analītikas sīkdatnes',
       catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
       catAdsName: 'Reklāmas sīkdatnes',
-      catAdsDesc: 'Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.',
+      catAdsDesc: 'Google AdSense - ļauj rādīt personalizētas reklāmas. Bez piekrišanas rādām tikai nepersonalizētas reklāmas bez reklāmas sīkdatnēm.',
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
@@ -593,7 +602,7 @@
       catAnalyticsName: 'Аналитические cookie',
       catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
       catAdsName: 'Рекламные cookie',
-      catAdsDesc: 'Google AdSense - позволяет показывать рекламу, которая поддерживает бесплатную работу сайта.',
+      catAdsDesc: 'Google AdSense - позволяет показывать персонализированную рекламу. Без согласия показывается только неперсонализированная реклама без рекламных cookie.',
       prefsSave: 'Сохранить настройки'
     },
     en: {
@@ -673,7 +682,7 @@
       catAnalyticsName: 'Analytics cookies',
       catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
       catAdsName: 'Advertising cookies',
-      catAdsDesc: 'Google AdSense - lets us show ads that keep the site free.',
+      catAdsDesc: 'Google AdSense - allows personalised ads. Without consent, only non-personalised ads without advertising cookies are shown.',
       prefsSave: 'Save preferences'
     }
   };
@@ -867,7 +876,6 @@
 /* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
 (function () {
   var GA_ID = 'G-VSLEWS7DRR';               // Google Analytics 4 mērījuma ID
-  var ADSENSE_ID = 'ca-pub-1040653408011392'; // Google AdSense izdevēja ID
 
   var banner = document.getElementById('cookieBanner');
   var prefs = document.getElementById('cookiePrefs');
@@ -879,13 +887,9 @@
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
   var swAds = document.getElementById('switchAds');
-  var gaLoaded = false, adsLoaded = false;
+  var gaLoaded = false;
 
-  // Google Consent Mode v2: viss liegts pēc noklusējuma, atjaunina pēc lietotāja izvēles.
-  // Sagatavo vietni Google sertificētā CMP (Privacy & messaging) pieslēgšanai.
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-  window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+  // Consent Mode noklusējums ir <head>; šeit tikai atjauninājums pēc lietotāja izvēles.
 
   function loadScript(src, attrs) {
     var s = document.createElement('script');
@@ -906,11 +910,7 @@
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
-    if (c.ads && !adsLoaded && ADSENSE_ID.indexOf('XXX') === -1) {
-      adsLoaded = true;
-      loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID,
-        { crossorigin: 'anonymous' });
-    }
+    // AdSense skripts ir <head>; personalizāciju nosaka Consent Mode atjauninājums augstāk.
   }
 
   function readConsent() {
