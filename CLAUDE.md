@@ -14,8 +14,12 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - `index.html` — the calculator itself: country picker with flags, rate buttons, live bidirectional net/gross calculation, floating mini-calculator (insert result into net/gross field), decimal-separator toggle (`#sepBtn`, comma vs period — independent of UI language), full LV/RU/EN i18n.
 - `buj.html`, `likmes.html` — FAQ and VAT-rates content, each with its own FAQPage JSON-LD. Moved out of index.html so the calculator page stays focused.
 - `instrukcijas.html` — step-by-step usage guide, covering the calculator and the floating mini-calculator's "insert into field" buttons.
+- `pvn-latvija.html`, `pvn-rekinos.html`, `pvn-e-komercija.html` — long-form guide pages (Article JSON-LD), added for AdSense content depth.
+- `par-vietni.html`, `lietosanas-noteikumi.html` — About and Terms of use (trust pages).
 - `kontakti.html`, `privatuma-politika.html` — contact form and privacy policy.
-- All 6 pages share the same header: logo, LV/RU/EN lang-switch, and a `☰` dropdown menu (`#menuDropdown`/`#menuBtn`/`#menuList`) linking to Instrukcijas/BUJ/Likmes/Kontakti. No page should be a navigation dead end.
+- AdSense is deliberately NOT loaded on `kontakti`, `privatuma-politika` and `lietosanas-noteikumi` (form/legal pages have no publisher content — AdSense policy). All other pages load it after consent.
+- All 11 pages share the same header: logo, LV/RU/EN lang-switch, and a `☰` dropdown menu (`#menuDropdown`/`#menuBtn`/`#menuList`) linking to Rokasgrāmata/PVN rēķinos/PVN e-komercijā/Instrukcijas/BUJ/Likmes/Par vietni/Kontakti; footers also link Lietošanas noteikumi and Privātuma politika. No page should be a navigation dead end.
+- `likmes.html` keeps the 27-country data in the `EU`/`RATE_DESC`/`ZERO_DESC` JS arrays; the static LV table + per-country `<details>` in `#ratesTable` are generated from those arrays (`buildRatesTable`) so crawlers see the data — if you change the arrays, regenerate the static block the same way rather than editing it by hand.
 - Internal links are extensionless (`href="buj"`, `href="/"` for the homepage, etc.) — GitHub Pages serves `foo.html` for a request to `/foo`, so this keeps `.html` out of the address bar. Follow this convention for any new internal links or pages.
 
 ## Content style
@@ -29,6 +33,8 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - Don't verify UI changes yourself in a browser preview after every edit — just make the change and describe it. The user tests it themselves. Only open a preview if asked to, or when reproducing a bug the user reported.
 - When adding a new page, replicate the existing per-page i18n pattern (an `I18N` object with `lv`/`ru`/`en` keys, an `apply(lang)` function that updates the DOM, `initialLang()` that checks `localStorage` then `navigator.language`) and the shared dropdown-menu markup/CSS/JS — don't introduce a different pattern.
 - The decimal-separator setting and the UI language setting are deliberately independent — don't couple them.
+- The cookie-consent dialogs (`#cookieBanner`, `#cookiePrefs`) are inserted by a small inline script with empty text nodes; `apply(lang)` fills every string from I18N. Keep it that way — the same ~100 words of dialog text must not sit in every page's static HTML (Google's duplicate-content guidance for AdSense).
+- Every guide page must carry a real disclaimer/sources block, but vary the wording per page — identical sentences across pages count against the site.
 
 ## Known quirks
 

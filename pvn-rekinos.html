@@ -377,7 +377,7 @@
       <li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>
     </ul>
 
-    <p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>
+    <p class="disclaimer">Šī lapa sniedz vispārīgu ieskatu rēķinu noformēšanas prasībās un neaizstāj nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>
   </article>
 
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
@@ -402,56 +402,28 @@
   </div>
 </footer>
 
-<!-- Sīkdatņu piekrišana: pirmais slānis -->
-<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
-  <div class="cookie-inner">
-    <div class="cookie-text">
-      <strong class="cookie-title" id="cookieTitle">Mēs cienām tavu privātumu</strong>
-      <span id="cookieText">Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. <a href="privatuma-politika">Uzzini vairāk</a></span>
-    </div>
-    <div class="cookie-actions">
-      <button id="cookieSettingsBtn" type="button">Iestatījumi</button>
-      <button id="cookieAccept" type="button">Piekrītu</button>
-    </div>
-  </div>
-</div>
-
-<!-- Sīkdatņu piekrišana: preferenču logs -->
-<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
-  <div class="prefs-card">
-    <div class="prefs-head">
-      <h2 id="prefsTitle">Pārvaldīt sīkdatņu preferences</h2>
-      <button id="prefsClose" type="button" aria-label="Aizvērt">✕</button>
-    </div>
-    <div class="prefs-top-actions">
-      <button id="prefsRejectAll" type="button">Noraidīt visu</button>
-      <button id="prefsAcceptAll" type="button">Pieņemt visas</button>
-    </div>
-    <p class="prefs-intro" id="prefsIntro">Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. Pārējās tiek ielādētas tikai ar tavu piekrišanu.</p>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catNecessaryName">Nepieciešamās sīkdatnes</span>
-        <span class="prefs-always" id="catNecessaryAlways">Vienmēr atļauts</span>
-      </div>
-      <p class="prefs-cat-desc" id="catNecessaryDesc">Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.</p>
-    </div>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catAnalyticsName">Analītikas sīkdatnes</span>
-        <button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button>
-      </div>
-      <p class="prefs-cat-desc" id="catAnalyticsDesc">Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.</p>
-    </div>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catAdsName">Reklāmas sīkdatnes</span>
-        <button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button>
-      </div>
-      <p class="prefs-cat-desc" id="catAdsDesc">Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.</p>
-    </div>
-    <button id="prefsSave" type="button">Saglabāt preferences</button>
-  </div>
-</div>
+<!-- Sīkdatņu piekrišanas dialogi: ieliek DOM ar JS (tekstus aizpilda apply() no I18N),
+     lai identisks teksts neatkārtotos katras lapas statiskajā HTML. Bez JS tie tāpat nedarbotos. -->
+<script>
+  document.body.insertAdjacentHTML('beforeend',
+    '<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">' +
+      '<div class="cookie-inner">' +
+        '<div class="cookie-text"><strong class="cookie-title" id="cookieTitle"></strong> <span id="cookieText"></span></div>' +
+        '<div class="cookie-actions"><button id="cookieSettingsBtn" type="button"></button><button id="cookieAccept" type="button"></button></div>' +
+      '</div>' +
+    '</div>' +
+    '<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">' +
+      '<div class="prefs-card">' +
+        '<div class="prefs-head"><h2 id="prefsTitle"></h2><button id="prefsClose" type="button" aria-label="Aizvērt">\u2715</button></div>' +
+        '<div class="prefs-top-actions"><button id="prefsRejectAll" type="button"></button><button id="prefsAcceptAll" type="button"></button></div>' +
+        '<p class="prefs-intro" id="prefsIntro"></p>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catNecessaryName"></span><span class="prefs-always" id="catNecessaryAlways"></span></div><p class="prefs-cat-desc" id="catNecessaryDesc"></p></div>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAnalyticsName"></span><button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAnalyticsDesc"></p></div>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAdsName"></span><button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAdsDesc"></p></div>' +
+        '<button id="prefsSave" type="button"></button>' +
+      '</div>' +
+    '</div>');
+</script>
 
 <script>
 (function () {
@@ -508,7 +480,7 @@
           '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Finanšu ministrija - PVN likmes</a>.</li>' +
           '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Eiropas Komisija - PVN</a>.</li>' +
         '</ul>' +
-        '<p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
+        '<p class="disclaimer">Šī lapa sniedz vispārīgu ieskatu rēķinu noformēšanas prasībās un neaizstāj nodokļu konsultāciju. Rēķinu noformēšanas prasības laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -582,7 +554,7 @@
           '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Министерство финансов - ставки НДС</a>.</li>' +
           '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">Европейская комиссия - НДС</a>.</li>' +
         '</ul>' +
-        '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Требования к оформлению счетов со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
+        '<p class="disclaimer">Эта страница даёт общее представление о требованиях к оформлению счетов и не заменяет налоговую консультацию. Требования к оформлению счетов со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 pvnkalkulators.eu',
@@ -656,7 +628,7 @@
           '<li><a href="https://www.fm.gov.lv/lv/pvn-likmes" target="_blank" rel="noopener">Ministry of Finance - VAT rates</a>.</li>' +
           '<li><a href="https://taxation-customs.ec.europa.eu/taxation/vat_en" target="_blank" rel="noopener">European Commission - VAT</a>.</li>' +
         '</ul>' +
-        '<p class="disclaimer">This page is informational and is not tax advice. Invoicing requirements change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
+        '<p class="disclaimer">This page gives a general overview of invoicing requirements and does not replace tax advice. Invoicing requirements change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
       back: '← Back to the calculator',
       footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 pvnkalkulators.eu',

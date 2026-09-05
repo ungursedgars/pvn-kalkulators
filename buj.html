@@ -536,56 +536,28 @@
   </div>
 </footer>
 
-<!-- Sīkdatņu piekrišana: pirmais slānis -->
-<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
-  <div class="cookie-inner">
-    <div class="cookie-text">
-      <strong class="cookie-title" id="cookieTitle">Mēs cienām tavu privātumu</strong>
-      <span id="cookieText">Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. <a href="privatuma-politika">Uzzini vairāk</a></span>
-    </div>
-    <div class="cookie-actions">
-      <button id="cookieSettingsBtn" type="button">Iestatījumi</button>
-      <button id="cookieAccept" type="button">Piekrītu</button>
-    </div>
-  </div>
-</div>
-
-<!-- Sīkdatņu piekrišana: preferenču logs -->
-<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
-  <div class="prefs-card">
-    <div class="prefs-head">
-      <h2 id="prefsTitle">Pārvaldīt sīkdatņu preferences</h2>
-      <button id="prefsClose" type="button" aria-label="Aizvērt">✕</button>
-    </div>
-    <div class="prefs-top-actions">
-      <button id="prefsRejectAll" type="button">Noraidīt visu</button>
-      <button id="prefsAcceptAll" type="button">Pieņemt visas</button>
-    </div>
-    <p class="prefs-intro" id="prefsIntro">Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. Pārējās tiek ielādētas tikai ar tavu piekrišanu.</p>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catNecessaryName">Nepieciešamās sīkdatnes</span>
-        <span class="prefs-always" id="catNecessaryAlways">Vienmēr atļauts</span>
-      </div>
-      <p class="prefs-cat-desc" id="catNecessaryDesc">Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.</p>
-    </div>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catAnalyticsName">Analītikas sīkdatnes</span>
-        <button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button>
-      </div>
-      <p class="prefs-cat-desc" id="catAnalyticsDesc">Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.</p>
-    </div>
-    <div class="prefs-cat">
-      <div class="prefs-cat-row">
-        <span class="prefs-cat-name" id="catAdsName">Reklāmas sīkdatnes</span>
-        <button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button>
-      </div>
-      <p class="prefs-cat-desc" id="catAdsDesc">Google AdSense - ļauj rādīt reklāmas, kas uztur vietni bez maksas.</p>
-    </div>
-    <button id="prefsSave" type="button">Saglabāt preferences</button>
-  </div>
-</div>
+<!-- Sīkdatņu piekrišanas dialogi: ieliek DOM ar JS (tekstus aizpilda apply() no I18N),
+     lai identisks teksts neatkārtotos katras lapas statiskajā HTML. Bez JS tie tāpat nedarbotos. -->
+<script>
+  document.body.insertAdjacentHTML('beforeend',
+    '<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">' +
+      '<div class="cookie-inner">' +
+        '<div class="cookie-text"><strong class="cookie-title" id="cookieTitle"></strong> <span id="cookieText"></span></div>' +
+        '<div class="cookie-actions"><button id="cookieSettingsBtn" type="button"></button><button id="cookieAccept" type="button"></button></div>' +
+      '</div>' +
+    '</div>' +
+    '<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">' +
+      '<div class="prefs-card">' +
+        '<div class="prefs-head"><h2 id="prefsTitle"></h2><button id="prefsClose" type="button" aria-label="Aizvērt">\u2715</button></div>' +
+        '<div class="prefs-top-actions"><button id="prefsRejectAll" type="button"></button><button id="prefsAcceptAll" type="button"></button></div>' +
+        '<p class="prefs-intro" id="prefsIntro"></p>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catNecessaryName"></span><span class="prefs-always" id="catNecessaryAlways"></span></div><p class="prefs-cat-desc" id="catNecessaryDesc"></p></div>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAnalyticsName"></span><button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAnalyticsDesc"></p></div>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAdsName"></span><button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAdsDesc"></p></div>' +
+        '<button id="prefsSave" type="button"></button>' +
+      '</div>' +
+    '</div>');
+</script>
 
 <script>
 (function () {
