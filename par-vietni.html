@@ -457,7 +457,8 @@
       catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
       catAnalyticsName: 'Analītikas sīkdatnes',
       catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
-      catAdsNoteHtml: 'Reklāmu personalizāciju pārvalda Google piekrišanas ziņojums, kas parādās, atverot vietni. Izvēli vari mainīt <a href="/#reklamas">šeit</a>.',
+      catAdsNoteHtml: 'Reklāmu personalizāciju pārvalda Google piekrišanas ziņojums. Atvērt to vari <a href="/#reklamas">šeit</a>.',
+      adsMsgUnavailable: 'Google piekrišanas ziņojums šobrīd nav pieejams - tas parādīsies, kad vietnē sāks rādīt reklāmas.',
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
@@ -511,7 +512,8 @@
       catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
       catAnalyticsName: 'Аналитические cookie',
       catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
-      catAdsNoteHtml: 'Персонализацией рекламы управляет сообщение о согласии Google, которое появляется при открытии сайта. Изменить выбор можно <a href="/#reklamas">здесь</a>.',
+      catAdsNoteHtml: 'Персонализацией рекламы управляет сообщение о согласии Google. Открыть его можно <a href="/#reklamas">здесь</a>.',
+      adsMsgUnavailable: 'Сообщение о согласии Google сейчас недоступно - оно появится, когда на сайте начнёт показываться реклама.',
       prefsSave: 'Сохранить настройки'
     },
     en: {
@@ -565,7 +567,8 @@
       catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
       catAnalyticsName: 'Analytics cookies',
       catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
-      catAdsNoteHtml: 'Ad personalisation is managed by Google\'s consent message shown when you open the site. You can change your choice <a href="/#reklamas">here</a>.',
+      catAdsNoteHtml: 'Ad personalisation is managed by Google\'s consent message. You can open it <a href="/#reklamas">here</a>.',
+      adsMsgUnavailable: 'Google\'s consent message is not available yet - it appears once ads are being served on the site.',
       prefsSave: 'Save preferences'
     }
   };
@@ -630,6 +633,7 @@
     if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
     var adsNote = document.getElementById('catAdsNote');
     if (adsNote) adsNote.innerHTML = t.catAdsNoteHtml;
+    window.pvnAdsUnavailableMsg = t.adsMsgUnavailable;
     var prefsCloseEl = document.getElementById('prefsClose');
     if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
   }
@@ -842,12 +846,37 @@
   var consent = readConsent();
   if (consent) applyConsent(consent);
   else showBannerWhenReady();
-  // /#reklamas - atkārtoti atvērt Google reklāmu piekrišanas ziņojumu (saite dialogā un privātuma politikā)
-  if (location.hash === '#reklamas' && document.querySelector('script[src*="adsbygoogle.js"]')) {
+  // Saite "/#reklamas" (dialogā, privātuma politikā, Par vietni) atver Google reklāmu piekrišanas
+  // ziņojumu. Ja tas vēl nav pieejams (reklāmas netiek rādītas, reklāmu bloķētājs), to paskaidrojam
+  // savā dialogā, nevis atstājam saiti bez darbības.
+  var hasAdScript = !!document.querySelector('script[src*="adsbygoogle.js"]');
+  function showAdsMessage() {
+    if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') {
+      window.googlefc.showRevocationMessage();
+      return;
+    }
+    if (!prefs.classList.contains('show')) openPrefs();
+    var n = document.getElementById('catAdsNote');
+    if (n && window.pvnAdsUnavailableMsg) n.textContent = window.pvnAdsUnavailableMsg;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href="/#reklamas"]') : null;
+    if (!a || !hasAdScript) return; // lapās bez reklāmu skripta ļaujam pāriet uz sākumlapu
+    e.preventDefault();
+    showAdsMessage();
+  });
+  function adsHashCheck() {
+    if (location.hash !== '#reklamas') return;
+    if (!hasAdScript) { showAdsMessage(); return; }
+    var fired = false;
+    function once() { if (!fired) { fired = true; showAdsMessage(); } }
     window.googlefc = window.googlefc || {};
     window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': function () { if (window.googlefc.showRevocationMessage) window.googlefc.showRevocationMessage(); } });
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': once });
+    setTimeout(once, 4000);
   }
+  window.addEventListener('hashchange', adsHashCheck);
+  adsHashCheck();
 
   window.pvnOpenCookieBanner = openPrefs;
   if (location.hash === '#cookies') openPrefs();
