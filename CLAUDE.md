@@ -24,6 +24,10 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 
 ## Content style
 
+- The site operator is **SIA UNG STORE** (Latvia). Keep that name consistent in every footer, in About, Terms, the privacy policy's data-controller section and the JSON-LD `publisher`.
+- Source of truth for Latvian rates is VID's "Pievienotās vērtības nodokļa likmes" page (vid.gov.lv); the Ministry of Finance rates page is a stale 2021 version - don't link or cite it. Current facts (verified 2026-09-05): 21% standard; 12% medicines/medical devices, infant food, domestic regular passenger transport, tourist accommodation, firewood and heat for households, fresh fruit/berries/vegetables, bread, milk, poultry, eggs; 5% books and press incl. electronic; 0% exports, intra-EU B2B supplies, international passenger transport. VAT return within 20 days, payment within 23 days after the period. Registration threshold 50 000 EUR; special small-business scheme (Art. 139.2) since 1 July 2025.
+- Guide pages show a fixed `LAST_CHECKED` date set in each page's script. Change it only when the rates and text were actually re-verified against VID/EC. Never generate today's date automatically - that misrepresents the content (Google Publisher Policies).
+
 - **Never use em-dashes (—) in any site content** — page copy, titles, meta descriptions, JSON-LD, all languages. Use a plain hyphen (-) instead. The owner's explicit preference: em-dashes make the page look AI-generated. (This rule is about site content; CLAUDE.md itself is exempt.)
 
 ## Workflow
@@ -35,6 +39,7 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - The decimal-separator setting and the UI language setting are deliberately independent — don't couple them.
 - The cookie-consent dialogs (`#cookieBanner`, `#cookiePrefs`) are inserted by a small inline script with empty text nodes; `apply(lang)` fills every string from I18N. Keep it that way — the same ~100 words of dialog text must not sit in every page's static HTML (Google's duplicate-content guidance for AdSense).
 - Every guide page must carry a real disclaimer/sources block, but vary the wording per page — identical sentences across pages count against the site.
+- Google Consent Mode v2: every page pushes `gtag('consent','default', all denied)` before any Google script can load and `gtag('consent','update', …)` from the consent dialog. Keep that order. Personalized ads in the EEA additionally require Google's certified CMP (AdSense → Privacy & messaging), which the owner enables in the AdSense dashboard; when that is switched on, load `adsbygoogle.js` on ad pages at page load so Google's message can show, and drop the "Reklāmas" toggle from our own dialog.
 
 ## Known quirks
 

@@ -347,7 +347,7 @@
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
       <a href="kontakti" id="footContact">Kontakti</a>
     </div>
-    <div id="footDisclaimer">© 2026 pvnkalkulators.eu</div>
+    <div id="footDisclaimer">© 2026 SIA UNG STORE · pvnkalkulators.eu</div>
   </div>
 </footer>
 
@@ -398,7 +398,7 @@
       errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
       altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
-      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora',
       cookieTitle: 'Mēs cienām tavu privātumu',
       cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
@@ -433,7 +433,7 @@
       errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
       altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
       footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
-      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
       cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
@@ -468,7 +468,7 @@
       errSend: 'Could not send. Try again later or email us directly.',
       altMail: 'Or write to us directly:', back: '← Back to the calculator',
       footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
-      footDisclaimer: '© 2026 pvnkalkulators.eu',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator',
       cookieTitle: 'We respect your privacy',
       cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
@@ -736,6 +736,12 @@
   var swAds = document.getElementById('switchAds');
   var gaLoaded = false;
 
+  // Google Consent Mode v2: viss liegts pēc noklusējuma, atjaunina pēc lietotāja izvēles.
+  // Sagatavo vietni Google sertificētā CMP (Privacy & messaging) pieslēgšanai.
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+
   function loadScript(src, attrs) {
     var s = document.createElement('script');
     s.async = true; s.src = src;
@@ -743,11 +749,15 @@
     document.head.appendChild(s);
   }
   function applyConsent(c) {
+    window.gtag('consent', 'update', {
+      analytics_storage: c.analytics ? 'granted' : 'denied',
+      ad_storage: c.ads ? 'granted' : 'denied',
+      ad_user_data: c.ads ? 'granted' : 'denied',
+      ad_personalization: c.ads ? 'granted' : 'denied'
+    });
     if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
       gaLoaded = true;
       loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
       window.gtag('config', GA_ID, { anonymize_ip: true });
     }
