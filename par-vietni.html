@@ -241,6 +241,8 @@
     border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
   }
   @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
+  .ad-slot { margin: 22px 0; }
+  .ad-slot ins { display: block; }
 </style>
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
@@ -347,8 +349,14 @@
     </ul>
 
     <h2 id="finansejums">Reklāma un finansējums</h2>
-    <p>Vietne ir un paliks bezmaksas. Tās uzturēšanas izmaksas sedz Google AdSense reklāmas, kas tiek ielādētas tikai tad, ja esi devis piekrišanu sīkdatņu joslā. Piekrišanu jebkurā laikā var mainīt <a href="privatuma-politika">privātuma politikas</a> lapā. Vairāk par datu apstrādi lasi turpat, bet par vietnes lietošanas nosacījumiem - <a href="lietosanas-noteikumi">lietošanas noteikumos</a>.</p>
+    <p>Vietne ir un paliks bezmaksas. Tās uzturēšanas izmaksas sedz Google AdSense reklāmas. Personalizētas reklāmas rādām tikai ar tavu piekrišanu, ko sniedz Google piekrišanas ziņojums; bez tās rādām nepersonalizētas reklāmas bez reklāmas sīkdatnēm. Izvēli vari mainīt <a href="/#reklamas">šeit</a>. Vairāk par datu apstrādi lasi turpat, bet par vietnes lietošanas nosacījumiem - <a href="lietosanas-noteikumi">lietošanas noteikumos</a>.</p>
   </article>
+
+  <!-- Raksta beigas -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1040653408011392" data-ad-slot="8444846629" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
 
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
@@ -389,7 +397,7 @@
         '<p class="prefs-intro" id="prefsIntro"></p>' +
         '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catNecessaryName"></span><span class="prefs-always" id="catNecessaryAlways"></span></div><p class="prefs-cat-desc" id="catNecessaryDesc"></p></div>' +
         '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAnalyticsName"></span><button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAnalyticsDesc"></p></div>' +
-        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAdsName"></span><button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAdsDesc"></p></div>' +
+        '<div class="prefs-cat"><p class="prefs-cat-desc" id="catAdsNote"></p></div>' +
         '<button id="prefsSave" type="button"></button>' +
       '</div>' +
     '</div>');
@@ -431,7 +439,7 @@
           '<li><strong>Kļūdas labojam.</strong> Ja saņemam pamatotu norādi uz kļūdu, izlabojam to un atjauninām lapu.</li>' +
         '</ul>' +
         '<h2 id="finansejums">Reklāma un finansējums</h2>' +
-        '<p>Vietne ir un paliks bezmaksas. Tās uzturēšanas izmaksas sedz Google AdSense reklāmas, kas tiek ielādētas tikai tad, ja esi devis piekrišanu sīkdatņu joslā. Piekrišanu jebkurā laikā var mainīt <a href="privatuma-politika">privātuma politikas</a> lapā. Vairāk par datu apstrādi lasi turpat, bet par vietnes lietošanas nosacījumiem - <a href="lietosanas-noteikumi">lietošanas noteikumos</a>.</p>',
+        '<p>Vietne ir un paliks bezmaksas. Tās uzturēšanas izmaksas sedz Google AdSense reklāmas. Personalizētas reklāmas rādām tikai ar tavu piekrišanu, ko sniedz Google piekrišanas ziņojums; bez tās rādām nepersonalizētas reklāmas bez reklāmas sīkdatnēm. Izvēli vari mainīt <a href="/#reklamas">šeit</a>. Vairāk par datu apstrādi lasi turpat, bet par vietnes lietošanas nosacījumiem - <a href="lietosanas-noteikumi">lietošanas noteikumos</a>.</p>',
       back: '← Atpakaļ uz kalkulatoru',
       footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
@@ -449,8 +457,7 @@
       catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
       catAnalyticsName: 'Analītikas sīkdatnes',
       catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
-      catAdsName: 'Reklāmas sīkdatnes',
-      catAdsDesc: 'Google AdSense - ļauj rādīt personalizētas reklāmas. Bez piekrišanas rādām tikai nepersonalizētas reklāmas bez reklāmas sīkdatnēm.',
+      catAdsNoteHtml: 'Reklāmu personalizāciju pārvalda Google piekrišanas ziņojums, kas parādās, atverot vietni. Izvēli vari mainīt <a href="/#reklamas">šeit</a>.',
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
@@ -486,7 +493,7 @@
           '<li><strong>Ошибки исправляем.</strong> Если получаем обоснованное указание на ошибку, исправляем её и обновляем страницу.</li>' +
         '</ul>' +
         '<h2 id="finansejums">Реклама и финансирование</h2>' +
-        '<p>Сайт бесплатный и останется таким. Расходы на его поддержку покрывает реклама Google AdSense, которая загружается только если вы дали согласие в панели cookie. Согласие можно изменить в любое время на странице <a href="privatuma-politika">политики конфиденциальности</a>. Подробнее об обработке данных читайте там же, а об условиях использования сайта - в <a href="lietosanas-noteikumi">условиях использования</a>.</p>',
+        '<p>Сайт бесплатный и останется таким. Расходы на его поддержку покрывает реклама Google AdSense. Персонализированная реклама показывается только с вашего согласия, которое запрашивает сообщение Google; без него показывается неперсонализированная реклама без рекламных cookie. Изменить выбор можно <a href="/#reklamas">здесь</a>. Подробнее об обработке данных читайте там же, а об условиях использования сайта - в <a href="lietosanas-noteikumi">условиях использования</a>.</p>',
       back: '← Назад к калькулятору',
       footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
@@ -504,8 +511,7 @@
       catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
       catAnalyticsName: 'Аналитические cookie',
       catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
-      catAdsName: 'Рекламные cookie',
-      catAdsDesc: 'Google AdSense - позволяет показывать персонализированную рекламу. Без согласия показывается только неперсонализированная реклама без рекламных cookie.',
+      catAdsNoteHtml: 'Персонализацией рекламы управляет сообщение о согласии Google, которое появляется при открытии сайта. Изменить выбор можно <a href="/#reklamas">здесь</a>.',
       prefsSave: 'Сохранить настройки'
     },
     en: {
@@ -541,7 +547,7 @@
           '<li><strong>We fix mistakes.</strong> If we receive a substantiated report of an error, we correct it and update the page.</li>' +
         '</ul>' +
         '<h2 id="finansejums">Advertising and funding</h2>' +
-        '<p>The site is free and will stay free. Its running costs are covered by Google AdSense ads, which load only if you have given consent in the cookie bar. You can change your consent at any time on the <a href="privatuma-politika">privacy policy</a> page. Read more about data processing there, and about the conditions for using the site in the <a href="lietosanas-noteikumi">terms of use</a>.</p>',
+        '<p>The site is free and will stay free. Its running costs are covered by Google AdSense ads. Personalised ads are shown only with your consent, which Google\'s consent message asks for; without it, non-personalised ads without advertising cookies are shown. You can change your choice <a href="/#reklamas">here</a>. Read more about data processing there, and about the conditions for using the site in the <a href="lietosanas-noteikumi">terms of use</a>.</p>',
       back: '← Back to the calculator',
       footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
@@ -559,8 +565,7 @@
       catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
       catAnalyticsName: 'Analytics cookies',
       catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
-      catAdsName: 'Advertising cookies',
-      catAdsDesc: 'Google AdSense - allows personalised ads. Without consent, only non-personalised ads without advertising cookies are shown.',
+      catAdsNoteHtml: 'Ad personalisation is managed by Google\'s consent message shown when you open the site. You can change your choice <a href="/#reklamas">here</a>.',
       prefsSave: 'Save preferences'
     }
   };
@@ -614,7 +619,7 @@
       prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
       prefsIntro: t.prefsIntro, catNecessaryName: t.catNecessaryName, catNecessaryAlways: t.alwaysOn,
       catNecessaryDesc: t.catNecessaryDesc, catAnalyticsName: t.catAnalyticsName,
-      catAnalyticsDesc: t.catAnalyticsDesc, catAdsName: t.catAdsName, catAdsDesc: t.catAdsDesc,
+      catAnalyticsDesc: t.catAnalyticsDesc,
       prefsSave: t.prefsSave
     };
     Object.keys(cookieIds).forEach(function (id) {
@@ -623,6 +628,8 @@
     });
     var cookieText = document.getElementById('cookieText');
     if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var adsNote = document.getElementById('catAdsNote');
+    if (adsNote) adsNote.innerHTML = t.catAdsNoteHtml;
     var prefsCloseEl = document.getElementById('prefsClose');
     if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
   }
@@ -744,7 +751,6 @@
   var acceptAllBtn = document.getElementById('prefsAcceptAll');
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
-  var swAds = document.getElementById('switchAds');
   var gaLoaded = false;
 
   // Consent Mode noklusējums ir <head>; šeit tikai atjauninājums pēc lietotāja izvēles.
@@ -756,12 +762,8 @@
     document.head.appendChild(s);
   }
   function applyConsent(c) {
-    window.gtag('consent', 'update', {
-      analytics_storage: c.analytics ? 'granted' : 'denied',
-      ad_storage: c.ads ? 'granted' : 'denied',
-      ad_user_data: c.ads ? 'granted' : 'denied',
-      ad_personalization: c.ads ? 'granted' : 'denied'
-    });
+    // Reklāmu (ad_*) piekrišanu Consent Mode atjaunina Google sertificētais ziņojums (Privacy & messaging); mēs - tikai analītiku.
+    window.gtag('consent', 'update', { analytics_storage: c.analytics ? 'granted' : 'denied' });
     if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
       gaLoaded = true;
       loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
@@ -790,16 +792,15 @@
 
   function setSwitch(sw, on) { sw.setAttribute('aria-checked', String(on)); }
   function getSwitch(sw) { return sw.getAttribute('aria-checked') === 'true'; }
-  [swAnalytics, swAds].forEach(function (sw) {
+  [swAnalytics].forEach(function (sw) {
     sw.addEventListener('click', function () { setSwitch(sw, !getSwitch(sw)); });
   });
 
   function showBanner() { banner.classList.add('show'); }
   function hideBanner() { banner.classList.remove('show'); }
   function openPrefs() {
-    var c = readConsent() || { analytics: false, ads: false };
+    var c = readConsent() || { analytics: false };
     setSwitch(swAnalytics, c.analytics);
-    setSwitch(swAds, c.ads);
     prefs.classList.add('show');
     prefsCloseBtn.focus();
   }
@@ -814,22 +815,39 @@
     hideBanner();
   }
 
-  acceptBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  acceptBtn.addEventListener('click', function () { finish({ analytics: true }); });
   settingsBtn.addEventListener('click', openPrefs);
   prefsCloseBtn.addEventListener('click', function () { closePrefs(true); });
-  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false, ads: false }); });
-  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false }); });
+  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true }); });
   saveBtn.addEventListener('click', function () {
-    finish({ analytics: getSwitch(swAnalytics), ads: getSwitch(swAds) });
+    finish({ analytics: getSwitch(swAnalytics) });
   });
   prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true);
   });
 
+  // Google GDPR ziņojums (no adsbygoogle.js) rādās pirmais; mūsu analītikas josla - pēc tā atbildes.
+  // Lapās bez reklāmu skripta, bez atbildes 4 s laikā vai ar reklāmu bloķētāju - uzreiz/pēc taimera.
+  function showBannerWhenReady() {
+    var done = false;
+    function go() { if (!done) { done = true; showBanner(); } }
+    if (!document.querySelector('script[src*="adsbygoogle.js"]')) { go(); return; }
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': go });
+    setTimeout(go, 4000);
+  }
   var consent = readConsent();
   if (consent) applyConsent(consent);
-  else showBanner();
+  else showBannerWhenReady();
+  // /#reklamas - atkārtoti atvērt Google reklāmu piekrišanas ziņojumu (saite dialogā un privātuma politikā)
+  if (location.hash === '#reklamas' && document.querySelector('script[src*="adsbygoogle.js"]')) {
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': function () { if (window.googlefc.showRevocationMessage) window.googlefc.showRevocationMessage(); } });
+  }
 
   window.pvnOpenCookieBanner = openPrefs;
   if (location.hash === '#cookies') openPrefs();

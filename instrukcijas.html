@@ -227,6 +227,8 @@
     border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
   }
   @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
+  .ad-slot { margin: 22px 0; }
+  .ad-slot ins { display: block; }
 </style>
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
@@ -333,6 +335,12 @@
 
   <p class="more" id="moreText">Uzzini vairāk: <a href="pvn-latvija">PVN rokasgrāmata</a> · <a href="buj">biežāk uzdotie jautājumi</a> · <a href="likmes">PVN likmes</a>.</p>
 
+  <!-- Raksta beigas -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1040653408011392" data-ad-slot="8444846629" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
   <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
 </main>
 
@@ -372,7 +380,7 @@
         '<p class="prefs-intro" id="prefsIntro"></p>' +
         '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catNecessaryName"></span><span class="prefs-always" id="catNecessaryAlways"></span></div><p class="prefs-cat-desc" id="catNecessaryDesc"></p></div>' +
         '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAnalyticsName"></span><button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAnalyticsDesc"></p></div>' +
-        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAdsName"></span><button type="button" class="switch" id="switchAds" role="switch" aria-checked="false" aria-labelledby="catAdsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAdsDesc"></p></div>' +
+        '<div class="prefs-cat"><p class="prefs-cat-desc" id="catAdsNote"></p></div>' +
         '<button id="prefsSave" type="button"></button>' +
       '</div>' +
     '</div>');
@@ -429,8 +437,7 @@
       catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
       catAnalyticsName: 'Analītikas sīkdatnes',
       catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
-      catAdsName: 'Reklāmas sīkdatnes',
-      catAdsDesc: 'Google AdSense - ļauj rādīt personalizētas reklāmas. Bez piekrišanas rādām tikai nepersonalizētas reklāmas bez reklāmas sīkdatnēm.',
+      catAdsNoteHtml: 'Reklāmu personalizāciju pārvalda Google piekrišanas ziņojums, kas parādās, atverot vietni. Izvēli vari mainīt <a href="/#reklamas">šeit</a>.',
       prefsSave: 'Saglabāt preferences'
     },
     ru: {
@@ -481,8 +488,7 @@
       catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
       catAnalyticsName: 'Аналитические cookie',
       catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
-      catAdsName: 'Рекламные cookie',
-      catAdsDesc: 'Google AdSense - позволяет показывать персонализированную рекламу. Без согласия показывается только неперсонализированная реклама без рекламных cookie.',
+      catAdsNoteHtml: 'Персонализацией рекламы управляет сообщение о согласии Google, которое появляется при открытии сайта. Изменить выбор можно <a href="/#reklamas">здесь</a>.',
       prefsSave: 'Сохранить настройки'
     },
     en: {
@@ -533,8 +539,7 @@
       catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
       catAnalyticsName: 'Analytics cookies',
       catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
-      catAdsName: 'Advertising cookies',
-      catAdsDesc: 'Google AdSense - allows personalised ads. Without consent, only non-personalised ads without advertising cookies are shown.',
+      catAdsNoteHtml: 'Ad personalisation is managed by Google\'s consent message shown when you open the site. You can change your choice <a href="/#reklamas">here</a>.',
       prefsSave: 'Save preferences'
     }
   };
@@ -604,7 +609,7 @@
       prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
       prefsIntro: t.prefsIntro, catNecessaryName: t.catNecessaryName, catNecessaryAlways: t.alwaysOn,
       catNecessaryDesc: t.catNecessaryDesc, catAnalyticsName: t.catAnalyticsName,
-      catAnalyticsDesc: t.catAnalyticsDesc, catAdsName: t.catAdsName, catAdsDesc: t.catAdsDesc,
+      catAnalyticsDesc: t.catAnalyticsDesc,
       prefsSave: t.prefsSave
     };
     Object.keys(cookieIds).forEach(function (id) {
@@ -613,6 +618,8 @@
     });
     var cookieText = document.getElementById('cookieText');
     if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var adsNote = document.getElementById('catAdsNote');
+    if (adsNote) adsNote.innerHTML = t.catAdsNoteHtml;
     var prefsCloseEl = document.getElementById('prefsClose');
     if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
   }
@@ -740,7 +747,6 @@
   var acceptAllBtn = document.getElementById('prefsAcceptAll');
   var saveBtn = document.getElementById('prefsSave');
   var swAnalytics = document.getElementById('switchAnalytics');
-  var swAds = document.getElementById('switchAds');
   var gaLoaded = false;
 
   // Consent Mode noklusējums ir <head>; šeit tikai atjauninājums pēc lietotāja izvēles.
@@ -752,12 +758,8 @@
     document.head.appendChild(s);
   }
   function applyConsent(c) {
-    window.gtag('consent', 'update', {
-      analytics_storage: c.analytics ? 'granted' : 'denied',
-      ad_storage: c.ads ? 'granted' : 'denied',
-      ad_user_data: c.ads ? 'granted' : 'denied',
-      ad_personalization: c.ads ? 'granted' : 'denied'
-    });
+    // Reklāmu (ad_*) piekrišanu Consent Mode atjaunina Google sertificētais ziņojums (Privacy & messaging); mēs - tikai analītiku.
+    window.gtag('consent', 'update', { analytics_storage: c.analytics ? 'granted' : 'denied' });
     if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
       gaLoaded = true;
       loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
@@ -787,16 +789,15 @@
 
   function setSwitch(sw, on) { sw.setAttribute('aria-checked', String(on)); }
   function getSwitch(sw) { return sw.getAttribute('aria-checked') === 'true'; }
-  [swAnalytics, swAds].forEach(function (sw) {
+  [swAnalytics].forEach(function (sw) {
     sw.addEventListener('click', function () { setSwitch(sw, !getSwitch(sw)); });
   });
 
   function showBanner() { banner.classList.add('show'); }
   function hideBanner() { banner.classList.remove('show'); }
   function openPrefs() {
-    var c = readConsent() || { analytics: false, ads: false };
+    var c = readConsent() || { analytics: false };
     setSwitch(swAnalytics, c.analytics);
-    setSwitch(swAds, c.ads);
     prefs.classList.add('show');
     prefsCloseBtn.focus();
   }
@@ -811,22 +812,39 @@
     hideBanner();
   }
 
-  acceptBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  acceptBtn.addEventListener('click', function () { finish({ analytics: true }); });
   settingsBtn.addEventListener('click', openPrefs);
   prefsCloseBtn.addEventListener('click', function () { closePrefs(true); });
-  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false, ads: false }); });
-  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true, ads: true }); });
+  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false }); });
+  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true }); });
   saveBtn.addEventListener('click', function () {
-    finish({ analytics: getSwitch(swAnalytics), ads: getSwitch(swAds) });
+    finish({ analytics: getSwitch(swAnalytics) });
   });
   prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true);
   });
 
+  // Google GDPR ziņojums (no adsbygoogle.js) rādās pirmais; mūsu analītikas josla - pēc tā atbildes.
+  // Lapās bez reklāmu skripta, bez atbildes 4 s laikā vai ar reklāmu bloķētāju - uzreiz/pēc taimera.
+  function showBannerWhenReady() {
+    var done = false;
+    function go() { if (!done) { done = true; showBanner(); } }
+    if (!document.querySelector('script[src*="adsbygoogle.js"]')) { go(); return; }
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': go });
+    setTimeout(go, 4000);
+  }
   var consent = readConsent();
   if (consent) applyConsent(consent);
-  else showBanner(); // rāda tikai, kamēr izvēle vēl nav izdarīta
+  else showBannerWhenReady();
+  // /#reklamas - atkārtoti atvērt Google reklāmu piekrišanas ziņojumu (saite dialogā un privātuma politikā)
+  if (location.hash === '#reklamas' && document.querySelector('script[src*="adsbygoogle.js"]')) {
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': function () { if (window.googlefc.showRevocationMessage) window.googlefc.showRevocationMessage(); } });
+  }
 
   // Preferenču atkārtota atvēršana (piem. no privātuma politikas): #cookies
   window.pvnOpenCookieBanner = openPrefs;
