@@ -138,6 +138,12 @@
     #sepBtn { font-size: 1rem; }
     #langBtn { height: 28px; padding: 0 8px; }
   }
+  /* Šauriem telefoniem (320 px): galvene citādi izspiež izvēlnes pogu ārpus ekrāna */
+  @media (max-width: 360px) {
+    .header-inner { padding: 9px 12px; }
+    nav { gap: 5px; }
+    .logo { font-size: .98rem; }
+  }
 
   main { padding: 30px 0 50px; }
   h1 { font-size: 1.6rem; margin-bottom: 6px; }
@@ -418,6 +424,7 @@
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
+      <a href="kalkulators-vietnei" id="footEmbed">Kalkulators tavai vietnei</a> ·
       <a href="par-vietni" id="footAbout">Par vietni</a> ·
       <a href="lietosanas-noteikumi" id="footTerms">Lietošanas noteikumi</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
@@ -513,7 +520,7 @@
         '</ul>' +
         '<p class="disclaimer">Šī lapa ir informatīva un nav uzskatāma par nodokļu konsultāciju. PVN likmes, sliekšņi un noteikumi laika gaitā mainās - pirms lēmumu pieņemšanas pārbaudi aktuālo informāciju oficiālajos avotos vai konsultējies ar grāmatvedi.</p>',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footEmbed: 'Kalkulators tavai vietnei', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -593,7 +600,7 @@
         '</ul>' +
         '<p class="disclaimer">Эта страница носит информационный характер и не является налоговой консультацией. Ставки, пороги и правила НДС со временем меняются - перед принятием решений проверяйте актуальную информацию в официальных источниках или проконсультируйтесь с бухгалтером.</p>',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footEmbed: 'Калькулятор для сайта', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -673,7 +680,7 @@
         '</ul>' +
         '<p class="disclaimer">This page is informational and is not tax advice. VAT rates, thresholds and rules change over time - before making decisions, check the current information in official sources or consult an accountant.</p>',
       back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footEmbed: 'Calculator for your site', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -745,6 +752,7 @@
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footEmbed').textContent = t.footEmbed;
     document.getElementById('footAbout').textContent = t.footAbout;
     document.getElementById('footTerms').textContent = t.footTerms;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;

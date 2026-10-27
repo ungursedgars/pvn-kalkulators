@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png">
+<link rel="apple-touch-icon" href="/logo-192.png">
+<title>PVN Kalkulators - Iegulstams kalkulators tavai vietnei</title>
+<meta name="description" content="Bezmaksas PVN kalkulators, ko ar vienu iframe koda rindu var ievietot savā vietnē: Latvijas likmes 21%, 12% un 5%, aprēķins abos virzienos, bez reklāmām un sīkdatnēm.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://pvnkalkulators.eu/kalkulators-vietnei">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<meta name="google-adsense-account" content="ca-pub-1040653408011392">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="PVN kalkulators tavai vietnei">
+<meta property="og:description" content="Ievieto bezmaksas PVN kalkulatoru savā vietnē, e-veikalā vai blogā ar vienu koda rindu. Bez reklāmām un sīkdatnēm, latviešu, krievu un angļu valodā.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "PVN kalkulators tavai vietnei",
+  "description": "Bezmaksas PVN kalkulators, ko ar vienu iframe koda rindu var ievietot savā vietnē: Latvijas likmes 21%, 12% un 5%, aprēķins abos virzienos, bez reklāmām un sīkdatnēm.",
+  "inLanguage": "lv",
+  "url": "https://pvnkalkulators.eu/kalkulators-vietnei",
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIA UNG STORE",
+    "url": "https://pvnkalkulators.eu/"
+  }
+}
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6675;
+    --accent: #1f6feb;
+    --accent-soft: rgba(31, 111, 235, .08);
+    --border: #dfe3e8;
+    --result-bg: #f0f5ff;
+    --shadow: 0 2px 12px rgba(20, 30, 50, .08);
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #12161c;
+    --card: #1b212a;
+    --text: #e8ecf1;
+    --muted: #9aa5b1;
+    --accent: #4d8dff;
+    --accent-soft: rgba(77, 141, 255, .12);
+    --border: #2c3440;
+    --result-bg: #202a3a;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-y: scroll; scrollbar-gutter: stable; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; gap: 14px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang-dropdown { position: relative; }
+  #langBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    height: 30px; padding: 0 10px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+    font-size: .8rem; font-weight: 700;
+  }
+  #langBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 130px;
+  }
+  .lang-dropdown.open .lang-list { display: block; }
+  .lang-list button {
+    display: block; width: 100%; padding: 9px 12px; border: none; border-radius: 8px;
+    background: none; color: var(--text); cursor: pointer; text-align: left;
+    font-size: .95rem; white-space: nowrap;
+  }
+  .lang-list button:hover { background: var(--accent-soft); color: var(--accent); }
+  .lang-list button.active { background: var(--accent); color: #fff; }
+  #sepBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700;
+    color: var(--text); display: flex; align-items: center; justify-content: center;
+  }
+  #sepBtn:hover { border-color: var(--accent); color: var(--accent); }
+  #themeBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #themeBtn:hover { border-color: var(--accent); }
+
+  .menu-dropdown { position: relative; }
+  #menuBtn {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #menuBtn:hover { border-color: var(--accent); color: var(--accent); }
+  .menu-list {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 6px; min-width: 150px;
+  }
+  .menu-dropdown.open .menu-list { display: block; }
+  .menu-list a {
+    display: block; padding: 9px 12px; border-radius: 8px;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
+  }
+  .menu-list a:hover { background: var(--accent-soft); color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .header-inner { padding: 9px 16px; }
+    nav { gap: 8px; }
+    .logo { font-size: 1.05rem; }
+    #sepBtn, #themeBtn, #menuBtn { width: 28px; height: 28px; }
+    #sepBtn { font-size: 1rem; }
+    #langBtn { height: 28px; padding: 0 8px; }
+  }
+  /* Šauriem telefoniem (320 px): galvene citādi izspiež izvēlnes pogu ārpus ekrāna */
+  @media (max-width: 360px) {
+    .header-inner { padding: 9px 12px; }
+    nav { gap: 5px; }
+    .logo { font-size: .98rem; }
+  }
+
+  main { padding: 30px 0 50px; }
+  h1 { font-size: 1.6rem; margin-bottom: 6px; }
+  .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; }
+
+  .guide h2 { font-size: 1.22rem; margin: 30px 0 8px; }
+  .guide h2:first-child { margin-top: 0; }
+  .guide p { margin-bottom: 12px; }
+  .guide ul { margin: 0 0 14px 20px; }
+  .guide li { margin-bottom: 6px; }
+  .guide a { color: var(--accent); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .guide .callout {
+    background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 16px; margin: 4px 0 16px;
+  }
+  .guide .callout p:last-child { margin-bottom: 0; }
+
+  .back-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-size: .95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); padding: 22px 0 34px; color: var(--muted); font-size: .88rem; text-align: center; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { margin: 0 4px; }
+
+  /* ===== Sīkdatņu piekrišanas josla ===== */
+  #cookieBanner {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: var(--card); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(20,30,50,.14);
+    padding: 16px; display: none;
+  }
+  #cookieBanner.show { display: block; }
+  .cookie-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .cookie-text { flex: 1; min-width: 240px; font-size: .9rem; color: var(--text); line-height: 1.5; }
+  .cookie-text a { color: var(--accent); }
+  .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .cookie-actions button {
+    padding: 9px 18px; font-size: .9rem; font-weight: 600; cursor: pointer;
+    border-radius: 9px; border: 1px solid var(--border);
+  }
+  #cookieSettingsBtn { background: var(--card); color: var(--muted); }
+  #cookieSettingsBtn:hover { border-color: var(--accent); color: var(--accent); }
+  #cookieAccept { background: var(--accent); color: #fff; border-color: var(--accent); }
+  #cookieAccept:hover { filter: brightness(1.05); }
+  @media (max-width: 560px) {
+    .cookie-actions { width: 100%; }
+    .cookie-actions button { flex: 1; }
+  }
+
+  /* ===== Sīkdatņu preferenču logs ===== */
+  .cookie-title { display: block; margin-bottom: 2px; }
+  #cookiePrefs {
+    display: none; position: fixed; inset: 0; z-index: 70;
+    background: rgba(10, 16, 26, .5); padding: 16px;
+  }
+  #cookiePrefs.show { display: flex; align-items: center; justify-content: center; }
+  .prefs-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); width: 100%; max-width: 480px;
+    max-height: calc(100vh - 32px); overflow-y: auto; padding: 20px;
+  }
+  .prefs-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .prefs-head h2 { font-size: 1.15rem; }
+  #prefsClose {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 1.05rem; padding: 4px 9px; border-radius: 8px; line-height: 1;
+  }
+  @media (hover: hover) { #prefsClose:hover { background: var(--accent-soft); color: var(--accent); } }
+  .prefs-top-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+  .prefs-top-actions button {
+    flex: 1; padding: 10px 12px; border-radius: 9px; font-size: .92rem; font-weight: 600; cursor: pointer;
+  }
+  #prefsRejectAll { background: var(--card); border: 1px solid var(--border); color: var(--muted); }
+  @media (hover: hover) { #prefsRejectAll:hover { border-color: var(--accent); color: var(--accent); } }
+  #prefsAcceptAll { background: var(--accent); border: 1px solid var(--accent); color: #fff; }
+  @media (hover: hover) { #prefsAcceptAll:hover { filter: brightness(1.05); } }
+  .prefs-intro { color: var(--muted); font-size: .9rem; margin-bottom: 4px; }
+  .prefs-cat { border-top: 1px solid var(--border); padding: 12px 0; }
+  .prefs-cat-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .prefs-cat-name { font-weight: 600; }
+  .prefs-always { color: var(--accent); font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .switch {
+    width: 44px; height: 24px; border-radius: 12px; border: none; padding: 0;
+    background: var(--border); position: relative; cursor: pointer; flex-shrink: 0;
+    transition: background .15s;
+  }
+  .switch .knob {
+    position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); transition: left .15s;
+  }
+  .switch[aria-checked="true"] { background: var(--accent); }
+  .switch[aria-checked="true"] .knob { left: 22px; }
+  .prefs-cat-desc { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  #prefsSave {
+    width: 100%; margin-top: 14px; padding: 12px; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
+  }
+  @media (hover: hover) { #prefsSave:hover { filter: brightness(1.05); } }
+  .guide ol { margin: 0 0 14px 20px; }
+
+  /* ===== Logrīka konfigurators ===== */
+  .embed-cfg {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 18px; margin: 0 0 30px;
+  }
+  .embed-cfg h2 { font-size: 1.15rem; margin-bottom: 12px; }
+  .cfg-opts { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .cfg-opts > div { flex: 1; min-width: 150px; }
+  .embed-cfg label { display: block; font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+  .embed-cfg select {
+    width: 100%; font: inherit; font-size: .95rem; padding: 8px 10px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);
+  }
+  .cfg-preview { margin-bottom: 14px; }
+  .cfg-preview iframe {
+    display: block; width: 100%; max-width: 460px; height: 360px;
+    border: 1px dashed var(--border); border-radius: 10px;
+  }
+  #cfgCode {
+    display: block; width: 100%; resize: vertical; padding: 10px 12px;
+    font-family: ui-monospace, Consolas, monospace; font-size: .82rem; line-height: 1.5;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);
+  }
+  .cfg-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+  #cfgCopy {
+    padding: 10px 18px; font-size: .95rem; font-weight: 600; cursor: pointer;
+    border: none; border-radius: 9px; background: var(--accent); color: #fff;
+  }
+  @media (hover: hover) { #cfgCopy:hover { filter: brightness(1.05); } }
+  .cfg-hint { color: var(--muted); font-size: .85rem; }
+  .ad-slot { margin: 22px 0; }
+  .ad-slot ins { display: block; }
+</style>
+<script>
+  // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('pvn-theme'); } catch (e) {}
+    t = t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#1b212a' : '#ffffff');
+  })();
+</script>
+<script>
+  // Google Consent Mode v2: noklusējums "viss liegts" jāuzstāda pirms jebkura Google skripta.
+  // Piekrišanas dialogs to atjaunina (gtag("consent","update")); līdz tam - bez sīkdatnēm.
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1040653408011392" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="/">PVN<span>kalkulators</span></a>
+    <nav>
+      <div class="lang-dropdown" id="langDropdown">
+        <button type="button" id="langBtn" title="Mainīt valodu" aria-haspopup="true" aria-expanded="false" aria-controls="langSwitch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langCurrent">LV</span>
+        </button>
+        <div class="lang-list" id="langSwitch" role="menu">
+          <button type="button" data-lang="lv" role="menuitemradio" aria-checked="true">Latviešu</button>
+          <button type="button" data-lang="ru" role="menuitemradio" aria-checked="false">Русский</button>
+          <button type="button" data-lang="en" role="menuitemradio" aria-checked="false">English</button>
+        </div>
+      </div>
+      <button id="sepBtn" title="Mainīt decimāldaļu atdalītāju">,</button>
+      <button id="themeBtn" title="Mainīt gaišo/tumšo režīmu"></button>
+      <div class="menu-dropdown" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="menu-list" id="menuList" role="menu">
+          <a href="pvn-latvija" id="navGuide" role="menuitem">Rokasgrāmata</a>
+          <a href="pvn-rekinos" id="navInvoicing" role="menuitem">PVN rēķinos</a>
+          <a href="pvn-e-komercija" id="navEcommerce" role="menuitem">PVN e-komercijā</a>
+          <a href="instrukcijas" id="navInstrukcijas" role="menuitem">Instrukcijas</a>
+          <a href="buj" id="navBuj" role="menuitem">BUJ</a>
+          <a href="likmes" id="navLikmes" role="menuitem">Likmes</a>
+          <a href="par-vietni" id="navAbout" role="menuitem">Par vietni</a>
+          <a href="kontakti" id="navKontakti" role="menuitem">Kontakti</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 id="pageTitle">PVN kalkulators tavai vietnei</h1>
+  <p class="lead" id="pageLead">Ievieto bezmaksas PVN kalkulatoru savā vietnē, e-veikalā vai blogā ar vienu koda rindu. Bez reklāmām un sīkdatnēm, latviešu, krievu un angļu valodā.</p>
+
+  <!-- Konfigurators ir ārpus #guideBody, jo apply() pārraksta raksta saturu -->
+  <section class="embed-cfg" id="embedCfg" aria-labelledby="cfgHeading">
+    <h2 id="cfgHeading">Priekšskatījums un kods</h2>
+    <div class="cfg-opts">
+      <div>
+        <label for="cfgLang" id="cfgLangLabel">Logrīka valoda</label>
+        <select id="cfgLang">
+          <option value="lv">Latviešu</option>
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div>
+        <label for="cfgTheme" id="cfgThemeLabel">Krāsu tēma</label>
+        <select id="cfgTheme">
+          <option value="light" id="cfgThemeLight">Gaiša</option>
+          <option value="dark" id="cfgThemeDark">Tumša</option>
+          <option value="auto" id="cfgThemeAuto">Pēc apmeklētāja ierīces</option>
+        </select>
+      </div>
+    </div>
+    <div class="cfg-preview">
+      <iframe id="cfgFrame" src="embed?lang=lv&amp;theme=light" title="Logrīka priekšskatījums"></iframe>
+    </div>
+    <label for="cfgCode" id="cfgCodeLabel">Kods ievietošanai</label>
+    <textarea id="cfgCode" rows="4" readonly spellcheck="false">&lt;iframe src="https://pvnkalkulators.eu/embed?lang=lv&amp;theme=light" title="PVN kalkulators" width="100%" height="360" style="border:0;max-width:460px" loading="lazy"&gt;&lt;/iframe&gt;</textarea>
+    <div class="cfg-actions">
+      <button type="button" id="cfgCopy">Kopēt kodu</button>
+      <span class="cfg-hint" id="cfgHint">Ielīmē kodu savas lapas HTML blokā.</span>
+    </div>
+  </section>
+
+  <article class="guide" id="guideBody">
+    <h2 id="kam-noder">Kam noder iegulstamais kalkulators</h2>
+    <p>Ja tavas vietnes apmeklētāji strādā ar cenām, rēķiniem vai tāmēm, PVN pārrēķins ir viena no biežākajām darbībām, kuras dēļ viņi atver citu cilni. Kad kalkulators ir tieši tavā lapā, apmeklētājs summu pārrēķina uzreiz un paliek pie tava satura. Logrīks īpaši noder:</p>
+    <ul>
+      <li>grāmatvedības un konsultāciju birojiem - klientiem paredzētajā sadaļā vai rakstos par nodokļiem;</li>
+      <li>e-veikaliem un vairumtirgotājiem, kas uzņēmumiem cenas rāda bez PVN;</li>
+      <li>uzņēmēju portāliem, biznesa blogiem un kopstrādes telpu vietnēm;</li>
+      <li>skolotājiem un mācību materiālu autoriem ekonomikas un uzņēmējdarbības stundām.</li>
+    </ul>
+    <h2 id="ka-ievietot">Kā ievietot savā vietnē</h2>
+    <ol>
+      <li>Augstāk izvēlies logrīka valodu un krāsu tēmu - priekšskatījums mainās uzreiz.</li>
+      <li>Nospied pogu "Kopēt kodu".</li>
+      <li>Ielīmē kodu savas lapas HTML blokā un publicē izmaiņas.</li>
+    </ol>
+    <p>Populārākajās platformās HTML bloks atrodas šeit: WordPress bloku redaktorā tas ir bloks "Custom HTML", Wix izvēlnē "Add Elements" sadaļā "Embed Code" - elements "Embed HTML", Shopify lapas vai raksta redaktorā - poga "Show HTML". Ja platforma ļauj ievietot tikai tekstu, pajautā izstrādātājam vai platformas atbalstam, kā pievienot iframe elementu.</p>
+    <p>Platums pielāgojas pieejamajai vietai līdz 460 pikseļiem, augstums ir 360 pikseļi, un logrīks labi izskatās arī telefonā. Atribūts loading="lazy" nozīmē, ka pārlūks logrīku ielādē tikai tad, kad apmeklētājs līdz tam ieritina, tāpēc tas nepalēnina lapas atvēršanos.</p>
+    <h2 id="ko-prot">Ko logrīks prot</h2>
+    <ul>
+      <li>Pieskaita PVN summai bez nodokļa vai atdala to no summas ar nodokli. Jāieraksta tikai viena summa - otra aprēķinās pati.</li>
+      <li>Latvijas likmes ar vienu klikšķi: 21% standarta, 12% un 5% samazinātās. Laukā "Cita %" var ierakstīt jebkuru citu likmi, piemēram, citas ES valsts.</li>
+      <li>PVN summu parāda atsevišķi un noapaļo līdz centiem tāpat kā galvenais kalkulators.</li>
+      <li>Saprot gan komatu, gan punktu kā decimāldaļu atdalītāju, kā arī atstarpes starp tūkstošiem.</li>
+      <li>Darbojas latviešu, krievu un angļu valodā, gaišā vai tumšā tēmā.</li>
+    </ul>
+    <h2 id="privatums">Privātums un drošība</h2>
+    <p>Logrīks ir viena neliela HTML lapa (mazāk nekā 10 KB) bez ārējiem skriptiem. Tas neizmanto sīkdatnes, neko nesaglabā apmeklētāja pārlūkā, nerāda reklāmas un neielādē Google Analytics vai citus mērīšanas rīkus. Ievadītās summas nekur netiek sūtītas - aprēķins notiek apmeklētāja pārlūkprogrammā.</p>
+    <p>Tāpat kā ielādējot attēlu vai fontu no citas vietnes, apmeklētāja pārlūks logrīka failu saņem no mūsu vietnes hostinga (GitHub Pages). Vairāk par datu apstrādi lasi <a href="privatuma-politika">privātuma politikā</a>.</p>
+    <h2 id="nosacijumi">Lietošanas nosacījumi</h2>
+    <ul>
+      <li>Logrīks ir bezmaksas, un to drīkst ievietot arī komerciālās vietnēs. Reģistrācija nav vajadzīga.</li>
+      <li>Saiti "pvnkalkulators.eu" logrīka apakšā nedrīkst paslēpt vai aizsegt - tā ir vienīgais, ko par logrīku lūdzam pretī.</li>
+      <li>Likmes un aprēķinu uzturam mēs. Ja Latvijā mainās PVN likmes, logrīks atjaunojas visās vietnēs automātiski - tavs kods nav jāmaina.</li>
+      <li>Logrīks ir informatīvs palīgrīks, un uz to attiecas tie paši <a href="lietosanas-noteikumi">lietošanas noteikumi</a> kā uz visu vietni, arī atbildības ierobežojums.</li>
+    </ul>
+    <h2 id="jautajumi">Biežākie jautājumi</h2>
+    <p><strong>Vai logrīks palēninās manu vietni?</strong><br>Praktiski nē. Tas neielādē papildu skriptus vai fontus, un ar loading="lazy" pārlūks to ielādē tikai tad, kad tas kļūst redzams.</p>
+    <p><strong>Vai var mainīt izmēru vai krāsas?</strong><br>Platumu un augstumu vari mainīt kodā, atribūtos width un height. Krāsām ir gaišā un tumšā tēma; ja tavai vietnei vajag ko citu, uzraksti mums caur <a href="kontakti">kontaktformu</a>.</p>
+    <p><strong>Kāpēc pogās ir tikai Latvijas likmes?</strong><br>Logrīks domāts galvenokārt Latvijas uzņēmumu un lasītāju vietnēm. Citas valsts likmi var ierakstīt laukā "Cita %", bet visu 27 ES valstu likmes ar skaidrojumiem atradīsi <a href="likmes">likmju lapā</a> un <a href="/">galvenajā kalkulatorā</a>.</p>
+    <p><strong>Vai logrīks jāmin manā sīkdatņu paziņojumā?</strong><br>Logrīks pats sīkdatnes neizmanto, tāpēc tavam sīkdatņu sarakstam tas neko nepievieno. Par vietnes privātuma politiku kopumā gan atbild tās uzturētājs.</p>
+  </article>
+
+  <!-- Raksta beigas -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1040653408011392" data-ad-slot="8444846629" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <a class="back-link" href="/" id="backLink">← Atpakaļ uz kalkulatoru</a>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/" id="footHome">Sākums</a> ·
+      <a href="pvn-latvija" id="footGuide">Rokasgrāmata</a> ·
+      <a href="pvn-rekinos" id="footInvoicing">PVN rēķinos</a> ·
+      <a href="pvn-e-komercija" id="footEcommerce">PVN e-komercijā</a> ·
+      <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="buj" id="footBuj">BUJ</a> ·
+      <a href="likmes" id="footLikmes">Likmes</a> ·
+      <a href="kalkulators-vietnei" id="footEmbed">Kalkulators tavai vietnei</a> ·
+      <a href="par-vietni" id="footAbout">Par vietni</a> ·
+      <a href="lietosanas-noteikumi" id="footTerms">Lietošanas noteikumi</a> ·
+      <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
+      <a href="kontakti" id="footContact">Kontakti</a>
+    </div>
+    <div id="footDisclaimer">© 2026 SIA UNG STORE · pvnkalkulators.eu</div>
+  </div>
+</footer>
+
+<!-- Sīkdatņu piekrišanas dialogi: ieliek DOM ar JS (tekstus aizpilda apply() no I18N),
+     lai identisks teksts neatkārtotos katras lapas statiskajā HTML. Bez JS tie tāpat nedarbotos. -->
+<script>
+  document.body.insertAdjacentHTML('beforeend',
+    '<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">' +
+      '<div class="cookie-inner">' +
+        '<div class="cookie-text"><strong class="cookie-title" id="cookieTitle"></strong> <span id="cookieText"></span></div>' +
+        '<div class="cookie-actions"><button id="cookieSettingsBtn" type="button"></button><button id="cookieAccept" type="button"></button></div>' +
+      '</div>' +
+    '</div>' +
+    '<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">' +
+      '<div class="prefs-card">' +
+        '<div class="prefs-head"><h2 id="prefsTitle"></h2><button id="prefsClose" type="button" aria-label="Aizvērt">\u2715</button></div>' +
+        '<div class="prefs-top-actions"><button id="prefsRejectAll" type="button"></button><button id="prefsAcceptAll" type="button"></button></div>' +
+        '<p class="prefs-intro" id="prefsIntro"></p>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catNecessaryName"></span><span class="prefs-always" id="catNecessaryAlways"></span></div><p class="prefs-cat-desc" id="catNecessaryDesc"></p></div>' +
+        '<div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="catAnalyticsName"></span><button type="button" class="switch" id="switchAnalytics" role="switch" aria-checked="false" aria-labelledby="catAnalyticsName"><span class="knob"></span></button></div><p class="prefs-cat-desc" id="catAnalyticsDesc"></p></div>' +
+        '<div class="prefs-cat"><p class="prefs-cat-desc" id="catAdsNote"></p></div>' +
+        '<button id="prefsSave" type="button"></button>' +
+      '</div>' +
+    '</div>');
+</script>
+
+<script>
+(function () {
+  var I18N = {
+    lv: {
+      htmlLang: 'lv', pageTitle: 'PVN Kalkulators - Iegulstams kalkulators tavai vietnei',
+      pageDescription: 'Bezmaksas PVN kalkulators, ko ar vienu iframe koda rindu var ievietot savā vietnē: Latvijas likmes 21%, 12% un 5%, aprēķins abos virzienos, bez reklāmām un sīkdatnēm.',
+      navGuide: 'Rokasgrāmata', navInvoicing: 'PVN rēķinos', navEcommerce: 'PVN e-komercijā', navInstrukcijas: 'Instrukcijas', navBuj: 'BUJ', navLikmes: 'Likmes', navAbout: 'Par vietni', navKontakti: 'Kontakti',
+      h1: 'PVN kalkulators tavai vietnei',
+      lead: 'Ievieto bezmaksas PVN kalkulatoru savā vietnē, e-veikalā vai blogā ar vienu koda rindu. Bez reklāmām un sīkdatnēm, latviešu, krievu un angļu valodā.',
+      cfgHeading: 'Priekšskatījums un kods', cfgLangLabel: 'Logrīka valoda', cfgThemeLabel: 'Krāsu tēma', cfgThemeLight: 'Gaiša', cfgThemeDark: 'Tumša', cfgThemeAuto: 'Pēc apmeklētāja ierīces',
+      cfgCodeLabel: 'Kods ievietošanai', cfgCopy: 'Kopēt kodu', cfgCopied: 'Nokopēts!', cfgHint: 'Ielīmē kodu savas lapas HTML blokā.', cfgFrameTitle: 'Logrīka priekšskatījums',
+      guideHtml:
+        '<h2 id="kam-noder">Kam noder iegulstamais kalkulators</h2>' +
+        '<p>Ja tavas vietnes apmeklētāji strādā ar cenām, rēķiniem vai tāmēm, PVN pārrēķins ir viena no biežākajām darbībām, kuras dēļ viņi atver citu cilni. Kad kalkulators ir tieši tavā lapā, apmeklētājs summu pārrēķina uzreiz un paliek pie tava satura. Logrīks īpaši noder:</p>' +
+        '<ul>' +
+        '<li>grāmatvedības un konsultāciju birojiem - klientiem paredzētajā sadaļā vai rakstos par nodokļiem;</li>' +
+        '<li>e-veikaliem un vairumtirgotājiem, kas uzņēmumiem cenas rāda bez PVN;</li>' +
+        '<li>uzņēmēju portāliem, biznesa blogiem un kopstrādes telpu vietnēm;</li>' +
+        '<li>skolotājiem un mācību materiālu autoriem ekonomikas un uzņēmējdarbības stundām.</li>' +
+        '</ul>' +
+        '<h2 id="ka-ievietot">Kā ievietot savā vietnē</h2>' +
+        '<ol>' +
+        '<li>Augstāk izvēlies logrīka valodu un krāsu tēmu - priekšskatījums mainās uzreiz.</li>' +
+        '<li>Nospied pogu "Kopēt kodu".</li>' +
+        '<li>Ielīmē kodu savas lapas HTML blokā un publicē izmaiņas.</li>' +
+        '</ol>' +
+        '<p>Populārākajās platformās HTML bloks atrodas šeit: WordPress bloku redaktorā tas ir bloks "Custom HTML", Wix izvēlnē "Add Elements" sadaļā "Embed Code" - elements "Embed HTML", Shopify lapas vai raksta redaktorā - poga "Show HTML". Ja platforma ļauj ievietot tikai tekstu, pajautā izstrādātājam vai platformas atbalstam, kā pievienot iframe elementu.</p>' +
+        '<p>Platums pielāgojas pieejamajai vietai līdz 460 pikseļiem, augstums ir 360 pikseļi, un logrīks labi izskatās arī telefonā. Atribūts loading="lazy" nozīmē, ka pārlūks logrīku ielādē tikai tad, kad apmeklētājs līdz tam ieritina, tāpēc tas nepalēnina lapas atvēršanos.</p>' +
+        '<h2 id="ko-prot">Ko logrīks prot</h2>' +
+        '<ul>' +
+        '<li>Pieskaita PVN summai bez nodokļa vai atdala to no summas ar nodokli. Jāieraksta tikai viena summa - otra aprēķinās pati.</li>' +
+        '<li>Latvijas likmes ar vienu klikšķi: 21% standarta, 12% un 5% samazinātās. Laukā "Cita %" var ierakstīt jebkuru citu likmi, piemēram, citas ES valsts.</li>' +
+        '<li>PVN summu parāda atsevišķi un noapaļo līdz centiem tāpat kā galvenais kalkulators.</li>' +
+        '<li>Saprot gan komatu, gan punktu kā decimāldaļu atdalītāju, kā arī atstarpes starp tūkstošiem.</li>' +
+        '<li>Darbojas latviešu, krievu un angļu valodā, gaišā vai tumšā tēmā.</li>' +
+        '</ul>' +
+        '<h2 id="privatums">Privātums un drošība</h2>' +
+        '<p>Logrīks ir viena neliela HTML lapa (mazāk nekā 10 KB) bez ārējiem skriptiem. Tas neizmanto sīkdatnes, neko nesaglabā apmeklētāja pārlūkā, nerāda reklāmas un neielādē Google Analytics vai citus mērīšanas rīkus. Ievadītās summas nekur netiek sūtītas - aprēķins notiek apmeklētāja pārlūkprogrammā.</p>' +
+        '<p>Tāpat kā ielādējot attēlu vai fontu no citas vietnes, apmeklētāja pārlūks logrīka failu saņem no mūsu vietnes hostinga (GitHub Pages). Vairāk par datu apstrādi lasi <a href="privatuma-politika">privātuma politikā</a>.</p>' +
+        '<h2 id="nosacijumi">Lietošanas nosacījumi</h2>' +
+        '<ul>' +
+        '<li>Logrīks ir bezmaksas, un to drīkst ievietot arī komerciālās vietnēs. Reģistrācija nav vajadzīga.</li>' +
+        '<li>Saiti "pvnkalkulators.eu" logrīka apakšā nedrīkst paslēpt vai aizsegt - tā ir vienīgais, ko par logrīku lūdzam pretī.</li>' +
+        '<li>Likmes un aprēķinu uzturam mēs. Ja Latvijā mainās PVN likmes, logrīks atjaunojas visās vietnēs automātiski - tavs kods nav jāmaina.</li>' +
+        '<li>Logrīks ir informatīvs palīgrīks, un uz to attiecas tie paši <a href="lietosanas-noteikumi">lietošanas noteikumi</a> kā uz visu vietni, arī atbildības ierobežojums.</li>' +
+        '</ul>' +
+        '<h2 id="jautajumi">Biežākie jautājumi</h2>' +
+        '<p><strong>Vai logrīks palēninās manu vietni?</strong><br>Praktiski nē. Tas neielādē papildu skriptus vai fontus, un ar loading="lazy" pārlūks to ielādē tikai tad, kad tas kļūst redzams.</p>' +
+        '<p><strong>Vai var mainīt izmēru vai krāsas?</strong><br>Platumu un augstumu vari mainīt kodā, atribūtos width un height. Krāsām ir gaišā un tumšā tēma; ja tavai vietnei vajag ko citu, uzraksti mums caur <a href="kontakti">kontaktformu</a>.</p>' +
+        '<p><strong>Kāpēc pogās ir tikai Latvijas likmes?</strong><br>Logrīks domāts galvenokārt Latvijas uzņēmumu un lasītāju vietnēm. Citas valsts likmi var ierakstīt laukā "Cita %", bet visu 27 ES valstu likmes ar skaidrojumiem atradīsi <a href="likmes">likmju lapā</a> un <a href="/">galvenajā kalkulatorā</a>.</p>' +
+        '<p><strong>Vai logrīks jāmin manā sīkdatņu paziņojumā?</strong><br>Logrīks pats sīkdatnes neizmanto, tāpēc tavam sīkdatņu sarakstam tas neko nepievieno. Par vietnes privātuma politiku kopumā gan atbild tās uzturētājs.</p>',
+      back: '← Atpakaļ uz kalkulatoru',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footEmbed: 'Kalkulators tavai vietnei', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
+      themeTitle: 'Mainīt gaišo/tumšo režīmu',
+      cookieTitle: 'Mēs cienām tavu privātumu',
+      cookieTextHtml: 'Šī vietne izmanto sīkdatnes, lai nodrošinātu tev labāko pieredzi. ' +
+        '<a href="privatuma-politika">Uzzini vairāk</a>',
+      cookieAccept: 'Piekrītu', cookieSettings: 'Iestatījumi',
+      prefsTitle: 'Pārvaldīt sīkdatņu preferences', prefsCloseLabel: 'Aizvērt',
+      prefsRejectAll: 'Noraidīt visu', prefsAcceptAll: 'Pieņemt visas',
+      prefsIntro: 'Mēs izmantojam sīkdatnes, lai vietne darbotos pareizi un lai saprastu, kā tā tiek lietota. ' +
+        'Nepieciešamās sīkdatnes nevar atslēgt - tās glabā tikai tavus iestatījumus. ' +
+        'Pārējās tiek ielādētas tikai ar tavu piekrišanu.',
+      catNecessaryName: 'Nepieciešamās sīkdatnes', alwaysOn: 'Vienmēr atļauts',
+      catNecessaryDesc: 'Valodas, gaišā/tumšā režīma un decimāldaļu atdalītāja iestatījumi. Glabājas tikai tavā pārlūkā.',
+      catAnalyticsName: 'Analītikas sīkdatnes',
+      catAnalyticsDesc: 'Google Analytics - palīdz saprast, kā vietne tiek lietota, lai to uzlabotu.',
+      catAdsNoteHtml: 'Reklāmu personalizāciju pārvalda Google piekrišanas ziņojums. Atvērt to vari <a href="/#reklamas">šeit</a>.',
+      adsMsgUnavailable: 'Google piekrišanas ziņojums šobrīd nav pieejams - tas parādīsies, kad vietnē sāks rādīt reklāmas.',
+      prefsSave: 'Saglabāt preferences'
+    },
+    ru: {
+      htmlLang: 'ru', pageTitle: 'Калькулятор НДС - Встраиваемый калькулятор для вашего сайта',
+      pageDescription: 'Бесплатный калькулятор НДС, который можно разместить на своём сайте одной строкой iframe-кода: латвийские ставки 21%, 12% и 5%, расчёт в обе стороны, без рекламы и cookie.',
+      navGuide: 'Руководство', navInvoicing: 'Счета с НДС', navEcommerce: 'НДС в e-commerce', navInstrukcijas: 'Инструкции', navBuj: 'Вопросы', navLikmes: 'Ставки', navAbout: 'О сайте', navKontakti: 'Контакты',
+      h1: 'Калькулятор НДС для вашего сайта',
+      lead: 'Разместите бесплатный калькулятор НДС на своём сайте, в интернет-магазине или блоге с помощью одной строки кода. Без рекламы и cookie, на латышском, русском и английском языках.',
+      cfgHeading: 'Предпросмотр и код', cfgLangLabel: 'Язык виджета', cfgThemeLabel: 'Цветовая тема', cfgThemeLight: 'Светлая', cfgThemeDark: 'Тёмная', cfgThemeAuto: 'Как на устройстве посетителя',
+      cfgCodeLabel: 'Код для вставки', cfgCopy: 'Копировать код', cfgCopied: 'Скопировано!', cfgHint: 'Вставьте код в HTML-блок своей страницы.', cfgFrameTitle: 'Предпросмотр виджета',
+      guideHtml:
+        '<h2 id="kam-noder">Кому пригодится встраиваемый калькулятор</h2>' +
+        '<p>Если посетители вашего сайта работают с ценами, счетами или сметами, пересчёт НДС - одно из самых частых действий, ради которых они открывают другую вкладку. Когда калькулятор находится прямо на вашей странице, посетитель пересчитывает сумму сразу и остаётся с вашим содержанием. Виджет особенно полезен:</p>' +
+        '<ul>' +
+        '<li>бухгалтерским и консалтинговым бюро - в разделе для клиентов или в статьях о налогах;</li>' +
+        '<li>интернет-магазинам и оптовикам, которые показывают компаниям цены без НДС;</li>' +
+        '<li>порталам для предпринимателей, бизнес-блогам и сайтам коворкингов;</li>' +
+        '<li>учителям и авторам учебных материалов для уроков экономики и предпринимательства.</li>' +
+        '</ul>' +
+        '<h2 id="ka-ievietot">Как разместить на своём сайте</h2>' +
+        '<ol>' +
+        '<li>Выше выберите язык виджета и цветовую тему - предпросмотр меняется сразу.</li>' +
+        '<li>Нажмите кнопку «Копировать код».</li>' +
+        '<li>Вставьте код в HTML-блок своей страницы и опубликуйте изменения.</li>' +
+        '</ol>' +
+        '<p>На популярных платформах HTML-блок находится здесь: в блочном редакторе WordPress это блок «Custom HTML», в Wix - элемент «Embed HTML» в разделе «Embed Code» меню «Add Elements», в редакторе страницы или статьи Shopify - кнопка «Show HTML». Если платформа позволяет вставлять только текст, спросите разработчика или поддержку платформы, как добавить элемент iframe.</p>' +
+        '<p>Ширина подстраивается под доступное место до 460 пикселей, высота - 360 пикселей, и виджет хорошо выглядит и на телефоне. Атрибут loading="lazy" означает, что браузер загружает виджет только тогда, когда посетитель до него прокрутит, поэтому он не замедляет открытие страницы.</p>' +
+        '<h2 id="ko-prot">Что умеет виджет</h2>' +
+        '<ul>' +
+        '<li>Прибавляет НДС к сумме без налога или выделяет его из суммы с налогом. Достаточно ввести одну сумму - вторая рассчитается сама.</li>' +
+        '<li>Латвийские ставки в один клик: 21% стандартная, 12% и 5% сниженные. В поле «Другая %» можно ввести любую другую ставку, например другой страны ЕС.</li>' +
+        '<li>Показывает сумму НДС отдельно и округляет до центов так же, как основной калькулятор.</li>' +
+        '<li>Понимает и запятую, и точку как десятичный разделитель, а также пробелы между тысячами.</li>' +
+        '<li>Работает на латышском, русском и английском языках, в светлой или тёмной теме.</li>' +
+        '</ul>' +
+        '<h2 id="privatums">Конфиденциальность и безопасность</h2>' +
+        '<p>Виджет - это одна небольшая HTML-страница (меньше 10 КБ) без внешних скриптов. Он не использует cookie, ничего не сохраняет в браузере посетителя, не показывает рекламу и не загружает Google Analytics или другие инструменты измерения. Введённые суммы никуда не отправляются - расчёт выполняется в браузере посетителя.</p>' +
+        '<p>Как и при загрузке изображения или шрифта с другого сайта, браузер посетителя получает файл виджета с хостинга нашего сайта (GitHub Pages). Подробнее об обработке данных - в <a href="privatuma-politika">политике конфиденциальности</a>.</p>' +
+        '<h2 id="nosacijumi">Условия использования</h2>' +
+        '<ul>' +
+        '<li>Виджет бесплатный, его можно размещать и на коммерческих сайтах. Регистрация не нужна.</li>' +
+        '<li>Ссылку «pvnkalkulators.eu» внизу виджета нельзя скрывать или перекрывать - это единственное, что мы просим взамен.</li>' +
+        '<li>Ставки и расчёт поддерживаем мы. Если в Латвии меняются ставки НДС, виджет обновляется на всех сайтах автоматически - ваш код менять не нужно.</li>' +
+        '<li>Виджет - информационный вспомогательный инструмент, и к нему применяются те же <a href="lietosanas-noteikumi">условия использования</a>, что и ко всему сайту, включая ограничение ответственности.</li>' +
+        '</ul>' +
+        '<h2 id="jautajumi">Частые вопросы</h2>' +
+        '<p><strong>Не замедлит ли виджет мой сайт?</strong><br>Практически нет. Он не загружает дополнительные скрипты или шрифты, а с loading="lazy" браузер загружает его только тогда, когда он становится видимым.</p>' +
+        '<p><strong>Можно ли изменить размер или цвета?</strong><br>Ширину и высоту можно изменить в коде, в атрибутах width и height. Для цветов есть светлая и тёмная тема; если вашему сайту нужно что-то другое, напишите нам через <a href="kontakti">контактную форму</a>.</p>' +
+        '<p><strong>Почему на кнопках только латвийские ставки?</strong><br>Виджет предназначен в первую очередь для сайтов латвийских компаний и читателей. Ставку другой страны можно ввести в поле «Другая %», а ставки всех 27 стран ЕС с пояснениями есть на <a href="likmes">странице ставок</a> и в <a href="/">основном калькуляторе</a>.</p>' +
+        '<p><strong>Нужно ли упоминать виджет в уведомлении о cookie?</strong><br>Сам виджет cookie не использует, поэтому в ваш список cookie он ничего не добавляет. За политику конфиденциальности сайта в целом отвечает его владелец.</p>',
+      back: '← Назад к калькулятору',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footEmbed: 'Калькулятор для сайта', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
+      themeTitle: 'Переключить светлый/тёмный режим',
+      cookieTitle: 'Мы уважаем вашу конфиденциальность',
+      cookieTextHtml: 'Этот сайт использует файлы cookie, чтобы обеспечить вам лучший опыт. ' +
+        '<a href="privatuma-politika">Узнать больше</a>',
+      cookieAccept: 'Принимаю', cookieSettings: 'Настройки',
+      prefsTitle: 'Управление настройками cookie', prefsCloseLabel: 'Закрыть',
+      prefsRejectAll: 'Отклонить все', prefsAcceptAll: 'Принять все',
+      prefsIntro: 'Мы используем cookie, чтобы сайт работал правильно и чтобы понимать, как им пользуются. ' +
+        'Необходимые cookie нельзя отключить - они хранят только ваши настройки. ' +
+        'Остальные загружаются только с вашего согласия.',
+      catNecessaryName: 'Необходимые cookie', alwaysOn: 'Всегда включены',
+      catNecessaryDesc: 'Настройки языка, светлой/тёмной темы и десятичного разделителя. Хранятся только в вашем браузере.',
+      catAnalyticsName: 'Аналитические cookie',
+      catAnalyticsDesc: 'Google Analytics - помогает понять, как используется сайт, чтобы улучшать его.',
+      catAdsNoteHtml: 'Персонализацией рекламы управляет сообщение о согласии Google. Открыть его можно <a href="/#reklamas">здесь</a>.',
+      adsMsgUnavailable: 'Сообщение о согласии Google сейчас недоступно - оно появится, когда на сайте начнёт показываться реклама.',
+      prefsSave: 'Сохранить настройки'
+    },
+    en: {
+      htmlLang: 'en', pageTitle: 'VAT Calculator - Embeddable calculator for your website',
+      pageDescription: 'A free VAT calculator you can add to your own website with one line of iframe code: Latvian rates of 21%, 12% and 5%, calculation in both directions, no ads or cookies.',
+      navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navAbout: 'About', navKontakti: 'Contact',
+      h1: 'VAT calculator for your website',
+      lead: 'Add a free VAT calculator to your website, online shop or blog with a single line of code. No ads, no cookies, in Latvian, Russian and English.',
+      cfgHeading: 'Preview and code', cfgLangLabel: 'Widget language', cfgThemeLabel: 'Colour theme', cfgThemeLight: 'Light', cfgThemeDark: 'Dark', cfgThemeAuto: 'Match the visitor\'s device',
+      cfgCodeLabel: 'Code to embed', cfgCopy: 'Copy code', cfgCopied: 'Copied!', cfgHint: 'Paste the code into an HTML block on your page.', cfgFrameTitle: 'Widget preview',
+      guideHtml:
+        '<h2 id="kam-noder">Who the embeddable calculator is for</h2>' +
+        '<p>If the visitors to your site work with prices, invoices or quotes, converting amounts with and without VAT is one of the most common reasons they open another tab. With the calculator right on your page, they get the figure straight away and stay with your content. The widget is especially useful for:</p>' +
+        '<ul>' +
+        '<li>accounting and advisory firms - in a client section or in articles about tax;</li>' +
+        '<li>online shops and wholesalers that show business customers prices without VAT;</li>' +
+        '<li>business portals, business blogs and coworking space websites;</li>' +
+        '<li>teachers and authors of learning materials for economics and entrepreneurship classes.</li>' +
+        '</ul>' +
+        '<h2 id="ka-ievietot">How to add it to your site</h2>' +
+        '<ol>' +
+        '<li>Choose the widget language and colour theme above - the preview updates instantly.</li>' +
+        '<li>Press "Copy code".</li>' +
+        '<li>Paste the code into an HTML block on your page and publish the changes.</li>' +
+        '</ol>' +
+        '<p>On the most popular platforms the HTML block is here: in the WordPress block editor it is the "Custom HTML" block, in Wix the "Embed HTML" element under "Add Elements" and "Embed Code", and in the Shopify page or blog post editor the "Show HTML" button. If your platform only lets you insert text, ask your developer or the platform\'s support how to add an iframe element.</p>' +
+        '<p>The width adapts to the available space up to 460 pixels, the height is 360 pixels, and the widget works well on phones too. The loading="lazy" attribute means the browser only loads the widget when the visitor scrolls to it, so it does not slow down how fast your page opens.</p>' +
+        '<h2 id="ko-prot">What the widget does</h2>' +
+        '<ul>' +
+        '<li>Adds VAT to an amount without tax or removes it from an amount with tax. Enter just one amount - the other is calculated for you.</li>' +
+        '<li>Latvian rates in one click: 21% standard, 12% and 5% reduced. In the "Other %" field you can enter any other rate, for example another EU country\'s.</li>' +
+        '<li>Shows the VAT amount separately and rounds to the cent the same way the main calculator does.</li>' +
+        '<li>Understands both a comma and a period as the decimal separator, as well as spaces between thousands.</li>' +
+        '<li>Works in Latvian, Russian and English, in a light or dark theme.</li>' +
+        '</ul>' +
+        '<h2 id="privatums">Privacy and security</h2>' +
+        '<p>The widget is a single small HTML page (under 10 KB) with no external scripts. It uses no cookies, stores nothing in the visitor\'s browser, shows no ads and does not load Google Analytics or any other measurement tool. The amounts entered are not sent anywhere - the calculation runs in the visitor\'s browser.</p>' +
+        '<p>Just as when an image or font is loaded from another site, the visitor\'s browser fetches the widget file from our site\'s hosting (GitHub Pages). Read more about data processing in our <a href="privatuma-politika">privacy policy</a>.</p>' +
+        '<h2 id="nosacijumi">Terms of use</h2>' +
+        '<ul>' +
+        '<li>The widget is free and may also be used on commercial websites. No registration is needed.</li>' +
+        '<li>The "pvnkalkulators.eu" link at the bottom of the widget must not be hidden or covered - it is the only thing we ask for in return.</li>' +
+        '<li>We maintain the rates and the calculation. If Latvian VAT rates change, the widget updates on every site automatically - you do not need to change your code.</li>' +
+        '<li>The widget is an informational helper, and the same <a href="lietosanas-noteikumi">terms of use</a> apply to it as to the whole site, including the limitation of liability.</li>' +
+        '</ul>' +
+        '<h2 id="jautajumi">Frequently asked questions</h2>' +
+        '<p><strong>Will the widget slow down my site?</strong><br>Practically not. It loads no extra scripts or fonts, and with loading="lazy" the browser only fetches it once it becomes visible.</p>' +
+        '<p><strong>Can I change the size or colours?</strong><br>You can change the width and height in the code, in the width and height attributes. For colours there is a light and a dark theme; if your site needs something else, write to us through the <a href="kontakti">contact form</a>.</p>' +
+        '<p><strong>Why do the buttons only show Latvian rates?</strong><br>The widget is meant mainly for websites of Latvian businesses and readers. Another country\'s rate can be entered in the "Other %" field, and the rates of all 27 EU countries with explanations are on the <a href="likmes">rates page</a> and in the <a href="/">main calculator</a>.</p>' +
+        '<p><strong>Do I need to mention the widget in my cookie notice?</strong><br>The widget itself uses no cookies, so it adds nothing to your cookie list. Responsibility for the site\'s privacy policy as a whole still lies with its owner.</p>',
+      back: '← Back to the calculator',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footEmbed: 'Calculator for your site', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
+      themeTitle: 'Toggle light/dark mode',
+      cookieTitle: 'We respect your privacy',
+      cookieTextHtml: 'This site uses cookies to give you the best experience. ' +
+        '<a href="privatuma-politika">Learn more</a>',
+      cookieAccept: 'I agree', cookieSettings: 'Settings',
+      prefsTitle: 'Manage cookie preferences', prefsCloseLabel: 'Close',
+      prefsRejectAll: 'Reject all', prefsAcceptAll: 'Accept all',
+      prefsIntro: 'We use cookies so the site works properly and to understand how it is used. ' +
+        'Necessary cookies cannot be turned off - they only store your settings. ' +
+        'All others load only with your consent.',
+      catNecessaryName: 'Necessary cookies', alwaysOn: 'Always on',
+      catNecessaryDesc: 'Language, light/dark mode and decimal separator settings. Stored only in your browser.',
+      catAnalyticsName: 'Analytics cookies',
+      catAnalyticsDesc: 'Google Analytics - helps us understand how the site is used so we can improve it.',
+      catAdsNoteHtml: 'Ad personalisation is managed by Google\'s consent message. You can open it <a href="/#reklamas">here</a>.',
+      adsMsgUnavailable: 'Google\'s consent message is not available yet - it appears once ads are being served on the site.',
+      prefsSave: 'Save preferences'
+    }
+  };
+
+  var langSwitch = document.getElementById('langSwitch');
+  var themeBtn = document.getElementById('themeBtn');
+  var lang = 'lv';
+
+  // Logrīka konfigurators: priekšskatījums un kods mainās līdz ar izvēlēto valodu un tēmu
+  var cfgLang = document.getElementById('cfgLang');
+  var cfgTheme = document.getElementById('cfgTheme');
+  var cfgFrame = document.getElementById('cfgFrame');
+  var cfgCode = document.getElementById('cfgCode');
+  var cfgCopy = document.getElementById('cfgCopy');
+  var cfgCopyTimer = null;
+  var EMBED_TITLES = { lv: 'PVN kalkulators', ru: 'Калькулятор НДС', en: 'VAT calculator' };
+  function cfgUpdate() {
+    var q = 'embed?lang=' + cfgLang.value + '&theme=' + cfgTheme.value;
+    if (cfgFrame.getAttribute('src') !== q) cfgFrame.setAttribute('src', q);
+    cfgCode.value = '<iframe src="https://pvnkalkulators.eu/' + q + '" title="' + EMBED_TITLES[cfgLang.value] +
+      '" width="100%" height="360" style="border:0;max-width:460px" loading="lazy"></iframe>';
+  }
+  cfgLang.addEventListener('change', cfgUpdate);
+  cfgTheme.addEventListener('change', cfgUpdate);
+  cfgCopy.addEventListener('click', function () {
+    function done() {
+      cfgCopy.textContent = I18N[lang].cfgCopied;
+      clearTimeout(cfgCopyTimer);
+      cfgCopyTimer = setTimeout(function () { cfgCopy.textContent = I18N[lang].cfgCopy; }, 2000);
+    }
+    function fallback() { cfgCode.focus(); cfgCode.select(); try { document.execCommand('copy'); } catch (e) {} done(); }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(cfgCode.value).then(done, fallback);
+    else fallback();
+  });
+
+  function apply(l) {
+    var t = I18N[l]; if (!t) return;
+    lang = l;
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.pageDescription);
+    document.getElementById('navGuide').textContent = t.navGuide;
+    document.getElementById('navInvoicing').textContent = t.navInvoicing;
+    document.getElementById('navEcommerce').textContent = t.navEcommerce;
+    document.getElementById('navInstrukcijas').textContent = t.navInstrukcijas;
+    document.getElementById('navBuj').textContent = t.navBuj;
+    document.getElementById('navLikmes').textContent = t.navLikmes;
+    document.getElementById('navAbout').textContent = t.navAbout;
+    document.getElementById('navKontakti').textContent = t.navKontakti;
+    document.getElementById('pageTitle').textContent = t.h1;
+    document.getElementById('pageLead').textContent = t.lead;
+    document.getElementById('guideBody').innerHTML = t.guideHtml;
+    ['cfgHeading', 'cfgLangLabel', 'cfgThemeLabel', 'cfgThemeLight', 'cfgThemeDark', 'cfgThemeAuto', 'cfgCodeLabel', 'cfgHint'].forEach(function (id) {
+      document.getElementById(id).textContent = t[id];
+    });
+    cfgCopy.textContent = t.cfgCopy;
+    cfgFrame.title = t.cfgFrameTitle;
+    cfgLang.value = l;
+    cfgUpdate();
+    document.getElementById('backLink').textContent = t.back;
+    document.getElementById('footHome').textContent = t.footHome;
+    document.getElementById('footGuide').textContent = t.footGuide;
+    document.getElementById('footInvoicing').textContent = t.footInvoicing;
+    document.getElementById('footEcommerce').textContent = t.footEcommerce;
+    document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footBuj').textContent = t.footBuj;
+    document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footEmbed').textContent = t.footEmbed;
+    document.getElementById('footAbout').textContent = t.footAbout;
+    document.getElementById('footTerms').textContent = t.footTerms;
+    document.getElementById('footPrivacy').textContent = t.footPrivacy;
+    document.getElementById('footContact').textContent = t.footContact;
+    document.getElementById('footDisclaimer').textContent = t.footDisclaimer;
+    themeBtn.title = t.themeTitle;
+    langSwitch.querySelectorAll('button').forEach(function (b) {
+      var active = b.dataset.lang === l;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-checked', String(active));
+    });
+    document.getElementById('langCurrent').textContent = l.toUpperCase();
+    document.getElementById('langBtn').title = { lv: 'Mainīt valodu', ru: 'Сменить язык', en: 'Change language' }[l];
+    try { localStorage.setItem('pvn-lang', l); } catch (e) {}
+    var cookieIds = {
+      cookieTitle: t.cookieTitle, cookieAccept: t.cookieAccept, cookieSettingsBtn: t.cookieSettings,
+      prefsTitle: t.prefsTitle, prefsRejectAll: t.prefsRejectAll, prefsAcceptAll: t.prefsAcceptAll,
+      prefsIntro: t.prefsIntro, catNecessaryName: t.catNecessaryName, catNecessaryAlways: t.alwaysOn,
+      catNecessaryDesc: t.catNecessaryDesc, catAnalyticsName: t.catAnalyticsName,
+      catAnalyticsDesc: t.catAnalyticsDesc,
+      prefsSave: t.prefsSave
+    };
+    Object.keys(cookieIds).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = cookieIds[id];
+    });
+    var cookieText = document.getElementById('cookieText');
+    if (cookieText) cookieText.innerHTML = t.cookieTextHtml;
+    var adsNote = document.getElementById('catAdsNote');
+    if (adsNote) adsNote.innerHTML = t.catAdsNoteHtml;
+    window.pvnAdsUnavailableMsg = t.adsMsgUnavailable;
+    var prefsCloseEl = document.getElementById('prefsClose');
+    if (prefsCloseEl) prefsCloseEl.setAttribute('aria-label', t.prefsCloseLabel);
+  }
+
+  function initialLang() {
+    try { var s = localStorage.getItem('pvn-lang'); if (s && I18N[s]) return s; } catch (e) {}
+    return 'lv';
+  }
+
+  langSwitch.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); closeLang(); });
+  });
+
+  /* --- Valodu nolaižamā saraksta pārslēgšana --- */
+  var langDropdown = document.getElementById('langDropdown');
+  var langBtn = document.getElementById('langBtn');
+  function closeLang() {
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  }
+  langBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = langDropdown.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', String(open));
+  });
+  var langDropdownPointer = false;
+  function langDropdownPointerArm() { langDropdownPointer = true; setTimeout(function () { langDropdownPointer = false; }, 0); }
+  langDropdown.addEventListener('mousedown', langDropdownPointerArm);
+  langDropdown.addEventListener('touchstart', langDropdownPointerArm, { passive: true });
+  langDropdown.addEventListener('focusout', function (e) {
+    if (langDropdownPointer) return;
+    if (!langDropdown.contains(e.relatedTarget)) closeLang();
+  });
+  document.addEventListener('click', function (e) {
+    if (!langDropdown.contains(e.target)) closeLang();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLang();
+  });
+  apply(initialLang());
+
+  var menuDropdown = document.getElementById('menuDropdown');
+  var menuBtn = document.getElementById('menuBtn');
+  function closeMenu() {
+    menuDropdown.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuDropdown.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  var menuDropdownPointer = false;
+  function menuDropdownPointerArm() { menuDropdownPointer = true; setTimeout(function () { menuDropdownPointer = false; }, 0); }
+  menuDropdown.addEventListener('mousedown', menuDropdownPointerArm);
+  menuDropdown.addEventListener('touchstart', menuDropdownPointerArm, { passive: true });
+  menuDropdown.addEventListener('focusout', function (e) {
+    if (menuDropdownPointer) return;
+    if (!menuDropdown.contains(e.relatedTarget)) closeMenu();
+  });
+  document.addEventListener('click', function (e) {
+    if (!menuDropdown.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  document.getElementById('menuList').querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Tēma - tās pašas SVG ikonas kā index
+  var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<circle cx="12" cy="12" r="5"></circle>' +
+    '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+    '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+    '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+    '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+    '</svg>';
+  var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+    '</svg>';
+  function applyTheme(th) {
+    document.documentElement.setAttribute('data-theme', th);
+    var tcMeta = document.querySelector('meta[name="theme-color"]');
+    if (tcMeta) tcMeta.setAttribute('content', th === 'dark' ? '#1b212a' : '#ffffff');
+    themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+    try { localStorage.setItem('pvn-theme', th); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('pvn-theme'); } catch (e) {}
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  var sepBtn = document.getElementById('sepBtn');
+  function applySep(sep) {
+    sepBtn.textContent = sep === 'comma' ? ',' : '.';
+    try { localStorage.setItem('pvn-decimal-sep', sep); } catch (e) {}
+  }
+  var savedSep = null;
+  try { savedSep = localStorage.getItem('pvn-decimal-sep'); } catch (e) {}
+  applySep(savedSep === 'period' ? 'period' : 'comma');
+  sepBtn.addEventListener('click', function () {
+    applySep(sepBtn.textContent === ',' ? 'period' : 'comma');
+  });
+})();
+
+/* ===== Sīkdatņu piekrišana + Google pakalpojumu ielāde ===== */
+(function () {
+  var GA_ID = 'G-VSLEWS7DRR'; // Google Analytics 4 mērījuma ID
+
+  var banner = document.getElementById('cookieBanner');
+  var prefs = document.getElementById('cookiePrefs');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var settingsBtn = document.getElementById('cookieSettingsBtn');
+  var prefsCloseBtn = document.getElementById('prefsClose');
+  var rejectAllBtn = document.getElementById('prefsRejectAll');
+  var acceptAllBtn = document.getElementById('prefsAcceptAll');
+  var saveBtn = document.getElementById('prefsSave');
+  var swAnalytics = document.getElementById('switchAnalytics');
+  var gaLoaded = false;
+
+  // Consent Mode noklusējums ir <head>; šeit tikai atjauninājums pēc lietotāja izvēles.
+
+  function loadScript(src, attrs) {
+    var s = document.createElement('script');
+    s.async = true; s.src = src;
+    if (attrs) Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
+    document.head.appendChild(s);
+  }
+  function applyConsent(c) {
+    // Reklāmu (ad_*) piekrišanu Consent Mode atjaunina Google sertificētais ziņojums (Privacy & messaging); mēs - tikai analītiku.
+    window.gtag('consent', 'update', { analytics_storage: c.analytics ? 'granted' : 'denied' });
+    if (c.analytics && !gaLoaded && GA_ID.indexOf('XXX') === -1) {
+      gaLoaded = true;
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
+    // AdSense skripts ir <head>; personalizāciju nosaka Consent Mode atjauninājums augstāk.
+  }
+
+  function readConsent() {
+    try {
+      var v2 = localStorage.getItem('pvn-consent-v2');
+      if (v2) return JSON.parse(v2);
+      var v1 = localStorage.getItem('pvn-consent');
+      if (v1 === 'granted') return { analytics: true, ads: true };
+      if (v1 === 'denied') return { analytics: false, ads: false };
+    } catch (e) {}
+    return null;
+  }
+  function saveConsent(c) {
+    try {
+      localStorage.setItem('pvn-consent-v2', JSON.stringify(c));
+      localStorage.removeItem('pvn-consent');
+    } catch (e) {}
+  }
+
+  function setSwitch(sw, on) { sw.setAttribute('aria-checked', String(on)); }
+  function getSwitch(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+  [swAnalytics].forEach(function (sw) {
+    sw.addEventListener('click', function () { setSwitch(sw, !getSwitch(sw)); });
+  });
+
+  function showBanner() { banner.classList.add('show'); }
+  function hideBanner() { banner.classList.remove('show'); }
+  function openPrefs() {
+    var c = readConsent() || { analytics: false };
+    setSwitch(swAnalytics, c.analytics);
+    prefs.classList.add('show');
+    prefsCloseBtn.focus();
+  }
+  function closePrefs(returnFocus) {
+    prefs.classList.remove('show');
+    if (returnFocus && banner.classList.contains('show')) settingsBtn.focus();
+  }
+  function finish(c) {
+    saveConsent(c);
+    applyConsent(c);
+    closePrefs(false);
+    hideBanner();
+  }
+
+  acceptBtn.addEventListener('click', function () { finish({ analytics: true }); });
+  settingsBtn.addEventListener('click', openPrefs);
+  prefsCloseBtn.addEventListener('click', function () { closePrefs(true); });
+  rejectAllBtn.addEventListener('click', function () { finish({ analytics: false }); });
+  acceptAllBtn.addEventListener('click', function () { finish({ analytics: true }); });
+  saveBtn.addEventListener('click', function () {
+    finish({ analytics: getSwitch(swAnalytics) });
+  });
+  prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true);
+  });
+
+  // Google GDPR ziņojums (no adsbygoogle.js) rādās pirmais; mūsu analītikas josla - pēc tā atbildes.
+  // Lapās bez reklāmu skripta, bez atbildes 4 s laikā vai ar reklāmu bloķētāju - uzreiz/pēc taimera.
+  function showBannerWhenReady() {
+    var done = false;
+    function go() { if (!done) { done = true; showBanner(); } }
+    if (!document.querySelector('script[src*="adsbygoogle.js"]')) { go(); return; }
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': go });
+    setTimeout(go, 4000);
+  }
+  var consent = readConsent();
+  if (consent) applyConsent(consent);
+  else showBannerWhenReady();
+  // Saite "/#reklamas" (dialogā, privātuma politikā, Par vietni) atver Google reklāmu piekrišanas
+  // ziņojumu. Ja tas vēl nav pieejams (reklāmas netiek rādītas, reklāmu bloķētājs), to paskaidrojam
+  // savā dialogā, nevis atstājam saiti bez darbības.
+  var hasAdScript = !!document.querySelector('script[src*="adsbygoogle.js"]');
+  function showAdsMessage() {
+    if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') {
+      window.googlefc.showRevocationMessage();
+      return;
+    }
+    if (!prefs.classList.contains('show')) openPrefs();
+    var n = document.getElementById('catAdsNote');
+    if (n && window.pvnAdsUnavailableMsg) n.textContent = window.pvnAdsUnavailableMsg;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href="/#reklamas"]') : null;
+    if (!a || !hasAdScript) return; // lapās bez reklāmu skripta ļaujam pāriet uz sākumlapu
+    e.preventDefault();
+    showAdsMessage();
+  });
+  function adsHashCheck() {
+    if (location.hash !== '#reklamas') return;
+    if (!hasAdScript) { showAdsMessage(); return; }
+    var fired = false;
+    function once() { if (!fired) { fired = true; showAdsMessage(); } }
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({ 'CONSENT_DATA_READY': once });
+    setTimeout(once, 4000);
+  }
+  window.addEventListener('hashchange', adsHashCheck);
+  adsHashCheck();
+
+  window.pvnOpenCookieBanner = openPrefs;
+  if (location.hash === '#cookies') openPrefs();
+})();
+</script>
+
+</body>
+</html>

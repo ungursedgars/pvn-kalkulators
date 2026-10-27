@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>PVN kalkulators - pvnkalkulators.eu</title>
+<!--
+  Iegulstamais PVN kalkulators citām vietnēm (iframe). Apzināti bez reklāmām, Google Analytics,
+  sīkdatnēm un localStorage, jo tas darbojas svešās vietnēs. noindex - tā ir tikai rīka saskarne,
+  nevis satura lapa. Parametri: ?lang=lv|ru|en, ?theme=light|dark|auto.
+  Latvijas likmes (data-r pogās) jāatjaunina kopā ar pārējo vietni, kad tās mainās.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --text: #1c2430; --muted: #5b6675; --accent: #1f6feb;
+    --border: #dfe3e8; --soft: #f0f5ff; --field: #ffffff;
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1b212a; --text: #e8ecf1; --muted: #9aa5b1; --accent: #4d8dff;
+    --border: #2c3440; --soft: #202a3a; --field: #12161c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.4; }
+  .w { padding: 14px; max-width: 460px; }
+  h1 { font-size: 1.05rem; margin: 0 0 10px; }
+  /* Viena rinda arī šaurā iframe, lai saturs ietilpst 350 px augstumā */
+  .rates { display: flex; gap: 6px; margin-bottom: 4px; }
+  .rates button, .rates input {
+    font: inherit; font-size: .92rem; font-weight: 600; height: 34px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--field); color: var(--text);
+    flex: 1 1 0; min-width: 0;
+  }
+  .rates button { padding: 0 6px; cursor: pointer; }
+  .rates button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .rates input { flex-grow: 1.5; padding: 0 8px; font-weight: 400; }
+  .rates input:focus, .amt:focus { outline: none; border-color: var(--accent); }
+  label { display: block; font-size: .85rem; font-weight: 600; margin: 10px 0 4px; }
+  .amt {
+    width: 100%; font: inherit; font-size: 1.05rem; padding: 8px 11px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--field); color: var(--text);
+  }
+  .vat {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    margin-top: 12px; padding: 9px 12px; background: var(--soft); border-radius: 8px; font-size: .92rem;
+  }
+  .vat strong { font-size: 1.15rem; color: var(--accent); white-space: nowrap; }
+  .by { margin-top: 9px; font-size: .78rem; color: var(--muted); }
+  .by a { color: var(--accent); }
+  /* Ļoti šaurā iframe kompaktāk, lai saite apakšā paliek redzama 360 px augstumā */
+  @media (max-width: 300px) {
+    .w { padding: 10px; }
+    h1 { margin-bottom: 8px; }
+    label { margin: 8px 0 3px; }
+    .vat { margin-top: 8px; padding: 7px 10px; }
+    .by { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="w">
+  <h1 id="title">PVN kalkulators</h1>
+  <div class="rates" id="rates">
+    <button type="button" data-r="21" class="on" aria-pressed="true">21%</button>
+    <button type="button" data-r="12" aria-pressed="false">12%</button>
+    <button type="button" data-r="5" aria-pressed="false">5%</button>
+    <input id="custom" inputmode="decimal" autocomplete="off" placeholder="Cita %" aria-label="Cita PVN likme procentos">
+  </div>
+  <label for="net" id="netLabel">Summa bez PVN (EUR)</label>
+  <input class="amt" id="net" inputmode="decimal" autocomplete="off" placeholder="0,00">
+  <label for="gross" id="grossLabel">Summa ar PVN (EUR)</label>
+  <input class="amt" id="gross" inputmode="decimal" autocomplete="off" placeholder="0,00">
+  <div class="vat" aria-live="polite"><span id="vatLabel">PVN summa (21%)</span><strong id="vat">0,00 €</strong></div>
+  <div class="by"><span id="byText">Kalkulators no</span> <a href="https://pvnkalkulators.eu/?utm_source=embed&amp;utm_medium=iframe" target="_blank" rel="noopener">pvnkalkulators.eu</a></div>
+</div>
+<script>
+(function () {
+  var T = {
+    lv: { title: 'PVN kalkulators', custom: 'Cita %', customAria: 'Cita PVN likme procentos', net: 'Summa bez PVN (EUR)', gross: 'Summa ar PVN (EUR)', vat: 'PVN summa', by: 'Kalkulators no', locale: 'lv-LV', dec: ',' },
+    ru: { title: 'Калькулятор НДС', custom: 'Другая %', customAria: 'Другая ставка НДС в процентах', net: 'Сумма без НДС (EUR)', gross: 'Сумма с НДС (EUR)', vat: 'Сумма НДС', by: 'Калькулятор от', locale: 'ru-RU', dec: ',' },
+    en: { title: 'VAT calculator', custom: 'Other %', customAria: 'Other VAT rate in percent', net: 'Amount without VAT (EUR)', gross: 'Amount with VAT (EUR)', vat: 'VAT amount', by: 'Calculator by', locale: 'en-GB', dec: '.' }
+  };
+  var q = new URLSearchParams(location.search);
+  var lang = Object.prototype.hasOwnProperty.call(T, q.get('lang')) ? q.get('lang') : 'lv';
+  var t = T[lang];
+  var theme = q.get('theme');
+  if (theme === 'auto') theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (theme !== 'dark') theme = 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.lang = lang;
+  document.title = t.title + ' - pvnkalkulators.eu';
+
+  function $(id) { return document.getElementById(id); }
+  var net = $('net'), gross = $('gross'), custom = $('custom'), vatEl = $('vat'), vatLabel = $('vatLabel');
+  $('title').textContent = t.title;
+  $('netLabel').textContent = t.net;
+  $('grossLabel').textContent = t.gross;
+  $('byText').textContent = t.by;
+  custom.placeholder = t.custom;
+  custom.setAttribute('aria-label', t.customAria);
+  net.placeholder = gross.placeholder = t.dec === ',' ? '0,00' : '0.00';
+
+  var money = new Intl.NumberFormat(t.locale, { style: 'currency', currency: 'EUR' });
+  var rate = 21, last = 'net';
+
+  function parse(s) {
+    s = String(s).replace(/\s/g, '').replace(',', '.');
+    if (!/^-?\d*\.?\d+$/.test(s) && !/^-?\d+\.$/.test(s)) return NaN;
+    return parseFloat(s);
+  }
+  // Precīza noapaļošana līdz centiem (1.005 -> 1.01), tāpat kā galvenajā kalkulatorā
+  function round2(n) {
+    var r = Number(Math.round(Number(n + 'e2')) + 'e-2');
+    return isNaN(r) ? Math.round(n * 100) / 100 : r;
+  }
+  function withDec(s) { return t.dec === ',' ? s.replace('.', ',') : s; }
+
+  function calc() {
+    vatLabel.textContent = t.vat + ' (' + withDec(String(rate)) + '%)';
+    var src = last === 'net' ? net : gross, dst = last === 'net' ? gross : net;
+    var v = parse(src.value);
+    if (src.value.trim() === '' || isNaN(v)) { dst.value = ''; vatEl.textContent = money.format(0); return; }
+    var vat;
+    if (last === 'net') {
+      vat = round2(v * rate / 100);
+      dst.value = withDec(round2(v + vat).toFixed(2));
+    } else {
+      var n = round2(v / (1 + rate / 100));
+      vat = round2(v - n);
+      dst.value = withDec(n.toFixed(2));
+    }
+    vatEl.textContent = money.format(vat);
+  }
+
+  net.addEventListener('input', function () { last = 'net'; calc(); });
+  gross.addEventListener('input', function () { last = 'gross'; calc(); });
+
+  var btns = Array.prototype.slice.call(document.querySelectorAll('#rates button'));
+  function select(b) {
+    btns.forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { rate = parseFloat(b.getAttribute('data-r')); custom.value = ''; select(b); calc(); });
+  });
+  custom.addEventListener('input', function () {
+    var r = parse(custom.value);
+    if (custom.value.trim() === '') { rate = 21; select(btns[0]); calc(); }
+    else if (!isNaN(r) && r >= 0 && r <= 100) { rate = r; select(null); calc(); }
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

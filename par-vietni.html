@@ -137,6 +137,12 @@
     #sepBtn { font-size: 1rem; }
     #langBtn { height: 28px; padding: 0 8px; }
   }
+  /* Šauriem telefoniem (320 px): galvene citādi izspiež izvēlnes pogu ārpus ekrāna */
+  @media (max-width: 360px) {
+    .header-inner { padding: 9px 12px; }
+    nav { gap: 5px; }
+    .logo { font-size: .98rem; }
+  }
 
   main { padding: 30px 0 50px; }
   h1 { font-size: 1.6rem; margin-bottom: 6px; }
@@ -371,6 +377,7 @@
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
       <a href="buj" id="footBuj">BUJ</a> ·
       <a href="likmes" id="footLikmes">Likmes</a> ·
+      <a href="kalkulators-vietnei" id="footEmbed">Kalkulators tavai vietnei</a> ·
       <a href="par-vietni" id="footAbout">Par vietni</a> ·
       <a href="lietosanas-noteikumi" id="footTerms">Lietošanas noteikumi</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
@@ -441,7 +448,7 @@
         '<h2 id="finansejums">Reklāma un finansējums</h2>' +
         '<p>Vietne ir un paliks bezmaksas. Tās uzturēšanas izmaksas sedz Google AdSense reklāmas. Personalizētas reklāmas rādām tikai ar tavu piekrišanu, ko sniedz Google piekrišanas ziņojums; bez tās rādām nepersonalizētas reklāmas bez reklāmas sīkdatnēm. Izvēli vari mainīt <a href="/#reklamas">šeit</a>. Vairāk par datu apstrādi lasi turpat, bet par vietnes lietošanas nosacījumiem - <a href="lietosanas-noteikumi">lietošanas noteikumos</a>.</p>',
       back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footBuj: 'BUJ', footLikmes: 'Likmes', footEmbed: 'Kalkulators tavai vietnei', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -496,7 +503,7 @@
         '<h2 id="finansejums">Реклама и финансирование</h2>' +
         '<p>Сайт бесплатный и останется таким. Расходы на его поддержку покрывает реклама Google AdSense. Персонализированная реклама показывается только с вашего согласия, которое запрашивает сообщение Google; без него показывается неперсонализированная реклама без рекламных cookie. Изменить выбор можно <a href="/#reklamas">здесь</a>. Подробнее об обработке данных читайте там же, а об условиях использования сайта - в <a href="lietosanas-noteikumi">условиях использования</a>.</p>',
       back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footBuj: 'Вопросы', footLikmes: 'Ставки', footEmbed: 'Калькулятор для сайта', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -551,7 +558,7 @@
         '<h2 id="finansejums">Advertising and funding</h2>' +
         '<p>The site is free and will stay free. Its running costs are covered by Google AdSense ads. Personalised ads are shown only with your consent, which Google\'s consent message asks for; without it, non-personalised ads without advertising cookies are shown. You can change your choice <a href="/#reklamas">here</a>. Read more about data processing there, and about the conditions for using the site in the <a href="lietosanas-noteikumi">terms of use</a>.</p>',
       back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footBuj: 'FAQ', footLikmes: 'Rates', footEmbed: 'Calculator for your site', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode',
       cookieTitle: 'We respect your privacy',
@@ -603,6 +610,7 @@
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
     document.getElementById('footBuj').textContent = t.footBuj;
     document.getElementById('footLikmes').textContent = t.footLikmes;
+    document.getElementById('footEmbed').textContent = t.footEmbed;
     document.getElementById('footAbout').textContent = t.footAbout;
     document.getElementById('footTerms').textContent = t.footTerms;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;

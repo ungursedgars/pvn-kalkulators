@@ -122,6 +122,12 @@
     #sepBtn { font-size: 1rem; }
     #langBtn { height: 28px; padding: 0 8px; }
   }
+  /* Šauriem telefoniem (320 px): galvene citādi izspiež izvēlnes pogu ārpus ekrāna */
+  @media (max-width: 360px) {
+    .header-inner { padding: 9px 12px; }
+    nav { gap: 5px; }
+    .logo { font-size: .98rem; }
+  }
 
   main { padding: 40px 0 60px; }
   .contact-card {
@@ -350,6 +356,7 @@
       <a href="pvn-rekinos" id="footInvoicing">PVN rēķinos</a> ·
       <a href="pvn-e-komercija" id="footEcommerce">PVN e-komercijā</a> ·
       <a href="instrukcijas" id="footInstrukcijas">Instrukcijas</a> ·
+      <a href="kalkulators-vietnei" id="footEmbed">Kalkulators tavai vietnei</a> ·
       <a href="par-vietni" id="footAbout">Par vietni</a> ·
       <a href="lietosanas-noteikumi" id="footTerms">Lietošanas noteikumi</a> ·
       <a href="privatuma-politika" id="footPrivacy">Privātuma politika</a> ·
@@ -405,7 +412,7 @@
       errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
       errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet tieši uz e-pastu.',
       altMail: 'Vai raksti tieši:', back: '← Atpakaļ uz kalkulatoru',
-      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
+      footHome: 'Sākums', footGuide: 'Rokasgrāmata', footInvoicing: 'PVN rēķinos', footEcommerce: 'PVN e-komercijā', footInstrukcijas: 'Instrukcijas', footEmbed: 'Kalkulators tavai vietnei', footAbout: 'Par vietni', footTerms: 'Lietošanas noteikumi', footPrivacy: 'Privātuma politika', footContact: 'Kontakti',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Mainīt gaišo/tumšo režīmu', subject: 'Jauns ziņojums no PVN kalkulatora',
       cookieTitle: 'Mēs cienām tavu privātumu',
@@ -440,7 +447,7 @@
       errEmail: 'Пожалуйста, введите корректный e-mail.',
       errSend: 'Не удалось отправить. Попробуйте позже или напишите на e-mail напрямую.',
       altMail: 'Или напишите напрямую:', back: '← Назад к калькулятору',
-      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
+      footHome: 'Главная', footGuide: 'Руководство', footInvoicing: 'Счета с НДС', footEcommerce: 'НДС в e-commerce', footInstrukcijas: 'Инструкции', footEmbed: 'Калькулятор для сайта', footAbout: 'О сайте', footTerms: 'Условия использования', footPrivacy: 'Политика конфиденциальности', footContact: 'Контакты',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Переключить светлый/тёмный режим', subject: 'Новое сообщение с калькулятора НДС',
       cookieTitle: 'Мы уважаем вашу конфиденциальность',
@@ -465,7 +472,7 @@
       pageDescription: 'Contact pvnkalkulators.eu - questions, ideas and partnership offers. We\'ll reply within one working day.',
       navGuide: 'Guide', navInvoicing: 'Invoicing', navEcommerce: 'E-commerce VAT', navInstrukcijas: 'Instructions', navBuj: 'FAQ', navLikmes: 'Rates', navAbout: 'About', navKontakti: 'Contact',
       title: 'Get in touch',
-      text: 'A question, an idea or a partnership proposal? Drop us a line \u2014 we\u2019ll reply within one working day.',
+      text: 'A question, an idea or a partnership proposal? Drop us a line - we\u2019ll reply within one working day.',
       lblName: 'Name', phName: 'Your name',
       lblEmail: 'Email', phEmail: 'you@email.com',
       lblMsg: 'Message', phMsg: 'Your message…',
@@ -475,7 +482,7 @@
       errEmail: 'Please enter a valid email address.',
       errSend: 'Could not send. Try again later or email us directly.',
       altMail: 'Or write to us directly:', back: '← Back to the calculator',
-      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
+      footHome: 'Home', footGuide: 'Guide', footInvoicing: 'Invoicing', footEcommerce: 'E-commerce VAT', footInstrukcijas: 'Instructions', footEmbed: 'Calculator for your site', footAbout: 'About', footTerms: 'Terms of use', footPrivacy: 'Privacy policy', footContact: 'Contact',
       footDisclaimer: '© 2026 SIA UNG STORE · pvnkalkulators.eu',
       themeTitle: 'Toggle light/dark mode', subject: 'New message from the VAT calculator',
       cookieTitle: 'We respect your privacy',
@@ -541,6 +548,7 @@
     document.getElementById('footInvoicing').textContent = t.footInvoicing;
     document.getElementById('footEcommerce').textContent = t.footEcommerce;
     document.getElementById('footInstrukcijas').textContent = t.footInstrukcijas;
+    document.getElementById('footEmbed').textContent = t.footEmbed;
     document.getElementById('footAbout').textContent = t.footAbout;
     document.getElementById('footTerms').textContent = t.footTerms;
     document.getElementById('footPrivacy').textContent = t.footPrivacy;
