@@ -7,6 +7,7 @@ Static multi-page site for a Latvian/EU VAT (PVN) calculator, live at pvnkalkula
 - Plain HTML/CSS/JS. No build step, no framework, no package.json — `npm install` is not needed and will fail (no package.json exists).
 - Hosted on GitHub Pages (repo `ungursedgars/pvn-kalkulators`, branch `main`, source `/` root).
 - Custom domain `pvnkalkulators.eu` via the `CNAME` file plus DNS records at Zone.eu (dashboard: eu.myzone.app) — 4 A records on the apex pointing at GitHub Pages IPs, `www` CNAME to the apex.
+- Search Console: both a Domain property and a URL-prefix property (`https://pvnkalkulators.eu/`, added 2026-10-28) exist. The plain `sitemap.xml` entry was stuck on "Couldn't fetch" for 3 months although the live test passed; the same file submitted as `sitemap.xml?v=2` was read immediately (Success, 12 pages, 2026-10-28). Keep the file at `/sitemap.xml` (also referenced in `robots.txt`) - don't rename or move it, Google reads it through the `?v=2` entry.
 - Contact form (`kontakti.html`) submits via Web3Forms (`fetch`, JSON body) — the access key in the page is a public key by design; no email address appears anywhere in the source.
 
 ## Pages
